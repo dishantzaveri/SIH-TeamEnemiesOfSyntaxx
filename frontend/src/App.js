@@ -8,6 +8,8 @@ import RegisterMentor from "./components/Register/registerMentor";
 import LoginMentee from "./components/Login/loginMentee";
 import LoginMentor from "./components/Login/loginMentor";
 import Account from "./pages/Account";
+import './static/css/login.css';
+
 function App() {
   return (
     <Router>

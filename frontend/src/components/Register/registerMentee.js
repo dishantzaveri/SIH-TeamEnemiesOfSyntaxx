@@ -1,202 +1,115 @@
-import React, { Component } from 'react';
-// import axios from 'axios';
-import { registerMentee } from './registerLogin';
-/** This component handles all the register student handles information**/
-export default class RegisterMentee extends Component {
-  constructor () {
-    super();
-    this.state = {
-      first_name: '',
-      last_name: '',
-      contact: '',
-      password: '',
-      location: '',
-      age: '',
-      email: '',
-      education: '',
-      errors: ''
-    };
+import React from "react";
+import axios from "axios";
+import "../../static/css/login.css";
 
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-  }
+// Importing componenets
+// import FacebookLogin from "./facebook";
 
-  onChange (e) {
-    this.setState({ [e.target.name]: e.target.value });
-  }
+const RegisterMentee = ({ setLogin }) => {
+//   const submission = () => {
+//     axios({
+//       method: "post",
+//       url: "https://reqres.in/api/users",
+//       data: {
+//         email: document.getElementById("email").value,
+//         password: document.getElementById("pass").value,
+//       },
+//     }).then(
+//       (response) => {
+//         console.log(response);
+//         alert(`${response.data.email} has been registered`);
+//         setLogin(true);
+//       },
+//       (error) => {
+//         alert(error);
+//       }
+//     );
+//   };
 
-  validate = () => {
-    if (!this.state.first_name ||
-      !this.state.last_name ||
-      !this.state.contact ||
-      !this.state.password ||
-      !this.state.location ||
-      !this.state.age ||
-      !this.state.email ||
-      !this.state.education) {
-      this.setState({ errors: "Please fill every field!" });
-      return false;
-    } else {
-      return true;
-    }
-  }
+  return (
+    <div class="bg-purple-gray-100 min-h-screen flex flex-col">
+      <div class="container max-w-lg mx-auto flex-1 flex flex-col items-center justify-center px-2">
+        <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
+          <h1 class="mb-8 text-3xl text-center">Sign up</h1>
+          <h2 class="mb-8 text-2xl text-center">As a Mentee</h2>
+          {/* <h3 class="mb-8 text-1x1 text-center">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </h3> */}
+          <div class="text-center">
+            {/* <FacebookLogin setLogin={setLogin} /> */}
+          </div>
+          <hr class="hr-text" data-content="OR" />
+          <input
+            type="text"
+            class="block border border-grey-light w-full p-3 rounded mb-4"
+            name="fullname"
+            placeholder="Full Name"
+            required
+          />
+          <input
+            type="text"
+            class="block border border-grey-light w-full p-3 rounded mb-4"
+            name="email"
+            placeholder="Email"
+            id="email"
+            required
+          />
+          <input
+            type="password"
+            class="block border border-grey-light w-full p-3 rounded mb-4"
+            name="password"
+            id="pass"
+            placeholder="Password"
+            required
+          />
+          <input
+            type="password"
+            class="block border border-grey-light w-full p-3 rounded mb-4"
+            name="confirm_password"
+            placeholder="Confirm Password"
+            required
+          />
 
-  onSubmit (e) {
-    e.preventDefault();
-
-    const student = {
-      first_name: this.state.first_name,
-      last_name: this.state.last_name,
-      contact: this.state.contact,
-      password: this.state.password,
-      location: this.state.location,
-      age: this.state.age,
-      email: this.state.email,
-      education: this.state.education
-    };
-/** Validates that the student is not a copy */
-    const isValid = this.validate();
-    if (isValid) {
-      registerMentee(student).then(res => {
-        if (res !== 200) { this.setState({ errors: "Student already exists" }) }
-        else {
-          /*console.log('[Component] - Student created succesfully!');*/
-          this.props.history.push('\loginMentee');
-        }
-      })
-      .catch(e => {
-        /*console.log('[Component] - An error has ocurred while creating a student...');*/
-      });
-  }
-}
-
-  render () {
-    /** Returns the loaded component to visualize the student**/
-    return (
-      <div class='container pl-10 pr-10 mt-5'>
-        <h3><strong>Register as a Student</strong></h3> <br />
-        <form noValidate onSubmit={this.onSubmit} className='' id='main-form'>
-          {this.state.errors ? <div className="alert alert-danger" role="alert">{this.state.errors}</div>: null }
-          <div className='row d-flex justify-content-between '>
-            <div className='form-group col-6'>
-              <label htmlFor='first_name' id='text'>First Name</label>
-              <input
-                type='text'
-                className='form-control'
-                name='first_name'
-                placeholder='John'
-                value={this.state.first_name}
-                onChange={this.onChange}
-                id='fields'
-              />
-            </div>
-            <div className='form-group col-6'>
-              <label htmlFor='last_name' id='text'>Last Name</label>
-              <input
-                type='text'
-                className='form-control'
-                name='last_name'
-                placeholder='Doe'
-                value={this.state.last_name}
-                onChange={this.onChange}
-                id='fields'
-              />
-            </div>
-          </div> <br />
-
-          <div className='row d-flex justify-content-between '>
-            <div className='form-group col-6'>
-              <label htmlFor='email' id='text'>Email</label>
-              <input
-                type='email'
-                className='form-control'
-                name='email'
-                placeholder='johndoe@mail.com'
-                value={this.state.email}
-                onChange={this.onChange}
-                id='fields'
-              />
-            </div>
-
-            <div className='form-group col-6'>
-              <label htmlFor='password' id='text'>Password</label>
-              <input
-                type='password'
-                className='form-control'
-                name='password'
-                placeholder='**********'
-                value={this.state.password}
-                onChange={this.onChange}
-                id='fields'
-              />
-            </div>
-          </div> <br />
-          <div className='row d-flex justify-content-between'>
-            <div className='form-group col-6'>
-              <label htmlFor='contact' id='text'>Contact</label>
-              <input
-                type='text'
-                className='form-control'
-                name='contact'
-                placeholder='+57 314 245 7896'
-                value={this.state.contact}
-                onChange={this.onChange}
-                id='fields'
-              />
-            </div>
-
-            <div className='form-group col-6'>
-              <label htmlFor='education' id='text'>Education</label>
-              <input
-                type='text'
-                className='form-control'
-                name='education'
-                placeholder='Frontier High School'
-                value={this.state.education}
-                onChange={this.onChange}
-                id='fields'
-              />
-            </div>
+          <div class="text-center text-sm text-grey-dark mt-4">
+            By signing up, you agree to the{" "}
+            <a
+              class="no-underline border-b border-grey-dark text-grey-dark"
+              href="google.com"
+            >
+              Terms of Service
+            </a>{" "}
+            and{" "}
+            <a
+              class="no-underline border-b border-grey-dark text-grey-dark"
+              href="google.com"
+            >
+              Privacy Policy
+            </a>{" "}
           </div>
 
-          <div className='row d-flex justify-content-between'>
-            <div className='form-group col-6'>
-              <label htmlFor='location' id='text'>Location</label>
-              <input
-                type='text'
-                className='form-control'
-                name='location'
-                placeholder='USA'
-                value={this.state.location}
-                onChange={this.onChange}
-                id='fields'
-              />
-            </div>
+          <button
+            id="submit"
+            type="submit"
+            // onClick={submission}
+            class=" w-full bg-purple-gray-500 hover:bg-purple-gray-600 text-white font-bold py-2 px-4 rounded"
+          >
+            Create Account
+          </button>
 
-            <div className='form-group col-6'>
-              <label htmlFor='age' id='text'>Age</label>
-              <input
-                type='number'
-                className='form-control'
-                name='age'
-                placeholder='18'
-                value={this.state.age}
-                onChange={this.onChange}
-                id='fields'
-              />
-            </div>
-          </div>
-          <br />
-          <div className='row col-12 d-flex justify-content-end'>
+          
+{/* <div className='row col-12 d-flex justify-content-end'>
             <button type='submit' class='btn btn-1'>
                         Cancel
             </button>
             <button type='submit' class='btn btn-2'>
                         Register
             </button>
-          </div>
-        </form>
+          </div> */}
+
+        </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+export default RegisterMentee;
