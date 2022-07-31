@@ -38,8 +38,7 @@ import Login from './OnBoarding/Login';
 import SignUp from './OnBoarding/SignUp';
 import SignUp1 from './OnBoarding/SignUp1';
 import Login1 from './OnBoarding/Login1';
-import Auth from './OnBoarding/auth';
-import Auth1 from './OnBoarding/auth1';
+
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -64,16 +63,18 @@ function Tabs() {
       initialRouteName="Home"
       screenOptions={({ route }) => ({
         tabBarIcon: () => icons[route.name],
+        
       })}
-      tabBarOptions={{
-        activeTintColor: '#18a990',
-        inactiveTintColor: 'gray',
-        labelStyle: {
-          fontWeight: 'bold',
-          fontSize: 12,
-        },
-      }}>
-      <Tab.Screen name="Home" component={WelcomePage} />
+      // tabBarOptions={{
+      //   activeTintColor: '#18a990',
+      //   inactiveTintColor: 'gray',
+      //   labelStyle: {
+      //     fontWeight: 'bold',
+      //     fontSize: 12,
+      //   },
+      // }}
+      >
+      <Tab.Screen name="Home" component={WelcomePage} options={{ headerShown: false }}/>
       <Tab.Screen
         name="Mentors"
         component={Mentors}
@@ -87,9 +88,9 @@ function Tabs() {
           },
         }}
       />
-      <Tab.Screen name="Mentees" component={Mentees} />
-      <Tab.Screen name="HowItWorks" component={HowItWorks} />
-      <Tab.Screen name="Events" component={Events} />
+      <Tab.Screen name="Mentees" component={Mentees} options={{ headerShown: false }}/>
+      <Tab.Screen name="HowItWorks" component={HowItWorks} options={{ headerShown: false }}/>
+      <Tab.Screen name="Events" component={Events} options={{ headerShown: false }}/>
     </Tab.Navigator>
   );
 }
@@ -101,16 +102,17 @@ function JobsTab() {
       screenOptions={({ route }) => ({
         tabBarIcon: () => icons[route.name],
       })}
-      tabBarOptions={{
-        activeTintColor: '#18a990',
-        inactiveTintColor: 'gray',
-        labelStyle: {
-          fontWeight: 'bold',
-          fontSize: 12,
-        },
-      }}>
-      <Tab.Screen name="Jobs" component={Jobs} />
-      <Tab.Screen name="JobSeekers" component={JobSeekers} />
+      // tabBarOptions={{
+      //   activeTintColor: '#18a990',
+      //   inactiveTintColor: 'gray',
+      //   labelStyle: {
+      //     fontWeight: 'bold',
+      //     fontSize: 12,
+      //   },
+      // }}
+      >
+      <Tab.Screen name="Jobs" component={Jobs} options={{ headerShown: false }}/>
+      <Tab.Screen name="JobSeekers" component={JobSeekers} options={{ headerShown: false }}/>
     </Tab.Navigator>
   );
 }
@@ -155,10 +157,11 @@ const Router = () => {
     },
     fonts: configureFonts(fontConfig),
   };
-  // useEffect(() => {
-  //   SplashScreen.hide();
-  // }, []);
+  useEffect(() => {
+    console.disableYellowBox = true;
+  }, []);
   return (
+    
     <PaperProvider>
       <NavigationContainer theme={Mytheme} >
         <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="SwiperScreens">
@@ -170,12 +173,7 @@ const Router = () => {
         <Stack.Screen
           name="SignUp"
           component={SignUp}
-          options={{ headerShown: false }}></Stack.Screen>
-        {/* <Stack.Screen
-          name="auth"
-          component={Auth}
-          options={{ headerShown: false }}></Stack.Screen> */}
-          
+          options={{ headerShown: false }}></Stack.Screen>       
         <Stack.Screen
           name="Login1"
           component={Login1}
@@ -185,15 +183,15 @@ const Router = () => {
           component={SignUp1}
           options={{ headerShown: false }}></Stack.Screen>
 
-          <Stack.Screen name="ChatBot" component={ChatBot} />
-          <Stack.Screen name="Tabs" component={Tabs} />
-          <Stack.Screen name="MMDetail" component={MentorMenteesDetail} />
+          <Stack.Screen name="ChatBot" component={ChatBot} options={{ headerShown: false }}/>
+          <Stack.Screen name="Tabs" component={Tabs}  options={{ headerShown: false }}/>
+          <Stack.Screen name="MMDetail" component={MentorMenteesDetail} options={{ headerShown: false }}/>
           <Stack.Screen
             name="ActiveMentorships"
-            component={ActiveMentorships}
+            component={ActiveMentorships} options={{ headerShown: false }}
           />
-          <Stack.Screen name="JobTabs" component={JobsTab} />
-          <Stack.Screen name="JobDetail" component={JobDetail} />
+          <Stack.Screen name="JobTabs" component={JobsTab} options={{ headerShown: false }} />
+          <Stack.Screen name="JobDetail" component={JobDetail} options={{ headerShown: false }}/>
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>

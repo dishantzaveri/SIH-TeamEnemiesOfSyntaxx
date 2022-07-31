@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, Text, Button, TouchableOpacity,TextInput,Image} from 'react-native';
+import {View, StyleSheet, Text, Button, TouchableOpacity,Alert,Image} from 'react-native';
 import PasswordInput from '../components/PassInput';
 import Textinp from '../components/Textinp';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import LottieView from 'lottie-react-native';
+import TouchId from 'react-native-touch-id';
 
 
 function Login1({navigation}) {
@@ -48,10 +49,19 @@ function Login1({navigation}) {
       <Text style={{fontSize:20}}>OR</Text>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => {
-            navigation.navigate('auth')
-            console.log("Logged In");
-        }}><Text style={styles.textStyle}>Use Your Fingerprint</Text>
+        onPress={() => TouchId.authenticate('Place your fingerprint!', {
+          title: 'Authentication',
+        })
+          .then(() => {
+            Alert.alert('Authentication Successful!');
+            console.log("Done")
+            navigation.navigate('Tabs')
+          })
+          .catch(() => {
+            Alert.alert('Fingerprint Did not match');
+          })}
+        >
+          <Text style={styles.textStyle}>Use Your Fingerprint</Text>
       </TouchableOpacity>
       <TouchableOpacity 
         onPress={()=>navigation.navigate('SignUp1')}>

@@ -22,7 +22,6 @@ const WelcomePage = (props) => {
   const discorUrl =
     'https://discord.gg/4fNygpXsaJ';
   return (
-    <ScrollView style={{flex: 1}}>
       <SafeAreaView style={styles.main}>
         <View style={styles.iconView}>
           <Logo width={40} height={40} />
@@ -105,7 +104,7 @@ const WelcomePage = (props) => {
           </TouchableOpacity>
         </View>
       </SafeAreaView>
-    </ScrollView>
+
   );
 };
 
@@ -157,49 +156,49 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   linearGradient: {
-    height: 50,
-    width: width / 1.22,
+    height:height*0.07,
+    width: width*0.3,
     borderRadius: 10,
-    marginBottom: 15,
+    margin: 10,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  joinButton: {
-    marginHorizontal: 15,
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: Dimensions.get('window').width / 3,
-    height: Dimensions.get('window').height / 11,
-    // borderWidth: 1,
-    padding: 12,
-    borderRadius: 50,
-    backgroundColor: '#a3f1ff',
-    // borderColor: '#17aa92',
-  },
-  activeMentorshipsButton: {
-    marginHorizontal: 15,
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: Dimensions.get('window').width / 2.5,
-    height: Dimensions.get('window').height / 11,
-    // borderWidth: 1,
-    padding: 12,
-    borderRadius: 50,
-    backgroundColor: '#a3f1ff',
-    // borderColor: '#daf0f4',
-  },
-  jobsButton: {
-    marginBottom: 6,
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: Dimensions.get('window').width / 2.5,
-    height: Dimensions.get('window').height / 11,
-    // borderWidth: 1,
-    padding: 12,
-    borderRadius: 50,
-    backgroundColor: '#a3f1ff',
-    // borderColor: '#17aa92',
-  },
+  // joinButton: {
+  //   marginHorizontal: 15,
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  //   width: Dimensions.get('window').width / 3,
+  //   height: Dimensions.get('window').height / 11,
+  //   // borderWidth: 1,
+  //   padding: 12,
+  //   borderRadius: 50,
+  //   backgroundColor: '#a3f1ff',
+  //   // borderColor: '#17aa92',
+  // },
+  // activeMentorshipsButton: {
+  //   marginHorizontal: 15,
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  //   width: Dimensions.get('window').width / 2.5,
+  //   height: Dimensions.get('window').height / 11,
+  //   // borderWidth: 1,
+  //   padding: 12,
+  //   borderRadius: 50,
+  //   backgroundColor: '#a3f1ff',
+  //   // borderColor: '#daf0f4',
+  // },
+  // jobsButton: {
+  //   marginBottom: 6,
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  //   width: Dimensions.get('window').width / 2.5,
+  //   height: Dimensions.get('window').height / 11,
+  //   // borderWidth: 1,
+  //   padding: 12,
+  //   borderRadius: 50,
+  //   backgroundColor: '#a3f1ff',
+  //   // borderColor: '#17aa92',
+  // },
   buttonText: {
     fontWeight: 'bold',
     color: 'white',
