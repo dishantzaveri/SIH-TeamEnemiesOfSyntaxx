@@ -8,7 +8,8 @@ import RegisterMentor from "./components/Register/registerMentor";
 import LoginMentee from "./components/Login/loginMentee";
 import LoginMentor from "./components/Login/loginMentor";
 import Account from "./pages/Account";
-import './static/css/login.css';
+import "./static/css/login.css";
+import { UploadDocs } from "./pages/UploadDocs";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/loginMentor" element={<LoginMentor />} />
         <Route path="/myprofile" element={<Account />} />
         <Route path="/registerMentee" element={<RegisterMentee />} />
+        <Route path="/uploadDocs" element={<UploadDocs />} />
       </Routes>
     </Router>
   );
