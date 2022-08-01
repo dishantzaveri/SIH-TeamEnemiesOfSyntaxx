@@ -10,11 +10,13 @@ import LoginMentor from "./components/Login/loginMentor";
 import Account from "./pages/Account";
 import "./static/css/login.css";
 import { UploadDocs } from "./pages/UploadDocs";
+import Home from "./pages/Home";
 
 function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="/loginMentee" element={<LoginMentee />} />
         <Route path="/registerMentor" element={<RegisterMentor />} />
         <Route path="/loginMentor" element={<LoginMentor />} />
