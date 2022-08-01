@@ -15,12 +15,7 @@ const Account = () => {
               src="https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg.jpg"
             />
 
-            <h1
-              className="font-extrabold text-lg cursor-pointer mt-4 self-center"
-              style={{
-                fontFamily: "IBM Plex Sans",
-              }}
-            >
+            <h1 className="font-bold text-lg cursor-pointer mt-4 self-center">
               Angelina
             </h1>
             <div className="mt-4">
@@ -37,89 +32,42 @@ const Account = () => {
           <div className="mb-8">
             <div className="ml-8 mt-32 shadow bg-white shadow-gray-300  p-[20px] rounded min-w-[600px]">
               <div className="flex justify-between border-b-[1px] border-solid border-gray-300 pb-2 mb-2">
-                <h1
-                  className="font-extrabold text-lg cursor-pointer self-center "
-                  style={{
-                    fontFamily: "IBM Plex Sans",
-                  }}
-                >
+                <h1 className="font-semibold text-lg cursor-pointer self-center ">
                   About
                 </h1>
                 <AiFillEdit size={23} color="#2eb6b8" />
               </div>
               <div>
-                <p
-                  className="font-bold text-base"
-                  style={{
-                    fontFamily: "IBM Plex Sans",
-                  }}
-                >
-                  Experience :{" "}
+                <p className="font-semibold text-base">Experience : </p>
+                <p>
+                  <span className="font-semibold">Company</span> : Google
                 </p>
-                <p
-                  style={{
-                    fontFamily: "IBM Plex Sans",
-                  }}
-                >
-                  <span className="font-bold">Company</span> : Google
+                <p>
+                  <span className="font-semibold">Role</span> : Software
+                  Engineer
                 </p>
-                <p
-                  style={{
-                    fontFamily: "IBM Plex Sans",
-                  }}
-                >
-                  <span className="font-bold">Role</span> : Software Engineer
-                </p>
-                <p
-                  style={{
-                    fontFamily: "IBM Plex Sans",
-                  }}
-                >
-                  <span className="font-bold">Period</span> : 2020 June - 2021
-                  July
+                <p>
+                  <span className="font-semibold">Period</span> : 2020 June -
+                  2021 July
                 </p>
               </div>
               <div className="mt-4">
-                <p
-                  className="font-bold text-base"
-                  style={{
-                    fontFamily: "IBM Plex Sans",
-                  }}
-                >
-                  Education :{" "}
+                <p className="font-semibold text-base">Education : </p>
+                <p>
+                  <span className="font-semibold">College</span> : DJ Sanghvi
                 </p>
-                <p
-                  style={{
-                    fontFamily: "IBM Plex Sans",
-                  }}
-                >
-                  <span className="font-bold">College</span> : DJ Sanghvi
+                <p>
+                  <span className="font-semibold">Year</span> : 2018-2022
                 </p>
-                <p
-                  style={{
-                    fontFamily: "IBM Plex Sans",
-                  }}
-                >
-                  <span className="font-bold">Year</span> : 2018-2022
-                </p>
-                <p
-                  style={{
-                    fontFamily: "IBM Plex Sans",
-                  }}
-                >
-                  <span className="font-bold">Course</span> : Computer
+                <p>
+                  <span className="font-semibold">Course</span> : Computer
                   Engineering
                 </p>
               </div>
             </div>
             <div className="ml-8 mt-4 shadow bg-white shadow-gray-300  p-[20px] rounded min-w-[600px] max-w-[700px]">
               <div className="flex justify-between border-b-[1px] border-solid border-gray-300 pb-2 mb-2">
-                <h1
-                  className="font-extrabold text-lg cursor-pointer self-center "
-                  style={{
-                    fontFamily: "IBM Plex Sans",
-                  }}
-                >
+                <h1 className="font-extrabold text-lg cursor-pointer self-center ">
                   Startups
                 </h1>
                 <AiFillEdit size={23} color="#2eb6b8" />
@@ -131,35 +79,19 @@ const Account = () => {
                     src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Tesla_logo.png"
                   />
                   <div className="ml-4">
-                    <h1
-                      className="font-extrabold text-lg cursor-pointer mt-4 self-center"
-                      style={{
-                        fontFamily: "IBM Plex Sans",
-                      }}
-                    >
+                    <h1 className="font-extrabold text-lg cursor-pointer mt-4 self-center">
                       Tesla
                     </h1>
-                    <p
-                      style={{
-                        fontFamily: "IBM Plex Sans",
-                      }}
-                    >
-                      <span className="font-bold">Description: </span> Tesla,
-                      Inc. is an American multinational automotive and clean
-                      energy company headquartered in Austin, Texas. Tesla
+                    <p>
+                      <span className="font-semibold">Description: </span>{" "}
+                      Tesla, Inc. is an American multinational automotive and
+                      clean energy company headquartered in Austin, Texas. Tesla
                       designs and manufactures electric vehicles (electric cars
                       and trucks), battery energy storage from home to
                       grid-scale, solar panels and solar roof tiles, and related
                       products and services.
                     </p>
-                    <p
-                      style={{
-                        fontFamily: "IBM Plex Sans",
-                      }}
-                      className="font-bold"
-                    >
-                      2020 June - Present
-                    </p>
+                    <p className="font-semibold">2020 June - Present</p>
                   </div>
                 </div>
                 <div className="mt-2 flex items-center border-b-2 border-solid border-gray-200 pb-4">
@@ -168,35 +100,19 @@ const Account = () => {
                     src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Tesla_logo.png"
                   />
                   <div className="ml-4">
-                    <h1
-                      className="font-extrabold text-lg cursor-pointer mt-4 self-center"
-                      style={{
-                        fontFamily: "IBM Plex Sans",
-                      }}
-                    >
+                    <h1 className="font-bold text-lg cursor-pointer mt-4 self-center">
                       Tesla
                     </h1>
-                    <p
-                      style={{
-                        fontFamily: "IBM Plex Sans",
-                      }}
-                    >
-                      <span className="font-bold">Description: </span> Tesla,
-                      Inc. is an American multinational automotive and clean
-                      energy company headquartered in Austin, Texas. Tesla
+                    <p>
+                      <span className="font-semibold">Description: </span>{" "}
+                      Tesla, Inc. is an American multinational automotive and
+                      clean energy company headquartered in Austin, Texas. Tesla
                       designs and manufactures electric vehicles (electric cars
                       and trucks), battery energy storage from home to
                       grid-scale, solar panels and solar roof tiles, and related
                       products and services.
                     </p>
-                    <p
-                      style={{
-                        fontFamily: "IBM Plex Sans",
-                      }}
-                      className="font-bold"
-                    >
-                      2020 June - Present
-                    </p>
+                    <p className="font-semibold">2020 June - Present</p>
                   </div>
                 </div>
               </div>
