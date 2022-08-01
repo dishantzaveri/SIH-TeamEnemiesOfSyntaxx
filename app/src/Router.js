@@ -38,6 +38,7 @@ import Login from './OnBoarding/Login';
 import SignUp from './OnBoarding/SignUp';
 import SignUp1 from './OnBoarding/SignUp1';
 import Login1 from './OnBoarding/Login1';
+import VideoCall from './components/App/VideoCall';
 
 
 const Tab = createBottomTabNavigator();
@@ -164,8 +165,9 @@ const Router = () => {
     
     <PaperProvider>
       <NavigationContainer theme={Mytheme} >
-        <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="SwiperScreens">
+        <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="VideoCall">
           <Stack.Screen name="SwiperScreens" component={SwiperScreens} />
+          <Stack.Screen name="VideoCall" component={VideoCall} options={{ headerShown: false }} />
           <Stack.Screen
           name="Login"
           component={Login}
