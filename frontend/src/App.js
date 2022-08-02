@@ -11,6 +11,7 @@ import Account from "./pages/Account";
 import "./static/css/login.css";
 import { UploadDocs } from "./pages/UploadDocs";
 import Home from "./pages/Home";
+import CreatePosts from "./components/Posts/CreatePosts";
 
 function App() {
   return (
@@ -20,9 +21,10 @@ function App() {
         <Route path="/loginMentee" element={<LoginMentee />} />
         <Route path="/registerMentor" element={<RegisterMentor />} />
         <Route path="/loginMentor" element={<LoginMentor />} />
-        <Route path="/myprofile" element={<Account />} />
         <Route path="/registerMentee" element={<RegisterMentee />} />
+        <Route path="/myprofile" element={<Account />} />
         <Route path="/uploadDocs" element={<UploadDocs />} />
+        <Route path="/createPosts" element={<CreatePosts />} />
       </Routes>
     </Router>
   );
