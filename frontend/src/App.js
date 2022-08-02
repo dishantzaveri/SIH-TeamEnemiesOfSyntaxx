@@ -11,7 +11,8 @@ import Account from "./pages/Account";
 import "./static/css/login.css";
 import { UploadDocs } from "./pages/UploadDocs";
 import Home from "./pages/Home";
-import CreatePosts from "./components/Posts/CreatePosts";
+import CreatePosts from "./components/CreatePosts/CreatePosts";
+import Posts from "./components/Posts/Posts";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/myprofile" element={<Account />} />
         <Route path="/uploadDocs" element={<UploadDocs />} />
         <Route path="/createPosts" element={<CreatePosts />} />
+        <Route path="/showPosts" element={<Posts />} />
       </Routes>
     </Router>
   );
