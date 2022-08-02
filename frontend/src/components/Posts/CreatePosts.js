@@ -21,7 +21,6 @@ import Create from "@material-ui/icons/Create";
 const CreatePosts = () => {
   const classes = Styles();
   const theme = useTheme();
-  const { displayName, photoURL } = useSelector((state) => state.user);
 
   const [uploadData, setUploadData] = useState({
     description: "",
@@ -85,13 +84,21 @@ const CreatePosts = () => {
       }
       if (URL !== "") {
         if (URL.startsWith("data")) {
-          swal("Invalid Image URL", "DATA-URL format is not allowed","warning");
+          swal(
+            "Invalid Image URL",
+            "DATA-URL format is not allowed",
+            "warning"
+          );
           setURL("");
         } else if (URL.includes("youtu.be") || URL.includes("youtube")) {
-          swal("Invalid Image URL","Youtube videos are not allowed","warning");
+          swal(
+            "Invalid Image URL",
+            "Youtube videos are not allowed",
+            "warning"
+          );
           setURL("");
         } else if (!URL.startsWith("http")) {
-          swal("Invalid Image URL","Please enter valid image url","warning");
+          swal("Invalid Image URL", "Please enter valid image url", "warning");
           setURL("");
         } else {
           // uploadToFirebaseDB(URL);
@@ -101,7 +108,7 @@ const CreatePosts = () => {
         // uploadToFirebaseDB(uploadData.file.data);
       }
     } else {
-      swal("Empty Post", "Please enter something","warning");
+      swal("Empty Post", "Please enter something", "warning");
     }
   };
 
@@ -145,7 +152,9 @@ const CreatePosts = () => {
           <input
             placeholder="Start a post"
             value={uploadData.description}
-            onChange={(e) => setUploadData({ ...uploadData, description: e.target.value })}
+            onChange={(e) =>
+              setUploadData({ ...uploadData, description: e.target.value })
+            }
           />
           <input
             id="upload-image"
@@ -189,7 +198,11 @@ const CreatePosts = () => {
       )}
       {!openURL && progress ? (
         <div className={classes.uploading}>
-          <LinearProgress variant="determinate" value={progress} className={classes.progress} />
+          <LinearProgress
+            variant="determinate"
+            value={progress}
+            className={classes.progress}
+          />
           <p>{progress} %</p>
         </div>
       ) : (
@@ -219,7 +232,12 @@ const CreatePosts = () => {
           className={classes.media__options}
         >
           <PhotoSizeSelectActualIcon
-            style={{ color: theme.palette.type === "dark" ? LinkedInLightBlue : LinkedInBlue }}
+            style={{
+              color:
+                theme.palette.type === "dark"
+                  ? LinkedInLightBlue
+                  : LinkedInBlue,
+            }}
           />
           <h4>Photo</h4>
         </label>
