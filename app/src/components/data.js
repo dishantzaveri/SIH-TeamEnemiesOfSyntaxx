@@ -1,5 +1,9 @@
 export const data = [
   {
+    question: 'Who will win sih',
+    answer: 'Definitely not you',
+  },
+  {
     question: 'hi',
     answer: 'Hello',
   },
@@ -7,21 +11,18 @@ export const data = [
     question: 'hello',
     answer: 'Hi',
   },
+ 
   {
-    question: 'hi bot',
-    answer: 'Hello',
-  },
-  {
-    question: 'hello bot',
-    answer: 'Hi',
+    question: 'Why not me',
+    answer: 'See your project progress dude',
   },
   {
     question: 'how are you',
     answer: 'I am fine',
   },
   {
-    question: 'what is your age',
-    answer: 'I was developed yesterday',
+    question: 'Bye',
+    answer: 'Lmao',
   },
   {
     question: 'what is your name',

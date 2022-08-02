@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import { height, width} from '../Consts';
 
 const styles = StyleSheet.create({
   incomingMsgBox: {
@@ -12,11 +13,16 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderColor: 'grey',
   },
+  container:{
+    flex:1,
+    backgroundColor: 'white',
+    margin:10
+  },
   incomingMsgText: {color: 'black', fontSize: 16},
 
   sentMsgBox: {
     backgroundColor: 'green',
-    maxWidth: '70%',
+    maxWidth: '80%',
     borderRadius: 10,
     padding: 5,
     alignSelf: 'flex-end',
@@ -28,24 +34,31 @@ const styles = StyleSheet.create({
 
   typeMsgContainer: {
     flexDirection: 'row',
-    marginHorizontal: 5,
-    bottom: 5,
+    alignItems: 'center',
+  
   },
 
   typeMsgBox: {
     borderWidth: 0.8,
     borderColor: 'grey',
-    padding: 10,
-    width: '80%',
-    borderTopLeftRadius: 10,
-    borderBottomLeftRadius: 10,
+ backgroundColor: 'white',
+    width: width*0.85,
+    borderRadius: 20,
+    margin:4
   },
 
   sendBtn: {
-    width: '20%',
+    width: width*0.2,
     alignItems: 'center',
     justifyContent: 'center',
   },
+  send: {
+    alignContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    // margin: height * 0.035,
+
+},
 
   sendTxt: {color: 'white'},
 });
