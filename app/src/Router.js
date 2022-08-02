@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
+import React, {useEffect} from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createStackNavigator} from '@react-navigation/stack';
 // import SplashScreen from 'react-native-splash-screen';
 import {
   Provider as PaperProvider,
@@ -39,7 +39,7 @@ import SignUp from './OnBoarding/SignUp';
 import SignUp1 from './OnBoarding/SignUp1';
 import Login1 from './OnBoarding/Login1';
 import VideoCall from './components/App/VideoCall';
-
+import Account from './components/Profile/Account';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -56,15 +56,11 @@ const icons = {
 };
 
 function Tabs() {
-
-
-
   return (
     <Tab.Navigator
       initialRouteName="Home"
-      screenOptions={({ route }) => ({
+      screenOptions={({route}) => ({
         tabBarIcon: () => icons[route.name],
-        
       })}
       // tabBarOptions={{
       //   activeTintColor: '#18a990',
@@ -74,8 +70,12 @@ function Tabs() {
       //     fontSize: 12,
       //   },
       // }}
-      >
-      <Tab.Screen name="Home" component={WelcomePage} options={{ headerShown: false }}/>
+    >
+      <Tab.Screen
+        name="Home"
+        component={WelcomePage}
+        options={{headerShown: false}}
+      />
       <Tab.Screen
         name="Mentors"
         component={Mentors}
@@ -89,9 +89,21 @@ function Tabs() {
           },
         }}
       />
-      <Tab.Screen name="Mentees" component={Mentees} options={{ headerShown: false }}/>
-      <Tab.Screen name="HowItWorks" component={HowItWorks} options={{ headerShown: false }}/>
-      <Tab.Screen name="Events" component={Events} options={{ headerShown: false }}/>
+      <Tab.Screen
+        name="Mentees"
+        component={Mentees}
+        options={{headerShown: false}}
+      />
+      <Tab.Screen
+        name="HowItWorks"
+        component={HowItWorks}
+        options={{headerShown: false}}
+      />
+      <Tab.Screen
+        name="Events"
+        component={Events}
+        options={{headerShown: false}}
+      />
     </Tab.Navigator>
   );
 }
@@ -100,7 +112,7 @@ function JobsTab() {
   return (
     <Tab.Navigator
       initialRouteName="Jobs"
-      screenOptions={({ route }) => ({
+      screenOptions={({route}) => ({
         tabBarIcon: () => icons[route.name],
       })}
       // tabBarOptions={{
@@ -111,15 +123,18 @@ function JobsTab() {
       //     fontSize: 12,
       //   },
       // }}
-      >
-      <Tab.Screen name="Jobs" component={Jobs} options={{ headerShown: false }}/>
-      <Tab.Screen name="JobSeekers" component={JobSeekers} options={{ headerShown: false }}/>
+    >
+      <Tab.Screen name="Jobs" component={Jobs} options={{headerShown: false}} />
+      <Tab.Screen
+        name="JobSeekers"
+        component={JobSeekers}
+        options={{headerShown: false}}
+      />
     </Tab.Navigator>
   );
 }
 
 const Router = () => {
-
   const fontConfig = {
     default: {
       regular: {
@@ -162,38 +177,69 @@ const Router = () => {
     console.disableYellowBox = true;
   }, []);
   return (
-    
     <PaperProvider>
-      <NavigationContainer theme={Mytheme} >
-        <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="VideoCall">
+      <NavigationContainer theme={Mytheme}>
+        <Stack.Navigator
+          screenOptions={{headerShown: false}}
+          initialRouteName="Account">
           <Stack.Screen name="SwiperScreens" component={SwiperScreens} />
-          <Stack.Screen name="VideoCall" component={VideoCall} options={{ headerShown: false }} />
           <Stack.Screen
-          name="Login"
-          component={Login}
-          options={{ headerShown: false }}></Stack.Screen>
-        <Stack.Screen
-          name="SignUp"
-          component={SignUp}
-          options={{ headerShown: false }}></Stack.Screen>       
-        <Stack.Screen
-          name="Login1"
-          component={Login1}
-          options={{ headerShown: false }}></Stack.Screen>
-        <Stack.Screen
-          name="SignUp1"
-          component={SignUp1}
-          options={{ headerShown: false }}></Stack.Screen>
+            name="VideoCall"
+            component={VideoCall}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{headerShown: false}}></Stack.Screen>
+          <Stack.Screen
+            name="SignUp"
+            component={SignUp}
+            options={{headerShown: false}}></Stack.Screen>
+          <Stack.Screen
+            name="Login1"
+            component={Login1}
+            options={{headerShown: false}}></Stack.Screen>
+          <Stack.Screen
+            name="SignUp1"
+            component={SignUp1}
+            options={{headerShown: false}}></Stack.Screen>
 
-          <Stack.Screen name="ChatBot" component={ChatBot} options={{ headerShown: false }}/>
-          <Stack.Screen name="Tabs" component={Tabs}  options={{ headerShown: false }}/>
-          <Stack.Screen name="MMDetail" component={MentorMenteesDetail} options={{ headerShown: false }}/>
+          <Stack.Screen
+            name="ChatBot"
+            component={ChatBot}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Tabs"
+            component={Tabs}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="MMDetail"
+            component={MentorMenteesDetail}
+            options={{headerShown: false}}
+          />
           <Stack.Screen
             name="ActiveMentorships"
-            component={ActiveMentorships} options={{ headerShown: false }}
+            component={ActiveMentorships}
+            options={{headerShown: false}}
           />
-          <Stack.Screen name="JobTabs" component={JobsTab} options={{ headerShown: false }} />
-          <Stack.Screen name="JobDetail" component={JobDetail} options={{ headerShown: false }}/>
+          <Stack.Screen
+            name="JobTabs"
+            component={JobsTab}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="JobDetail"
+            component={JobDetail}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Account"
+            component={Account}
+            options={{headerShown: false}}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
