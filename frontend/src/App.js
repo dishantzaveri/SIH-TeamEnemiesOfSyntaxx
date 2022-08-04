@@ -12,7 +12,9 @@ import "./static/css/login.css";
 import { UploadDocs } from "./pages/UploadDocs";
 import Home from "./pages/Home";
 import CreatePosts from "./components/CreatePosts/CreatePosts";
-import Posts from "./components/Posts/Posts";
+import Posts from "./components/Posts/Post";
+import Post from "./components/Posts/Post";
+import Feed from "./components/Feed/Feed";
 
 function App() {
   return (
@@ -27,6 +29,7 @@ function App() {
         <Route path="/uploadDocs" element={<UploadDocs />} />
         <Route path="/createPosts" element={<CreatePosts />} />
         <Route path="/showPosts" element={<Posts />} />
+        <Route path="/feed" element={<Feed />} />
       </Routes>
     </Router>
   );
