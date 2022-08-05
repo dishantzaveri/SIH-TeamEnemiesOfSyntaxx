@@ -15,6 +15,8 @@ import CreatePosts from "./components/CreatePosts/CreatePosts";
 import Posts from "./components/Posts/Post";
 import Post from "./components/Posts/Post";
 import Feed from "./components/Feed/Feed";
+import { PitchDeck } from "./components/PitchDeck/PitchDeck";
+import VideoCall from "./components/VideoCall/VideoCall";
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
         <Route path="/createPosts" element={<CreatePosts />} />
         <Route path="/showPosts" element={<Posts />} />
         <Route path="/feed" element={<Feed />} />
+        <Route path="/pitchdeck" element={<PitchDeck />} />
+        <Route path="/videocall" element={<VideoCall />} />
       </Routes>
     </Router>
   );
