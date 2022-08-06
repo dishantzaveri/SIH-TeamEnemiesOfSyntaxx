@@ -15,24 +15,6 @@ export default function Onboarding2({ navigation }) {
            <LinearGradient
           colors={[colors.primary, '#ADD8E6']}
           style={{width: '100%', height: 200, position: 'relative'}}></LinearGradient>
-            {/* <View style={styles.logoImg}>
-                <Image
-                    source={logo}
-                    style={{
-                    
-                      alignContent: 'center',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      alignSelf: 'center',
-             
-                      margin: height * 0.020,
-                      width: width * 0.2,
-                      height: height * 0.12,
-                    }}
-
-                />
-
-            </View> */}
             <View style={styles.card}>
                 <Image
                     source={Circle2}
@@ -46,7 +28,7 @@ export default function Onboarding2({ navigation }) {
                     uri: 'https://www.pinkvilla.com/files/styles/amp_metadata_content_image/public/sini-shetty-.jpg',
                   }}
                   style={{
-                    width: width * 0.15,
+                    width: width * 0.25,
                     height: height * 0.11,
                     borderRadius: 100,
                   }}
@@ -56,9 +38,6 @@ export default function Onboarding2({ navigation }) {
                 <View style={styles.button2}>
                     <Button style={styles.button3} labelStyle={styles.text1} >
                         Fresher
-                    </Button>
-                    <Button style={styles.button3} labelStyle={styles.text1} >
-                        Internship
                     </Button>
                     <Button style={styles.button3} labelStyle={styles.text1}>
                         Experienced
@@ -82,10 +61,10 @@ const styles = StyleSheet.create({
 
     },
     text1: {
-        fontSize: 12,
+        fontSize: 10,
 
         color: "#1D3557",
-        textAlign: "center",
+       
     },
     text3: {
         fontSize: 15,
@@ -115,6 +94,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         height: height * 0.75,
         position: 'absolute',
+        width: width * 0.9, 
     },
     image: {
         margin: height * 0.020,
@@ -133,20 +113,17 @@ const styles = StyleSheet.create({
     button2: {
 
         justifyContent: 'space-between',
-
-
-        width: width * 0.85,
-       
         color: '#000000',
         backgroundColor: '#E8EEF7',
         flexDirection: 'row',
-        alignSelf: 'center',
-        margin: 10,
+        margin: 15,
     },
     button3: {
 
         color: '#000000',
         backgroundColor: '#E8EEF7',
+        width: width * 0.3,
+
       
    
     },

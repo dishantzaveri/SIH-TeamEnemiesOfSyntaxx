@@ -17,13 +17,12 @@ import {
   Job,
   JobSeeker,
 } from '../components/SVGR-Components';
-import Demo4 from '../pages/Demo4';
-import Demo5 from '../pages/Demo5';
-import Demo6 from '../pages/Demo6';
-import Demo7 from '../pages/Demo7';
 import Onboarding1 from '../pages/Onboarding1';
 import Onboarding2 from '../pages/Onboarding2';
 import Onboarding3 from '../pages/Onboarding3';
+import Onboarding4 from '../pages/Onboarding4';
+import Onboarding5 from '../pages/Onboarding5';
+import Onboarding6 from '../pages/Onboarding6';
 
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
@@ -173,8 +172,8 @@ component={Onboarding3}
         }}
       />
         <Drawer.Screen
-     name="4"
-component={Demo4}
+     name="Onboarding4"
+component={Onboarding4}
         options={{
           drawerIcon: ({color}) => (
             <Ionicons name="chatbox-ellipses-outline" size={22} color={color} />
@@ -182,8 +181,8 @@ component={Demo4}
         }}
       />
         <Drawer.Screen
-     name="5"
-component={Demo5}
+     name="Onboarding5"
+component={Onboarding5}
         options={{
           drawerIcon: ({color}) => (
             <Ionicons name="chatbox-ellipses-outline" size={22} color={color} />
@@ -191,17 +190,8 @@ component={Demo5}
         }}
       />
         <Drawer.Screen
-     name="6"
-component={Demo6}
-        options={{
-          drawerIcon: ({color}) => (
-            <Ionicons name="chatbox-ellipses-outline" size={22} color={color} />
-          ),
-        }}
-      />
-        <Drawer.Screen
-     name="7"
-component={Demo7}
+     name="Onboarding6"
+component={Onboarding6}
         options={{
           drawerIcon: ({color}) => (
             <Ionicons name="chatbox-ellipses-outline" size={22} color={color} />

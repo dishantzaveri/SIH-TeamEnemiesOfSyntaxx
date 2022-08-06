@@ -13,16 +13,20 @@ import {
 import logo from '../assets/logo.jpg';
 import Uploadpic from '../assets/uploadpic.png';
 import Selectpic from '../assets/selectpic.png';
+import LinearGradient from 'react-native-linear-gradient';
+import { useTheme } from '@react-navigation/native';
+import Circle1 from '../assets/circle1.png';
 
 import {
   launchCamera,
   launchImageLibrary
 } from 'react-native-image-picker';
-import {Dimensions} from 'react-native';
+import { Dimensions } from 'react-native';
 
 const Onboarding1 = () => {
   const [filePath, setFilePath] = useState({});
   const [Pic, SetPic] = useState('');
+  const { colors } = useTheme();
 
   const requestCameraPermission = async () => {
     if (Platform.OS === 'android') {
@@ -133,49 +137,25 @@ const Onboarding1 = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.container}>
-        {/* <View style={styles.logoImg}>
-          <Image
-            source={logo}
+      <LinearGradient
+        colors={[colors.primary, '#ADD8E6']}
+        style={{ width: '100%', height: 200, position: 'relative' }}></LinearGradient>
 
-          />
-
-        </View> */}
-        <Text style={styles.text}>Please upload your picture..</Text>
-        <Text style={styles.text}>Supported formats: jpg, jpeg, png</Text>
-        <View style={{
-          alignItems: "center"
-        }}>
-          {/* <TouchableHighlight
-            underlayColor="rgba(0,0,0,0)">
-            <Image
-              style={styles.img}
-
-              source={{
-                uri: 'data:image/png;base64,' + Pic
-              }}
-            />
-          </TouchableHighlight> */}
-        </View>
-        {/* <Image
-          source={{
-            uri: 'data:image/jpeg;base64,' + filePath.data,
-          }}
-          style={styles.imageStyle}
-        />
+      <View style={styles.card}>
         <Image
-          source={{uri: filePath.uri}}
-          style={styles.imageStyle}
+          source={Circle1}
+
         />
-        <Text style={styles.textStyle}>{filePath.uri}</Text> */}
-        <View style={styles.uploadImg}>
+        <Text style={styles.text}>Please upload your picture..</Text>
+        <View>
           <TouchableOpacity onPress={() => uploadImage('photo')}>
             <Image
               source={Uploadpic}
+              style={styles.uploadImg}
             />
           </TouchableOpacity>
         </View>
-        <View style={styles.uploadImg}>
+        <View>
           <TouchableOpacity onPress={() => captureImage('photo')}>
             <Image
               source={Selectpic}
@@ -241,8 +221,10 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: height * 0.01,
-    marginBottom: height * 0.01,
+    marginTop: height * 0.05,
+    marginBottom: height * 0.05,
+    width: width * 0.8,
+    height: height * 0.2,
   },
   card: {
     elevation: 10,
@@ -251,11 +233,13 @@ const styles = StyleSheet.create({
     shadowColor: '#333',
     shadowOpacity: 0.5,
     shadowRadius: 2,
-    marginHorizontal: width * 0.15,
-    marginVertical: height * 0.035,
+    marginHorizontal: width * 0.05,
+    marginVertical: height * 0.1,
     alignItems: 'center',
     justifyContent: 'center',
-    height: height * 0.45,
+    height: height * 0.75,
+    position: 'absolute',
+    width: width * 0.9,
   },
   image: {
     margin: height * 0.030,
@@ -278,6 +262,7 @@ const styles = StyleSheet.create({
     color: '#00CFDE',
     fontWeight: "500",
     marginBottom: height * 0.035,
+    margin: 10
   },
 
 });

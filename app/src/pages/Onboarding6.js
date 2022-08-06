@@ -13,35 +13,35 @@ import {
     Title,
     Subheading,
     RadioButton,
-} from 'react-native-paper';
+} from 'react-native-paper';;
+import Circle5 from '../assets/circle5.png';
 import { height, width } from '../Consts';
 import { useTheme } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
-import Circle3 from '../assets/circle3.png';
 
-
-const Onboarding3 = ({ navigation }) => {
+const Onboarding6 = ({ navigation }) => {
 
    const { colors } = useTheme();
-    const [name, setName] = useState('');
-    const [phonenumber, setPhonenumber] = useState('');
-    const [headline, setHeadline] = useState('');
-    const [gender, setGender] = useState('');
-    const [email, setEmail] = useState('');
-    const [dob, setDob] = useState('');
+    const [skills, setSkills] = useState('');
+    const [skills1, setSkills1] = useState('');
+    const [skills2, setSkills2] = useState('');
+    const [skills3, setSkills3] = useState('');
+    const [skills4, setSkills4] = useState('');
+    const [skills5, setSkills5] = useState('');
 
     return (
         <SafeAreaView style={styles.container} >
-             <LinearGradient
+               <LinearGradient
           colors={[colors.primary, '#ADD8E6']}
           style={{width: '100%', height: 200, position: 'relative'}}></LinearGradient>
-        
+         
             <View style={styles.card}>
                 <Image
-                    source={Circle3}
+                    source={Circle5}
+
                 />
                 <View>
-                    <Text style={styles.text}>Setup profile and find your perfect Mentor.</Text>
+                    <Text style={styles.text}>Setup profile to find your perfect Mentor.</Text>
                 </View>
                 <Image
                    source={{
@@ -55,24 +55,10 @@ const Onboarding3 = ({ navigation }) => {
 
                 />
                 <View style={styles.form}>
-                <Subheading>Enter your Name*</Subheading>
+                <Subheading>Your Skills*</Subheading>
                 <TextInput
-                    value={name}
-                    onChangeText={setName}
-                    underlineColorAndroid="transparent"
-                    placeholderTextColor='#C4C4C4'
-                    style={{
-                        ...styles.nameInput,
-                        borderColor: colors.textAfter,
-                        color: colors.text,
-                        //backgroundColor: colors.background,
-                    }}
-                    placeholder={'Name'}
-                />
-                <Subheading>Enter your Phone Number*</Subheading>
-                <TextInput
-                    value={phonenumber}
-                    onChangeText={setPhonenumber}
+                    value={skills}
+                    onChangeText={setSkills}
                     underlineColorAndroid="transparent"
                     placeholderTextColor={colors.placeholder}
                     style={{
@@ -81,7 +67,47 @@ const Onboarding3 = ({ navigation }) => {
                         color: colors.text,
                         //backgroundColor: colors.background,
                     }}
-                    placeholder={'Phone Number'}
+                    placeholder={'Search Your Skills Here'}
+                />
+                      <Subheading>Suggested Skills*</Subheading>
+                <TextInput
+                    value={skills1}
+                    onChangeText={setSkills1}
+                    underlineColorAndroid="transparent"
+                    placeholderTextColor={colors.placeholder}
+                    style={{
+                        ...styles.nameInput,
+                        borderColor: colors.textAfter,
+                        color: colors.text,
+                        //backgroundColor: colors.background,
+                    }}
+                    placeholder={'User Experience'}
+                />
+                <TextInput
+                    value={skills2}
+                    onChangeText={setSkills2}
+                    underlineColorAndroid="transparent"
+                    placeholderTextColor={colors.placeholder}
+                    style={{
+                        ...styles.nameInput,
+                        borderColor: colors.textAfter,
+                        color: colors.text,
+                        //backgroundColor: colors.background,
+                    }}
+                    placeholder={'User Research'}
+                />
+                <TextInput
+                    value={skills3}
+                    onChangeText={setSkills3}
+                    underlineColorAndroid="transparent"
+                    placeholderTextColor={colors.placeholder}
+                    style={{
+                        ...styles.nameInput,
+                        borderColor: colors.textAfter,
+                        color: colors.text,
+                        //backgroundColor: colors.background,
+                    }}
+                    placeholder={'Competitive Analysis'}
                 />
                   <View style={styles.button}>
                 <Button title="Next"  >
@@ -90,12 +116,11 @@ const Onboarding3 = ({ navigation }) => {
             </View>
             </View>
            
-           
         </SafeAreaView>
     );
 }
 
-export default Onboarding3;
+export default Onboarding6;
 
 const styles = StyleSheet.create({
     container: {
@@ -127,7 +152,7 @@ const styles = StyleSheet.create({
         marginVertical: height * 0.1,
         alignItems: 'center',
         justifyContent: 'center',
-        height: height * 0.75,
+        height: height * 0.85,
         position: 'absolute',
         width: width * 0.9, 
 
@@ -163,14 +188,14 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        fontSize: 20,
+        fontSize: 18,
         alignContent: 'center',
         alignItems: 'center',
         justifyContent: 'center',
         alignSelf: 'center',
-        margin:10,
         color: '#00CFDE',
         fontWeight: "500",
         marginBottom: height * 0.035,
+        margin:10
     },
 });
