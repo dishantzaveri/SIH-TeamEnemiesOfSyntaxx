@@ -178,7 +178,7 @@ const SwiperScreens = ({navigation}) => {
         navigation.navigate('Login1');
         console.log("Logged In");
         }}
-        ><Text style={styles.textStyle}>Mentee</Text>
+        ><Text style={styles.textStyle}>Entreprenaur</Text>
       </TouchableOpacity>
       </View>
     </View>

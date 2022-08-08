@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
-import React, {useEffect} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import React, { useEffect } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AppStack from './navigation/AppStack';
 import AuthStack from './navigation/AuthStack';
 
@@ -76,11 +76,11 @@ const Router = () => {
     console.disableYellowBox = true;
   }, []);
   return (
-   
-      <NavigationContainer theme={Mytheme} independent={true}>
-      {/* <AuthStack /> */}
-        <AppStack/>
-      </NavigationContainer>
+
+    <NavigationContainer theme={Mytheme} independent={true}>
+      <AuthStack />
+      {/* <AppStack /> */}
+    </NavigationContainer>
   );
 };
 
