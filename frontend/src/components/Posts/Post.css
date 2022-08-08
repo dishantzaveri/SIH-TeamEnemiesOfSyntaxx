@@ -1,9 +1,10 @@
 .post {
-    background-color: rgba(233, 210, 242, 0.667);
+    background-color: rgba(233, 204, 245, 0.667);
     padding: 15px;
-    margin-bottom: 10px;
+    margin-bottom: 2.5em;
     border-radius: 10px;
     width: 50%;
+    box-shadow: 10px 10px 5px #c8c8c8;
   }
   
   .post_header {
