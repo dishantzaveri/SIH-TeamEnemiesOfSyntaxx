@@ -15,6 +15,7 @@ import CreatePosts from "./components/CreatePosts/CreatePosts";
 import Posts from "./components/Posts/Post";
 import Post from "./components/Posts/Post";
 import Feed from "./components/Feed/Feed";
+import News from "./components/News/News";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/createPosts" element={<CreatePosts />} />
         <Route path="/showPosts" element={<Posts />} />
         <Route path="/feed" element={<Feed />} />
+        <Route path="/news" element={<News />} />
       </Routes>
     </Router>
   );
