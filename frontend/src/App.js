@@ -16,6 +16,8 @@ import Posts from "./components/Posts/Post";
 import Post from "./components/Posts/Post";
 import Feed from "./components/Feed/Feed";
 import News from "./components/News/News";
+import { PitchDeck } from "./components/PitchDeck/PitchDeck";
+import VideoCall from "./components/VideoCall/VideoCall";
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
         <Route path="/showPosts" element={<Posts />} />
         <Route path="/feed" element={<Feed />} />
         <Route path="/news" element={<News />} />
+        <Route path="/pitchdeck" element={<PitchDeck />} />
+        <Route path="/videocall" element={<VideoCall />} />
       </Routes>
     </Router>
   );
