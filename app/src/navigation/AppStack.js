@@ -24,6 +24,7 @@ import Onboarding4 from '../pages/Onboarding4';
 import Onboarding5 from '../pages/Onboarding5';
 import Onboarding6 from '../pages/Onboarding6';
 import Careertv from '../pages/Careertv';
+import Resume from '../pages/Resume';
 
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
@@ -209,6 +210,17 @@ const AppStack = () => {
           ),
         }}
       />
+        <Drawer.Screen
+        name="Resume Builder"
+        component={Resume}
+        options={{
+          headerShown: false,
+          drawerIcon: ({ color }) => (
+            <Ionicons name="play-circle-outline" size={22} color={color} />
+          ),
+        }}
+      />
+
 
 
     </Drawer.Navigator>
