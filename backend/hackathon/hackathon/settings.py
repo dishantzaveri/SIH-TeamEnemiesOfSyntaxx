@@ -41,8 +41,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'drf_spectacular',
-    'testapp',
     'accounts',
+    'testapp',
 ]
 
 AUTH_USER_MODEL = 'accounts.User'
