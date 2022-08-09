@@ -21,6 +21,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import theme from '../theme';
 import Posts from '../components/Posts/Posts';
+import Resume from '../pages/Resume';
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -201,6 +202,16 @@ const AppStack = () => {
           headerShown: false,
           drawerIcon: ({color}) => (
             <Ionicons name="play-circle-outline" size={22} color={color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Resume Builder"
+        component={Resume}
+        options={{
+          headerShown: false,
+          drawerIcon: ({color}) => (
+            <Ionicons name="document" size={22} color={color} />
           ),
         }}
       />

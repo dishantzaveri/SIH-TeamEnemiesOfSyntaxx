@@ -14,7 +14,7 @@ const ResumeBuilder = ({ }) => {
 
             <View style={{ marginVertical: 20, alignItems: 'center', alignContent: 'center', justifyContent: 'center' }}>
 
-                <Text style={styles.title}>With Jobs Market Resume Builder, you can quickly and easily create a CV within 15 minutes!</Text>
+                <Text style={styles.title}>With our Resume Builder, you can quickly and easily create a CV within 15 minutes!</Text>
 
                 <Text style={styles.title1}>Your profile is 50% complete</Text>
 
