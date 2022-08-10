@@ -11,6 +11,13 @@ import Account from "./pages/Account";
 import "./static/css/login.css";
 import { UploadDocs } from "./pages/UploadDocs";
 import Home from "./pages/Home";
+import CreatePosts from "./components/CreatePosts/CreatePosts";
+import Posts from "./components/Posts/Post";
+import Post from "./components/Posts/Post";
+import Feed from "./components/Feed/Feed";
+import News from "./components/News/News";
+import { PitchDeck } from "./components/PitchDeck/PitchDeck";
+import VideoCall from "./components/VideoCall/VideoCall";
 
 function App() {
   return (
@@ -20,9 +27,15 @@ function App() {
         <Route path="/loginMentee" element={<LoginMentee />} />
         <Route path="/registerMentor" element={<RegisterMentor />} />
         <Route path="/loginMentor" element={<LoginMentor />} />
-        <Route path="/myprofile" element={<Account />} />
         <Route path="/registerMentee" element={<RegisterMentee />} />
+        <Route path="/myprofile" element={<Account />} />
         <Route path="/uploadDocs" element={<UploadDocs />} />
+        <Route path="/createPosts" element={<CreatePosts />} />
+        <Route path="/showPosts" element={<Posts />} />
+        <Route path="/feed" element={<Feed />} />
+        <Route path="/news" element={<News />} />
+        <Route path="/pitchdeck" element={<PitchDeck />} />
+        <Route path="/videocall" element={<VideoCall />} />
       </Routes>
     </Router>
   );

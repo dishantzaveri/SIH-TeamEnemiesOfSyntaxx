@@ -11,7 +11,6 @@ export const UploadDocs = () => {
   useEffect(() => {
     checkIfWalletIsConnected();
     getAllDocs();
-    // addDocs();
   }, []);
 
   const retrieveFile = (e) => {
