@@ -1,0 +1,33 @@
+.font-weight{
+    font-weight: 700 ;
+    display: block;
+}
+.fullSingle-img{
+    height: 300px;
+    width: 100%;
+}
+.color-green{
+    background: green;
+    color: #fff !important;
+ }
+ .card---{
+    width: 100%;
+
+ }
+ .fullSingleCard{
+     width: 40%;
+     /* margin: auto; */
+ }
+ .white-c{
+     color: #fff;
+     font-weight: 600;
+ }
+ .transpa{
+     background: none;
+ }
+ .donay-btn{
+     width: 100%;
+ }
+.container{
+    display: inline-block
+}

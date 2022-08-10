@@ -18,6 +18,10 @@ import Feed from "./components/Feed/Feed";
 import News from "./components/News/News";
 import { PitchDeck } from "./components/PitchDeck/PitchDeck";
 import VideoCall from "./components/VideoCall/VideoCall";
+import AllCampaigns from "./components/AllCampaigns/AllCampaigns";
+import SingleCampaign from "./components/AllCampaignsSingleCampaign/SingleCampaign";
+import FullSingleCampaign from "./components/FullSingleCampaign/FullSingleCampaign";
+
 
 function App() {
   return (
@@ -36,6 +40,8 @@ function App() {
         <Route path="/news" element={<News />} />
         <Route path="/pitchdeck" element={<PitchDeck />} />
         <Route path="/videocall" element={<VideoCall />} />
+        <Route path = "/campaigns" element={<AllCampaigns />} />
+        <Route path = "/singleCampaign/:id" element={<FullSingleCampaign />} />
       </Routes>
     </Router>
   );
