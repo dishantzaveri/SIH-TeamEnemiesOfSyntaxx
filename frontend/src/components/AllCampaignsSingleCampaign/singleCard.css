@@ -1,0 +1,50 @@
+.single-campaign-card{
+    border: 1px solid rgba(216, 140, 220, 0.476);
+    width: 25%;
+    height: 400px !important;
+    box-sizing: border-box;
+    overflow: hidden;
+    margin:2em;
+    padding: 5px;
+    margin-bottom: 5% !important;
+    transition: all 0.3s;
+    display: inline-block;
+}
+.single-campaign-card:hover{
+    border: 1px solid rgb(158, 67, 207);
+    transition: all 0.3s;
+
+}
+.naira-n{
+    font-size: 170%;
+}
+.c-img{
+    height: 200px;
+    width: 100%;
+}
+.last-donay, .card-title, b, .grey, .goal--{
+    color: #555;
+}
+.goal--{
+    font-weight: 500;
+}
+.last-donay, .raised--{
+    font-size: 70%;
+}
+.story-p{
+    height: 20px !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #555;
+}
+.description-st{
+    font-weight: 700;
+    font-size: 90%;
+}
+.all-c_header{
+    font-weight: 800;
+    font-size: 30px;
+}
+.all-c-r{
+    padding: 5%;
+}
