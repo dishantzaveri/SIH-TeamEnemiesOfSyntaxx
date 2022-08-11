@@ -6101,6 +6101,11 @@
   "resolved" "https://registry.npmjs.org/react-native-background-timer/-/react-native-background-timer-2.4.1.tgz"
   "version" "2.4.1"
 
+"react-native-base64@^0.2.1":
+  "integrity" "sha512-eHgt/MA8y5ZF0aHfZ1aTPcIkDWxza9AaEk4GcpIX+ZYfZ04RcaNahO+527KR7J44/mD3efYfM23O2C1N44ByWA=="
+  "resolved" "https://registry.npmjs.org/react-native-base64/-/react-native-base64-0.2.1.tgz"
+  "version" "0.2.1"
+
 "react-native-codegen@^0.69.1":
   "integrity" "sha512-TOZEqBarczcyYN3iZE3VpKkooOevaAzBq9n7lU0h9mQUvtRhLVyolc+a5K6cWI0e4v4K69I0MqzjPcPeFKo32Q=="
   "resolved" "https://registry.npmjs.org/react-native-codegen/-/react-native-codegen-0.69.1.tgz"

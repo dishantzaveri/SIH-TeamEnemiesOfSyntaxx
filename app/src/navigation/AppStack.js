@@ -2,13 +2,11 @@ import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import CustomDrawer from '../components/CustomDrawer';
-
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import VideoCall from '../components/App/VideoCall';
 import Account from '../components/Profile/Account';
 import ChatBot from '../components/ChatBot';
-import {Events, HowItWorks, Mentees, Mentors, WelcomePage} from '../pages';
-
+import { Mentees, Mentors, WelcomePage} from '../pages';
 import Onboarding1 from '../pages/Onboarding1';
 import Onboarding2 from '../pages/Onboarding2';
 import Onboarding3 from '../pages/Onboarding3';
@@ -23,6 +21,8 @@ import theme from '../theme';
 import Posts from '../components/Posts/Posts';
 import Resume from '../pages/Resume';
 import SearchJobs from '../pages/SearchJobs';
+import Blogs from '../pages/Blogs';
+import OpenBlogScreen from '../pages/OpenBlogScreen';
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -223,6 +223,26 @@ const AppStack = () => {
           headerShown: false,
           drawerIcon: ({color}) => (
             <Ionicons name="search" size={22} color={color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Blogs"
+        component={Blogs}
+        options={{
+          headerShown: false,
+          drawerIcon: ({color}) => (
+            <Ionicons name="school" size={22} color={color} />
+          ),
+        }}
+      />
+       <Drawer.Screen
+        name="OpenBlogScreen"
+        component={OpenBlogScreen}
+        options={{
+          headerShown: false,
+          drawerIcon: ({color}) => (
+            <Ionicons name="school" size={22} color={color} />
           ),
         }}
       />
