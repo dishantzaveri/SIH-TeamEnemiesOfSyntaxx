@@ -21,6 +21,7 @@ import VideoCall from "./components/VideoCall/VideoCall";
 import AllCampaigns from "./components/AllCampaigns/AllCampaigns";
 import SingleCampaign from "./components/AllCampaignsSingleCampaign/SingleCampaign";
 import FullSingleCampaign from "./components/FullSingleCampaign/FullSingleCampaign";
+import MyForm from "./components/Forms/Form";
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
         <Route path="/pitchdeck" element={<PitchDeck />} />
         <Route path="/videocall" element={<VideoCall />} />
         <Route path = "/campaigns" element={<AllCampaigns />} />
+        <Route path = "/form" element={<MyForm />} />
         <Route path = "/singleCampaign/:id" element={<FullSingleCampaign />} />
       </Routes>
     </Router>
