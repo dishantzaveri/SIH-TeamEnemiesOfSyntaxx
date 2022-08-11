@@ -1,30 +1,49 @@
-import React from "react";
-import axios from "axios";
+import { useEffect, useState } from "react";
+import { useRegisterMentorMutation } from "../../features/auth/authAPISlice";
+import { setCredentails } from "../../features/auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
 import "../../static/css/login.css";
-
+import { useNavigate } from "react-router-dom";
 // Importing componenets
 // import FacebookLogin from "./facebook";
 
 const RegisterMentor = ({ setLogin }) => {
-//   const submission = () => {
-//     axios({
-//       method: "post",
-//       url: "https://reqres.in/api/users",
-//       data: {
-//         email: document.getElementById("email").value,
-//         password: document.getElementById("pass").value,
-//       },
-//     }).then(
-//       (response) => {
-//         console.log(response);
-//         alert(`${response.data.email} has been registered`);
-//         setLogin(true);
-//       },
-//       (error) => {
-//         alert(error);
-//       }
-//     );
-//   };
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
+  const { token } = useSelector(state => state.auth);
+  const [inputs, setInputs] = useState({
+    name: '',
+    email: '',
+    password: '',
+  })
+  const [pass, setPass] = useState('')
+  const [registerMentor] = useRegisterMentorMutation();
+
+  const register = async () => {
+    if(pass !== inputs.password){
+      alert("Passwords do not match")
+    } else {
+      try{
+        const data = await registerMentor({
+            name: inputs.name,
+            email: inputs.email,
+            password: inputs.password,
+        }).unwrap();
+        const user = {...data, name: inputs.name, isMentee: false, isMentor: true}
+        dispatch(setCredentails(user))
+        localStorage.setItem('user', JSON.stringify(user))
+        console.log(user);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (token) {
+      navigate('/feed')
+    }
+  }, [token])
 
   return (
     <div class="bg-purple-gray-100 min-h-screen flex flex-col">
@@ -44,6 +63,8 @@ const RegisterMentor = ({ setLogin }) => {
             class="block border border-grey-light w-full p-3 rounded mb-4"
             name="fullname"
             placeholder="Full Name"
+            value={inputs.name}
+            onChange={e => setInputs({ ...inputs, name: e.target.value })}
             required
           />
           <input
@@ -52,6 +73,8 @@ const RegisterMentor = ({ setLogin }) => {
             name="email"
             placeholder="Email"
             id="email"
+            value={inputs.email}
+            onChange={e => setInputs({ ...inputs, email: e.target.value })}
             required
           />
           <input
@@ -60,6 +83,8 @@ const RegisterMentor = ({ setLogin }) => {
             name="password"
             id="pass"
             placeholder="Password"
+            value={inputs.password}
+            onChange={e => setInputs({ ...inputs, password: e.target.value })}
             required
           />
           <input
@@ -67,6 +92,8 @@ const RegisterMentor = ({ setLogin }) => {
             class="block border border-grey-light w-full p-3 rounded mb-4"
             name="confirm_password"
             placeholder="Confirm Password"
+            value={pass}
+            onChange={e => setPass(e.target.value)}
             required
           />
 
@@ -90,7 +117,7 @@ const RegisterMentor = ({ setLogin }) => {
           <button
             id="submit"
             type="submit"
-            // onClick={submission}
+            onClick={register}
             class=" w-full bg-purple-gray-500 hover:bg-purple-gray-600 text-white font-bold py-2 px-4 rounded"
           >
             Create Account
