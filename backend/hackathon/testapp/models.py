@@ -32,8 +32,8 @@ class Category(models.Model):
         verbose_name_plural = 'categories'
 
 class Post_Like(models.Model):
-    like_user                       = models.ForeignKey(User, on_delete=models.CASCADE, related_name='like_user')
-    group_post                      = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='like_on_group_post')
+    owner                           = models.ForeignKey(User, on_delete=models.CASCADE, related_name='like_user')
+    group_post                      = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='like_user')
     create_date                     = models.DateTimeField(auto_now_add=True)
     class Meta:
         ordering = ['create_date']
