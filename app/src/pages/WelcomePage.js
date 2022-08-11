@@ -7,12 +7,13 @@ import {
   TouchableOpacity,
   View,
   Linking,
-  ScrollView,
+  Image
 } from 'react-native';
 import {WebView} from 'react-native-webview';
-import {JoinNowAddUser, Logo, Github} from '../components/SVGR-Components';
+import {JoinNowAddUser, Github} from '../components/SVGR-Components';
 import LinearGradient from 'react-native-linear-gradient';
 import {height, width} from '../Consts';
+import logo from '../assets/logo.jpg'
 
 
 const WelcomePage = (props) => {
@@ -24,8 +25,8 @@ const WelcomePage = (props) => {
   return (
       <SafeAreaView style={styles.main}>
         <View style={styles.iconView}>
-          <Logo width={40} height={40} />
-          <Text style={styles.headerText}>Find Mentor & Mentees</Text>
+          <Image source={logo} style={styles.image} />
+          {/* <Text style={styles.headerText}>Find Mentor & Mentees</Text> */}
         </View>
 
         <TouchableOpacity
@@ -78,18 +79,6 @@ const WelcomePage = (props) => {
         </View>
         <View style={{flexDirection: 'row'}}>
           <TouchableOpacity
-            onPress={() => props.navigation.navigate('JobTabs')}
-            style={styles.jobsButton}>
-              <LinearGradient
-            start={{x: 0, y: 0}}
-            end={{x: 1, y: 0}}
-            style={styles.linearGradient}
-            colors={['#F14F0A','#F5B400']}
-            >
-            <Text style={styles.label}>Jobs</Text>
-          </LinearGradient>
-          </TouchableOpacity>
-          <TouchableOpacity
             onPress={() => props.navigation.navigate('ActiveMentorships')}
             style={styles.activeMentorshipsButton}>
             <LinearGradient
@@ -100,7 +89,6 @@ const WelcomePage = (props) => {
             >
             <Text style={styles.label}>Active</Text>
           </LinearGradient>
-            {/* <Text style={styles.buttonText}>Mentorships</Text> */}
           </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -163,42 +151,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  // joinButton: {
-  //   marginHorizontal: 15,
-  //   justifyContent: 'center',
-  //   alignItems: 'center',
-  //   width: Dimensions.get('window').width / 3,
-  //   height: Dimensions.get('window').height / 11,
-  //   // borderWidth: 1,
-  //   padding: 12,
-  //   borderRadius: 50,
-  //   backgroundColor: '#a3f1ff',
-  //   // borderColor: '#17aa92',
-  // },
-  // activeMentorshipsButton: {
-  //   marginHorizontal: 15,
-  //   justifyContent: 'center',
-  //   alignItems: 'center',
-  //   width: Dimensions.get('window').width / 2.5,
-  //   height: Dimensions.get('window').height / 11,
-  //   // borderWidth: 1,
-  //   padding: 12,
-  //   borderRadius: 50,
-  //   backgroundColor: '#a3f1ff',
-  //   // borderColor: '#daf0f4',
-  // },
-  // jobsButton: {
-  //   marginBottom: 6,
-  //   justifyContent: 'center',
-  //   alignItems: 'center',
-  //   width: Dimensions.get('window').width / 2.5,
-  //   height: Dimensions.get('window').height / 11,
-  //   // borderWidth: 1,
-  //   padding: 12,
-  //   borderRadius: 50,
-  //   backgroundColor: '#a3f1ff',
-  //   // borderColor: '#17aa92',
-  // },
+ image:{
+    width: Dimensions.get('window').width / 6,
+    height: Dimensions.get('window').height / 12,
+
+ },
   buttonText: {
     fontWeight: 'bold',
     color: 'white',

@@ -22,6 +22,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import theme from '../theme';
 import Posts from '../components/Posts/Posts';
 import Resume from '../pages/Resume';
+import SearchJobs from '../pages/SearchJobs';
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -105,7 +106,7 @@ const AppStack = () => {
         },
       }}>
       <Drawer.Screen
-        name="Home"
+        name="Home Screen"
         component={Tabs}
         options={{
           drawerIcon: ({color}) => (
@@ -212,6 +213,16 @@ const AppStack = () => {
           headerShown: false,
           drawerIcon: ({color}) => (
             <Ionicons name="document" size={22} color={color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Search Jobs"
+        component={SearchJobs}
+        options={{
+          headerShown: false,
+          drawerIcon: ({color}) => (
+            <Ionicons name="search" size={22} color={color} />
           ),
         }}
       />
