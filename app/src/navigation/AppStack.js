@@ -23,8 +23,13 @@ import Resume from '../pages/Resume';
 import SearchJobs from '../pages/SearchJobs';
 import Blogs from '../pages/Blogs';
 import OpenBlogScreen from '../pages/OpenBlogScreen';
+import HomeScreen from '../pages/HomeScreen';
+import EventScreen from '../pages/EventScreen';
+import ChatScreen from '../pages/ChatScreen';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
+const HomeStack = createNativeStackNavigator();
 
 function Tabs() {
   return (
@@ -90,7 +95,19 @@ function Tabs() {
   );
 }
 
+const HomeStackScreen = () => {
+  return (
+    <HomeStack.Navigator screenOptions={{headerShown: false}}>
+      <HomeStack.Screen name="HomeMain" component={HomeScreen} screenOptions={{headerShown: false}} />
+      <HomeStack.Screen name="Event" component={EventScreen}  screenOptions={{headerShown: false}} />
+      <HomeStack.Screen name="Chat" component={ChatScreen}  screenOptions={{headerShown: false}} />
+    </HomeStack.Navigator>
+  );
+};
+
 const AppStack = () => {
+
+  
   return (
     <Drawer.Navigator
       drawerContent={props => <CustomDrawer {...props} />}
@@ -246,7 +263,18 @@ const AppStack = () => {
           ),
         }}
       />
+        <Drawer.Screen
+        name="Events"
+        component={HomeStackScreen}
+        options={{
+          headerShown: false,
+          drawerIcon: ({color}) => (
+            <Ionicons name="school" size={22} color={color} />
+          ),
+        }}
+      />
     </Drawer.Navigator>
+    
   );
 };
 
