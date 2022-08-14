@@ -3,6 +3,8 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.db import models
 from rest_framework.authtoken.models import Token
 
+import requests
+
 # Create your models here.
 class UserManager(BaseUserManager):
     def create_user(self, email, password, **extra_fields):
