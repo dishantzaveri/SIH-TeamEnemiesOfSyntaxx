@@ -62,16 +62,8 @@ class LoginAPI(GenericAPIView):
 			login(request,user)
 			serializer = self.serializer_class(user)
 			token = Token.objects.get(user=user)
-			return Response({'token' : token.key,'email' : user.email,'name' : user.name},status = status.HTTP_200_OK)
+			return Response({'token' : token.key,'email' : user.email,'name' : user.name, 'is_entrepreneur': user.is_entrepreneur, 'is_mentor': user.is_mentor},status = status.HTTP_200_OK)
 		return Response('Invalid Credentials',status = status.HTTP_404_NOT_FOUND)
-
-class MentorsList(generics.ListCreateAPIView):
-    queryset = MentorProfile.objects.all()
-    serializer_class = MentorProfileSerializer
-
-class EntrepreneursList(generics.ListCreateAPIView):
-	queryset = EntrepreneurProfile.objects.all()
-	serializer_class = EntrepreneurProfileSerializer
 
 class StartupDetails(viewsets.ModelViewSet):
 	queryset = Startup.objects.all()
@@ -124,14 +116,7 @@ class MentorProfileViewSet(viewsets.ModelViewSet):
 	permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 	def get_queryset(self):
-		return MentorProfile.objects.filter(user=self.request.user)
-	
-	def perform_create(self,serializer):
-		serializer.save(user = self.request.user)
-	
-	def update(self, request, *args, **kwargs):
-		kwargs['partial'] = True
-		return super().update(request, *args, **kwargs)
+		return MentorProfile.objects.all()
 
 class EntrepreneurProfileViewSet(viewsets.ModelViewSet):
 	queryset = EntrepreneurProfile.objects.all()
@@ -139,11 +124,4 @@ class EntrepreneurProfileViewSet(viewsets.ModelViewSet):
 	permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 	def get_queryset(self):
-		return EntrepreneurProfile.objects.filter(user=self.request.user)
-	
-	def perform_create(self,serializer):
-		serializer.save(user = self.request.user)
-	
-	def update(self, request, *args, **kwargs):
-		kwargs['partial'] = True
-		return super().update(request, *args, **kwargs)
+		return EntrepreneurProfile.objects.all()

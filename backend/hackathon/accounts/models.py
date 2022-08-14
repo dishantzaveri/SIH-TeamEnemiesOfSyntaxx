@@ -54,11 +54,33 @@ class User(AbstractUser):
 
 class Startup(models.Model):
     user = models.ForeignKey(User, related_name = 'startup', on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
-    industry = models.CharField(max_length=255,null=True,blank=True)
+    legal_name = models.CharField(max_length=255,null=True, blank=True)
+    trade_name = models.CharField(max_length=255, null=True, blank=True)
+    is_verified = models.BooleanField(default=False, null=True, blank=True)
+    gstin = models.CharField(max_length=255, unique=True, null=True, blank=True)
+    gstin_status = models.BooleanField(default=False, null=True, blank=True)
+    registration_date = models.DateField(null=True,blank=True)
+    business_constitution = models.CharField(max_length=255, unique=True, null=True, blank=True)
+    taxpayer_type = models.CharField(max_length=255, null=True, blank=True)
+    cancellation_date = models.DateField(null=True, blank=True)
+    business_activity_nature = models.CharField(max_length=255, null=True, blank=True)
+    office = models.CharField(max_length=255, null=True, blank=True)
+    recipient = models.CharField(max_length=255, null=True, blank=True)
+    warehouse = models.CharField(max_length=255, null=True, blank=True)
+    state_jurisdiction = models.CharField(max_length=255, null=True, blank=True)
+    state_code = models.CharField(max_length=255, null=True, blank=True)
+    center_jurisdiction = models.CharField(max_length=255, null=True, blank=True)
+    center_code = models.CharField(max_length=255, null=True, blank=True)
+    branch_no = models.CharField(max_length=255, null=True, blank=True)
+    branch_name = models.CharField(max_length=255, null=True,   blank=True)
+    location = models.CharField(max_length=255, null=True, blank=True)
+    street = models.CharField(max_length=255, null=True, blank=True)
+    district = models.CharField(max_length=255, null=True, blank=True)
+    state = models.CharField(max_length=255, null=True  , blank=True)
+    pincode = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
-        return self.name
+        return self.trade_name
 
 class WorkExperience(models.Model):
     user = models.ForeignKey(User, related_name = 'experience', on_delete=models.CASCADE)
@@ -82,11 +104,10 @@ class Education(models.Model):
     description = models.TextField(max_length=255, blank=True, null=True)
 
 class MentorProfile(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
     expertise = models.CharField(max_length=70,null=True,blank=True)
 
 class EntrepreneurProfile(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
     startup = models.ManyToManyField(Startup)
     mentor = models.ForeignKey(MentorProfile,models.SET_NULL,null=True,blank=True)
-
