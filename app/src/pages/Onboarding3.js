@@ -18,9 +18,10 @@ import { height, width } from '../Consts';
 import { useTheme } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import Circle3 from '../assets/circle3.png';
+import {useNavigation} from '@react-navigation/native';
 
 
-const Onboarding3 = ({ navigation }) => {
+const Onboarding3 = ({}) => {
 
    const { colors } = useTheme();
     const [name, setName] = useState('');
@@ -29,6 +30,7 @@ const Onboarding3 = ({ navigation }) => {
     const [gender, setGender] = useState('');
     const [email, setEmail] = useState('');
     const [dob, setDob] = useState('');
+    const navigation = useNavigation();
 
     return (
         <SafeAreaView style={styles.container} >
@@ -83,8 +85,8 @@ const Onboarding3 = ({ navigation }) => {
                     }}
                     placeholder={'Phone Number'}
                 />
-                  <View style={styles.button}>
-                <Button title="Next"  >
+                  <View style={styles.button} >
+                <Button title="Next" onPress={() => navigation.navigate('Onboarding4')} >
                 </Button>
                 </View>
             </View>

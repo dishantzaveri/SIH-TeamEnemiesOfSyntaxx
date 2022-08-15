@@ -30,6 +30,8 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 const HomeStack = createNativeStackNavigator();
+const OnboardingStack = createNativeStackNavigator();
+const BlogStack = createNativeStackNavigator();
 
 function Tabs() {
   return (
@@ -104,6 +106,30 @@ const HomeStackScreen = () => {
     </HomeStack.Navigator>
   );
 };
+const Onboarding = () => {
+  return (
+    <OnboardingStack.Navigator screenOptions={{headerShown: false}}>
+      <OnboardingStack.Screen name="Onboarding1" component={Onboarding1} screenOptions={{headerShown: false}} />
+      <OnboardingStack.Screen name="Onboarding2" component={Onboarding2} screenOptions={{headerShown: false}} />
+      <OnboardingStack.Screen name="Onboarding3" component={Onboarding3} screenOptions={{headerShown: false}} />
+      <OnboardingStack.Screen name="Onboarding4" component={Onboarding4} screenOptions={{headerShown: false}} />
+      <OnboardingStack.Screen name="Onboarding5" component={Onboarding5} screenOptions={{headerShown: false}} />
+      <OnboardingStack.Screen name="Onboarding6" component={Onboarding6} screenOptions={{headerShown: false}} />
+
+
+    </OnboardingStack.Navigator>
+  );
+};
+
+const Blog = () => {
+  return (
+    <BlogStack.Navigator screenOptions={{headerShown: false}}>
+      <BlogStack.Screen name="Blogs" component={Blogs} screenOptions={{headerShown: false}} />
+      <BlogStack.Screen name="OpenBlogScreen" component={OpenBlogScreen} screenOptions={{headerShown: false}} />
+    </BlogStack.Navigator>
+  );
+};
+
 
 const AppStack = () => {
 
@@ -160,6 +186,15 @@ const AppStack = () => {
         }}
       />
       <Drawer.Screen
+        name="Onboarding"
+        component={Onboarding}
+        options={{
+          drawerIcon: ({color}) => (
+            <Ionicons name="chatbox-ellipses-outline" size={22} color={color} />
+          ),
+        }}
+      />
+      {/* <Drawer.Screen
         name="Onboarding1"
         component={Onboarding1}
         options={{
@@ -212,7 +247,7 @@ const AppStack = () => {
             <Ionicons name="chatbox-ellipses-outline" size={22} color={color} />
           ),
         }}
-      />
+      /> */}
       <Drawer.Screen
         name="Careertv"
         component={Careertv}
@@ -244,8 +279,8 @@ const AppStack = () => {
         }}
       />
       <Drawer.Screen
-        name="Blogs"
-        component={Blogs}
+        name="Blog"
+        component={Blog}
         options={{
           headerShown: false,
           drawerIcon: ({color}) => (
@@ -253,7 +288,7 @@ const AppStack = () => {
           ),
         }}
       />
-       <Drawer.Screen
+       {/* <Drawer.Screen
         name="OpenBlogScreen"
         component={OpenBlogScreen}
         options={{
@@ -262,7 +297,7 @@ const AppStack = () => {
             <Ionicons name="school" size={22} color={color} />
           ),
         }}
-      />
+      /> */}
         <Drawer.Screen
         name="Events"
         component={HomeStackScreen}

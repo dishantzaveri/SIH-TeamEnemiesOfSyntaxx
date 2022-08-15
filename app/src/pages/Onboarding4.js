@@ -15,15 +15,17 @@ import Portfolio from '../assets/portfolio.png';
 import { height, width } from '../Consts';
 import LinearGradient from 'react-native-linear-gradient';
 import { useTheme } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 
 
-const Onboarding4 = ({ navigation }) => {
+const Onboarding4 = ({  }) => {
 
     const { colors } = useTheme();
     const [name, setName] = useState('');
     const [fresher, setFresher] = useState('');
     const [experience, setExperience] = useState('');
+    const navigation = useNavigation();
 
 
     return (
@@ -84,7 +86,7 @@ const Onboarding4 = ({ navigation }) => {
 
 
                         <View style={styles.button}>
-                            <Button title="Next"  >
+                            <Button title="Next"  onPress={() => navigation.navigate('Onboarding5')}>
                             </Button>
                         </View>
                     </View>

@@ -18,8 +18,9 @@ import Circle5 from '../assets/circle5.png';
 import { height, width } from '../Consts';
 import { useTheme } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
+import {useNavigation} from '@react-navigation/native';
 
-const Onboarding6 = ({ navigation }) => {
+const Onboarding6 = ({ }) => {
 
    const { colors } = useTheme();
     const [skills, setSkills] = useState('');
@@ -28,6 +29,7 @@ const Onboarding6 = ({ navigation }) => {
     const [skills3, setSkills3] = useState('');
     const [skills4, setSkills4] = useState('');
     const [skills5, setSkills5] = useState('');
+    const navigation = useNavigation();
 
     return (
         <SafeAreaView style={styles.container} >

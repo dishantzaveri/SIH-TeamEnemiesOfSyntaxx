@@ -11,8 +11,11 @@ import {
 import React, { useEffect, useState } from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import { data, popular } from '../components/BlogData';
+import { useTheme } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 const Blogs = props => {
     const { width, height } = Dimensions.get('window');
+    const navigation = useNavigation();
     useEffect(() => {
         var requestOptions = {
             method: 'GET',

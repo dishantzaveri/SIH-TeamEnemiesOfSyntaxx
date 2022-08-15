@@ -1,14 +1,16 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { View, StyleSheet, TouchableOpacity, Image, Dimensions, SafeAreaView, } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Image, Dimensions, SafeAreaView } from 'react-native';
 import { withTheme, Text, RadioButton, Button } from 'react-native-paper';
 import logo from '../assets/logo.jpg';
 import Circle2 from '../assets/circle2.png';
 import { height, width } from '../Consts';
 import { useTheme } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
+import {useNavigation} from '@react-navigation/native';
 
-export default function Onboarding2({ navigation }) {
+export default function Onboarding2({  }) {
   const {colors} = useTheme();
+  const navigation = useNavigation();
 
     return (
         <SafeAreaView style={styles.container} >
@@ -44,7 +46,7 @@ export default function Onboarding2({ navigation }) {
                     </Button>
                 </View>
                 <View style={styles.button}>
-                    <Button labelStyle={styles.text3}>
+                    <Button labelStyle={styles.text3} onPress={() => navigation.navigate('Onboarding3')}>
                         Next
                     </Button>
                 </View>

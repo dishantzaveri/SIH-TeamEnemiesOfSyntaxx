@@ -8,13 +8,15 @@ import { height, width } from '../Consts';
 import YoutubePlayer from "react-native-youtube-iframe";
 import LinearGradient from 'react-native-linear-gradient';
 import { useTheme } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
-const Onboarding5 = ({ navigation }) => {
+const Onboarding5 = ({}) => {
 
 
     const [fileResponse, setFileResponse] = useState([]);
     const [playing, setPlaying] = useState(false);
     const { colors } = useTheme();
+    const navigation = useNavigation();
 
     const onStateChange = useCallback((state) => {
         if (state === "ended") {
@@ -86,7 +88,7 @@ const Onboarding5 = ({ navigation }) => {
 
             <View style={styles.button}>
 
-                <Button
+                <Button onPress={() => navigation.navigate('Onboarding6')}
 
                     title="Next"
                 >

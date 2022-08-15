@@ -22,11 +22,13 @@ import {
   launchImageLibrary
 } from 'react-native-image-picker';
 import { Dimensions } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 const Onboarding1 = () => {
   const [filePath, setFilePath] = useState({});
   const [Pic, SetPic] = useState('');
   const { colors } = useTheme();
+  const navigation = useNavigation();
 
   const requestCameraPermission = async () => {
     if (Platform.OS === 'android') {
@@ -162,8 +164,8 @@ const Onboarding1 = () => {
             />
           </TouchableOpacity>
         </View>
-        <View style={styles.button}>
-          <Button
+        <View style={styles.button} >
+          <Button onPress={() => navigation.navigate('Onboarding2')}
             title="Next">
           </Button>
         </View>
