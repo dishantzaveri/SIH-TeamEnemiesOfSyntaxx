@@ -9,11 +9,15 @@ from .models import *
 from .serializers import *
 
 from rest_framework.response import Response
+from django.http import JsonResponse
+from rest_framework.views import APIView
 from rest_framework.generics import GenericAPIView
 from rest_framework.decorators import action,api_view
 from rest_framework import generics
 
 from django.contrib.auth import get_user_model
+
+import requests
 
 User = get_user_model()
 
@@ -32,7 +36,7 @@ class MentorRegisterAPI(GenericAPIView):
 			user.save()
 		token = Token.objects.create(user=user)
 		
-		return Response({'token' : token.key,'email' : user.email},status = status.HTTP_200_OK)
+		return Response({'token' : token.key,'email' : user.email, 'name' : user.name},status = status.HTTP_200_OK)
 
 class EntrepreneurRegisterAPI(GenericAPIView):
 	
@@ -125,3 +129,18 @@ class EntrepreneurProfileViewSet(viewsets.ModelViewSet):
 
 	def get_queryset(self):
 		return EntrepreneurProfile.objects.all()
+
+class GstVerification(APIView):
+	def post(self,request):
+		gstnumber = request.data['gstnumber']
+		url = "https://gst-details2.p.rapidapi.com/Gstverifywebsvcv2/Gstverify"
+		payload = f"clientid=111&txn_id=2254545&consent=Y&gstnumber={gstnumber}&method=gstvalidatev2"
+		headers = {
+		    "content-type": "application/x-www-form-urlencoded",
+		    "X-RapidAPI-Key": "aeeaf0c4ffmsh8d2e448618a749cp1497acjsnf52c97a559d3",
+		    "X-RapidAPI-Host": "gst-details2.p.rapidapi.com"
+		    }
+		
+		response = requests.request("POST", url, data=payload, headers=headers)
+		print(type(response))
+		return JsonResponse(response.json(), safe=False)

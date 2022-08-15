@@ -1,7 +1,9 @@
 from django.db import models
-from accounts.models import User
-# Create your models here.
 
+from django.contrib.auth import get_user_model
+User = get_user_model()
+
+# Create your models here.
 class Post(models.Model):
     created 			= models.DateTimeField(auto_now_add=True)
     title 				= models.CharField(max_length=100, blank=True, default='')
@@ -37,4 +39,32 @@ class Post_Like(models.Model):
     create_date                     = models.DateTimeField(auto_now_add=True)
     class Meta:
         ordering = ['create_date']
+
+class Session(models.Model):
+    Online = 'ON'
+    Offline = 'OFF'
+
+    organiser = models.ForeignKey(User, related_name='organiser', on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    start_time = models.TimeField()
+    end_time = models.TimeField(null=True,blank=True)
+    start_date = models.DateField()
+    end_date = models.DateField(null=True, blank=True)
+    mode = models.CharField(max_length = 3, choices = [(Online, 'Online'),(Offline,'Offline')], default = Online)
+    max_registrations = models.PositiveIntegerField()
+    venue = models.CharField(max_length = 255, blank = True, null=True)
+    meet_link = models.URLField(null=True,blank=True)
+    description = models.TextField(null=True, blank = True, max_length=300)
+    price = models.FloatField(null=True, blank = True, default=0)
+
+    def __str__(self):
+        return self.name
+
+
+class Attendee(models.Model):
+    session = models.ForeignKey(Session, on_delete = models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('session', 'user')
     

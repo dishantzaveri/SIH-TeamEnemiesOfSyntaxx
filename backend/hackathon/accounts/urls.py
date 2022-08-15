@@ -16,4 +16,5 @@ urlpatterns = [
     path('mentor_register/', views.MentorRegisterAPI.as_view(), name = 'Mentor Registration'),
     path('entrepreneur_register/', views.EntrepreneurRegisterAPI.as_view(), name = 'Entrepreneur Registration'),
     path('login/', views.LoginAPI.as_view(), name = 'Login'),
+    path('gstverify/',views.GstVerification.as_view(), name = 'Gst Verify'),
 ]

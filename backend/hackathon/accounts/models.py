@@ -3,7 +3,6 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.db import models
 from rest_framework.authtoken.models import Token
 
-import requests
 
 # Create your models here.
 class UserManager(BaseUserManager):
@@ -51,8 +50,8 @@ class User(AbstractUser):
 
     @property
     def token(self):
-        token = Token.objects.get(user=User.objects.get(self.id))
-        return token
+        token = Token.objects.get(user=User.objects.get(email=self.email))
+        return token.key
 
 class Startup(models.Model):
     user = models.ForeignKey(User, related_name = 'startup', on_delete=models.CASCADE)

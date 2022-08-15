@@ -2,8 +2,6 @@ from rest_framework import serializers
 from .models import *
 from accounts.models import User
 
-
-
 class PostSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.name')
     like_on_post_count = serializers.SerializerMethodField('get_like_on_group_post_count')
@@ -50,3 +48,23 @@ class PostLikeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post_Like
         fields = ['id','owner','group_post','create_date']
+
+class SessionSerializer(serializers.ModelSerializer):
+    organiser = serializers.ReadOnlyField(source='organiser.name')
+    organiser_token = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Session
+        fields = ['id','organiser','organiser_token','name', 'description', 'start_time', 'end_time', 'start_date', 
+        'end_date', 'mode', 'max_registrations', 'venue', 'meet_link', 'price']
+    
+    def get_organiser_token(self,obj):
+        token = obj.organiser.token
+        return token 
+
+class AttendeeSerializer(serializers.ModelSerializer):
+    attendee_token = serializers.ReadOnlyField(source= 'user.token')
+
+    class Meta:
+        model = Attendee
+        fields = ['session', 'user','attendee_token']
