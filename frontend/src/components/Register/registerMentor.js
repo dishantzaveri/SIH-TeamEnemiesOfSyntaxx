@@ -4,46 +4,74 @@ import { setCredentails } from "../../features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import "../../static/css/login.css";
 import { useNavigate } from "react-router-dom";
+import { CometChat } from "@cometchat-pro/chat";
+import * as CONSTANTS from "../../constants/constants";
+
 // Importing componenets
 // import FacebookLogin from "./facebook";
 
 const RegisterMentor = ({ setLogin }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
-  const { token } = useSelector(state => state.auth);
+  const navigate = useNavigate();
+  const { token } = useSelector((state) => state.auth);
   const [inputs, setInputs] = useState({
-    name: '',
-    email: '',
-    password: '',
-  })
-  const [pass, setPass] = useState('')
+    name: "",
+    email: "",
+    password: "",
+  });
+  const [pass, setPass] = useState("");
   const [registerMentor] = useRegisterMentorMutation();
 
   const register = async () => {
-    if(pass !== inputs.password){
-      alert("Passwords do not match")
+    if (pass !== inputs.password) {
+      alert("Passwords do not match");
     } else {
-      try{
+      try {
         const data = await registerMentor({
-            name: inputs.name,
-            email: inputs.email,
-            password: inputs.password,
+          name: inputs.name,
+          email: inputs.email,
+          password: inputs.password,
         }).unwrap();
-        const user = {...data, name: inputs.name, isMentee: false, isMentor: true}
-        dispatch(setCredentails(user))
-        localStorage.setItem('user', JSON.stringify(user))
+        const user = {
+          ...data,
+          name: inputs.name,
+          isMentee: false,
+          isMentor: true,
+        };
+        dispatch(setCredentails(user));
+        localStorage.setItem("user", JSON.stringify(user));
+        const uuid = inputs.name.split(" ")[0] + inputs.email.split("@")[0];
+        console.log(uuid);
+        var cometUser = new CometChat.User(uuid);
+        cometUser.setName(inputs.name);
+        CometChat.createUser(cometUser, CONSTANTS.AUTH_KEY).then(
+          (user) => {
+            console.log("user created", user);
+            CometChat.login(uuid, CONSTANTS.AUTH_KEY).then(
+              (user) => {
+                console.log("Login Successful:", { user });
+              },
+              (error) => {
+                console.log("Login failed with exception:", { error });
+              }
+            );
+          },
+          (error) => {
+            console.log("error", error);
+          }
+        );
         console.log(user);
       } catch (error) {
         console.log(error);
       }
     }
-  }
+  };
 
   useEffect(() => {
     if (token) {
-      navigate('/feed')
+      navigate("/login");
     }
-  }, [token])
+  }, [token]);
 
   return (
     <div class="bg-purple-gray-100 min-h-screen flex flex-col">
@@ -64,7 +92,7 @@ const RegisterMentor = ({ setLogin }) => {
             name="fullname"
             placeholder="Full Name"
             value={inputs.name}
-            onChange={e => setInputs({ ...inputs, name: e.target.value })}
+            onChange={(e) => setInputs({ ...inputs, name: e.target.value })}
             required
           />
           <input
@@ -74,7 +102,7 @@ const RegisterMentor = ({ setLogin }) => {
             placeholder="Email"
             id="email"
             value={inputs.email}
-            onChange={e => setInputs({ ...inputs, email: e.target.value })}
+            onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
             required
           />
           <input
@@ -84,7 +112,7 @@ const RegisterMentor = ({ setLogin }) => {
             id="pass"
             placeholder="Password"
             value={inputs.password}
-            onChange={e => setInputs({ ...inputs, password: e.target.value })}
+            onChange={(e) => setInputs({ ...inputs, password: e.target.value })}
             required
           />
           <input
@@ -93,7 +121,7 @@ const RegisterMentor = ({ setLogin }) => {
             name="confirm_password"
             placeholder="Confirm Password"
             value={pass}
-            onChange={e => setPass(e.target.value)}
+            onChange={(e) => setPass(e.target.value)}
             required
           />
 
@@ -123,8 +151,7 @@ const RegisterMentor = ({ setLogin }) => {
             Create Account
           </button>
 
-          
-{/* <div className='row col-12 d-flex justify-content-end'>
+          {/* <div className='row col-12 d-flex justify-content-end'>
             <button type='submit' class='btn btn-1'>
                         Cancel
             </button>
@@ -132,7 +159,6 @@ const RegisterMentor = ({ setLogin }) => {
                         Register
             </button>
           </div> */}
-
         </div>
       </div>
     </div>
