@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'drf_spectacular',
     'accounts',
+    'newsandpolicis',
     'testapp',
 ]
 
