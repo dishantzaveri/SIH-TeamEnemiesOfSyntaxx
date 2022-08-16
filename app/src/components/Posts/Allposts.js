@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -7,7 +7,7 @@ import {
   FlatList,
   Text,
   Share,
-  Image
+  Image,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -16,8 +16,7 @@ import theme from '../../theme';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Feather from 'react-native-vector-icons/Feather';
 
-
-export default function AllPosts({ navigation }) {
+export default function AllPosts({navigation}) {
   const [search, setSearch] = useState('');
   const [filteredData, setFilteredData] = useState([]);
   const [masterData, setMasterData] = useState([]);
@@ -45,33 +44,32 @@ export default function AllPosts({ navigation }) {
   }, []);
 
   const fetchData = async () => {
-
     var axios = require('axios');
 
     var config = {
       method: 'get',
       url: 'https://vismayvora.pythonanywhere.com/api/posts/',
       headers: {
-        'Authorization': 'Token 72f957f003d1ae579df255c5e46c5adefcb0d7c7',
-        'Cookie': 'csrftoken=o4q1Ihf3JTBVbPIRuFvCtHZVT3RHp0X8; sessionid=0rx0ut9910ocx5ggaz1l6en6khbzxg1n'
-      }
+        Authorization: 'Token 72f957f003d1ae579df255c5e46c5adefcb0d7c7',
+        Cookie:
+          'csrftoken=o4q1Ihf3JTBVbPIRuFvCtHZVT3RHp0X8; sessionid=0rx0ut9910ocx5ggaz1l6en6khbzxg1n',
+      },
     };
 
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
+        console.log(JSON.stringify(response.data.reverse()));
         setFilteredData(response.data);
         setMasterData(response.data);
       })
       .catch(function (error) {
         console.log(error);
       });
-
   };
 
-  const searchFilter = (text) => {
+  const searchFilter = text => {
     if (text) {
-      const newData = masterData.filter((item) => {
+      const newData = masterData.filter(item => {
         const itemData = item.owner
           ? item.owner.toUpperCase()
           : ''.toUpperCase();
@@ -83,7 +81,7 @@ export default function AllPosts({ navigation }) {
       setSearch(text);
     }
     if (text) {
-      const newData = masterData.filter((item) => {
+      const newData = masterData.filter(item => {
         const itemData = item.title
           ? item.title.toUpperCase()
           : ''.toUpperCase();
@@ -93,15 +91,13 @@ export default function AllPosts({ navigation }) {
 
       setFilteredData(newData);
       setSearch(text);
-    }
-
-    else {
+    } else {
       setFilteredData(masterData);
       setSearch(text);
     }
   };
 
-  const renderItem = ({ item }) => {
+  const renderItem = ({item}) => {
     return (
       <View
         style={{
@@ -116,7 +112,7 @@ export default function AllPosts({ navigation }) {
             justifyContent: 'space-between',
             alignItems: 'center',
           }}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <Image
               style={{
                 height: 55,
@@ -127,11 +123,11 @@ export default function AllPosts({ navigation }) {
                 uri: 'https://imgnew.outlookindia.com/public/uploads/articles/2021/10/30/Mrunal_Thakur_21.jpg',
               }}
             />
-            <View style={{ marginLeft: 10 }}>
-              <Text style={{ fontWeight: '600', color: 'black', fontSize: 16 }}>
+            <View style={{marginLeft: 10}}>
+              <Text style={{fontWeight: '600', color: 'black', fontSize: 16}}>
                 {item.owner}
               </Text>
-              <Text style={{ color: 'black' }}>{item.title}</Text>
+              <Text style={{color: 'black'}}>{item.title}</Text>
             </View>
           </View>
           <Text
@@ -141,14 +137,11 @@ export default function AllPosts({ navigation }) {
             + Follow
           </Text>
         </View>
-        <Text style={{ marginTop: 10 }}>
-          {item.body}
-        </Text>
+        <Text style={{marginTop: 10}}>{item.body}</Text>
         <Image
           source={{
             uri: item.images_post,
           }}
-
           style={{
             width: '100%',
             height: 300,
@@ -166,22 +159,24 @@ export default function AllPosts({ navigation }) {
             borderTopWidth: 1,
             paddingTop: 20,
           }}>
-          <View style={{ flexDirection: 'row' }}>
-            <AntDesign name="like2" size={25} style={{ marginHorizontal: 20 }} />
+          <View style={{flexDirection: 'row'}}>
+            <AntDesign name="like2" size={25} style={{marginHorizontal: 20}} />
             <Text>{item.like_on_post_count}</Text>
           </View>
-          <View style={{ flexDirection: 'row' }}>
-            <Fontisto name="commenting" size={25} style={{ marginHorizontal: 20 }} />
+          <View style={{flexDirection: 'row'}}>
+            <Fontisto
+              name="commenting"
+              size={25}
+              style={{marginHorizontal: 20}}
+            />
             <Text>{item.comment_on_post_count}</Text>
           </View>
-          <TouchableOpacity
-            onPress={onShare}>
+          <TouchableOpacity onPress={onShare}>
             <AntDesign name="sharealt" size={25} />
           </TouchableOpacity>
           {/* <Feather name="send" size={25} /> */}
         </View>
       </View>
-
     );
   };
 
@@ -228,7 +223,7 @@ export default function AllPosts({ navigation }) {
               }}
               placeholder="Search"
               value={search}
-              onChangeText={(text) => searchFilter(text)}
+              onChangeText={text => searchFilter(text)}
             />
           </View>
         </View>
@@ -237,49 +232,43 @@ export default function AllPosts({ navigation }) {
 
       <FlatList
         data={filteredData}
-        keyExtractor={({ id }) => id}
+        keyExtractor={({id}) => id}
         contentContainerStyle={{}}
         renderItem={renderItem}
-
       />
-
     </View>
-
   );
 }
 
 const styles = StyleSheet.create({
-
   container: {
     flex: 1,
     backgroundColor: 'white',
-
   },
   header: {
     paddingTop: 64,
     paddingBottom: 16,
     backgroundColor: '#3BCBFF',
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     borderBottomWidth: 1,
-    borderBottomColor: "#EBECF4",
-
+    borderBottomColor: '#EBECF4',
   },
   headerTitle: {
     fontSize: 20,
-    fontWeight: "500"
+    fontWeight: '500',
   },
   feed: {
-    marginHorizontal: 10
+    marginHorizontal: 10,
   },
   feedItem: {
-    backgroundColor: "#00CBA9",
+    backgroundColor: '#00CBA9',
     borderRadius: 5,
     padding: 8,
-    flexDirection: "row",
+    flexDirection: 'row',
     margin: 25,
-    shadowColor: "#000000",
-    shadowOffset: { height: 15 },
+    shadowColor: '#000000',
+    shadowOffset: {height: 15},
     shadowRadius: 15,
     shadowOpacity: 10,
   },
@@ -287,44 +276,43 @@ const styles = StyleSheet.create({
     width: 46,
     height: 46,
     borderRadius: 20,
-    marginRight: 16
+    marginRight: 16,
   },
   name: {
     fontSize: 15,
-    fontWeight: "500",
-    color: "#454D65"
+    fontWeight: '500',
+    color: '#454D65',
   },
   timestamp: {
     fontSize: 11,
-    color: "#C4C6CE",
-    marginTop: 4
+    color: '#C4C6CE',
+    marginTop: 4,
   },
   post: {
     marginTop: 16,
     fontSize: 14,
-    color: "white"
+    color: 'white',
   },
   postImage: {
     width: undefined,
     height: 150,
     borderRadius: 5,
-    marginVertical: 16
+    marginVertical: 16,
   },
   input: {
     padding: 10,
     flex: 1,
-    borderBottomColor: "black",
+    borderBottomColor: 'black',
     backgroundColor: '#00CBA9',
   },
   inputCard: {
     margin: 25,
     flexDirection: 'row',
-    backgroundColor: "#000000",
+    backgroundColor: '#000000',
     alignItems: 'center',
     borderRadius: 5,
     zIndex: 100,
-    borderColor: "white",
-    borderWidth: 0.5
+    borderColor: 'white',
+    borderWidth: 0.5,
   },
-
 });
