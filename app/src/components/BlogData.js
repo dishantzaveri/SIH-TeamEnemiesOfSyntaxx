@@ -2,27 +2,27 @@ export const data = [
     
     {
       id: 1,
-      author: 'Thomas Edison',
+      author: "The petition has been filed at the Allahabad bench of the NCLT under the Insolvency and Bankruptcy Code, the regulatory filing showed",
       likes: 100,
-      title: 'Genius is one percent inspiration and ninety-nine percent perspiration.',
+      title:  "SBI starts insolvency proceedings against Bajaj Hindusthan Sugar | Mint - Mint",
       profilePic: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-      image: 'https://miro.medium.com/max/788/1*bdezOVG_rWX8mXkVn62QOQ.jpeg'
+      image: "https://images.livemint.com/img/2022/08/16/600x338/NCLT_insolvency_1660655344901_1660655345205_1660655345205.jpg"
     },
     {
         id: 2,
-        author: 'Yogi Berra',
-        title: 'You can observe a lot just by watching.',
+        author:  "On the lines of launching the more affordable S1 electric scooter, Ola Electric announced that its first all-electric car will arrive in India in 2024. This all-electric car was already teased by Ola Electric in a few mild teasers earlier, and now Ola Electri…",
+        title: "Ola Electric Vehicle launch timeframe revealed officially - CarToq.com",
         likes: 220,
         profilePic: 'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-        image: 'https://miro.medium.com/max/788/1*n3bgDB8TG4kfyVbTzGcSWA.jpeg'
+        image: "https://www.cartoq.com/wp-content/uploads/2022/08/OLA-EV-CAR-1.jpeg"
       },
     {
       id: 3,
-      author: 'Abraham Lincoln',
-      title: 'A house divided against itself cannot stand.',
+      author: "This tweet that has been quoted by Anand Mahindra, shows his reaction to an Elon Musk's Tesla vs. Mahindra meme that features Pankaj Tripathi.  | Trending",
+      title: "Anand Mahindra reacts to Tesla vs. Mahindra meme, featuring Pankaj Tripathi - Hindustan Times",
       likes: 620,
       profilePic: 'https://images.pexels.com/photos/736716/pexels-photo-736716.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-      image: 'https://miro.medium.com/max/875/1*v5kDIx_1WTzqHzdJmFPSgA.jpeg'
+      image:"https://images.hindustantimes.com/img/2022/08/16/1600x900/Anand_Mahindra_Elon_Musk_Tesla_vs_Mahindra_meme_Pankaj_Tripathi_1660651184770_1660651192269_1660651192269.png"
     },
   ]
 
