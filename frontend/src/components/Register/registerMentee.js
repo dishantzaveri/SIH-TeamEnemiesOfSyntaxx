@@ -4,49 +4,68 @@ import { setCredentails } from "../../features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import "../../static/css/login.css";
 import { useNavigate } from "react-router-dom";
-
+import { CometChat } from "@cometchat-pro/chat";
+import * as CONSTANTS from "../../constants/constants";
 // Importing componenets
 // import FacebookLogin from "./facebook";
 
 const RegisterMentee = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
-  const { token } = useSelector(state => state.auth);
+  const navigate = useNavigate();
+  const { token } = useSelector((state) => state.auth);
   const [inputs, setInputs] = useState({
-    name: '',
-    email: '',
-    password: '',
-  })
-  const [pass, setPass] = useState('')
+    name: "",
+    email: "",
+    password: "",
+  });
+  const [pass, setPass] = useState("");
   const [registerMentee] = useRegisterMenteeMutation();
 
   const register = async () => {
-    if(pass !== inputs.password){
-      alert("Passwords do not match")
+    if (pass !== inputs.password) {
+      alert("Passwords do not match");
     } else {
-      try{
+      try {
         const data = await registerMentee({
-            name: inputs.name,
-            email: inputs.email,
-            password: inputs.password,
+          name: inputs.name,
+          email: inputs.email,
+          password: inputs.password,
         }).unwrap();
-        const user = {...data, isMentee: true, isMentor: false}
-        dispatch(setCredentails(user))
-        localStorage.setItem('user', JSON.stringify(user))
+        const user = { ...data, isMentee: true, isMentor: false };
+        dispatch(setCredentails(user));
+        localStorage.setItem("user", JSON.stringify(user));
+        const uuid = inputs.name.split(" ")[0] + inputs.email.split("@")[0];
+        console.log(uuid);
+        var cometUser = new CometChat.User(uuid);
+        cometUser.setName(inputs.name);
+        CometChat.createUser(cometUser, CONSTANTS.AUTH_KEY).then(
+          (user) => {
+            console.log("user created", user);
+            CometChat.login(uuid, CONSTANTS.AUTH_KEY).then(
+              (user) => {
+                console.log("Login Successful:", { user });
+              },
+              (error) => {
+                console.log("Login failed with exception:", { error });
+              }
+            );
+          },
+          (error) => {
+            console.log("error", error);
+          }
+        );
         console.log(user);
       } catch (error) {
         console.log(error);
       }
     }
-  }
+  };
 
   useEffect(() => {
     if (token) {
-      navigate('/feed')
+      navigate("/login");
     }
-  }, [token])
-  
-
+  }, [token]);
 
   return (
     <div class="bg-purple-gray-100 min-h-screen flex flex-col">
@@ -126,8 +145,7 @@ const RegisterMentee = () => {
             Create Account
           </button>
 
-          
-{/* <div className='row col-12 d-flex justify-content-end'>
+          {/* <div className='row col-12 d-flex justify-content-end'>
             <button type='submit' class='btn btn-1'>
                         Cancel
             </button>
@@ -135,7 +153,6 @@ const RegisterMentee = () => {
                         Register
             </button>
           </div> */}
-
         </div>
       </div>
     </div>
