@@ -7,7 +7,7 @@ const PointsHistory = ({ }) => {
         <View style={styles.container}>
             <View style={{ marginTop: 20 }}>
 
-                <Text style={styles.title}>Referred Akash to Blockchain investor role in Microsoft</Text>
+                <Text style={styles.title}>Referred Akash to UI/UX Designer role in Microsoft</Text>
                 <View style={{ flexDirection: 'row', justifyContent: 'center', alignContent: 'center' }}>
                     <Image source={coin} style={styles.image} ></Image>
                     <Text style={styles.title1}> +50</Text>
@@ -15,7 +15,7 @@ const PointsHistory = ({ }) => {
             </View>
             <View style={{ margin: 20,borderTopColor:'#000000' , borderTopWidth: 1 }}>
 
-                <Text style={styles.title}>Referred Mentordots Mobile App to a friend</Text>
+                <Text style={styles.title}>Referred Jobs Market Mobile App to a friend</Text>
                 <View style={{ flexDirection: 'row', justifyContent: 'center', alignContent: 'center' }}>
                     <Image source={coin} style={styles.image} ></Image>
                     <Text style={styles.title1}> +50</Text>

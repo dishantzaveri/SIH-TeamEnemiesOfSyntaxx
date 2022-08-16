@@ -15,7 +15,7 @@ const ReferEarn = ({ }) => {
             </View>
             <View style={{ margin: 20, alignItems: 'center', borderTopColor: '#000000', borderTopWidth: 1 }}>
 
-                <Text style={styles.title}>Refer a suitable mentor to an entrepreneur and earn exciting rewards</Text>
+                <Text style={styles.title}>Refer a suitable job to a friend and earn exciting rewards</Text>
                 <Button style={{ backgroundColor: '#00CFDE', borderColor: '#00CFDE', margin: 5, borderRadius: 5, width: width * 0.3 }} labelStyle={{ color: 'white', fontSize: 10 }} >Refer now</Button>
             </View>
         </View>

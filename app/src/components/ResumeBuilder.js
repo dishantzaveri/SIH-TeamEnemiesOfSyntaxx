@@ -7,8 +7,11 @@ import { Button } from 'react-native-paper';
 import resume1 from '../assets/resume1.png';
 import resume2 from '../assets/resume2.png';
 import resume3 from '../assets/resume3.png';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 
 const ResumeBuilder = ({ }) => {
+    const navigation = useNavigation();
     return (
         <SafeAreaView style={styles.container}>
 
@@ -24,10 +27,13 @@ const ResumeBuilder = ({ }) => {
                 <Text style={styles.title2}>Complete your profile for better results</Text>
 
                 <Text style={styles.title3}>   Choose a template for your resume</Text>
+                <TouchableOpacity   onPress={() =>
+                        navigation.navigate('Resume2')}>
 
                 <Image source={resume1} style={styles.image} ></Image>
                 <Image source={resume2} style={styles.image} ></Image>
                 <Image source={resume3} style={styles.image} ></Image>
+                </TouchableOpacity>
             </View>
             <View>  
                 <Button style={{ backgroundColor: '#00CFDE', borderColor: '#00CFDE', marginBottom: 15, borderRadius: 5, width: width * 0.5 }} labelStyle={{ color: 'white', fontSize: 13 }} >Create my Resume</Button>

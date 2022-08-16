@@ -72,8 +72,8 @@ export default function AllPosts({ navigation }) {
   const searchFilter = (text) => {
     if (text) {
       const newData = masterData.filter((item) => {
-        const itemData = item.sports
-          ? item.sports.toUpperCase()
+        const itemData = item.owner
+          ? item.owner.toUpperCase()
           : ''.toUpperCase();
         const textData = text.toUpperCase();
         return itemData.indexOf(textData) > -1;
@@ -94,18 +94,6 @@ export default function AllPosts({ navigation }) {
       setFilteredData(newData);
       setSearch(text);
     }
-    if (text) {
-      const newData = masterData.filter((item) => {
-        const itemData = item.location
-          ? item.location.toUpperCase()
-          : ''.toUpperCase();
-        const textData = text.toUpperCase();
-        return itemData.indexOf(textData) > -1;
-      });
-
-      setFilteredData(newData);
-      setSearch(text);
-    }
 
     else {
       setFilteredData(masterData);
@@ -116,90 +104,90 @@ export default function AllPosts({ navigation }) {
   const renderItem = ({ item }) => {
     return (
       <View
-      style={{
-        marginTop: 10,
-        paddingVertical: 10,
-        paddingHorizontal: 15,
-        backgroundColor: 'white',
-      }}>
-      <View
         style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <Image
-            style={{
-              height: 55,
-              width: 55,
-              borderRadius: 100,
-            }}
-            source={{
-              uri: 'https://imgnew.outlookindia.com/public/uploads/articles/2021/10/30/Mrunal_Thakur_21.jpg',
-            }}
-          />
-          <View style={{marginLeft: 10}}>
-            <Text style={{fontWeight: '600', color: 'black', fontSize: 16}}>
-              {item.owner}
-            </Text>
-            <Text style={{color: 'black'}}>{item.title}</Text>
-          </View>
-        </View>
-        <Text
-          style={{
-            color: '#4186F5',
-          }}>
-          + Follow
-        </Text>
-      </View>
-      <Text style={{marginTop: 10}}>
-       {item.body}
-      </Text>
-      <Image
-        source={{
-          uri: item.images_post,
-        }}
-        
-        style={{
-          width: '100%',
-          height: 300,
           marginTop: 10,
-          resizeMode: 'center',
-        }}
-      />
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          marginHorizontal:10,
-      
-          borderTopColor: 'lightgray',
-          borderTopWidth: 1,
-          paddingTop: 20,
+          paddingVertical: 10,
+          paddingHorizontal: 15,
+          backgroundColor: 'white',
         }}>
-          <View style={{flexDirection: 'row'}}> 
-        <AntDesign name="like2" size={25} style={{marginHorizontal:20}}/>
-        <Text>{item.like_on_post_count}</Text>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Image
+              style={{
+                height: 55,
+                width: 55,
+                borderRadius: 100,
+              }}
+              source={{
+                uri: 'https://imgnew.outlookindia.com/public/uploads/articles/2021/10/30/Mrunal_Thakur_21.jpg',
+              }}
+            />
+            <View style={{ marginLeft: 10 }}>
+              <Text style={{ fontWeight: '600', color: 'black', fontSize: 16 }}>
+                {item.owner}
+              </Text>
+              <Text style={{ color: 'black' }}>{item.title}</Text>
+            </View>
+          </View>
+          <Text
+            style={{
+              color: '#4186F5',
+            }}>
+            + Follow
+          </Text>
         </View>
-        <View  style={{flexDirection: 'row'}}>
-        <Fontisto name="commenting" size={25}  style={{marginHorizontal:20}}/>
-        <Text>{item.comment_on_post_count}</Text>
+        <Text style={{ marginTop: 10 }}>
+          {item.body}
+        </Text>
+        <Image
+          source={{
+            uri: item.images_post,
+          }}
+
+          style={{
+            width: '100%',
+            height: 300,
+            marginTop: 10,
+            resizeMode: 'center',
+          }}
+        />
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginHorizontal: 10,
+
+            borderTopColor: 'lightgray',
+            borderTopWidth: 1,
+            paddingTop: 20,
+          }}>
+          <View style={{ flexDirection: 'row' }}>
+            <AntDesign name="like2" size={25} style={{ marginHorizontal: 20 }} />
+            <Text>{item.like_on_post_count}</Text>
+          </View>
+          <View style={{ flexDirection: 'row' }}>
+            <Fontisto name="commenting" size={25} style={{ marginHorizontal: 20 }} />
+            <Text>{item.comment_on_post_count}</Text>
+          </View>
+          <TouchableOpacity
+            onPress={onShare}>
+            <AntDesign name="sharealt" size={25} />
+          </TouchableOpacity>
+          {/* <Feather name="send" size={25} /> */}
         </View>
-        <TouchableOpacity
-              onPress={onShare}>
-        <AntDesign name="sharealt" size={25} />
-        </TouchableOpacity>
-        {/* <Feather name="send" size={25} /> */}
       </View>
-    </View>
 
     );
   };
 
   return (
     <View style={styles.container}>
-  <View
+      <View
         style={{
           flexDirection: 'row',
           alignItems: 'center',
@@ -239,6 +227,8 @@ export default function AllPosts({ navigation }) {
                 height: 40,
               }}
               placeholder="Search"
+              value={search}
+              onChangeText={(text) => searchFilter(text)}
             />
           </View>
         </View>
