@@ -27,6 +27,7 @@ import HomeScreen from '../pages/HomeScreen';
 import EventScreen from '../pages/EventScreen';
 import ChatScreen from '../pages/ChatScreen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import AllPosts from '../components/Posts/Allposts';
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 const HomeStack = createNativeStackNavigator();
@@ -69,7 +70,7 @@ function Tabs() {
       />
       <Tab.Screen
         name="Posts"
-        component={Posts}
+        component={AllPosts}
         options={{
           headerShown: false,
         }}
