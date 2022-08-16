@@ -4,41 +4,50 @@ import { setCredentails } from "../../features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import "../../static/css/login.css";
 import { useNavigate } from "react-router-dom";
-
+import { CometChat } from "@cometchat-pro/chat";
+import * as CONSTANTS from "../../constants/constants";
 // Importing componenets
 // import FacebookLogin from "./facebook";
 
 const Login = ({ setLogin }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
-  const { token } = useSelector(state => state.auth);
+  const navigate = useNavigate();
+  const { token } = useSelector((state) => state.auth);
   const [inputs, setInputs] = useState({
-    email: '',
-    password: '',
-  })
+    email: "",
+    password: "",
+  });
   const [login] = useLoginMutation();
 
   const submit = async () => {
-    try{
+    try {
       const data = await login({
-          email: inputs.email,
-          password: inputs.password,
+        email: inputs.email,
+        password: inputs.password,
       }).unwrap();
-      const user = {...data, isMentee: false, isMentor: true}
-      dispatch(setCredentails(user))
-      localStorage.setItem('user', JSON.stringify(user))
+      const user = { ...data, isMentee: false, isMentor: true };
+      dispatch(setCredentails(user));
+      localStorage.setItem("user", JSON.stringify(user));
+      const uuid = data.name.split(" ")[0] + data.email.split("@")[0];
+      CometChat.login(uuid, CONSTANTS.AUTH_KEY).then(
+        (user) => {
+          console.log("Login Successful:", { user });
+        },
+        (error) => {
+          console.log("Login failed with exception:", { error });
+        }
+      );
       console.log(data);
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
     if (token) {
-      navigate('/feed')
+      navigate("/feed");
     }
-  }, [token])
-
+  }, [token]);
 
   return (
     <div class="bg-purple-gray-100 min-h-screen flex flex-col">
