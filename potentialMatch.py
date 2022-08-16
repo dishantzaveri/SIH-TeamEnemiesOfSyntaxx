@@ -12,4 +12,4 @@ class PotentialMatch(object):
 
 
     def printAll(self):
-        print "[matchRate = " + str(self.matchRate)  + "; totalMentorInterests = " + str(self.totalMentorInterests) +"]"
+        print ("[matchRate = ") + str(self.matchRate)  + "; totalMentorInterests = " + str(self.totalMentorInterests) +"]"

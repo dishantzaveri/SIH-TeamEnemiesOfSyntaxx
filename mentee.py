@@ -35,6 +35,6 @@ class Mentee(object):
             printInterests = ";".join(self.interests)
         else:
             printInterests = self.interests[0]
-        print "[uid = " + str(self.uid)  + "; firstName = " + self.firstName + "; lastName = " + self.lastName + "; homePhone = " + self.homePhone + "; studentCell = " + self.studentCell + "; email = "+ self.email + "; emailType = "+ self.emailType + "; gender = "+ self.gender + "; race = "+ self.race + "; middleSchool = "+ self.middleSchool + "; interests = " + printInterests + "; mentor = " +  self.mentor + "; matchRate = " + str(self.matchRate) + "]"
+        print ("[uid = " + str(self.uid)  + "; firstName = " + self.firstName + "; lastName = " + self.lastName + "; homePhone = " + self.homePhone + "; studentCell = " + self.studentCell + "; email = "+ self.email + "; emailType = "+ self.emailType + "; gender = "+ self.gender + "; race = "+ self.race + "; middleSchool = "+ self.middleSchool + "; interests = " + printInterests + "; mentor = " +  self.mentor + "; matchRate = " + str(self.matchRate) + "]")
 
 

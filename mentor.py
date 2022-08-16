@@ -33,7 +33,7 @@ class Mentor(object):
             printInterests = ";".join(self.interests)
         else:
             printInterests = self.interests[0]
-        print "[uid = " + str(self.uid) + "; firstName = " + self.firstName + "; lastName = " + self.lastName + "; phone = " + self.phone + "; grade = " + self.grade + "; email = "+ self.email +  "; gender = "+ self.gender + "; race = "+ self.race + "; homeRoom = "+ self.homeRoom + "; interests = " + printInterests + "]"
+        print ("[uid = " + str(self.uid) + "; firstName = " + self.firstName + "; lastName = " + self.lastName + "; phone = " + self.phone + "; grade = " + self.grade + "; email = "+ self.email +  "; gender = "+ self.gender + "; race = "+ self.race + "; homeRoom = "+ self.homeRoom + "; interests = " + printInterests + "]")
 
 
 

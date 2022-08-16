@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from re import *
 import unicodedata
 from potentialMatch import *
@@ -91,7 +92,7 @@ def processMentor(sheet, row):
     if sheet.cell(row=row, column=6).value == None:
         phone = ""
     else:
-        x= unicode(sheet.cell(row=row, column=6).value)
+        x= unicode_literals(sheet.cell(row=row, column=6).value)
         x = unicodedata.normalize('NFKD', x).encode("ascii")
         phone = sub("[^0123456789]", "", x)[0:10]
         phone = "(" + phone[0:3] + ")" + phone[3:6] + "-" + phone[6:10]

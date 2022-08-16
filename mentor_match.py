@@ -1,3 +1,4 @@
+from ntpath import join
 from openpyxl import *
 from openpyxl.styles import PatternFill, Border, Side, Alignment, Protection, Font
 from mentee import *
@@ -41,7 +42,7 @@ def main():
     sumofMatches = float(0)
     for mentee in allMentees:
         sumofMatches += mentee.matchRate
-    print "Average Mentor Match: " + str(round(sumofMatches/len(allMentees), 2)*100) +"%"
+    print ("Average Mentor Match: ") + str(round(sumofMatches/len(allMentees), 2)*100) +"%"
 
     allMentors.sort(key=lambda x: x.lastName, reverse=False)
     row = 1
