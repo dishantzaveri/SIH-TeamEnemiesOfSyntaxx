@@ -227,7 +227,13 @@ export default function AllPosts({navigation}) {
             />
           </View>
         </View>
-        <AntDesign name="message1" size={25} />
+        <AntDesign
+          name="message1"
+          size={25}
+          onPress={() => {
+            navigation.navigate('ChatMain');
+          }}
+        />
       </View>
 
       <FlatList

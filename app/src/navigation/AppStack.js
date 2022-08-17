@@ -37,6 +37,7 @@ import Resume4 from '../pages/Resume4';
 import ReferralClub from '../pages/ReferralClub';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import UploadPost from '../components/Posts/UploadPost';
+import AllPostMain from '../components/Posts/AllPostMain';
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 const HomeStack = createNativeStackNavigator();
@@ -83,7 +84,7 @@ function Tabs() {
       />
       <Tab.Screen
         name="Posts"
-        component={AllPosts}
+        component={AllPostMain}
         options={{
           headerShown: false,
         }}
