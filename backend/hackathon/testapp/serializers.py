@@ -1,6 +1,11 @@
 from rest_framework import serializers
 from .models import *
-from accounts.models import User
+from accounts.models import User,WorkExperience
+
+class WorkExperiencedesignation(serializers.ModelSerializer):
+    class Meta:
+        model = WorkExperience
+        fields = ['job_title']
 
 class PostSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.name')
@@ -14,9 +19,12 @@ class PostSerializer(serializers.ModelSerializer):
         comment =  Comment.objects.filter(post=obj)
         return comment.count()
 
+    experience = WorkExperiencedesignation(read_only=True)
+
     class Meta:
         model = Post
-        fields = ['id', 'title', 'body', 'owner','images_post','youtube_link','like_on_post_count','comment_on_post_count']
+        fields = ['id', 'title', 'body', 'owner','images_post','youtube_link','like_on_post_count','experience','comment_on_post_count']
+
 
 class UserSerializer(serializers.ModelSerializer):
     posts = serializers.PrimaryKeyRelatedField(many=True, read_only=True)

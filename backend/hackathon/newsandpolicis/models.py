@@ -15,3 +15,25 @@ class Scheme(models.Model):
 
     class Meta:
         ordering = ['created']
+
+class Funding(models.Model):
+    name                = models.CharField(max_length=500, blank=True, default='')
+    description         = models.TextField(blank=True, default='')
+    images              = models.ImageField(null=True,blank=True)
+    #createdBy           = models.ForeignKey(User, on_delete=models.CASCADE,related_name='created_by')
+    targetAmount        = models.IntegerField(null=True, blank=True)
+    collectedAmount     = models.IntegerField(null=True, blank=True)
+    event_date          = models.DateField(null=True, blank=True)
+    contributors        = models.CharField(max_length=500, blank=True, default='')
+    subEvents           = models.CharField(max_length=500, blank=True, default='')
+    targetVolunteers    = models.CharField(max_length=500, blank=True)
+    registeredVolunteers= models.IntegerField(null=True, blank=True)
+    address             = models.CharField(max_length=255,blank=True, null=True)
+    latitude            = models.CharField(max_length=255, blank=True, null=True)
+    longitude           = models.CharField(max_length=255, blank=True, null=True)
+    created_at          = models.DateTimeField(auto_now_add=True)
+
+class Recomendation(models.Model):
+    owner       = models.ForeignKey(User,on_delete=models.CASCADE,related_name='owner')
+    created_at  = models.DateTimeField(auto_now_add=True)
+    body        = models.TextField(blank=True, default='')
