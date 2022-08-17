@@ -5,6 +5,8 @@ from django.contrib.auth import authenticate,login
 from rest_framework.authtoken.models import Token
 from rest_framework import status,permissions,viewsets
 
+from testapp import custom_permissions
+
 from .models import *
 from .serializers import *
 
@@ -121,6 +123,13 @@ class MentorProfileViewSet(viewsets.ModelViewSet):
 
 	def get_queryset(self):
 		return MentorProfile.objects.all()
+	
+	def perform_create(self,serializer):
+		serializer.save(user = self.request.user)
+	
+	def update(self, request, *args, **kwargs):
+		kwargs['partial'] = True
+		return super().update(request, *args, **kwargs)
 
 class EntrepreneurProfileViewSet(viewsets.ModelViewSet):
 	queryset = EntrepreneurProfile.objects.all()
@@ -129,6 +138,17 @@ class EntrepreneurProfileViewSet(viewsets.ModelViewSet):
 
 	def get_queryset(self):
 		return EntrepreneurProfile.objects.all()
+	
+	def perform_create(self,serializer):
+		serializer.save(user = self.request.user)
+	
+	def update(self, request, *args, **kwargs):
+		kwargs['partial'] = True
+		return super().update(request, *args, **kwargs)
+	
+	def get_serializer_context(self):
+          """Adds request to the context of serializer"""
+          return {"request": self.request}
 
 class GstVerification(APIView):
 	def post(self,request):
@@ -142,5 +162,43 @@ class GstVerification(APIView):
 		    }
 		
 		response = requests.request("POST", url, data=payload, headers=headers)
-		print(type(response))
+		response_dict = response.json()
+		response_dict["Succeeded"]["Gst_Details"]["result"]['legalNameOfBusiness'] = response_dict["Succeeded"]["Gst_Details"]["result"].pop('lgnm')
+		response_dict["Succeeded"]["Gst_Details"]["result"]['stateJurisdiction'] = response_dict["Succeeded"]["Gst_Details"]["result"].pop("stj")
+		response_dict["Succeeded"]["Gst_Details"]["result"]['taxpayerType'] = response_dict["Succeeded"]["Gst_Details"]["result"].pop("dty")
+		response_dict["Succeeded"]["Gst_Details"]["result"]['taxpayerType'] = response_dict["Succeeded"]["Gst_Details"]["result"].pop("dty")
+		print(response_dict)
 		return JsonResponse(response.json(), safe=False)
+
+class ConnectMenteeViewSet(viewsets.ModelViewSet):
+	queryset = Mentorship.objects.all()
+	serializer_class = MentorshipSerializer
+	permission_classes = [custom_permissions.IsMentorOrReadOnly]
+
+	def get_queryset(self):
+		return Mentorship.objects.all(mentor = self.request.user)
+	
+	def perform_create(self,serializer):
+		serializer.save(mentor = self.request.user, is_active=True)
+	
+	def update(self, request, *args, **kwargs):
+		kwargs['partial'] = True
+		return super().update(request, *args, **kwargs)
+
+class ConnectMentorViewSet(viewsets.ModelViewSet):
+	queryset = Mentorship.objects.all()
+	serializer_class = MentorshipSerializer
+	permission_classes = [custom_permissions.IsEntrepreneurOrReadOnly]
+
+	def get_queryset(self):
+		return Mentorship.objects.all(entrepreneur = self.request.user)
+	
+	def perform_create(self,serializer):
+
+		serializer.save(entrepreneur = self.request.user, is_active=True)
+	
+	def update(self, request, *args, **kwargs):
+		kwargs['partial'] = True
+		return super().update(request, *args, **kwargs)
+
+

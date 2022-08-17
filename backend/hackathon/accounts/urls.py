@@ -10,6 +10,8 @@ router.register(r'experience', views.WorkExperienceDetails)
 router.register(r'education', views.EducationDetails)
 router.register(r'mentor', views.MentorProfileViewSet)
 router.register(r'entrepreneur', views.EntrepreneurProfileViewSet)
+router.register(r'connect_mentee',views.ConnectMenteeViewSet)
+router.register(r'connect_mentor',views.ConnectMentorViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
@@ -17,4 +19,6 @@ urlpatterns = [
     path('entrepreneur_register/', views.EntrepreneurRegisterAPI.as_view(), name = 'Entrepreneur Registration'),
     path('login/', views.LoginAPI.as_view(), name = 'Login'),
     path('gstverify/',views.GstVerification.as_view(), name = 'Gst Verify'),
+    # path('connect_mentee/',views.ConnectMenteeView.as_view(), name = 'Connect Mentee'),
+
 ]

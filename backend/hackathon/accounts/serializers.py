@@ -76,22 +76,75 @@ class StartupSerializer(serializers.ModelSerializer):
         'state_code', 'center_jurisdiction', 'center_code', 'branch_no', 'branch_name', 'location', 'street', 'district', 'state', 'pincode']
 
 class MentorProfileSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(read_only=True)
     experience = WorkExperienceSerializer(source = 'user.experience', many=True, read_only=True)
     education = EducationSerializer(source = 'user.education', many=True, read_only=True)
 
     class Meta:
         model = MentorProfile
-        fields = ['user', 'expertise', 'experience', 'education']
+        fields = ['id', 'expertise', 'experience', 'education']
+
+# class RelatedFieldAlternative(serializers.PrimaryKeyRelatedField):
+#     def __init__(self, **kwargs):
+#         self.serializer = kwargs.pop('serializer', None)
+#         if self.serializer is not None and not issubclass(self.serializer, serializers.Serializer):
+#             raise TypeError('"serializer" is not a valid serializer class')
+
+#         super().__init__(**kwargs)
+
+#     def use_pk_only_optimization(self):
+#         return False if self.serializer else True
+
+#     def to_representation(self, instance):
+#         if self.serializer:
+#             return self.serializer(instance, context=self.context).data
+#         return super().to_representation(instance)
 
 class EntrepreneurProfileSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
-    name = serializers.CharField(source='user.name')
+    name = serializers.CharField(source='user.name',read_only=True)
     startup = StartupSerializer(source = 'user.startup', many=True, read_only=True)
-    mentor = MentorProfileSerializer(many=True,read_only=True)
+    mentor = serializers.SerializerMethodField(read_only=True)
+    # mentor = RelatedFieldAlternative(queryset=MentorProfile.objects.all(), serializer=MentorProfileSerializer,required=False)
     experience = WorkExperienceSerializer(source = 'user.experience', many=True, read_only=True)
     education = EducationSerializer(source = 'user.education', many=True, read_only=True)
 
     class Meta:
         model = EntrepreneurProfile
-        fields = ['user','name','id','startup', 'mentor', 'experience', 'education']
+        fields = ['name','id','startup', 'mentor', 'experience', 'education']
+    
+    def get_mentor(self,obj):
+        current_entrepreneur = None
+        request = self.context.get("request")
+        if request and hasattr(request, "user"):
+            current_entrepreneur = request.user
+            print(current_entrepreneur)
+        mentors_list = Mentorship.objects.filter(entrepreneur=current_entrepreneur).values_list('mentor')
+        print(mentors_list)
+        mentor_queryset = MentorProfile.objects.filter(user__in=mentors_list)
+        print(mentor_queryset)
+        return MentorProfileSerializer(mentor_queryset, many=True).data
+
+
+class MentorshipSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(read_only=True)
+    mentor = serializers.ReadOnlyField(source='mentor.email')
+    #entrepreneur=serializers.SerializerMethodField()
+
+    class Meta:
+        model=Mentorship
+        fields = ['id','mentor','entrepreneur','created_at','is_active','ended_at']
+    
+    # def to_representation(self, instance):
+    #     response = super().to_representation(instance)
+    #     response['mentor'] = MentorProfileSerializer(instance.mentor).data
+    #     response['entrepreneur'] = EntrepreneurProfileSerializer(instance.entrepreneur).data
+    #     return response
+    
+    # def get_entrepreneur(self,obj):
+    #     request = self.context.get("request")
+    #     entrepreneur_email = request.data.get('entrepreneur')
+    #     entrepreneur = User.objects.get(email = entrepreneur_email)
+    #     return entrepreneur
+        
 

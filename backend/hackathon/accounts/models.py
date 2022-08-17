@@ -109,6 +109,16 @@ class MentorProfile(models.Model):
     expertise = models.CharField(max_length=70,null=True,blank=True)
 
 class EntrepreneurProfile(models.Model):
-    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='user')
     startup = models.ManyToManyField(Startup)
     mentor = models.ForeignKey(MentorProfile,models.SET_NULL,null=True,blank=True)
+
+class Mentorship(models.Model):
+    mentor = models.ForeignKey(User, models.CASCADE, related_name='mentor')
+    entrepreneur = models.ForeignKey(User, models.CASCADE, related_name='entrepreneur')
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_active = models.BooleanField(default=True)
+    ended_at = models.DateTimeField(null=True,blank=True)
+
+    class Meta:
+        unique_together=('mentor','entrepreneur')
