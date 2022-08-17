@@ -76,7 +76,7 @@ function Login({ navigation }) {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          // navigation.navigate('Tabs');
+          navigation.navigate('Tabs');
           saveData();
        
         }}><Text style={styles.textStyle}>Login</Text>

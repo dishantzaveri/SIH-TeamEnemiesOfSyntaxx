@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text ,Image} from 'react-native';
+import { View, StyleSheet, Text, Image } from 'react-native';
 import { height, width } from '../Consts';
 import * as Progress from 'react-native-progress';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -27,18 +27,18 @@ const ResumeBuilder = ({ }) => {
                 <Text style={styles.title2}>Complete your profile for better results</Text>
 
                 <Text style={styles.title3}>   Choose a template for your resume</Text>
-                <TouchableOpacity   onPress={() =>
-                        navigation.navigate('Resume2')}>
 
                 <Image source={resume1} style={styles.image} ></Image>
                 <Image source={resume2} style={styles.image} ></Image>
                 <Image source={resume3} style={styles.image} ></Image>
+            </View>
+            <View>
+                <TouchableOpacity onPress={() =>
+                    navigation.navigate('Resume2')}>
+                    <Button style={{ backgroundColor: '#00CFDE', borderColor: '#00CFDE', marginBottom: 15, borderRadius: 5, width: width * 0.5 }} labelStyle={{ color: 'white', fontSize: 13 }} >Create my Resume</Button>
                 </TouchableOpacity>
             </View>
-            <View>  
-                <Button style={{ backgroundColor: '#00CFDE', borderColor: '#00CFDE', marginBottom: 15, borderRadius: 5, width: width * 0.5 }} labelStyle={{ color: 'white', fontSize: 13 }} >Create my Resume</Button>
-            </View>  
-            
+
         </SafeAreaView>
     );
 };

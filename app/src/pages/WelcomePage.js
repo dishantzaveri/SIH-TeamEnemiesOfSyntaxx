@@ -14,9 +14,11 @@ import {JoinNowAddUser, Github} from '../components/SVGR-Components';
 import LinearGradient from 'react-native-linear-gradient';
 import {height, width} from '../Consts';
 import logo from '../assets/logo.jpg'
+import {useNavigation} from '@react-navigation/native';
 
 
 const WelcomePage = (props) => {
+  const navigation = useNavigation();
   const githubFindMentor = 'https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx';
   const joinNow =
     'https://docs.google.com/forms/d/e/1FAIpQLSc3uWpEeBUCXMoGAJ5qm31p9URBppxXT5L4RJFrTOJee9TFjQ/viewform';
