@@ -61,3 +61,30 @@ class SchemeDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Scheme.objects.all()
     serializer_class = SchemeSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+class FundingList(generics.ListCreateAPIView):
+    queryset = Funding.objects.all()
+    serializer_class = FundingSerializer
+    #permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save()
+
+class FundingDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Scheme.objects.all()
+    serializer_class = FundingSerializer
+    #permission_classes = [permissions.IsAuthenticated]
+
+class RecomendationList(generics.ListCreateAPIView):
+    queryset = Recomendation.objects.all()
+    serializer_class = RecomendationSeizlizer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save()
+
+class RecomendationDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Recomendation.objects.all()
+    serializer_class = RecomendationSeizlizer
+    permission_classes = [permissions.IsAuthenticated]
+
