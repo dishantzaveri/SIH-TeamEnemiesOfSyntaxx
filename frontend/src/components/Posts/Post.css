@@ -3,7 +3,6 @@
     padding: 15px;
     margin-bottom: 2.5em;
     border-radius: 10px;
-    width: 50%;
     box-shadow: 10px 10px 5px #c8c8c8;
   }
   
@@ -34,7 +33,7 @@
   }
   
   .post_body {
-    overflow-wrap: anywhere;
+    /* overflow-wrap: anywhere; */
   }
 
   .inputOption {
@@ -57,11 +56,10 @@
   }
 
   .img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 90%;
-  height: 350px;
-  margin-top: 5px;
-  margin-bottom: 15px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 350px;
+    margin-top: 5px;
+    margin-bottom: 15px;
   }

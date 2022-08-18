@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux';
 // import { selectUser } from '../../../features/userSlice';
 import FlipMove from 'react-flip-move';
 import CreatePosts from '../CreatePosts/CreatePosts';
+import News from '../News/News';
 
 function Feed() {
 //   const user = useSelector(selectUser);
@@ -50,25 +51,30 @@ function Feed() {
   };
 
   return (
-    <div className="feed">
-      <div className="feed_inputContainer">
-        
-      <CreatePosts />
-        
+    <div className='grid grid-cols-12 p-8 gap-8'>
+      <div className="feed col-span-8">
+        <div className="feed_inputContainer">
+          
+        <CreatePosts />
+          
+        </div>
+        <FlipMove>
+      
+          {/* {posts.slice(0, 5).map(({ id, data: { name, description, message, photoUrl}}) => ( */}
+            <Post 
+              // key="1"
+              // name="Greha"
+              // description="Here is my desc"
+              // message="This is my message"
+              // photoUrl={photoUrl}
+            />
+          {/* ))} */}
+        </FlipMove>
+    
       </div>
-      <FlipMove>
-     
-        {/* {posts.slice(0, 5).map(({ id, data: { name, description, message, photoUrl}}) => ( */}
-          <Post 
-            // key="1"
-            // name="Greha"
-            // description="Here is my desc"
-            // message="This is my message"
-            // photoUrl={photoUrl}
-          />
-        {/* ))} */}
-      </FlipMove>
-   
+      <div className='col-span-4'>
+        <News />
+      </div>
     </div>
   );
 };
