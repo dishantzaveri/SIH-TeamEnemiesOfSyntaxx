@@ -121,7 +121,8 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.BasicAuthentication',
-    ]
+    ],
+    "DATE_INPUT_FORMATS": ["%d-%m-%Y"],
 }
 
 SPECTACULAR_SETTINGS = {
@@ -163,3 +164,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')  #your email goes here
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD') #password
+
+X_RapidAPI_Key = env('X_RapidAPI_Key')
+X_RapidAPI_Host = env('X_RapidAPI_Host')
+

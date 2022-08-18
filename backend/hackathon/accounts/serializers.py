@@ -71,9 +71,8 @@ class StartupSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Startup
-        fields = ['id','legal_name','trade_name','is_verified','gstin', 'gstin_status', 'registration_date', 'business_constitution',
-        'taxpayer_type', 'cancellation_date', 'business_activity_nature','office', 'recipient', 'warehouse', 'state_jurisdiction', 
-        'state_code', 'center_jurisdiction', 'center_code', 'branch_no', 'branch_name', 'location', 'street', 'district', 'state', 'pincode']
+        fields = ['id','legalNameOfBusiness','tradeName','is_verified','gstin', 'gstnStatus', 'dateOfRegistration', 'constitutionOfBusiness',
+        'taxpayerType', 'natureOfBusinessActivity','principalPlaceOfBusinessAddress', 'stateJurisdiction', 'centerJurisdiction', 'aadhaar_linked']
 
 class MentorProfileSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)

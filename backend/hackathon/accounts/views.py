@@ -20,6 +20,7 @@ from rest_framework import generics
 from django.contrib.auth import get_user_model
 
 import requests
+from hackathon import settings
 
 User = get_user_model()
 
@@ -157,18 +158,48 @@ class GstVerification(APIView):
 		payload = f"clientid=111&txn_id=2254545&consent=Y&gstnumber={gstnumber}&method=gstvalidatev2"
 		headers = {
 		    "content-type": "application/x-www-form-urlencoded",
-		    "X-RapidAPI-Key": "aeeaf0c4ffmsh8d2e448618a749cp1497acjsnf52c97a559d3",
-		    "X-RapidAPI-Host": "gst-details2.p.rapidapi.com"
+		    "X-RapidAPI-Key": settings.X_RapidAPI_Key,
+		    "X-RapidAPI-Host": settings.X_RapidAPI_Host
 		    }
 		
 		response = requests.request("POST", url, data=payload, headers=headers)
-		response_dict = response.json()
-		response_dict["Succeeded"]["Gst_Details"]["result"]['legalNameOfBusiness'] = response_dict["Succeeded"]["Gst_Details"]["result"].pop('lgnm')
-		response_dict["Succeeded"]["Gst_Details"]["result"]['stateJurisdiction'] = response_dict["Succeeded"]["Gst_Details"]["result"].pop("stj")
-		response_dict["Succeeded"]["Gst_Details"]["result"]['taxpayerType'] = response_dict["Succeeded"]["Gst_Details"]["result"].pop("dty")
-		response_dict["Succeeded"]["Gst_Details"]["result"]['taxpayerType'] = response_dict["Succeeded"]["Gst_Details"]["result"].pop("dty")
-		print(response_dict)
-		return JsonResponse(response.json(), safe=False)
+		if response is not None:
+			print(response)
+			response_dict = response.json()
+			print(response_dict)
+			trimmed_response = {}
+		# response_dict["Succeeded"]["Gst_Details"]["result"]['legalNameOfBusiness']             = response_dict["Succeeded"]["Gst_Details"]["result"].pop('lgnm')
+		# response_dict["Succeeded"]["Gst_Details"]["result"]['stateJurisdiction']               = response_dict["Succeeded"]["Gst_Details"]["result"].pop("stj")
+		# response_dict["Succeeded"]["Gst_Details"]["result"]['taxpayerType']                    = response_dict["Succeeded"]["Gst_Details"]["result"].pop("dty")
+		# response_dict["Succeeded"]["Gst_Details"]["result"]['natureOfBusinessActivity']        = response_dict["Succeeded"]["Gst_Details"]["result"].pop("nba")
+		# response_dict["Succeeded"]["Gst_Details"]["result"]['dateOfRegistration']              = response_dict["Succeeded"]["Gst_Details"]["result"].pop("rgdt")
+		# response_dict["Succeeded"]["Gst_Details"]["result"]['constitutionOfBusiness']          = response_dict["Succeeded"]["Gst_Details"]["result"].pop("ctb")
+		# response_dict["Succeeded"]["Gst_Details"]["result"]['principalPlaceOfBusinessAddress']            = response_dict["Succeeded"]["Gst_Details"]["result"].pop("pradr")
+		# response_dict["Succeeded"]["Gst_Details"]["result"]['principalPlaceOfBusinessAddress']['address'] = response_dict["Succeeded"]["Gst_Details"]["result"]['principalPlaceOfBusinessAddress'].pop("adr")
+		# response_dict["Succeeded"]["Gst_Details"]["result"]['gstnStatus'] = response_dict["Succeeded"]["Gst_Details"]["result"].pop("sts")
+		# response_dict["Succeeded"]["Gst_Details"]["result"]['tradeName'] = response_dict["Succeeded"]["Gst_Details"]["result"].pop("tradeNam")
+		# response_dict["Succeeded"]["Gst_Details"]["result"]['centerJurisdiction'] = response_dict["Succeeded"]["Gst_Details"]["result"].pop("ctj")
+		# response_dict["Succeeded"]["Gst_Details"]["result"]['aadhaar_linked'] = response_dict["Succeeded"]["Gst_Details"]["result"].pop("adhrVFlag")
+			trimmed_response['gstin'] = gstnumber
+			trimmed_response['is_verified'] = True
+			trimmed_response['legalNameOfBusiness'] = response_dict["Succeeded"]["Gst_Details"]["result"].pop('lgnm')
+			trimmed_response['stateJurisdiction'] = response_dict["Succeeded"]["Gst_Details"]["result"].pop("stj")
+			trimmed_response['taxpayerType'] = response_dict["Succeeded"]["Gst_Details"]["result"].pop("dty")
+			trimmed_response['natureOfBusinessActivity'] = response_dict["Succeeded"]["Gst_Details"]["result"]['nba'].pop(0)
+			trimmed_response['dateOfRegistration'] = response_dict["Succeeded"]["Gst_Details"]["result"].pop("rgdt")
+			trimmed_response['constitutionOfBusiness'] = response_dict["Succeeded"]["Gst_Details"]["result"].pop("ctb")
+			trimmed_response['principalPlaceOfBusinessAddress'] = response_dict["Succeeded"]["Gst_Details"]["result"]['pradr'].pop("adr")
+			trimmed_response['gstnStatus'] = response_dict["Succeeded"]["Gst_Details"]["result"].pop("sts")
+			trimmed_response['tradeName'] = response_dict["Succeeded"]["Gst_Details"]["result"].pop("tradeNam")
+			trimmed_response['centerJurisdiction'] = response_dict["Succeeded"]["Gst_Details"]["result"].pop("ctj")
+			trimmed_response['aadhaar_linked'] = response_dict["Succeeded"]["Gst_Details"]["result"].pop("adhrVFlag")
+			print(trimmed_response)
+			serializer = StartupSerializer(data = trimmed_response)
+			serializer.is_valid(raise_exception=True)
+			serializer.save(user=self.request.user)
+			return JsonResponse(serializer.data, safe=False,status = status.HTTP_200_OK)
+		else:
+			return JsonResponse(response,safe=False)
 
 class ConnectMenteeViewSet(viewsets.ModelViewSet):
 	queryset = Mentorship.objects.all()
