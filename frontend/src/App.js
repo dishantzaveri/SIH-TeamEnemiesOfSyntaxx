@@ -13,6 +13,7 @@ import Post from "./components/Posts/Post";
 import Feed from "./components/Feed/Feed";
 import News from "./components/News/News";
 import { PitchDeck } from "./components/PitchDeck/PitchDeck";
+import  PitchDeckForm  from "./components/PitchDeck/PitchDeckForm";
 import VideoCall from "./components/VideoCall/VideoCall";
 import AllCampaigns from "./components/AllCampaigns/AllCampaigns";
 import SingleCampaign from "./components/AllCampaignsSingleCampaign/SingleCampaign";
@@ -40,6 +41,7 @@ function App() {
         <Route path="/chat" element={<Chat />} />
         <Route path="/news" element={<News />} />
         <Route path="/pitchdeck" element={<PitchDeck />} />
+        <Route path="/pitchdeck-form" element={<PitchDeckForm />} />
         <Route path="/videocall" element={<VideoCall />} />
         <Route path = "/campaigns" element={<AllCampaigns />} />
         <Route path = "/form" element={<MyForm />} />
