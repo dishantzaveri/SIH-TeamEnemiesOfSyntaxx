@@ -59,9 +59,11 @@ const Sidebar = ({ usersList }) => {
           />
         </div>
       </div>
-      {usersList.map((user) => (
-        <ChatTile key={user.uid} user={user} />
-      ))}
+      <div className="overflow-auto">
+        {usersList.map((user) => (
+          <ChatTile key={user.uid} user={user} />
+        ))}
+      </div>
     </div>
   );
 };
