@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
-import React, { useEffect } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import React, {useEffect, useState} from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import AppStack from './navigation/AppStack';
 import AuthStack from './navigation/AuthStack';
 
@@ -25,13 +25,10 @@ import {
   JobSeekers,
   JobDetail,
 } from './pages';
-
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useSelector} from 'react-redux';
 
 console.disableYellowBox = true;
-
-
-
 
 const Router = () => {
   const fontConfig = {
@@ -72,14 +69,23 @@ const Router = () => {
     },
     fonts: configureFonts(fontConfig),
   };
+  const [userToken, setUserToken] = useState(null);
+  const {user} = useSelector(state => state.user);
   useEffect(() => {
     console.disableYellowBox = true;
   }, []);
-  return (
+  useEffect(() => {
+    console.log(user);
+    if (user?.token) {
+      setUserToken(user);
+    } else {
+      setUserToken(null);
+    }
+  }, [user]);
 
+  return (
     <NavigationContainer theme={Mytheme} independent={true}>
-      {/* <AuthStack /> */}
-      <AppStack />
+      {userToken ? <AppStack /> : <AuthStack />}
     </NavigationContainer>
   );
 };

@@ -13,8 +13,16 @@ import {
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useDispatch} from 'react-redux';
+import {resetUser} from '../redux/reducers/user';
 
 const CustomDrawer = props => {
+  const dispatch = useDispatch();
+  const logout = async () => {
+    await AsyncStorage.removeItem('@save_token');
+    dispatch(resetUser());
+  };
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView
@@ -52,6 +60,20 @@ const CustomDrawer = props => {
         </ImageBackground>
         <View style={{flex: 1, backgroundColor: '#fff', paddingTop: 10}}>
           <DrawerItemList {...props} />
+        </View>
+        <View
+          style={{backgroundColor: 'white', padding: 20, alignItems: 'center'}}>
+          <TouchableOpacity
+            style={{
+              padding: 10,
+              backgroundColor: '#8200d6',
+              borderRadius: 20,
+            }}
+            onPress={() => {
+              logout();
+            }}>
+            <Text style={{fontSize: 16, color: 'white'}}>Logout</Text>
+          </TouchableOpacity>
         </View>
       </DrawerContentScrollView>
       {/* <View style={{padding: 20, borderTopWidth: 1, borderTopColor: '#ccc'}}>

@@ -1,40 +1,59 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, Text, Button, TouchableOpacity, Alert, Image } from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  StyleSheet,
+  Text,
+  Button,
+  TouchableOpacity,
+  Alert,
+  Image,
+} from 'react-native';
 import PasswordInput from '../components/PassInput';
 import Textinp from '../components/Textinp';
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import TouchId from 'react-native-touch-id';
+import {useDispatch} from 'react-redux';
+import {setUser} from '../redux/reducers/user';
 
-
-function Login({ navigation }) {
+function Login({navigation}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [tok, setTok] = useState();
+  const dispatch = useDispatch();
   const saveData = async () => {
     const STORAGE_KEY1 = '@save_token';
     var myHeaders = new Headers();
-    myHeaders.append("Cookie", "csrftoken=o4q1Ihf3JTBVbPIRuFvCtHZVT3RHp0X8; sessionid=0rx0ut9910ocx5ggaz1l6en6khbzxg1n");
-    
+    myHeaders.append(
+      'Cookie',
+      'csrftoken=o4q1Ihf3JTBVbPIRuFvCtHZVT3RHp0X8; sessionid=0rx0ut9910ocx5ggaz1l6en6khbzxg1n',
+    );
     var formdata = new FormData();
-    formdata.append("email", email);
-    formdata.append("password", password);
-    
+    formdata.append('email', email);
+    formdata.append('password', password);
+
     var requestOptions = {
       method: 'POST',
       headers: myHeaders,
       body: formdata,
-      redirect: 'follow'
+      redirect: 'follow',
     };
-    
-    fetch("https://vismayvora.pythonanywhere.com/account/login/", requestOptions)
-    .then(response => response.json())
-    .then(result => {
-      setTok(result.token);
-      console.log(result.token);
-      AsyncStorage.setItem(STORAGE_KEY1, result.token);
-    })
-    .catch(error => console.log('error', error));
+
+    fetch(
+      'https://vismayvora.pythonanywhere.com/account/login/',
+      requestOptions,
+    )
+      .then(response => response.json())
+      .then(result => {
+        setTok(result.token);
+        console.log(result.token);
+        AsyncStorage.setItem(STORAGE_KEY1, result.token);
+        dispatch(setUser(result));
+      })
+      .catch(error => console.log('error', error));
     // try {
     //   //await AsyncStorage.clear();
     //    AsyncStorage.setItem(STORAGE_KEY1, token);
@@ -63,7 +82,8 @@ function Login({ navigation }) {
         onChangeText={text => {
           setEmail(text);
         }}
-        placeholderTextColor="grey" />
+        placeholderTextColor="grey"
+      />
       <PasswordInput
         placeholder="Password"
         autoComplete="password"
@@ -78,35 +98,36 @@ function Login({ navigation }) {
         onPress={() => {
           // navigation.navigate('Tabs');
           saveData();
-       
-        }}><Text style={styles.textStyle}>Login</Text>
+        }}>
+        <Text style={styles.textStyle}>Login</Text>
       </TouchableOpacity>
-      <Text style={{ fontSize: 20, margin: 5 }}>OR</Text>
+      <Text style={{fontSize: 20, margin: 5}}>OR</Text>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => TouchId.authenticate('Place your fingerprint!', {
-          title: 'Authentication',
-        })
-          .then(() => {
-            Alert.alert('Authentication Successful!');
-            console.log("Done")
-            navigation.navigate('Tabs')
+        onPress={() =>
+          TouchId.authenticate('Place your fingerprint!', {
+            title: 'Authentication',
           })
-          .catch(() => {
-            Alert.alert('Fingerprint Did not match');
-          })}
-      ><Text style={styles.textStyle}>Use Your Fingerprint</Text>
+            .then(() => {
+              Alert.alert('Authentication Successful!');
+              console.log('Done');
+              navigation.navigate('Tabs');
+            })
+            .catch(() => {
+              Alert.alert('Fingerprint Did not match');
+            })
+        }>
+        <Text style={styles.textStyle}>Use Your Fingerprint</Text>
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
-          
-          navigation.navigate('SignUp')
+          navigation.navigate('SignUp');
           // console.log("Signed Up");
-        }}
-      >
-        <Text style={{ fontSize: 15, margin: 30 }}>Don't have an account? Signup</Text>
+        }}>
+        <Text style={{fontSize: 15, margin: 30}}>
+          Don't have an account? Signup
+        </Text>
       </TouchableOpacity>
-
     </View>
   );
 }
@@ -116,7 +137,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF'
+    backgroundColor: '#FFFFFF',
   },
   textStyle: {
     color: 'white',
@@ -129,7 +150,7 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     margin: 25,
-    marginLeft: 20
+    marginLeft: 20,
   },
   text: {
     fontSize: 24,
@@ -144,8 +165,8 @@ const styles = StyleSheet.create({
     margin: 10,
     padding: 10,
     borderRadius: 10,
-    width: wp('85%')
-  }
+    width: wp('85%'),
+  },
 });
 
 export default Login;
