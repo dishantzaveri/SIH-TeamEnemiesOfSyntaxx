@@ -17,7 +17,7 @@ const RenderItem = (props) => {
         <Text>➡️ Visit</Text>
         <TouchableOpacity
           onPress={() => {
-            props.navigation.navigate('MMDetail', {
+            props.navigation.navigate('MentorMenteesDetail', {
               slug: props.data.mentor.replace(
                 'https://findmentor.network/peer/',
                 '',

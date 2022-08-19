@@ -53,6 +53,7 @@ const ResumeStack = createNativeStackNavigator();
 const HomeScreensStack = createNativeStackNavigator();
 const AuthStack = createNativeStackNavigator();
 const AllTabsStack = createNativeStackNavigator();
+const MentorStack = createNativeStackNavigator();
 
 function JobsTab() {
   return (
@@ -80,49 +81,20 @@ function JobsTab() {
   );
 }
 
-const AuthStackScreens = () => {
+const MentorsScreens = () => {
   return (
-    <AuthStack.Navigator
-      screenOptions={{headerShown: false}}
-      // initialRouteName="AppStack"
-    >
-      <AuthStack.Screen name="SwiperScreens" component={SwiperScreens} />
-      <AuthStack.Screen
-        name="Login"
-        component={Login}
-        options={{headerShown: false}}
+    <MentorStack.Navigator screenOptions={{headerShown: false}}>
+      <MentorStack.Screen
+        name="Mentors"
+        component={Mentors}
+        screenOptions={{headerShown: false}}
       />
-      <AuthStack.Screen
-        name="SignUp"
-        component={SignUp}
-        options={{headerShown: false}}
-      />
-      <AuthStack.Screen
-        name="Login1"
-        component={Login1}
-        options={{headerShown: false}}
-      />
-      <AuthStack.Screen
-        name="SignUp1"
-        component={SignUp1}
-        options={{headerShown: false}}
-      />
-      <AuthStack.Screen
-        name="MMDetail"
+      <MentorStack.Screen
+        name="MentorMenteesDetail"
         component={MentorMenteesDetail}
-        options={{headerShown: false}}
+        screenOptions={{headerShown: false}}
       />
-      <AuthStack.Screen
-        name="JobTabs"
-        component={JobsTab}
-        options={{headerShown: false}}
-      />
-      <AuthStack.Screen
-        name="JobDetail"
-        component={JobDetail}
-        options={{headerShown: false}}
-      />
-    </AuthStack.Navigator>
+    </MentorStack.Navigator>
   );
 };
 
@@ -152,7 +124,7 @@ function Tabs() {
           if (route.name === 'Home') {
             return <Entypo name="home" size={27} color={color} />;
           }
-          if (route.name === 'Mentors') {
+          if (route.name === 'AllMentors') {
             return <FontAwesome5 name="people-carry" size={27} color={color} />;
           }
           if (route.name === 'Mentees') {
@@ -191,8 +163,8 @@ function Tabs() {
       <Tab.Screen name="Upload" component={UploadPost} />
 
       <Tab.Screen
-        name="Mentors"
-        component={Mentors}
+        name="AllMentors"
+        component={MentorsScreens}
         options={{
           headerShown: false,
           headerStyle: {
@@ -328,11 +300,6 @@ const Blog = () => {
 const AllTabs = () => {
   return (
     <AllTabsStack.Navigator screenOptions={{headerShown: false}}>
-      {/* <AllTabsStack.Screen
-        name="Registeration"
-        component={AuthStackScreens}
-        screenOptions={{ headerShown: false }}
-      /> */}
       <AllTabsStack.Screen
         name="Tabs"
         component={Tabs}

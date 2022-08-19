@@ -41,7 +41,7 @@ const Card = ({navigation, data, listType = 'mentor'}) => {
     <SafeAreaView>
       <TouchableOpacity
         onPress={() =>
-          navigation.navigate('MMDetail', {
+          navigation.navigate('MentorMenteesDetail', {
             slug: data.slug,
           })
         }

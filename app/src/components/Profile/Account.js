@@ -1,18 +1,36 @@
-import {View, Text, Image, Dimensions, ScrollView} from 'react-native';
-import React from 'react';
-import {useTheme} from '@react-navigation/native';
+import { View, Text, Image, Dimensions, ScrollView } from 'react-native';
+import React, { useEffect ,useState } from 'react';
+import { useTheme } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 export default function Account() {
-  const {colors} = useTheme();
+  const { colors } = useTheme();
+  const {data, setData} = useState([]);
+  useEffect(() => {
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Token 72f957f003d1ae579df255c5e46c5adefcb0d7c7");
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow'
+    };
+
+    fetch("https://vismayvora.pythonanywhere.com/account/entrepreneur/", requestOptions)
+      .then(response => response.text())
+      .then(result =>{console.log(result) ; setData(result)} )
+      .catch(error => console.log('error', error));
+  }, []);
+
+ 
   return (
-    <View style={{flex: 1, backgroundColor: 'white'}}>
+    <View style={{ flex: 1, backgroundColor: 'white' }}>
       <ScrollView>
         <LinearGradient
           colors={[colors.primary, '#ADD8E6']}
-          style={{width: '100%', height: 200, position: 'relative'}}>
+          style={{ width: '100%', height: 200, position: 'relative' }}>
           <View
             style={{
               backgroundColor: 'white',
@@ -83,7 +101,7 @@ export default function Account() {
             </View>
           </View>
         </LinearGradient>
-        <View style={{marginTop: 160, paddingHorizontal: 30}}>
+        <View style={{ marginTop: 160, paddingHorizontal: 30 }}>
           <View
             style={{
               backgroundColor: 'white',
@@ -100,7 +118,7 @@ export default function Account() {
                 justifyContent: 'space-between',
                 alignItems: 'center',
               }}>
-              <Text style={{fontSize: 16, fontWeight: 'bold', color: 'black'}}>
+              <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'black' }}>
                 About
               </Text>
               <AntDesign name="edit" color={colors.primary} size={22} />
@@ -109,48 +127,48 @@ export default function Account() {
               style={{
                 marginTop: 10,
               }}>
-              <Text style={{fontWeight: '600', color: 'black', fontSize: 14}}>
+              <Text style={{ fontWeight: '600', color: 'black', fontSize: 14 }}>
                 Experience:{' '}
               </Text>
-              <View style={{flexDirection: 'row', marginVertical: 2}}>
-                <Text style={{color: 'black', fontWeight: '600'}}>
+              <View style={{ flexDirection: 'row', marginVertical: 2 }}>
+                <Text style={{ color: 'black', fontWeight: '600' }}>
                   Company:{' '}
                 </Text>
-                <Text style={{color: 'black'}}> Google</Text>
+                <Text style={{ color: 'black' }}> Google</Text>
               </View>
-              <View style={{flexDirection: 'row', marginVertical: 2}}>
-                <Text style={{color: 'black', fontWeight: '600'}}>Role: </Text>
-                <Text style={{color: 'black'}}> Software Engineer</Text>
+              <View style={{ flexDirection: 'row', marginVertical: 2 }}>
+                <Text style={{ color: 'black', fontWeight: '600' }}>Role: </Text>
+                <Text style={{ color: 'black' }}> Software Engineer</Text>
               </View>
-              <View style={{flexDirection: 'row', marginVertical: 2}}>
-                <Text style={{color: 'black', fontWeight: '600'}}>
+              <View style={{ flexDirection: 'row', marginVertical: 2 }}>
+                <Text style={{ color: 'black', fontWeight: '600' }}>
                   Period :{' '}
                 </Text>
-                <Text style={{color: 'black'}}> 2020 June - 2021 July</Text>
+                <Text style={{ color: 'black' }}> 2020 June - 2021 July</Text>
               </View>
             </View>
             <View
               style={{
                 marginTop: 10,
               }}>
-              <Text style={{fontWeight: '600', color: 'black', fontSize: 14}}>
+              <Text style={{ fontWeight: '600', color: 'black', fontSize: 14 }}>
                 Education :{' '}
               </Text>
-              <View style={{flexDirection: 'row', marginVertical: 2}}>
-                <Text style={{color: 'black', fontWeight: '600'}}>
+              <View style={{ flexDirection: 'row', marginVertical: 2 }}>
+                <Text style={{ color: 'black', fontWeight: '600' }}>
                   College :{' '}
                 </Text>
-                <Text style={{color: 'black'}}> DJ Sanghvi</Text>
+                <Text style={{ color: 'black' }}> DJ Sanghvi</Text>
               </View>
-              <View style={{flexDirection: 'row', marginVertical: 2}}>
-                <Text style={{color: 'black', fontWeight: '600'}}>Year : </Text>
-                <Text style={{color: 'black'}}> 2018-2022</Text>
+              <View style={{ flexDirection: 'row', marginVertical: 2 }}>
+                <Text style={{ color: 'black', fontWeight: '600' }}>Year : </Text>
+                <Text style={{ color: 'black' }}> 2018-2022</Text>
               </View>
-              <View style={{flexDirection: 'row', marginVertical: 2}}>
-                <Text style={{color: 'black', fontWeight: '600'}}>
+              <View style={{ flexDirection: 'row', marginVertical: 2 }}>
+                <Text style={{ color: 'black', fontWeight: '600' }}>
                   Course :{' '}
                 </Text>
-                <Text style={{color: 'black'}}> Computer Engineering</Text>
+                <Text style={{ color: 'black' }}> Computer Engineering</Text>
               </View>
             </View>
           </View>
@@ -172,7 +190,7 @@ export default function Account() {
                 justifyContent: 'space-between',
                 alignItems: 'center',
               }}>
-              <Text style={{fontSize: 16, fontWeight: 'bold', color: 'black'}}>
+              <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'black' }}>
                 Startups
               </Text>
               <AntDesign name="edit" color={colors.primary} size={22} />
@@ -192,16 +210,16 @@ export default function Account() {
                   borderRadius: 100,
                 }}
               />
-              <View style={{width: '80%', marginLeft: 10}}>
+              <View style={{ width: '80%', marginLeft: 10 }}>
                 <Text
-                  style={{fontSize: 16, color: 'black', fontWeight: 'bold'}}>
+                  style={{ fontSize: 16, color: 'black', fontWeight: 'bold' }}>
                   Tesla
                 </Text>
-                <Text style={{color: 'black'}}>
+                <Text style={{ color: 'black' }}>
                   Tesla, Inc. is an American multinational automotive and clean
                   .......
                 </Text>
-                <Text style={{color: 'black', fontWeight: '600'}}>
+                <Text style={{ color: 'black', fontWeight: '600' }}>
                   2020 June - Present
                 </Text>
               </View>
@@ -221,16 +239,16 @@ export default function Account() {
                   borderRadius: 100,
                 }}
               />
-              <View style={{width: '80%', marginLeft: 10}}>
+              <View style={{ width: '80%', marginLeft: 10 }}>
                 <Text
-                  style={{fontSize: 16, color: 'black', fontWeight: 'bold'}}>
+                  style={{ fontSize: 16, color: 'black', fontWeight: 'bold' }}>
                   Tesla
                 </Text>
-                <Text style={{color: 'black'}}>
+                <Text style={{ color: 'black' }}>
                   Tesla, Inc. is an American multinational automotive and clean
                   .......
                 </Text>
-                <Text style={{color: 'black', fontWeight: '600'}}>
+                <Text style={{ color: 'black', fontWeight: '600' }}>
                   2020 June - Present
                 </Text>
               </View>

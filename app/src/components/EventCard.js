@@ -53,7 +53,7 @@ const EventCard = ({event, isVolunteer}) => {
       }>
       <Card.Cover
         source={{
-          uri: event.image,
+          uri: event.images,
         }}
       />
       <Card.Content>
