@@ -14,7 +14,6 @@ import {JoinNowAddUser, Github} from '../components/SVGR-Components';
 import LinearGradient from 'react-native-linear-gradient';
 import {height, width} from '../Consts';
 import logo from '../assets/logo.jpg';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const WelcomePage = props => {
   const githubFindMentor =

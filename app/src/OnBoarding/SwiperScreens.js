@@ -6,8 +6,10 @@ import BgImageWrapper from '../components/BgImageWrapper';
 import {height, width} from '../Consts';
 import LinearGradient from 'react-native-linear-gradient';
 import LottieView from 'lottie-react-native';
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 const SwiperScreens = ({navigation}) => {
   const {colors} = useTheme();
@@ -156,32 +158,31 @@ const SwiperScreens = ({navigation}) => {
   const GetStarted = () => {
     return (
       <View style={styles.container}>
-      <LottieView
-        source={require('../assets/animation.json')}
-        autoPlay={true}
-        loop={false}
-
-        style={styles.animation}
-      />
-      <View style={{flexDirection:'row',alignSelf:'center',margin:40}}>
-        <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-        navigation.navigate('Login');
-        console.log("Logged In");
-        }}
-        ><Text style={styles.textStyle}>Mentor</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-        navigation.navigate('Login1');
-        console.log("Logged In");
-        }}
-        ><Text style={styles.textStyle}>Entreprenaur</Text>
-      </TouchableOpacity>
+        <LottieView
+          source={require('../assets/animation.json')}
+          autoPlay={true}
+          loop={false}
+          style={styles.animation}
+        />
+        <View style={{flexDirection: 'row', alignSelf: 'center', margin: 40}}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              navigation.navigate('Login');
+              console.log('Logged In');
+            }}>
+            <Text style={styles.textStyle}>Mentor</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              navigation.navigate('Login1');
+              console.log('Logged In');
+            }}>
+            <Text style={styles.textStyle}>Entreprenaur</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
     );
   };
 
@@ -255,33 +256,30 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center',
-
-
   },
   animation: {
-    width: width*0.6,
-    height: height*0.4,
+    width: width * 0.6,
+    height: height * 0.4,
   },
   image: {
     alignItems: 'center',
     justifyContent: 'center',
     margin: 50,
     height: 150,
-    width: 300
+    width: 300,
   },
   textStyle: {
     color: 'white',
 
-    fontSize:18,
+    fontSize: 18,
   },
-  button:{
-    backgroundColor:'#0065ff',
-    marginHorizontal:25,
-    padding:10,
-    borderRadius:10,
-    marginTop:height*0.2,
-    
-}
+  button: {
+    backgroundColor: '#0065ff',
+    marginHorizontal: 25,
+    padding: 10,
+    borderRadius: 10,
+    marginTop: height * 0.2,
+  },
 });
 
 export default SwiperScreens;
