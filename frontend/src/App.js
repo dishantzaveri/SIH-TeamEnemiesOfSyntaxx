@@ -20,6 +20,7 @@ import SingleCampaign from "./components/AllCampaignsSingleCampaign/SingleCampai
 import FullSingleCampaign from "./components/FullSingleCampaign/FullSingleCampaign";
 import MyForm from "./components/Forms/Form";
 import CreateProfile from "./components/CreateProfile/CreateProfile";
+import MentorsList from "./components/MentorsList/MentorsList";
 import Chat from "./pages/Chat";
 import Gst from "./pages/Gst";
 
@@ -47,6 +48,7 @@ function App() {
         <Route path = "/form" element={<MyForm />} />
         <Route path = "/singleCampaign/:id" element={<FullSingleCampaign />} />
         <Route path = "/createProfile" element={<CreateProfile />} />
+        <Route path = "/mentorsList" element={<MentorsList />} />
       </Routes>
     </Router>
   );
