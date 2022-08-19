@@ -71,7 +71,7 @@ class FundingList(generics.ListCreateAPIView):
         serializer.save()
 
 class FundingDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Scheme.objects.all()
+    queryset = Funding.objects.all()
     serializer_class = FundingSerializer
     #permission_classes = [permissions.IsAuthenticated]
 
