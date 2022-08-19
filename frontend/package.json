@@ -43,7 +43,8 @@
     "spectacle-renderer": "^0.0.3",
     "twemoji": "^13.0.1",
     "uuid": "^8.3.2",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "web3.storage": "^4.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
