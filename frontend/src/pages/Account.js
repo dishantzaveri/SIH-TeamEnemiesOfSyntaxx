@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar } from "../components/Navbar";
+import  Navbar  from "../components/Navbar";
 import { MdEmail } from "react-icons/md";
 import { FaBirthdayCake } from "react-icons/fa";
 import { AiFillEdit } from "react-icons/ai";
