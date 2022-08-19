@@ -23,6 +23,7 @@ import CreateProfile from "./components/CreateProfile/CreateProfile";
 import Chat from "./pages/Chat";
 import Gst from "./pages/Gst";
 import Events from "./pages/Events";
+import MentorList from "./components/MentorsList/MentorsList";
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
         <Route path="/singleCampaign/:id" element={<FullSingleCampaign />} />
         <Route path="/createProfile" element={<CreateProfile />} />
         <Route path="/events" element={<Events />} />
+        <Route path="/mentorlist" element={<MentorList />} />
       </Routes>
     </Router>
   );

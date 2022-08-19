@@ -80,7 +80,7 @@ const Events = () => {
           <h1 className="text-2xl mt-4 text-slate-700">Book Your Seats Now!</h1>
         </div>
         <div>
-          <div>
+          <div className="">
             <input placeholder="Search Events.." />
             <button>Search</button>
           </div>
