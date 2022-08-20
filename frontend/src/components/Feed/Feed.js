@@ -1,40 +1,38 @@
-import React, { useEffect, useState } from 'react';
-import './Feed.css';
-import CreateIcon from '@material-ui/icons/Create';
-import ImageIcon from '@material-ui/icons/Image';
-import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
-import EventNoteIcon from '@material-ui/icons/EventNote';
-import CalendarViewDayIcon from '@material-ui/icons/CalendarViewDay';
-import Post from '../Posts/Post';
+import React, { useEffect, useState } from "react";
+import "./Feed.css";
+import CreateIcon from "@material-ui/icons/Create";
+import ImageIcon from "@material-ui/icons/Image";
+import SubscriptionsIcon from "@material-ui/icons/Subscriptions";
+import EventNoteIcon from "@material-ui/icons/EventNote";
+import CalendarViewDayIcon from "@material-ui/icons/CalendarViewDay";
+import Post from "../Posts/Post";
 // import { db } from '../../../firebase';
 // import firebase from 'firebase';
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 // import { selectUser } from '../../../features/userSlice';
-import FlipMove from 'react-flip-move';
-import CreatePosts from '../CreatePosts/CreatePosts';
-import News from '../News/News';
+import FlipMove from "react-flip-move";
+import CreatePosts from "../CreatePosts/CreatePosts";
+import News from "../News/News";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../../features/auth/authSlice.js";
-import { Avatar } from '@material-ui/core';
+import { Avatar } from "@material-ui/core";
 import HomeIcon from "@material-ui/icons/Home";
 import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
 import BusinessCenterIcon from "@material-ui/icons/BusinessCenter";
 import ChatIcon from "@material-ui/icons/Chat";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import SearchIcon from "@material-ui/icons/Search";
-import PersonIcon from '@material-ui/icons/Person';
+import PersonIcon from "@material-ui/icons/Person";
 
-function HeaderOption({ avatar, Icon, title}) {
+function HeaderOption({ avatar, Icon, title }) {
   return (
-      <div className="headerOption">
-          {Icon && <Icon className='headerOption__icon' /> }
-          {avatar && (
-              <Avatar className="headerOption__icon" src={avatar}/>
-          )}
-          <h3 className='headerOption__title'>{title}</h3>
-      </div>
-  )
+    <div className="headerOption">
+      {Icon && <Icon className="headerOption__icon" />}
+      {avatar && <Avatar className="headerOption__icon" src={avatar} />}
+      <h3 className="headerOption__title">{title}</h3>
+    </div>
+  );
 }
 
 const Header = () => {
@@ -47,13 +45,12 @@ const Header = () => {
       <Link className="font-bold text-3xl" to="/">
         mentoree
       </Link>
-{/* {token && ( */}
-  <div className="header__search">
-          <SearchIcon />
-          <input type="text" placeholder="Search bar" />
-        </div>
-{/* )} */}
-      
+      {/* {token && ( */}
+      <div className="header__search">
+        <SearchIcon />
+        <input type="text" placeholder="Search bar" />
+      </div>
+      {/* )} */}
 
       <div className={`flex gap-4 ${token && "hidden"} items-center`}>
         <Link className="font-semibold text-xl" to="/registermentor">
@@ -74,107 +71,98 @@ const Header = () => {
         </Link>
       </div>
       <div>
-      {token && (
-        <>
-        <div className="header__right">
-        <Link to="/feed">
-        <HeaderOption Icon={HomeIcon} title="Home" />
-        </Link>
+        {token && (
+          <>
+            <div className="header__right">
+              <Link to="/feed">
+                <HeaderOption Icon={HomeIcon} title="Home" />
+              </Link>
 
-        <HeaderOption Icon={SupervisorAccountIcon} title="Mentors" />
+              <HeaderOption Icon={SupervisorAccountIcon} title="Mentors" />
 
-        <Link to="/chat">
-        <HeaderOption Icon={ChatIcon} title="Chat" />
-        </Link>
+              <Link to="/chat">
+                <HeaderOption Icon={ChatIcon} title="Chat" />
+              </Link>
 
-        <Link to="/myProfile">
-        <HeaderOption Icon={PersonIcon} title="Profile" />
-        </Link>
-        
-        {/* <HeaderOption Icon={NotificationsIcon} title="Notifications" /> */}
-        {/* <HeaderOption avatar={user.photoUrl} title="me" /> */}
-        <button
-          className="uppercase rounded-full border w-[8vw] py-2 hover:bg-inherit hover:text-inherit bg-purple-gray-600 text-white transition-all duration-150"
-          onClick={() => dispatch(logout())}
-        >
-          Log out
-        </button>
-      </div>
-        
-        </>
-      )}
+              <Link to="/myProfile">
+                <HeaderOption Icon={PersonIcon} title="Profile" />
+              </Link>
+
+              {/* <HeaderOption Icon={NotificationsIcon} title="Notifications" /> */}
+              {/* <HeaderOption avatar={user.photoUrl} title="me" /> */}
+              <button
+                className="uppercase rounded-full border w-[8vw] py-2 hover:bg-inherit hover:text-inherit bg-purple-gray-600 text-white transition-all duration-150"
+                onClick={() => dispatch(logout())}
+              >
+                Log out
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
 };
 
 function Feed() {
-//   const user = useSelector(selectUser);
+  //   const user = useSelector(selectUser);
 
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const [posts, setPosts] = useState([]);
 
-//   useEffect(() => {
-//     db.collection("posts").orderBy('timestamp', 'desc').onSnapshot(snapshot => (
-//       setPosts(snapshot.docs.map(doc => (
-//         {
-//           id: doc.id,
-//           data: doc.data(),
-//         }
-//       )))
-//     ))
-//   }, [])
-  
-//   const sendPost = e => {
-//     e.preventDefault();
+  //   useEffect(() => {
+  //     db.collection("posts").orderBy('timestamp', 'desc').onSnapshot(snapshot => (
+  //       setPosts(snapshot.docs.map(doc => (
+  //         {
+  //           id: doc.id,
+  //           data: doc.data(),
+  //         }
+  //       )))
+  //     ))
+  //   }, [])
 
-//     // db.collection("posts").add({
-//     //   name: user.displayName,
-//     //   description: user.email,
-//     //   message: input,
-//     //   photoUrl: user.photoUrl || '',
-//     //   timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-//     // });
-//     setInput("");
-//   };
-  
+  //   const sendPost = e => {
+  //     e.preventDefault();
+
+  //     // db.collection("posts").add({
+  //     //   name: user.displayName,
+  //     //   description: user.email,
+  //     //   message: input,
+  //     //   photoUrl: user.photoUrl || '',
+  //     //   timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+  //     // });
+  //     setInput("");
+  //   };
 
   return (
-  <>
+    <>
       <Header />
-    <div className='grid grid-cols-12 p-8 gap-8'>
-    <div className='col-span-1'>
-      </div>
-      <div className="feed col-span-6">
+      <div className="grid grid-cols-12 p-8 gap-8">
+        <div className="col-span-1"></div>
+        <div className="feed col-span-6">
+          <div className="feed_inputContainer">
+            <CreatePosts />
+          </div>
 
-        <div className="feed_inputContainer">
-          
-        <CreatePosts />
-          
-        </div>
-       
-        <FlipMove>
-      
-          {/* {posts.slice(0, 5).map(({ id, data: { name, description, message, photoUrl}}) => ( */}
-            <Post 
-              // key="1"
-              // name="Greha"
-              // description="Here is my desc"
-              // message="This is my message"
-              // photoUrl={photoUrl}
+          <FlipMove>
+            {/* {posts.slice(0, 5).map(({ id, data: { name, description, message, photoUrl}}) => ( */}
+            <Post
+            // key="1"
+            // name="Greha"
+            // description="Here is my desc"
+            // message="This is my message"
+            // photoUrl={photoUrl}
             />
-          {/* ))} */}
-        </FlipMove>
-    
+            {/* ))} */}
+          </FlipMove>
+        </div>
+        <div className="col-span-1"></div>
+        <div className="col-span-4">
+          <News />
+        </div>
       </div>
-      <div className='col-span-1'>
-      </div>
-      <div className='col-span-4'>
-        <News />
-      </div>
-    </div>
     </>
   );
-};
+}
 
 export default Feed;

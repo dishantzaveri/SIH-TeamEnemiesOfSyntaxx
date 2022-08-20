@@ -13,7 +13,7 @@ import Post from "./components/Posts/Post";
 import Feed from "./components/Feed/Feed";
 import News from "./components/News/News";
 import { PitchDeck } from "./components/PitchDeck/PitchDeck";
-import  PitchDeckForm  from "./components/PitchDeck/PitchDeckForm";
+import PitchDeckForm from "./components/PitchDeck/PitchDeckForm";
 import VideoCall from "./components/VideoCall/VideoCall";
 import AllCampaigns from "./components/AllCampaigns/AllCampaigns";
 import SingleCampaign from "./components/AllCampaignsSingleCampaign/SingleCampaign";
@@ -22,7 +22,9 @@ import MyForm from "./components/Forms/Form";
 import CreateProfile from "./components/CreateProfile/CreateProfile";
 import Chat from "./pages/Chat";
 import Gst from "./pages/Gst";
-
+import Events from "./pages/Events";
+import MentorList from "./components/MentorsList/MentorsList";
+import Mentors from "./pages/Mentors";
 
 function App() {
   return (
@@ -43,10 +45,13 @@ function App() {
         <Route path="/pitchdeck" element={<PitchDeck />} />
         <Route path="/pitchdeck-form" element={<PitchDeckForm />} />
         <Route path="/videocall" element={<VideoCall />} />
-        <Route path = "/campaigns" element={<AllCampaigns />} />
-        <Route path = "/form" element={<MyForm />} />
-        <Route path = "/singleCampaign/:id" element={<FullSingleCampaign />} />
-        <Route path = "/createProfile" element={<CreateProfile />} />
+        <Route path="/campaigns" element={<AllCampaigns />} />
+        <Route path="/form" element={<MyForm />} />
+        <Route path="/singleCampaign/:id" element={<FullSingleCampaign />} />
+        <Route path="/createProfile" element={<CreateProfile />} />
+        <Route path="/events" element={<Events />} />
+        <Route path="/mentorlist" element={<MentorList />} />
+        <Route path="/mentors" element={<Mentors />} />
       </Routes>
     </Router>
   );

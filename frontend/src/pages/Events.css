@@ -47,7 +47,7 @@
   position: sticky;
   top: 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   /* border-bottom: 0.1px solid lightgray;  */
   padding-top: 10px;
   /* padding-bottom: 10px; */
@@ -55,6 +55,7 @@
   z-index: 999;
   background-color: white;
   padding: 10px;
+  align-items: center;
 }
 
 .header__search {
