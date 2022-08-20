@@ -18,7 +18,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import TouchId from 'react-native-touch-id';
 import {useDispatch} from 'react-redux';
 import {setUser} from '../redux/reducers/user';
-
+import * as CONSTANTS from '../CONSTANTS';
+import {CometChat} from '@cometchat-pro/react-native-chat';
 function Login({navigation}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -47,11 +48,20 @@ function Login({navigation}) {
       requestOptions,
     )
       .then(response => response.json())
-      .then(result => {
+      .then(async result => {
         setTok(result.token);
-        console.log(result.token);
-        AsyncStorage.setItem(STORAGE_KEY1, result.token);
+        console.log(result);
+        await AsyncStorage.setItem(STORAGE_KEY1, JSON.stringify(result));
         dispatch(setUser(result));
+        const uuid = result.name.split(' ')[0] + result.email.split('@')[0];
+        CometChat.login(uuid, CONSTANTS.AUTH_KEY).then(
+          user => {
+            console.log('Login Successful:', {user});
+          },
+          error => {
+            console.log('Login failed with exception:', {error});
+          },
+        );
       })
       .catch(error => console.log('error', error));
     // try {

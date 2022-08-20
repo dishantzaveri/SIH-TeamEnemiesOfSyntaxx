@@ -1,32 +1,69 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, Text, Button, TouchableOpacity, TextInput, Image } from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  StyleSheet,
+  Text,
+  Button,
+  TouchableOpacity,
+  TextInput,
+  Image,
+} from 'react-native';
 import PasswordInput from '../components/PassInput';
 import Textinp from '../components/Textinp';
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+import {CometChat} from '@cometchat-pro/react-native-chat';
 
-function SignUp1({ navigation }) {
+function SignUp1({navigation}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const saveData = async () => {
     var myHeaders = new Headers();
-    myHeaders.append("Cookie", "csrftoken=o4q1Ihf3JTBVbPIRuFvCtHZVT3RHp0X8; sessionid=0rx0ut9910ocx5ggaz1l6en6khbzxg1n");
+    myHeaders.append(
+      'Cookie',
+      'csrftoken=o4q1Ihf3JTBVbPIRuFvCtHZVT3RHp0X8; sessionid=0rx0ut9910ocx5ggaz1l6en6khbzxg1n',
+    );
 
     var formdata = new FormData();
-    formdata.append("email", email);
-    formdata.append("password", password);
-    formdata.append("name", name);
+    formdata.append('email', email);
+    formdata.append('password', password);
+    formdata.append('name', name);
 
     var requestOptions = {
       method: 'POST',
       headers: myHeaders,
       body: formdata,
-      redirect: 'follow'
+      redirect: 'follow',
     };
 
-    fetch("https://vismayvora.pythonanywhere.com/account/entrepreneur_register/", requestOptions)
+    fetch(
+      'https://vismayvora.pythonanywhere.com/account/entrepreneur_register/',
+      requestOptions,
+    )
       .then(response => response.text())
-      .then(result => console.log(result))
+      .then(result => {
+        console.log(result);
+        const uuid = inputs.name.split(' ')[0] + inputs.email.split('@')[0];
+        console.log(uuid);
+        var cometUser = new CometChat.User(uuid);
+        cometUser.setName(inputs.name);
+        CometChat.createUser(cometUser, CONSTANTS.AUTH_KEY)
+          .then(user => {
+            console.log('user created', user);
+            CometChat.login(uuid, CONSTANTS.AUTH_KEY).then(
+              user => {
+                console.log('Signup Successful:', {user});
+              },
+              error => {
+                console.log('Login failed with exception:', {error});
+              },
+            );
+          })
+          .catch(error => console.log('error', error));
+      })
       .catch(error => console.log('error', error));
   };
   return (
@@ -46,7 +83,8 @@ function SignUp1({ navigation }) {
         onChangeText={text => {
           setName(text);
         }}
-        placeholderTextColor="grey" />
+        placeholderTextColor="grey"
+      />
 
       <Textinp
         marginTop={20}
@@ -57,7 +95,8 @@ function SignUp1({ navigation }) {
         onChangeText={text => {
           setEmail(text);
         }}
-        placeholderTextColor="grey" />
+        placeholderTextColor="grey"
+      />
       <PasswordInput
         placeholder="Password"
         autoComplete="password"
@@ -71,9 +110,10 @@ function SignUp1({ navigation }) {
         style={styles.button}
         onPress={() => {
           saveData();
-          navigation.navigate('Login1')
+          navigation.navigate('Login1');
           // console.log("Signed Up");
-        }}><Text style={styles.textStyle}>Sign Up</Text>
+        }}>
+        <Text style={styles.textStyle}>Sign Up</Text>
       </TouchableOpacity>
     </View>
   );
@@ -84,7 +124,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF'
+    backgroundColor: '#FFFFFF',
   },
   textStyle: {
     color: 'white',
@@ -103,15 +143,15 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     margin: 25,
-    marginLeft: 20
+    marginLeft: 20,
   },
   button: {
     backgroundColor: '#0065ff',
     marginTop: 20,
     padding: 10,
     borderRadius: 10,
-    width: wp('85%')
-  }
+    width: wp('85%'),
+  },
 });
 
 export default SignUp1;

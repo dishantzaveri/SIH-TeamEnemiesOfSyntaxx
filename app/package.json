@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@cometchat-pro/react-native-chat": "^3.0.10",
     "@daily-co/react-native-daily-js": "^0.27.0",
     "@daily-co/react-native-webrtc": "^1.94.1-daily.4",
     "@react-native-async-storage/async-storage": "^1.17.9",

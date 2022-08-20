@@ -16,6 +16,7 @@ import {
 } from 'react-native-responsive-screen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import TouchId from 'react-native-touch-id';
+import {CometChat} from '@cometchat-pro/react-native-chat';
 
 function Login1({navigation}) {
   const [email, setEmail] = useState('');
@@ -47,8 +48,18 @@ function Login1({navigation}) {
       .then(response => response.json())
       .then(result => {
         setTok(result.token);
-        console.log(result.token);
-        AsyncStorage.setItem(STORAGE_KEY1, result.token);
+        console.log(result);
+        AsyncStorage.setItem(STORAGE_KEY1, JSON.stringify(result));
+        dispatch(setUser(result));
+        const uuid = result.name.split(' ')[0] + result.email.split('@')[0];
+        CometChat.login(uuid, CONSTANTS.AUTH_KEY).then(
+          user => {
+            console.log('Login Successful:', {user});
+          },
+          error => {
+            console.log('Login failed with exception:', {error});
+          },
+        );
       })
       .catch(error => console.log('error', error));
     // try {

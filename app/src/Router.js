@@ -9,24 +9,13 @@ import {
   Provider as PaperProvider,
   DefaultTheme,
   configureFonts,
-  Text,
-  Paragraph,
-  Subheading,
 } from 'react-native-paper';
-import {
-  WelcomePage,
-  Mentors,
-  Mentees,
-  HowItWorks,
-  ActiveMentorships,
-  MentorMenteesDetail,
-  Events,
-  Jobs,
-  JobSeekers,
-  JobDetail,
-} from './pages';
+
+import {useDispatch, useSelector} from 'react-redux';
+import * as CONSTANTS from './CONSTANTS';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useSelector} from 'react-redux';
+import {setUser} from './redux/reducers/user';
+import {CometChat} from '@cometchat-pro/react-native-chat';
 
 console.disableYellowBox = true;
 
@@ -71,17 +60,37 @@ const Router = () => {
   };
   const [userToken, setUserToken] = useState(null);
   const {user} = useSelector(state => state.user);
+  const dispatch = useDispatch();
   useEffect(() => {
     console.disableYellowBox = true;
+    getUserFromAsync();
   }, []);
   useEffect(() => {
-    console.log(user);
+    console.log('Router = ', user);
     if (user?.token) {
+      console.log('Hello');
       setUserToken(user);
+      const uuid = user.name.split(' ')[0] + user.email.split('@')[0];
+      CometChat.login(uuid, CONSTANTS.AUTH_KEY).then(
+        user => {
+          console.log('Login Successful:', {user});
+        },
+        error => {
+          console.log('Login failed with exception:', {error});
+        },
+      );
     } else {
       setUserToken(null);
     }
   }, [user]);
+
+  const getUserFromAsync = async () => {
+    const user = await AsyncStorage.getItem('@save_token');
+    console.log('Router ', user);
+    if (user) {
+      dispatch(setUser(JSON.parse(user)));
+    }
+  };
 
   return (
     <NavigationContainer theme={Mytheme} independent={true}>
