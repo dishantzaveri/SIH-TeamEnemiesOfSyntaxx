@@ -106,3 +106,7 @@
 .headerOption:hover {
   color: rgb(96 78 158);
 }
+
+input:focus {
+  outline: none !important;
+}
