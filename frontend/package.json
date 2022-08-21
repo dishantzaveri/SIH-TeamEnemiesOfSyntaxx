@@ -29,6 +29,7 @@
     "ipfs-http-client": "^57.0.3",
     "material-ui-search-bar": "^1.0.0",
     "pptxgenjs": "^3.10.0",
+    "razorpay": "^2.8.3",
     "rc-menu": "^9.6.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
