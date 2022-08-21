@@ -5,9 +5,17 @@ export const postSlice = apiSlice.injectEndpoints({
         getPosts: builder.query({
             query: () => '/api/posts/'
         }),
+        postPost: builder.mutation({
+            query: (post) => ({
+                url: '/api/posts/',
+                method: 'POST',
+                body: { ...post }
+            })
+        }),
     })
 })
 
 export const {
-    useGetPostsQuery
+    useGetPostsQuery,
+    usePostPostMutation,
 } = postSlice
