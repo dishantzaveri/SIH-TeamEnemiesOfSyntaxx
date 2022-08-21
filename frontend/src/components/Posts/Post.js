@@ -29,22 +29,19 @@ const Post = forwardRef(({ name, description, message, photoUrl }, ref) => {
     <>
     {data && data.slice().reverse().map(post => (
       <div ref={ref} key={post.id} className="post">
-        <div className="post_header">
+        <div className="post_header items-center gap-4">
           <Avatar src={photoUrl}></Avatar>
-          <div className="postInfo">
-            <h2>{post.owner}</h2>
-            <p>{post.title}</p>
+          <div className="">
+            <h2 className='text-xl font-semibold'>{post.title}</h2>
+            <p className='text-xs text-gray-600'>by {post.owner}</p>
 
           </div>
         </div>
         <div className="post_body">
-          {post.images_post && <img 
-          src={post.images_post}
-          alt="new" className='img'
-          />}
+          {post.images_post && <img src={post.images_post} alt="new" className='img' />}
           <p>{post.body}</p>
           {post.youtube_link && 
-            <div>
+            <div className='mt-2'>
               {/* <a target='_blank' className='text-blue-400' href={post.youtube_link}>{post.youtube_link}</a> */}
               <iframe width="100%" height="500" src={"https://www.youtube.com/embed/" + youtube_parser(post.youtube_link)} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>}
