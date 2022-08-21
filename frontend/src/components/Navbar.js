@@ -67,8 +67,9 @@ export default function  Navbar  ()  {
         <Link to="/feed">
         <HeaderOption Icon={HomeIcon} title="Home" />
         </Link>
-
+        <Link to="/mentors">
         <HeaderOption Icon={SupervisorAccountIcon} title="Mentors" />
+        </Link>
 
         <Link to="/chat">
         <HeaderOption Icon={ChatIcon} title="Chat" />
