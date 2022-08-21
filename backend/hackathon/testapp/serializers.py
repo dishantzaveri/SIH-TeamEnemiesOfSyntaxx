@@ -63,7 +63,7 @@ class SessionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Session
-        fields = ['id','organiser','organiser_token','name', 'description', 'start_time', 'end_time', 'start_date', 
+        fields = ['id','organiser','organiser_token','name', 'image', 'description', 'start_time', 'end_time', 'start_date', 
         'end_date', 'mode', 'max_registrations', 'venue', 'meet_link', 'price']
     
     def get_organiser_token(self,obj):

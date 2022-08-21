@@ -87,6 +87,16 @@ class StartupDetails(viewsets.ModelViewSet):
 		kwargs['partial'] = True
 		return super().update(request, *args, **kwargs)
 
+class StartupsList(GenericAPIView):
+	serializer_class = StartupSerializer
+
+	permission_classes = [permissions.IsAuthenticated]
+
+	def get(self,request):
+		startups = Startup.objects.all()
+		serializer = StartupSerializer(startups, many=True)
+		return Response(serializer.data)
+
 class WorkExperienceDetails(viewsets.ModelViewSet):
 	queryset = WorkExperience.objects.all()
 	serializer_class = WorkExperienceSerializer
@@ -123,7 +133,7 @@ class MentorProfileViewSet(viewsets.ModelViewSet):
 	permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 	def get_queryset(self):
-		return MentorProfile.objects.all()
+		return MentorProfile.objects.get(user=self.request.user)
 	
 	def perform_create(self,serializer):
 		serializer.save(user = self.request.user)
@@ -132,13 +142,23 @@ class MentorProfileViewSet(viewsets.ModelViewSet):
 		kwargs['partial'] = True
 		return super().update(request, *args, **kwargs)
 
+class MentorsList(GenericAPIView):
+	serializer_class = MentorProfileSerializer
+
+	permission_classes = [permissions.IsAuthenticated]
+
+	def get(self,request):
+		mentors = MentorProfile.objects.all()
+		serializer = MentorProfileSerializer(mentors, many=True)
+		return Response(serializer.data)
+
 class EntrepreneurProfileViewSet(viewsets.ModelViewSet):
 	queryset = EntrepreneurProfile.objects.all()
 	serializer_class = EntrepreneurProfileSerializer
 	permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 	def get_queryset(self):
-		return EntrepreneurProfile.objects.all()
+		return EntrepreneurProfile.objects.get(user=self.request.user)
 	
 	def perform_create(self,serializer):
 		serializer.save(user = self.request.user)
@@ -150,6 +170,16 @@ class EntrepreneurProfileViewSet(viewsets.ModelViewSet):
 	def get_serializer_context(self):
           """Adds request to the context of serializer"""
           return {"request": self.request}
+
+class EntrepreneursList(GenericAPIView):
+	serializer_class = EntrepreneurProfileSerializer
+
+	permission_classes = [permissions.IsAuthenticated]
+
+	def get(self,request):
+		entrepreneurs = EntrepreneurProfile.objects.all()
+		serializer = EntrepreneurProfileSerializer(entrepreneurs, many=True)
+		return Response(serializer.data)
 
 class GstVerification(APIView):
 	def post(self,request):
@@ -193,7 +223,6 @@ class GstVerification(APIView):
 			trimmed_response['tradeName'] = response_dict["Succeeded"]["Gst_Details"]["result"].pop("tradeNam")
 			trimmed_response['centerJurisdiction'] = response_dict["Succeeded"]["Gst_Details"]["result"].pop("ctj")
 			trimmed_response['aadhaar_linked'] = response_dict["Succeeded"]["Gst_Details"]["result"].pop("adhrVFlag")
-			print(trimmed_response)
 			serializer = StartupSerializer(data = trimmed_response)
 			serializer.is_valid(raise_exception=True)
 			serializer.save(user=self.request.user)

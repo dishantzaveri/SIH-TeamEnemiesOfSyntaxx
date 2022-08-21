@@ -46,6 +46,7 @@ class Session(models.Model):
 
     organiser = models.ForeignKey(User, related_name='organiser', on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
+    image=models.ImageField(null=True,blank=True)
     start_time = models.TimeField()
     end_time = models.TimeField(null=True,blank=True)
     start_date = models.DateField()

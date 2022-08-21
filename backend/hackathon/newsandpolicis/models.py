@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-from accounts.models import User
+from accounts.models import User, Startup
 # Create your models here.
 
 class Scheme(models.Model):
@@ -20,7 +20,7 @@ class Funding(models.Model):
     name                = models.CharField(max_length=500, blank=True, default='')
     description         = models.TextField(blank=True, default='')
     images              = models.ImageField(null=True,blank=True)
-    #createdBy           = models.ForeignKey(User, on_delete=models.CASCADE,related_name='created_by')
+    startup             = models.ForeignKey(Startup, on_delete=models.CASCADE,related_name='startup')
     targetAmount        = models.IntegerField(null=True, blank=True)
     collectedAmount     = models.IntegerField(null=True, blank=True)
     event_date          = models.DateField(null=True, blank=True)

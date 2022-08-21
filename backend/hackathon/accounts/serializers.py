@@ -81,7 +81,7 @@ class MentorProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MentorProfile
-        fields = ['id', 'expertise', 'experience', 'education']
+        fields = ['id', 'expertise', 'experience', 'education', 'latitude', 'longitude']
 
 # class RelatedFieldAlternative(serializers.PrimaryKeyRelatedField):
 #     def __init__(self, **kwargs):

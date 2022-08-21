@@ -61,7 +61,7 @@ class Startup(models.Model):
     gstin = models.CharField(max_length=255, unique=True, null=True, blank=True)
     gstnStatus = models.CharField(max_length=255, null=True, blank=True)
     dateOfRegistration = models.CharField(max_length = 255,null=True,blank=True)
-    constitutionOfBusiness = models.CharField(max_length=255, unique=True, null=True, blank=True)
+    constitutionOfBusiness = models.CharField(max_length=255, null=True, blank=True)
     taxpayerType = models.CharField(max_length=255, null=True, blank=True)
     natureOfBusinessActivity = models.CharField(max_length=255, null=True, blank=True)
     principalPlaceOfBusinessAddress = models.CharField(max_length=255, null=True, blank=True)
@@ -70,7 +70,7 @@ class Startup(models.Model):
     aadhaar_linked = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
-        return self.trade_name
+        return self.tradeName
 
 class WorkExperience(models.Model):
     user = models.ForeignKey(User, related_name = 'experience', on_delete=models.CASCADE)
@@ -96,6 +96,8 @@ class Education(models.Model):
 class MentorProfile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     expertise = models.CharField(max_length=70,null=True,blank=True)
+    latitude = models.FloatField(null=True,blank=True)
+    longitude = models.FloatField(null=True,blank=True)
 
 class EntrepreneurProfile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='user')
