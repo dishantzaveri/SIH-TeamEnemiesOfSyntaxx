@@ -2,27 +2,30 @@ export const data = [
     
     {
       id: 1,
-      author: "The petition has been filed at the Allahabad bench of the NCLT under the Insolvency and Bankruptcy Code, the regulatory filing showed",
+      content: "The petition has been filed at the Allahabad bench of the NCLT under the Insolvency and Bankruptcy Code, the regulatory filing showed",
       likes: 100,
       title:  "SBI starts insolvency proceedings against Bajaj Hindusthan Sugar | Mint - Mint",
       profilePic: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-      image: "https://images.livemint.com/img/2022/08/16/600x338/NCLT_insolvency_1660655344901_1660655345205_1660655345205.jpg"
+      image: "https://images.livemint.com/img/2022/08/16/600x338/NCLT_insolvency_1660655344901_1660655345205_1660655345205.jpg",
+      author:'Johann Wolfgang von Goethe'
     },
     {
         id: 2,
-        author:  "On the lines of launching the more affordable S1 electric scooter, Ola Electric announced that its first all-electric car will arrive in India in 2024. This all-electric car was already teased by Ola Electric in a few mild teasers earlier, and now Ola Electri…",
+        content:  "On the lines of launching the more affordable S1 electric scooter, Ola Electric announced that its first all-electric car will arrive in India in 2024. This all-electric car was already teased by Ola Electric in a few mild teasers earlier, and now Ola Electri…",
         title: "Ola Electric Vehicle launch timeframe revealed officially - CarToq.com",
         likes: 220,
         profilePic: 'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-        image: "https://www.cartoq.com/wp-content/uploads/2022/08/OLA-EV-CAR-1.jpeg"
+        image: "https://www.cartoq.com/wp-content/uploads/2022/08/OLA-EV-CAR-1.jpeg",
+        author:'Byron Pulsifer'
       },
     {
       id: 3,
-      author: "This tweet that has been quoted by Anand Mahindra, shows his reaction to an Elon Musk's Tesla vs. Mahindra meme that features Pankaj Tripathi.  | Trending",
+      content: "This tweet that has been quoted by Anand Mahindra, shows his reaction to an Elon Musk's Tesla vs. Mahindra meme that features Pankaj Tripathi.  | Trending",
       title: "Anand Mahindra reacts to Tesla vs. Mahindra meme, featuring Pankaj Tripathi - Hindustan Times",
       likes: 620,
       profilePic: 'https://images.pexels.com/photos/736716/pexels-photo-736716.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-      image:"https://images.hindustantimes.com/img/2022/08/16/1600x900/Anand_Mahindra_Elon_Musk_Tesla_vs_Mahindra_meme_Pankaj_Tripathi_1660651184770_1660651192269_1660651192269.png"
+      image:"https://images.hindustantimes.com/img/2022/08/16/1600x900/Anand_Mahindra_Elon_Musk_Tesla_vs_Mahindra_meme_Pankaj_Tripathi_1660651184770_1660651192269_1660651192269.png",
+      author:'Lao Tzu'
     },
   ]
 

@@ -42,6 +42,8 @@ import {JobDetail, Jobs, JobSeekers, MentorMenteesDetail} from '../pages';
 import SwiperScreens from '../OnBoarding/SwiperScreens';
 import {NavigationContainer} from '@react-navigation/native';
 import RazorpayScreens from '../pages/RazorpayScreens';
+import Profile1 from '../components/Profile/Profile1';
+import Profile2 from '../components/Profile/Profile2';
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 const HomeStack = createNativeStackNavigator();
@@ -158,7 +160,9 @@ function Tabs() {
         }}
       />
 
-      <Tab.Screen name="Upload" component={UploadPost} />
+      <Tab.Screen name="Upload" component={UploadPost}  options={{
+          headerShown: false,
+        }}/>
 
       <Tab.Screen
         name="AllMentors"
@@ -240,6 +244,16 @@ const Onboarding = () => {
       <OnboardingStack.Screen
         name="Onboarding6"
         component={Onboarding6}
+        screenOptions={{headerShown: false}}
+      />
+      <OnboardingStack.Screen
+        name="Profile1"
+        component={Profile1}
+        screenOptions={{headerShown: false}}
+      />
+      <OnboardingStack.Screen
+        name="Profile2"
+        component={Profile2}
         screenOptions={{headerShown: false}}
       />
     </OnboardingStack.Navigator>

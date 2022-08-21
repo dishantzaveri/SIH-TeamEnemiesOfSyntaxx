@@ -112,7 +112,7 @@ const Onboarding6 = ({ }) => {
                     placeholder={'Competitive Analysis'}
                 />
                   <View style={styles.button}>
-                <Button title="Next"  >
+                <Button title="Next" onPress ={() =>{navigation.navigate('Profile1')}}>
                 </Button>
                 </View>
             </View>

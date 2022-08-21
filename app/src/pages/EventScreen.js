@@ -37,7 +37,7 @@ const EventScreen = ({route}) => {
 
 
   return (
-    <ImageBackground source={{uri: event.image}} style={styles.container}>
+    <ImageBackground source={{uri: event.images}} style={styles.container}>
       <View
         style={{...StyleSheet.absoluteFill, backgroundColor: 'rgba(0,0,0,0.4)'}}
       />

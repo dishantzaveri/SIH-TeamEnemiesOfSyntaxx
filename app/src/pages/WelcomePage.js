@@ -13,9 +13,11 @@ import {WebView} from 'react-native-webview';
 import {JoinNowAddUser, Github} from '../components/SVGR-Components';
 import LinearGradient from 'react-native-linear-gradient';
 import {height, width} from '../Consts';
-import logo from '../assets/logo.jpg';
+import logo from '../assets/mentordots.png';
+import { useTheme } from '@react-navigation/native';
 
 const WelcomePage = props => {
+  const { colors } = useTheme();
   const githubFindMentor =
     'https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx';
   const joinNow =
@@ -40,10 +42,6 @@ const WelcomePage = props => {
         <Text style={styles.text1Style}> Feel free to contribute! </Text>
       </TouchableOpacity>
       <View style={{marginHorizontal: 19}}>
-        {/* <Text>
-            Every night & every deploy, the spread sheet will be parsed by
-            GitHub actions, then generate this beauty.
-          </Text> */}
       </View>
       <View style={styles.discordView}>
         <WebView
@@ -74,19 +72,7 @@ const WelcomePage = props => {
           </LinearGradient>
         </TouchableOpacity>
       </View>
-      <View style={{flexDirection: 'row'}}>
-        <TouchableOpacity
-          onPress={() => props.navigation.navigate('ActiveMentorships')}
-          style={styles.activeMentorshipsButton}>
-          <LinearGradient
-            start={{x: 0, y: 0}}
-            end={{x: 1, y: 0}}
-            style={styles.linearGradient}
-            colors={['#F14F0A', '#F5B400']}>
-            <Text style={styles.label}>Active</Text>
-          </LinearGradient>
-        </TouchableOpacity>
-      </View>
+
     </SafeAreaView>
   );
 };
@@ -147,8 +133,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    width: Dimensions.get('window').width / 6,
-    height: Dimensions.get('window').height / 12,
+    width: Dimensions.get('window').width / 3,
+    height: Dimensions.get('window').height / 10,
+    margin:10
   },
   buttonText: {
     fontWeight: 'bold',

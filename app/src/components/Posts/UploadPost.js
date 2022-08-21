@@ -53,7 +53,7 @@ const UploadPost = () => {
   return (
     <View
       style={{
-        padding: 20,
+        padding: 30,backgroundColor: '#fff',flex:1,
       }}>
       <TextInput
         value={title}
