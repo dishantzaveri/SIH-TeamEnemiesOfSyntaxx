@@ -37,7 +37,7 @@ const FullSingleCampaign = (props) => {
                                                 <p className="card-text pl-4"> <i className="fas fa-user"></i>  <b> Amusan Olumide </b> is raising this campaign </p>
                                             </div>
                                             <ul className="list-group list-group-flush pl-4">
-                                                <li className="list-group-item">Created 3 days ago </li>
+                                                <li className="list-group-item">Created 1 day ago </li>
                                                 <li className=" list-group-item">
                                                    "description"
                                                 </li>
