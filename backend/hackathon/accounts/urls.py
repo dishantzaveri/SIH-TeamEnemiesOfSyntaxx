@@ -10,8 +10,6 @@ router.register(r'experience', views.WorkExperienceDetails)
 router.register(r'education', views.EducationDetails)
 router.register(r'mentor', views.MentorProfileViewSet)
 router.register(r'entrepreneur', views.EntrepreneurProfileViewSet)
-router.register(r'connect_mentee',views.ConnectMenteeViewSet)
-router.register(r'connect_mentor',views.ConnectMentorViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
@@ -22,6 +20,7 @@ urlpatterns = [
     path('mentors_list/',views.MentorsList.as_view(), name = 'Mentors'),
     path('entrepreneurs_list/',views.EntrepreneursList.as_view(), name = 'Entrepreneurs'),
     path('startups_list/',views.StartupsList.as_view(), name = 'Startupss'),
-    # path('connect_mentee/',views.ConnectMenteeView.as_view(), name = 'Connect Mentee'),
+    path('connect_mentee/',views.ConnectMenteeView.as_view(), name = 'Connect Mentee'),
+    path('connect_mentor/',views.ConnectMentorView.as_view(), name = 'Connect Mentor'),
 
 ]

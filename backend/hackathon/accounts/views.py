@@ -19,7 +19,7 @@ from rest_framework import generics
 
 from django.contrib.auth import get_user_model
 
-import requests
+import requests, datetime
 from hackathon import settings
 
 User = get_user_model()
@@ -198,18 +198,6 @@ class GstVerification(APIView):
 			response_dict = response.json()
 			print(response_dict)
 			trimmed_response = {}
-		# response_dict["Succeeded"]["Gst_Details"]["result"]['legalNameOfBusiness']             = response_dict["Succeeded"]["Gst_Details"]["result"].pop('lgnm')
-		# response_dict["Succeeded"]["Gst_Details"]["result"]['stateJurisdiction']               = response_dict["Succeeded"]["Gst_Details"]["result"].pop("stj")
-		# response_dict["Succeeded"]["Gst_Details"]["result"]['taxpayerType']                    = response_dict["Succeeded"]["Gst_Details"]["result"].pop("dty")
-		# response_dict["Succeeded"]["Gst_Details"]["result"]['natureOfBusinessActivity']        = response_dict["Succeeded"]["Gst_Details"]["result"].pop("nba")
-		# response_dict["Succeeded"]["Gst_Details"]["result"]['dateOfRegistration']              = response_dict["Succeeded"]["Gst_Details"]["result"].pop("rgdt")
-		# response_dict["Succeeded"]["Gst_Details"]["result"]['constitutionOfBusiness']          = response_dict["Succeeded"]["Gst_Details"]["result"].pop("ctb")
-		# response_dict["Succeeded"]["Gst_Details"]["result"]['principalPlaceOfBusinessAddress']            = response_dict["Succeeded"]["Gst_Details"]["result"].pop("pradr")
-		# response_dict["Succeeded"]["Gst_Details"]["result"]['principalPlaceOfBusinessAddress']['address'] = response_dict["Succeeded"]["Gst_Details"]["result"]['principalPlaceOfBusinessAddress'].pop("adr")
-		# response_dict["Succeeded"]["Gst_Details"]["result"]['gstnStatus'] = response_dict["Succeeded"]["Gst_Details"]["result"].pop("sts")
-		# response_dict["Succeeded"]["Gst_Details"]["result"]['tradeName'] = response_dict["Succeeded"]["Gst_Details"]["result"].pop("tradeNam")
-		# response_dict["Succeeded"]["Gst_Details"]["result"]['centerJurisdiction'] = response_dict["Succeeded"]["Gst_Details"]["result"].pop("ctj")
-		# response_dict["Succeeded"]["Gst_Details"]["result"]['aadhaar_linked'] = response_dict["Succeeded"]["Gst_Details"]["result"].pop("adhrVFlag")
 			trimmed_response['gstin'] = gstnumber
 			trimmed_response['is_verified'] = True
 			trimmed_response['legalNameOfBusiness'] = response_dict["Succeeded"]["Gst_Details"]["result"].pop('lgnm')
@@ -230,35 +218,82 @@ class GstVerification(APIView):
 		else:
 			return JsonResponse(response,safe=False)
 
-class ConnectMenteeViewSet(viewsets.ModelViewSet):
+class ConnectMenteeView(GenericAPIView):
 	queryset = Mentorship.objects.all()
 	serializer_class = MentorshipSerializer
 	permission_classes = [custom_permissions.IsMentorOrReadOnly]
 
-	def get_queryset(self):
+	def get(self):
 		return Mentorship.objects.all(mentor = self.request.user)
 	
-	def perform_create(self,serializer):
+	def post(self,serializer):
+		data = self.request.data
+		serializer = self.serializer_class(data=data)
+		serializer.is_valid(raise_exception=True)
 		serializer.save(mentor = self.request.user, is_active=True)
+		obj, created = Coins.objects.get_or_create(user=self.request.user,coins=49)
+		if not created:
+			if obj.coins == 0:
+				days_since_modified = (datetime.date.today() - obj.date_modified).days
+				if days_since_modified > 30:
+					obj.coins = 49
+					obj.date_modified = datetime.date.today()
+				else:
+					days_left = 30 - days_since_modified
+					return Response(f"You have exhausted your limit of 30 requests. You can send more requests after {days_left} days.")
+			else:
+				obj.coins = obj.coins - 1
+				obj.save()
+		return Response(serializer.data,status = status.HTTP_200_OK)
 	
-	def update(self, request, *args, **kwargs):
-		kwargs['partial'] = True
-		return super().update(request, *args, **kwargs)
+	def patch(self, request, pk, *args, **kwargs):
+		try:
+			mentorship = Mentorship.objects.get(pk=pk)
+		except Mentorship.DoesNotExist:
+			content = {'detail': 'No such mentorship exists'}
+			return JsonResponse(content, status = status.HTTP_404_NOT_FOUND)
+		serializer = MentorshipSerializer(instance = mentorship, data=request.data, partial = True)
+		if serializer.is_valid():
+			serializer.save()
+		return JsonResponse(serializer.data, status = status.HTTP_202_ACCEPTED)
 
-class ConnectMentorViewSet(viewsets.ModelViewSet):
+class ConnectMentorView(GenericAPIView):
 	queryset = Mentorship.objects.all()
 	serializer_class = MentorshipSerializer
 	permission_classes = [custom_permissions.IsEntrepreneurOrReadOnly]
 
-	def get_queryset(self):
-		return Mentorship.objects.all(entrepreneur = self.request.user)
+	def get(self):
+		return Mentorship.objects.all(mentor = self.request.user)
 	
-	def perform_create(self,serializer):
-
-		serializer.save(entrepreneur = self.request.user, is_active=True)
+	def post(self,serializer):
+		data = self.request.data
+		serializer = self.serializer_class(data=data)
+		serializer.is_valid(raise_exception=True)
+		serializer.save(mentor = self.request.user, is_active=True)
+		obj, created = Coins.objects.get_or_create(user=self.request.user,coins=29)
+		if not created:
+			if obj.coins == 0:
+				days_since_modified = (datetime.date.today() - obj.date_modified).days
+				if days_since_modified > 30:
+					obj.coins = 29
+					obj.date_modified = datetime.date.today()
+				else:
+					days_left = 30 - days_since_modified
+					return Response(f"You have exhausted your limit of 30 requests. You can send more requests after {days_left} days.")
+			else:
+				obj.coins = obj.coins - 1
+				obj.save()
+		return Response(serializer.data,status = status.HTTP_200_OK)
 	
-	def update(self, request, *args, **kwargs):
-		kwargs['partial'] = True
-		return super().update(request, *args, **kwargs)
+	def patch(self, request, pk, *args, **kwargs):
+		try:
+			mentorship = Mentorship.objects.get(pk=pk)
+		except Mentorship.DoesNotExist:
+			content = {'detail': 'No such mentorship exists'}
+			return JsonResponse(content, status = status.HTTP_404_NOT_FOUND)
+		serializer = MentorshipSerializer(instance = mentorship, data=request.data, partial = True)
+		if serializer.is_valid():
+			serializer.save()
+		return JsonResponse(serializer.data, status = status.HTTP_202_ACCEPTED)
 
 

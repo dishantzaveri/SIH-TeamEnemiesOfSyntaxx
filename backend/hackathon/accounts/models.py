@@ -1,7 +1,10 @@
+from datetime import datetime
+from enum import auto
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.base_user import BaseUserManager
 from django.db import models
 from rest_framework.authtoken.models import Token
+import datetime
 
 
 # Create your models here.
@@ -56,7 +59,7 @@ class User(AbstractUser):
 class Startup(models.Model):
     user = models.ForeignKey(User, related_name = 'startup', on_delete=models.CASCADE)
     legalNameOfBusiness = models.CharField(max_length=255,null=True, blank=True)
-    tradeName = models.CharField(max_length=255, null=True, blank=True)
+    tradeName = models.CharField(max_length=255)
     is_verified = models.BooleanField(default=False, null=True, blank=True)
     gstin = models.CharField(max_length=255, unique=True, null=True, blank=True)
     gstnStatus = models.CharField(max_length=255, null=True, blank=True)
@@ -113,3 +116,8 @@ class Mentorship(models.Model):
 
     class Meta:
         unique_together=('mentor','entrepreneur')
+
+class Coins(models.Model):
+    coins = models.PositiveIntegerField(null=True, blank=True,default=30)
+    user = models.ForeignKey(User, on_delete = models.CASCADE, related_name = 'coins')
+    date_modified = models.DateField(default=datetime.date.today)
