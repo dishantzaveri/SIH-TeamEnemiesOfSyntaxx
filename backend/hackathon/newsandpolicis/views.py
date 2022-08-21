@@ -13,9 +13,15 @@ import pandas as pd
 import numpy as np
 import json
 from geopy.geocoders import Nominatim
+
+import os
+from pathlib import Path
+BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
+
 geolocator = Nominatim(user_agent="kaggle_learn")
 #url = 'https://drive.google.com/file/d/1lat5t_QBe-rbl97YopgXPmXMaeBMVOzE/view?usp=sharing'
-df_full = pd.read_csv("C:/Users/HP/Desktop/Indian startups till 2022.csv")
+csv_path = os.path.join(BASE_DIR,"newsandpolicis/Indian startups till 2022.csv")
+df_full = pd.read_csv(csv_path)
 df = df_full
 junk_amount_index = []
 df_digit_values = df['Amount ($)'].loc[(df['Amount ($)'] != 'Undisclosed') & (df['Amount ($)'] != 'undisclosed')].str.isdigit()
