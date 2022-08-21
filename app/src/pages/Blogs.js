@@ -212,6 +212,7 @@ const styles = StyleSheet.create({
         paddingTop: 0,
         paddingLeft: 20,
         position: 'relative',
+        backgroundColor: 'white',
     },
     container: {
         backgroundColor: 'white',
@@ -242,26 +243,6 @@ const styles = StyleSheet.create({
     },
     trackImage: {
         opacity: 1,
-    },
-    createMemeContainer: {
-        width: 150,
-        height: 40,
-        backgroundColor: '#46703b',
-        borderRadius: 10,
-        marginLeft: 20,
-        marginBottom: 20,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    createMemeText: {
-        color: 'white',
-        fontWeight: 'bold',
-        textTransform: 'uppercase',
-    },
-    container: {
-        flex: 1,
-        marginLeft: 0,
     },
     YourDailyRead: {
         marginTop: 10,

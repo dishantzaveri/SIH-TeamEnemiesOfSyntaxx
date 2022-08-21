@@ -27,7 +27,7 @@ const EventScreen = ({route}) => {
           marginLeft: 5,
           width: '80%',
         }}>
-        <Paragraph style={{color: colors.primary, fontWeight: 'bold'}}>
+        <Paragraph style={{color: colors.background, fontWeight: 'bold'}}>
           {name}:-{' '}
         </Paragraph>
         <Paragraph style={{color: colors.background}}>{value}</Paragraph>
@@ -65,7 +65,7 @@ const EventScreen = ({route}) => {
         <View style={{flex: 1}}></View>
         <Paragraph
           style={{
-            color: colors.background,
+            color: '#00CFDE',
             fontWeight: 'bold',
             fontSize: 16,
             textDecorationLine: 'underline',
@@ -78,7 +78,7 @@ const EventScreen = ({route}) => {
         <View style={{marginTop: 10}}>
           <Paragraph
             style={{
-              color: colors.background,
+              color: '#00CFDE',
               fontWeight: 'bold',
               fontSize: 16,
               textDecorationLine: 'underline',
@@ -92,38 +92,22 @@ const EventScreen = ({route}) => {
           />
           <Detail
             name={'No. of Volunteers Required'}
-            value={event.targetVolunteers}
+            value={event.startup}
           />
-          <Detail name={'Location'} value={event.address} />
+          {/* <Detail name={'Location'} value={event.address} /> */}
           <View
             style={{
               flexDirection: 'row',
               marginTop: 10,
               justifyContent: 'space-evenly',
             }}>
-            <Button
-              title={'Volunteer'}
-              style={'solid'}
-              // disabled={volunteered}
-              // onPress={volunteer}
-              buttonStyle={{
-                backgroundColor: colors.primary,
-                height: 50,
-                width: 120,
-                borderRadius: 30,
-                marginBottom: 20,
-              }}
-              titleStyle={{
-                fontWeight: 'bold',
-                fontSize: 18,
-              }}
-            />
+        
             <Button
               title={'Donate'}
               onPress={() => navigation.navigate('RazorpayScreens')}
               style={'solid'}
               buttonStyle={{
-                backgroundColor: colors.primary,
+                backgroundColor: '#00CFDE',
                 height: 50,
                 width: 120,
                 borderRadius: 30,
@@ -144,7 +128,7 @@ const EventScreen = ({route}) => {
               navigation.navigate('Chat');
             }}
             buttonStyle={{
-              backgroundColor: colors.primary,
+              backgroundColor:'#00CFDE',
               height: 50,
               width: 120,
               borderRadius: 30,

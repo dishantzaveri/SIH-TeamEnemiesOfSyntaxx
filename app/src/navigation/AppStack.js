@@ -12,7 +12,6 @@ import Onboarding2 from '../pages/Onboarding2';
 import Onboarding3 from '../pages/Onboarding3';
 import Onboarding4 from '../pages/Onboarding4';
 import Onboarding5 from '../pages/Onboarding5';
-import Onboarding6 from '../pages/Onboarding6';
 import Careertv from '../pages/Careertv';
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -63,14 +62,7 @@ function JobsTab() {
       screenOptions={({route}) => ({
         tabBarIcon: () => icons[route.name],
       })}
-      // tabBarOptions={{
-      //   activeTintColor: '#18a990',
-      //   inactiveTintColor: 'gray',
-      //   labelStyle: {
-      //     fontWeight: 'bold',
-      //     fontSize: 12,
-      //   },
-      // }}
+
     >
       <Tab.Screen name="Jobs" component={Jobs} options={{headerShown: false}} />
       <Tab.Screen
@@ -243,11 +235,6 @@ const Onboarding = () => {
         screenOptions={{headerShown: false}}
       />
       <OnboardingStack.Screen
-        name="Onboarding6"
-        component={Onboarding6}
-        screenOptions={{headerShown: false}}
-      />
-      <OnboardingStack.Screen
         name="Profile1"
         component={Profile1}
         screenOptions={{headerShown: false}}
@@ -390,7 +377,7 @@ const AppStack = () => {
           options={{
             drawerIcon: ({color}) => (
               <Ionicons
-                name="chatbox-ellipses-outline"
+                name="location"
                 size={22}
                 color={color}
               />

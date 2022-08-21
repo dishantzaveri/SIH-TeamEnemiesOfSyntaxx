@@ -1,11 +1,10 @@
 import React from 'react';
 import {
     View, StyleSheet, Image,
-    TouchableOpacity,
-    TextInput, SafeAreaView, Button
+    TextInput, SafeAreaView, 
 } from 'react-native';
 import {
-    Text,
+    Text,Button
 } from 'react-native-paper';;
 import Laptop from '../assets/laptop.png';
 import { height, width } from '../Consts';
@@ -21,7 +20,7 @@ const SearchJobs = ({ navigation }) => {
         <SafeAreaView style={styles.container} >
             {/* <Header title={'Search Jobs'} /> */}
             <View style={styles.view2}>
-                <Text style={styles.title}>Search Jobs</Text>
+                <Text style={styles.title}>Search Companies</Text>
                 <TextInput placeholderTextColor={colors.placeholder2}
                     style={{
                         ...styles.nameInput,
@@ -39,12 +38,11 @@ const SearchJobs = ({ navigation }) => {
                     placeholder="Enter location">
                 </TextInput>
             </View>
-            <View style={styles.button}>
-                <Button
-                    color={colors.button}
-                    title="Search Job">
-                </Button>
-            </View>
+            {/* <View style={styles.button}>
+          <Button labelStyle={styles.text3} >
+          Search Companies
+          </Button>
+        </View> */}
             <View style={styles.view}>
                 <Text style={styles.text}>Top companies</Text>
                 <Text style={styles.text2}>View all</Text>
@@ -67,12 +65,13 @@ const styles = StyleSheet.create({
 
     },
     button: {
-        width: width * 0.4,
+        width: width * 0.5,
         justifyContent: 'center',
         alignSelf: 'center',
-        margin: 25,
+        margin: 20,
+        backgroundColor: '#00CFDE',
         color: '#fff',
-    },
+      },
     nameInput: {
         height: 45,
         borderBottomWidth: 1,
@@ -97,6 +96,12 @@ const styles = StyleSheet.create({
         width: width * 0.85,
         alignSelf: 'center',
 
+    },
+    text3: {
+        fontSize: 13,
+    
+        color: "white",
+        textAlign: "center",
     },
     view: {
         flexDirection: 'row',

@@ -8,8 +8,9 @@ import {
   TouchableOpacity,
   Image,
   Platform,
-  PermissionsAndroid, TouchableHighlight, Button
+  PermissionsAndroid, TouchableHighlight,
 } from 'react-native';
+import { Button } from 'react-native-paper';
 import logo from '../assets/logo.jpg';
 import Uploadpic from '../assets/uploadpic.png';
 import Selectpic from '../assets/selectpic.png';
@@ -22,7 +23,7 @@ import {
   launchImageLibrary
 } from 'react-native-image-picker';
 import { Dimensions } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 const Onboarding1 = () => {
   const [filePath, setFilePath] = useState({});
@@ -164,9 +165,10 @@ const Onboarding1 = () => {
             />
           </TouchableOpacity>
         </View>
-        <View style={styles.button} >
-          <Button onPress={() => navigation.navigate('Onboarding2')}
-            title="Next">
+
+        <View style={styles.button}>
+          <Button labelStyle={styles.text3} onPress={() => navigation.navigate('Onboarding2')}>
+            Next
           </Button>
         </View>
       </View>
@@ -184,6 +186,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
   },
+  text3: {
+    fontSize: 15,
+    fontWeight: "bold",
+    color: "white",
+    textAlign: "center",
+},
   titleText: {
     fontSize: 22,
     fontWeight: 'bold',

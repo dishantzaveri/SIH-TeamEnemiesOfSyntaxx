@@ -1,10 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import {
     View, StyleSheet, Image, TextInput,
-    TouchableOpacity,
-    Button,
-    ToastAndroid,
-    KeyboardAvoidingView,
     ScrollView, SafeAreaView
 } from 'react-native';
 import {
@@ -12,18 +8,18 @@ import {
     Card,
     Title,
     Subheading,
-    RadioButton,
+    Button,
 } from 'react-native-paper';
 import { height, width } from '../Consts';
 import { useTheme } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import Circle3 from '../assets/circle3.png';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 
-const Onboarding3 = ({}) => {
+const Onboarding3 = ({ }) => {
 
-   const { colors } = useTheme();
+    const { colors } = useTheme();
     const [name, setName] = useState('');
     const [phonenumber, setPhonenumber] = useState('');
     const [headline, setHeadline] = useState('');
@@ -34,10 +30,10 @@ const Onboarding3 = ({}) => {
 
     return (
         <SafeAreaView style={styles.container} >
-             <LinearGradient
-          colors={[colors.primary, '#ADD8E6']}
-          style={{width: '100%', height: 200, position: 'relative'}}></LinearGradient>
-        
+            <LinearGradient
+                colors={[colors.primary, '#ADD8E6']}
+                style={{ width: '100%', height: 200, position: 'relative' }}></LinearGradient>
+
             <View style={styles.card}>
                 <Image
                     source={Circle3}
@@ -46,53 +42,54 @@ const Onboarding3 = ({}) => {
                     <Text style={styles.text}>Setup profile and find your perfect Mentor.</Text>
                 </View>
                 <Image
-                   source={{
-                    uri: 'https://www.pinkvilla.com/files/styles/amp_metadata_content_image/public/sini-shetty-.jpg',
-                  }}
-                  style={{
-                    width: width * 0.25,
-                    height: height * 0.11,
-                    borderRadius: 100,
-                  }}
+                    source={{
+                        uri: 'https://www.pinkvilla.com/files/styles/amp_metadata_content_image/public/sini-shetty-.jpg',
+                    }}
+                    style={{
+                        width: width * 0.25,
+                        height: height * 0.11,
+                        borderRadius: 100,
+                    }}
 
                 />
                 <View style={styles.form}>
-                <Subheading>Enter your Name*</Subheading>
-                <TextInput
-                    value={name}
-                    onChangeText={setName}
-                    underlineColorAndroid="transparent"
-                    placeholderTextColor='#C4C4C4'
-                    style={{
-                        ...styles.nameInput,
-                        borderColor: colors.textAfter,
-                        color: colors.text,
-                        //backgroundColor: colors.background,
-                    }}
-                    placeholder={'Name'}
-                />
-                <Subheading>Enter your Phone Number*</Subheading>
-                <TextInput
-                    value={phonenumber}
-                    onChangeText={setPhonenumber}
-                    underlineColorAndroid="transparent"
-                    placeholderTextColor={colors.placeholder}
-                    style={{
-                        ...styles.nameInput,
-                        borderColor: colors.textAfter,
-                        color: colors.text,
-                        //backgroundColor: colors.background,
-                    }}
-                    placeholder={'Phone Number'}
-                />
-                  <View style={styles.button} >
-                <Button title="Next" onPress={() => navigation.navigate('Onboarding4')} >
-                </Button>
+                    <Subheading>Enter your Name*</Subheading>
+                    <TextInput
+                        value={name}
+                        onChangeText={setName}
+                        underlineColorAndroid="transparent"
+                        placeholderTextColor='#C4C4C4'
+                        style={{
+                            ...styles.nameInput,
+                            borderColor: colors.textAfter,
+                            color: colors.text,
+                            //backgroundColor: colors.background,
+                        }}
+                        placeholder={'Name'}
+                    />
+                    <Subheading>Enter your Phone Number*</Subheading>
+                    <TextInput
+                        value={phonenumber}
+                        onChangeText={setPhonenumber}
+                        underlineColorAndroid="transparent"
+                        placeholderTextColor={colors.placeholder}
+                        style={{
+                            ...styles.nameInput,
+                            borderColor: colors.textAfter,
+                            color: colors.text,
+                            //backgroundColor: colors.background,
+                        }}
+                        placeholder={'Phone Number'}
+                    />
+                    <View style={styles.button}>
+                        <Button labelStyle={styles.text3} onPress={() => navigation.navigate('Onboarding4')}>
+                            Next
+                        </Button>
+                    </View>
                 </View>
             </View>
-            </View>
-           
-           
+
+
         </SafeAreaView>
     );
 }
@@ -113,7 +110,7 @@ const styles = StyleSheet.create({
         marginBottom: height * 0.025,
 
     },
-    form:{
+    form: {
         width: '85%',
         alignSelf: 'center',
         marginTop: 15,
@@ -131,8 +128,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         height: height * 0.75,
         position: 'absolute',
-        width: width * 0.9, 
+        width: width * 0.9,
 
+    },
+    text3: {
+        fontSize: 15,
+        fontWeight: "bold",
+        color: "white",
+        textAlign: "center",
     },
     image: {
         margin: height * 0.10,
@@ -144,17 +147,17 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins-Regular',
         paddingLeft: 10,
         borderRadius: 7,
-      },
-      nameInput2: {
+    },
+    nameInput2: {
         height: 45,
         borderWidth: 2,
         marginBottom: 15,
         fontFamily: 'Poppins-Regular',
         paddingLeft: 10,
         borderRadius: 7,
-        flex:1,
-        marginRight:10,
-      },
+        flex: 1,
+        marginRight: 10,
+    },
     button: {
         width: width * 0.25,
         justifyContent: 'center',
@@ -170,7 +173,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         alignSelf: 'center',
-        margin:10,
+        margin: 10,
         color: '#00CFDE',
         fontWeight: "500",
         marginBottom: height * 0.035,

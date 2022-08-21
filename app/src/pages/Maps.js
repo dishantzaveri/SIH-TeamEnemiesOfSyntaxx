@@ -1,111 +1,126 @@
-import React,{useState , useRef,useEffect }  from "react";
-import { StyleSheet,Button, Text, View,TouchableOpacity } from "react-native";
-import { Marker } from "react-native-maps";
-import MapView from "react-native-maps";
-import {URL,token} from "../utils/link";
-export default function Location({navigation}) {
-  const [data,setData]=useState([]);
-  const [loading,setLoading]=useState(true);
-  const [visible,setVisible]=useState(false);
-  const mapRef = useRef(null);
-  const [region, setRegion] = useState({
-    latitude: 19.0760,
-    longitude: 72.8777,
-    latitudeDelta: 0.001,
-    longitudeDelta: 0.001,
-  });
-  const mumbaiRegion = {
-    latitude: 19.0760,
-    longitude: 72.8777,
-    latitudeDelta: 0.01,
-    longitudeDelta: 0.01,
-  };
+import React, { useState ,useRef ,  useEffect } from 'react';
+import {  Text  ,Button  ,PermissionsAndroid , StyleSheet} from 'react-native';
+import MapView, { PROVIDER_GOOGLE ,Marker } from 'react-native-maps';
+import { Polyline } from "react-native-maps";
 
-  const getProjects=async()=>{
-    setLoading(true);
-    try{
-        const result=await fetch(URL+'/create_project/',{
-            method:'GET',
-            headers: {'Authorization': 'Token '+token},
-        });
-        const json= await result.json();
-        console.log(json);
-        setData(json);
-    }catch(error){
-        console.log(error);
-        // Alert.alert(error);
-    }finally{
-        setLoading(false);
-    }
-}
-  const goToTokyo = () => {
-    //complete this animation in 3 seconds
-    mapRef.current.animateToRegion(tokyoRegion, 3 * 1000);
-  };
-  const selectLocation = () => {
-    setVisible(true);
-    // navigation.navigate('AddProject')
-  };
+import Geolocation from '@react-native-community/geolocation';
 
-  useEffect(() => {
-    // console.log(BASE_URL);
-      getProjects();
-  },[]);
+function Map() {
+ {
+    const mapRef = useRef(null);
 
-  return (
-    <View style={styles.container}>
+    const [location , setLocation] = useState({
+        latitude: 0,
+        longitude: 0,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421});
+          
+      let  initialRegion={
+          latitude: 19.0760,
+          longitude: 72.8777,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }
+      // const [location]
+        const tokyoRegion = {
+            latitude: 35.6762,
+            longitude: 139.6503,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0922,
+          };
+          
+
+          var watchID = useRef(null)
+
+        const goToTokyo = () => {
+            mapRef.current.animateToRegion(tokyoRegion, 3 * 1000);
+          };
+
+          useEffect(() => {
+            const requestLocationPermission = async () => {
+              if (Platform.OS === 'ios') {
+                getOneTimeLocation();
+              
+              } else {
+                try {
+                  const granted = await PermissionsAndroid.request(
+                    PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+                    {
+                      title: 'Location Access Required',
+                      message: 'This App needs to Access your location',
+                    },
+                  );
+                  if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                     await getOneTimeLocation();
+                 
+                  } else {
+                    console.log('Permission Denied');
+                  }
+                } catch (err) {
+                  console.warn(err);
+                }
+              }
+            };
+            requestLocationPermission();
+            return () => {
+              Geolocation.clearWatch(watchID);
+            };
+          }, []);
+
+          const getOneTimeLocation = async() =>{
+            Geolocation.getCurrentPosition((pos) =>{
+              let latitude = pos.coords.latitude;
+              let longitude = pos.coords.longitude; 
+              let latitudeDelta = 0.092 ;
+              let longitudeDelta= 0.0421;
+            setLocation({latitude , longitude , latitudeDelta, longitudeDelta})
+            console.log(location )
+          },(err)=>{console.log(err)} , {enableHighAccuracy: true, timeout: 10000, maximumAge: 3000})
+          }
+
+
+    return (
+        <>
+      {/* <MapView
+         style={{ flex: 1 }}
+         provider={PROVIDER_GOOGLE}
+         initialRegion={tokyoRegion}
+         mapType = 'hybrid'
+         onRegionChangeComplete={(r) => setLocation(r)}
+         ref={mapRef}
+        //  showsUserLocation = {true}
+        //  showsMyLocationButton = {true}
+      >
+      </MapView> */}
       <MapView
-        ref={mapRef}
-        style={styles.map}
+        // ref={mapRef}
+        style={{ flex : 1}}
         initialRegion={{
           latitude: 19.0760,
           longitude: 72.8777,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
-        onRegionChangeComplete={(region) => setRegion(region)}
-      >
-      <Marker coordinate={mumbaiRegion} title="Mumbai" onPress={()=>navigation.navigate('Details')}/>
-      {data.map((item,index)=>(
-        <Marker key={index} title={item.name} coordinate={{
-          latitude: item.latitude,
-          longitude: item.longitude,
-          latitudeDelta: 0.01,
-          longitudeDelta: 0.01,
-        }}
-        onPress={()=>navigation.navigate('Details',{id:item.id,loc:item.location_name,desc:item.description,name:item.name})}
-        />
-      ))}
-      {visible?<Marker coordinate={region} onPress={()=>navigation.navigate("AddProject",{loc:region})} pinColor="green" title="New Project"/>:<></>}
-      </MapView>
-      <View>
-        <TouchableOpacity style={styles.button} onPress={() => selectLocation()}><Text style={{color:'white',fontSize:18}}>Add A Project</Text></TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => getProjects()}><Text style={{color:'white',fontSize:16}}>Refresh</Text></TouchableOpacity>
-      </View>
-      {/* <Text style={styles.text}>Current latitude{region.latitude}</Text>
-      <Text style={styles.text}>Current longitude{region.longitude}</Text> */}
-    </View>
-  );
+        provider={PROVIDER_GOOGLE}
+        // onRegionChangeComplete={(region) => setRegion(region)}
+      />
+      <Button onPress={() => goToTokyo()} title="Go to Tokyo" />
+      {/* <Button onPress={() => getMyLocation()} title="Go to My location" /> */}
+      <Text style={styles.text}>Current latitude: {location.latitude}</Text>
+    <Text style={styles.text}>Current longitude: {location.longitude}</Text>
+      </>
+    );
+  }
 }
-const styles = StyleSheet.create({
-  container: {
-    ...StyleSheet.absoluteFillObject,
-    flex: 1,
-    justifyContent: "flex-end",
-    alignItems: "center",
-  },
+
+const styles = StyleSheet.create ({
   map: {
-    ...StyleSheet.absoluteFillObject,
+     height: 400,
+     marginTop: 80
   },
   text: {
-    fontSize: 20,
-    backgroundColor: "lightblue",
-  },
-  button:{
-    width:150,
-    alignItems:'center',
-    margin:10,
-    backgroundColor:'#0065ff',
-    borderRadius:7,
+    color : "black"
   }
-});
+})
+
+export default Map;

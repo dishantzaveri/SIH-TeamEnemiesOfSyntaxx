@@ -1,13 +1,11 @@
 
 import React, { useState } from 'react';
 import {
-    View, StyleSheet, Image, TextInput,
-    Button,
-    ScrollView, SafeAreaView, TouchableOpacity,
+    View, StyleSheet, Image, TextInput, SafeAreaView, TouchableOpacity,
 } from 'react-native';
 import {
     Text,
-    Subheading,
+    Subheading, Button
 } from 'react-native-paper';;
 import Circle4 from '../assets/circle4.png';
 import Linkedin from '../assets/linkedin.png';
@@ -15,11 +13,11 @@ import Portfolio from '../assets/portfolio.png';
 import { height, width } from '../Consts';
 import LinearGradient from 'react-native-linear-gradient';
 import { useTheme } from '@react-navigation/native';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 
 
-const Onboarding4 = ({  }) => {
+const Onboarding4 = ({ }) => {
 
     const { colors } = useTheme();
     const [name, setName] = useState('');
@@ -30,67 +28,68 @@ const Onboarding4 = ({  }) => {
 
     return (
         <SafeAreaView style={styles.container} >
-                    <LinearGradient
-          colors={[colors.primary, '#ADD8E6']}
-          style={{width: '100%', height: 200, position: 'relative'}}></LinearGradient>
-      
-                <View style={styles.card}>
-                    <Image
-                        source={Circle4}
+            <LinearGradient
+                colors={[colors.primary, '#ADD8E6']}
+                style={{ width: '100%', height: 200, position: 'relative' }}></LinearGradient>
 
-                    />
-                    <View >
-                        <Text style={styles.text}>Tell us About your professional life..</Text>
-                    </View>
-                    <Image
-                   source={{
-                    uri: 'https://www.pinkvilla.com/files/styles/amp_metadata_content_image/public/sini-shetty-.jpg',
-                  }}
-                  style={{
-                    width: width * 0.25,
-                    height: height * 0.11,
-                    borderRadius: 100,
-                  }}
+            <View style={styles.card}>
+                <Image
+                    source={Circle4}
 
                 />
-                    <View style={styles.form}>
-                        <Subheading>Recent Location*</Subheading>
-                        <TextInput
-                            value={name}
-                            onChangeText={setName}
-                            underlineColorAndroid="transparent"
-                            placeholderTextColor={colors.placeholder}
-                            style={{
-                                ...styles.nameInput,
-                                borderColor: colors.textAfter,
-                                color: colors.text,
-                                //backgroundColor: colors.background,
-                            }}
-                            placeholder={'Internship done'}
-                        />
-                        <View style={styles.icons}>
-                            <TouchableOpacity >
-                                <Image
-                                    source={Linkedin}
-                                />
-                            </TouchableOpacity >
-                        </View>
-                        <View style={styles.icons}>
-                            <TouchableOpacity >
-                                <Image
-                                    source={Portfolio}
-                                />
-                            </TouchableOpacity >
-                        </View>
+                <View >
+                    <Text style={styles.text}>Tell us About your professional life..</Text>
+                </View>
+                <Image
+                    source={{
+                        uri: 'https://www.pinkvilla.com/files/styles/amp_metadata_content_image/public/sini-shetty-.jpg',
+                    }}
+                    style={{
+                        width: width * 0.25,
+                        height: height * 0.11,
+                        borderRadius: 100,
+                    }}
+
+                />
+                <View style={styles.form}>
+                    <Subheading>Recent Location*</Subheading>
+                    <TextInput
+                        value={name}
+                        onChangeText={setName}
+                        underlineColorAndroid="transparent"
+                        placeholderTextColor={colors.placeholder}
+                        style={{
+                            ...styles.nameInput,
+                            borderColor: colors.textAfter,
+                            color: colors.text,
+                            //backgroundColor: colors.background,
+                        }}
+                        placeholder={'Internship done'}
+                    />
+                    <View style={styles.icons}>
+                        <TouchableOpacity >
+                            <Image
+                                source={Linkedin}
+                            />
+                        </TouchableOpacity >
+                    </View>
+                    <View style={styles.icons}>
+                        <TouchableOpacity >
+                            <Image
+                                source={Portfolio}
+                            />
+                        </TouchableOpacity >
+                    </View>
 
 
 
-                        <View style={styles.button}>
-                            <Button title="Next"  onPress={() => navigation.navigate('Onboarding5')}>
-                            </Button>
-                        </View>
+                    <View style={styles.button}>
+                        <Button labelStyle={styles.text3} onPress={() => navigation.navigate('Onboarding5')}>
+                            Next
+                        </Button>
                     </View>
                 </View>
+            </View>
 
         </SafeAreaView>
     );
@@ -112,7 +111,7 @@ const styles = StyleSheet.create({
         marginBottom: height * 0.025,
 
     },
-   icons: {
+    icons: {
         alignContent: 'center',
         alignItems: 'center',
         justifyContent: 'center',
@@ -138,7 +137,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         height: height * 0.75,
         position: 'absolute',
-        width: width * 0.9, 
+        width: width * 0.9,
 
     },
     image: {
@@ -151,6 +150,12 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins-Regular',
         paddingLeft: 10,
 
+    },
+    text3: {
+        fontSize: 15,
+        fontWeight: "bold",
+        color: "white",
+        textAlign: "center",
     },
     nameInput2: {
         height: 45,

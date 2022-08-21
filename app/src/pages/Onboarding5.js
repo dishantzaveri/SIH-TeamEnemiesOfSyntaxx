@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
-import { View, StyleSheet, TouchableOpacity, Image, Alert, SafeAreaView, Button } from 'react-native';
-import { withTheme, Text, RadioButton } from 'react-native-paper';
+import { View, StyleSheet, TouchableOpacity, Image, Alert, SafeAreaView } from 'react-native';
+import { Text, Button } from 'react-native-paper';
 import DocumentPicker, { types } from 'react-native-document-picker';
 import Circle5 from '../assets/circle5.png';
 import Resume from '../assets/resume.png';
@@ -8,9 +8,9 @@ import { height, width } from '../Consts';
 import YoutubePlayer from "react-native-youtube-iframe";
 import LinearGradient from 'react-native-linear-gradient';
 import { useTheme } from '@react-navigation/native';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
-const Onboarding5 = ({}) => {
+const Onboarding5 = ({ }) => {
 
 
     const [fileResponse, setFileResponse] = useState([]);
@@ -45,9 +45,9 @@ const Onboarding5 = ({}) => {
 
     return (
         <SafeAreaView style={styles.container} >
-                       <LinearGradient
-          colors={[colors.primary, '#ADD8E6']}
-          style={{width: '100%', height: 200, position: 'relative'}}></LinearGradient>
+            <LinearGradient
+                colors={[colors.primary, '#ADD8E6']}
+                style={{ width: '100%', height: 200, position: 'relative' }}></LinearGradient>
             <View style={styles.card}>
                 <Image
                     source={Circle5}
@@ -55,19 +55,19 @@ const Onboarding5 = ({}) => {
                 />
                 <Text style={styles.text}>Please upload your Video Resume & Voice Resume.</Text>
                 <Image
-                   source={{
-                    uri: 'https://www.pinkvilla.com/files/styles/amp_metadata_content_image/public/sini-shetty-.jpg',
-                  }}
-                  style={{
-                    width: width * 0.25,
-                    height: height * 0.11,
-                    borderRadius: 100,
-                  }}
+                    source={{
+                        uri: 'https://www.pinkvilla.com/files/styles/amp_metadata_content_image/public/sini-shetty-.jpg',
+                    }}
+                    style={{
+                        width: width * 0.25,
+                        height: height * 0.11,
+                        borderRadius: 100,
+                    }}
 
                 />
-                 <Text style={{ fontSize: 13, color: '#000000' }}>Sample Video Resume</Text>
-                 <View style={styles.youtube}>
-                
+                <Text style={{ fontSize: 13, color: '#000000' }}>Sample Video Resume</Text>
+                <View style={styles.youtube}>
+
                     <YoutubePlayer
                         height={300}
                         videoId={"PHJbX6bakjw"}
@@ -78,24 +78,17 @@ const Onboarding5 = ({}) => {
 
                 <Text style={{ fontSize: 11, color: '#F5AC3E' }}>Supported formats: mp4, mov</Text>
                 <TouchableOpacity onPress={handleDocumentSelection}>
-                <Image
-                    source={Resume}
-                    style={styles.image}
+                    <Image
+                        source={Resume}
+                        style={styles.image}
                     //PHJbX6bakjw
-                />
+                    />
                 </TouchableOpacity>
-               
-
-            <View style={styles.button}>
-
-                <Button onPress={() => navigation.navigate('Onboarding6')}
-
-                    title="Next"
-                >
-                </Button>
-
-
-            </View>
+                <View style={styles.button}>
+                    <Button labelStyle={styles.text3} onPress={() => navigation.navigate('Profile1')}>
+                        Next
+                    </Button>
+                </View>
             </View>
         </SafeAreaView>
     );
@@ -117,6 +110,12 @@ const styles = StyleSheet.create({
         marginBottom: height * 0.015,
 
     },
+    text3: {
+        fontSize: 15,
+        fontWeight: "bold",
+        color: "white",
+        textAlign: "center",
+    },
     card: {
         elevation: 10,
         backgroundColor: '#fff',
@@ -130,7 +129,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         height: height * 0.85,
         position: 'absolute',
-        width: width * 0.9, 
+        width: width * 0.9,
     },
     image: {
         margin: height * 0.020,

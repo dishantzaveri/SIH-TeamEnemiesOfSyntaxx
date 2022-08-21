@@ -17,6 +17,7 @@ import {
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/native';
+import {height,width} from '../Consts';
 
 const EventCard = ({event, isVolunteer}) => {
   const {colors} = useTheme();
@@ -47,7 +48,7 @@ const EventCard = ({event, isVolunteer}) => {
 
   return (
     <Card
-      style={{marginTop: 15}}
+      style={{margin: 15}}
       onPress={() =>
         isVolunteer ? {} : navigation.navigate('Event', {event})
       }>
@@ -129,8 +130,8 @@ const EventCard = ({event, isVolunteer}) => {
 
 const styles = StyleSheet.create({
   info: {
-    height: 40,
-    width: '45%',
+    height: height*0.05,
+    width: width*0.32,
     borderRadius: 30,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
