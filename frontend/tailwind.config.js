@@ -12,6 +12,8 @@ module.exports = {
         'greha-1' : '	#989898',
         'greha-2' : '	#979aaa',
         'greha-3' : '	#4c516d',
+        'light-blue' : '#DAF0F4',
+        'blue' : '#2eb6b8',
       },
     }
   },

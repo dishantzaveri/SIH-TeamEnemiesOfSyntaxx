@@ -1,6 +1,5 @@
 .single-campaign-card{
     border: 1px solid rgba(216, 140, 220, 0.476);
-    width: 25%;
     height: 400px !important;
     box-sizing: border-box;
     overflow: hidden;
@@ -14,9 +13,6 @@
     border: 1px solid rgb(158, 67, 207);
     transition: all 0.3s;
 
-}
-.naira-n{
-    font-size: 170%;
 }
 .c-img{
     height: 200px;
@@ -32,7 +28,7 @@
     font-size: 70%;
 }
 .story-p{
-    height: 20px !important;
+    height: 50px !important;
     overflow: hidden;
     text-overflow: ellipsis;
     color: #555;

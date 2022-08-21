@@ -2,19 +2,20 @@ import React from 'react';
 import './singleCard.css';
 import { NavLink } from 'react-router-dom';
 
-const SingleCampaign = ({ image, title, ...otherProps }) => {
+const SingleCampaign = ({ data }) => {
     return (
-
-        <NavLink  to={`/singleCampaign/${otherProps.id}`}>
-            <div className="card single-campaign-card shadow animated wow slideInLeft" >
-                <img src="https://th.bing.com/th/id/OIP.otIPf0nD6Sxy3HcAhQJnGAHaE8?w=259&h=180&c=7&r=0&o=5&dpr=3&pid=1.7" className="card-img-top c-img" alt="title" />
+        <NavLink className='w-full' state={{'data': data}} to={`/singleCampaign/${data.id}`}>
+            <div className="card single-campaign-card shadow animated wow slideInLeft w-full" >
+                <img src={data.images} className="card-img-top c-img" alt="title" />
                 <div className="card-body">
-                    <h5 className="card-title description-st"> Company Name</h5>
-                    <p className="card-text story-p">Story</p>
-                    <p className="last-donay"> Last Donation was 4 hours ago </p>
-                    <progress className='progress' max="100" value="89"></progress>
-                    <br />
-                    <span className="naira-n"> ₦</span><b>213.00 </b> <span className="grey raised--"> raised of </span> <span className="goal--"> ₦ <b>900.00</b></span>
+                    <h5 className="card-title description-st">{data.name}</h5>
+                    <h1 className='text-sm'>{data.subEvents}</h1>
+                    <p className="card-text story-p text-xs">{data.description}</p>
+                    <p className="last-donay">{data.event_date}</p>
+                    <progress className='progress' max={data.targetAmount} value={data.collectedAmount}></progress>
+                    <p className="last-donay">{data.contributors}</p>
+                    <p className="last-donay">{data.registeredVolunteers} contributed</p>
+                    <span className="naira-n"></span><b>$ {data.collectedAmount} </b> <span className="grey raised--"> raised of </span> <span className="goal--"> <b>$ {data.targetAmount}</b></span>
                 </div>
             </div>
         </NavLink>

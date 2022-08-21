@@ -71,6 +71,23 @@ const Gst = () => {
     return x
   }
 
+  const data = {
+    aadhaar_linked: "Yes",
+    centerJurisdiction: "Commissionerate - PUNE - I,Division - DIVISION-II PIMPRI,Range - RANGE-V ,(Jurisdictional Office)",
+    constitutionOfBusiness: "Public Limited Company",
+    dateOfRegistration: "01/07/2017",
+    gstin: "27AAACT2727Q1ZW",
+    gstnStatus: "Active",
+    id: 12,
+    is_verified: true,
+    legalNameOfBusiness: "TATA MOTORS LIMITED",
+    natureOfBusinessActivity: "Factory / Manufacturing",
+    principalPlaceOfBusinessAddress: "TATA MOTORS LIMITED, Nigadi Bhosari Road, PIMPRI, Pune, Maharashtra, 411018",
+    stateJurisdiction: "State - Maharashtra,Zone - Pune,Division - PUNE-LTU-2,Charge - PUNE_LTU_524",
+    taxpayerType: "Regular",
+    tradeName: "TATA MOTORS LIMITED"
+  }
+
   const getData = async () => {
     // console.log(getFilterData(data))
     // let x = new FormData();
