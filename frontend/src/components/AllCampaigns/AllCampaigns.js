@@ -2,8 +2,10 @@ import React, { useContext } from 'react';
 // import NavBar from '../Navbar/Navbar';
 // import Loader from '../Loader/Loader';
 import SingleCampaign from '../AllCampaignsSingleCampaign/SingleCampaign';
+import Navbar from '../Navbar';
+import SideNavbar from '../SideNavbar/SideNavbar';
 // import Footer from '../Footer/Footer';
-import { AllCampaignsContext } from '../../contexts/allCampaignsContext';
+// import { AllCampaignsContext } from '../../contexts/allCampaignsContext';
 
 const AllCampaigns = () => {
     // const { campaigns, loading, message } = useContext(AllCampaignsContext);
@@ -17,6 +19,7 @@ const AllCampaigns = () => {
              {/* : null} */}
             {/* {campaigns ? */}
                 <div className="">
+                    <Navbar />
                     <h1 className="text-center all-c_header "> ALL CAMPAIGNS </h1>
                     <br />
                     <div className="row all-c-r">
@@ -29,10 +32,10 @@ const AllCampaigns = () => {
                                             percentage="20"             
                                         />
                                          <SingleCampaign image="" title="Title" story="story"
-                                            id="2" goal="1000" reached="200"
-                                            percentage="20"             
+                                            id="2" goal="100" reached="20"
+                                            percentage="10"             
                                         />
-                                         <SingleCampaign image="" title="Title" story="story"
+                                         {/* <SingleCampaign image="" title="Title" story="story"
                                             id="id" goal="1000" reached="200"
                                             percentage="20"             
                                         />
@@ -51,7 +54,7 @@ const AllCampaigns = () => {
                                          <SingleCampaign image="" title="Title" story="story"
                                             id="id" goal="1000" reached="200"
                                             percentage="20"             
-                                        />
+                                        /> */}
                                     </div>
                                 {/* )
                             })
