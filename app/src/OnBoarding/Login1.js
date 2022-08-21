@@ -17,11 +17,14 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import TouchId from 'react-native-touch-id';
 import {CometChat} from '@cometchat-pro/react-native-chat';
+import {useDispatch} from 'react-redux';
+import {setUser} from '../redux/reducers/user';
 
 function Login1({navigation}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [tok, setTok] = useState();
+  const dispatch = useDispatch();
   const saveData = async () => {
     const STORAGE_KEY1 = '@save_token';
     var myHeaders = new Headers();

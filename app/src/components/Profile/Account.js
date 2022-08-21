@@ -93,7 +93,7 @@ export default function Account() {
                   color: 'black',
                   fontSize: 16,
                 }}>
-                {user.email}
+                {user?.email}
               </Text>
             </View>
             <View

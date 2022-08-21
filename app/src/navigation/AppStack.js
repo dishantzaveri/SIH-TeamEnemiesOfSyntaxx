@@ -37,10 +37,7 @@ import ReferralClub from '../pages/ReferralClub';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import UploadPost from '../components/Posts/UploadPost';
 import AllPostMain from '../components/Posts/AllPostMain';
-import Login from '../OnBoarding/Login';
-import SignUp from '../OnBoarding/SignUp';
-import Login1 from '../OnBoarding/Login1';
-import SignUp1 from '../OnBoarding/SignUp1';
+
 import {JobDetail, Jobs, JobSeekers, MentorMenteesDetail} from '../pages';
 import SwiperScreens from '../OnBoarding/SwiperScreens';
 import {NavigationContainer} from '@react-navigation/native';
@@ -204,7 +201,7 @@ const HomeStackScreen = () => {
         component={ChatScreen}
         screenOptions={{headerShown: false}}
       />
-       <HomeStack.Screen
+      <HomeStack.Screen
         name="RazorpayScreens"
         component={RazorpayScreens}
         screenOptions={{headerShown: false}}

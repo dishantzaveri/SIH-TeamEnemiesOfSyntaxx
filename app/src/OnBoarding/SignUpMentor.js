@@ -16,7 +16,7 @@ import {
 } from 'react-native-responsive-screen';
 import {CometChat} from '@cometchat-pro/react-native-chat';
 import * as CONSTANTS from '../CONSTANTS';
-function SignUp1({navigation}) {
+function SignUpMentor({navigation}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
@@ -40,7 +40,7 @@ function SignUp1({navigation}) {
     };
 
     fetch(
-      'https://vismayvora.pythonanywhere.com/account/entrepreneur_register/',
+      'https://vismayvora.pythonanywhere.com/account/mentor_register/',
       requestOptions,
     )
       .then(response => response.text())
@@ -110,7 +110,7 @@ function SignUp1({navigation}) {
         style={styles.button}
         onPress={() => {
           saveData();
-          navigation.navigate('Login1');
+          navigation.navigate('Login');
           // console.log("Signed Up");
         }}>
         <Text style={styles.textStyle}>Sign Up</Text>
@@ -154,4 +154,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignUp1;
+export default SignUpMentor;

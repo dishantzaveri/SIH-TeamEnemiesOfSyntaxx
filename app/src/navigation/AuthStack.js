@@ -1,7 +1,6 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Login from '../OnBoarding/Login';
-import SignUp from '../OnBoarding/SignUp';
 import Login1 from '../OnBoarding/Login1';
 import SignUp1 from '../OnBoarding/SignUp1';
 import {
@@ -12,6 +11,7 @@ import {
   MentorMenteesDetail,
 } from '../pages';
 import SwiperScreens from '../OnBoarding/SwiperScreens';
+import SignUpMentor from '../OnBoarding/SignUpMentor';
 
 const Stack = createNativeStackNavigator();
 
@@ -54,7 +54,7 @@ const AuthStack = () => {
         options={{headerShown: false}}></Stack.Screen>
       <Stack.Screen
         name="SignUp"
-        component={SignUp}
+        component={SignUpMentor}
         options={{headerShown: false}}></Stack.Screen>
       <Stack.Screen
         name="Login1"

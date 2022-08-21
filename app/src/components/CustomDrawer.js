@@ -14,11 +14,12 @@ import {
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {resetUser} from '../redux/reducers/user';
 
 const CustomDrawer = props => {
   const dispatch = useDispatch();
+  const {user} = useSelector(state => state.user);
   const logout = async () => {
     await AsyncStorage.removeItem('@save_token');
     dispatch(resetUser());
@@ -44,7 +45,7 @@ const CustomDrawer = props => {
               fontFamily: 'Roboto-Medium',
               marginBottom: 5,
             }}>
-            Sini Shetty
+            {user?.name}
           </Text>
           <View style={{flexDirection: 'row'}}>
             <Text
