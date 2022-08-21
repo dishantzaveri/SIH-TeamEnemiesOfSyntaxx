@@ -298,7 +298,7 @@ const styles = StyleSheet.create({
         // shadowOpacity: 0.05,
         // shadowRadius: 1,
         borderRadius: 15,
-        height: height * 0.26,
+        height: height * 0.28,
         borderColor: '#D9D9D9',
         borderWidth: 1,
     },
@@ -315,7 +315,7 @@ const styles = StyleSheet.create({
         // shadowOpacity: 0.05,
         // shadowRadius: 1,
         borderRadius: 15,
-        height: height * 0.54,
+        height: height * 0.58,
         borderColor: '#D9D9D9',
         borderWidth: 1,
     },
@@ -342,7 +342,7 @@ const styles = StyleSheet.create({
     },
     nameInput2: {
 
-        fontSize: 10,
+        fontSize: 12,
     },
     nameInput3: {
 
@@ -382,7 +382,7 @@ const styles = StyleSheet.create({
     },
     button1: {
         width: width * 0.27,
-        height: height * 0.04,
+        height: height * 0.05,
         backgroundColor: '#B9E6EB',
         margin: 3
     },

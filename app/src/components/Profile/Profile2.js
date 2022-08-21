@@ -23,6 +23,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Profile2 = ({ navigation }) => {
     const { colors } = useTheme();
+    const [gst,setGst] = useState('');
     const [isModalVisible, setModalVisible] = useState(false);
     const [startdate, setStartDate] = useState('');
     const [enddate, setEndDate] = useState('');
@@ -32,8 +33,8 @@ const Profile2 = ({ navigation }) => {
     const [startdate2, setStartDate2] = useState('');
     const [enddate2, setEndDate2] = useState('');
     const [certificate, setCertificate] = useState('');
-    const[authority1,setAuthority1]=useState('');
-    const [year1,setYear1]=useState('');
+    const [authority1, setAuthority1] = useState('');
+    const [year1, setYear1] = useState('');
     const [jobcategory, setJobcategory] = useState('');
     const [companyname, setCompanyname] = useState('');
     const [degree, setDegree] = useState('');
@@ -50,7 +51,7 @@ const Profile2 = ({ navigation }) => {
         setModalVisible1(!isModalVisible1);
     }
     const [isModalVisible2, setModalVisible2] = useState(false);
-    const toggleModalVisibility2= () => {
+    const toggleModalVisibility2 = () => {
         setModalVisible2(!isModalVisible2);
     }
     const [isModalVisible3, setModalVisible3] = useState(false);
@@ -64,9 +65,9 @@ const Profile2 = ({ navigation }) => {
         myHeaders.append("Cookie", "csrftoken=XrZ21zawQLTzsfHhgMRb0aSPUt27OtRf; sessionid=tpxs6ge4xtu4f4shfqsqgnxc4niny1tz");
 
         var formdata = new FormData();
-        formdata.append("institute", "SVKM");
-        formdata.append("start_date", "08-05-2020");
-        formdata.append("end_date", "08-05-2022");
+        formdata.append("institute", schoolname);
+        formdata.append("start_date", startdate);
+        formdata.append("end_date", enddate);
 
         var requestOptions = {
             method: 'POST',
@@ -87,9 +88,10 @@ const Profile2 = ({ navigation }) => {
         myHeaders.append("Cookie", "csrftoken=XrZ21zawQLTzsfHhgMRb0aSPUt27OtRf; sessionid=tpxs6ge4xtu4f4shfqsqgnxc4niny1tz");
 
         var formdata = new FormData();
-        formdata.append("job_title", "CEO");
-        formdata.append("company_name", "Google");
-        formdata.append("start_date", "05-08-2020");
+        formdata.append("job_title", jobcategory);
+        formdata.append("company_name",companyname);
+        formdata.append("start_date", startdate2);
+        formdata.append("end_date", enddate2);
 
         var requestOptions = {
             method: 'POST',
@@ -99,6 +101,27 @@ const Profile2 = ({ navigation }) => {
         };
 
         fetch("https://vismayvora.pythonanywhere.com/account/experience/", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+    }
+
+    const sendStartups = () => {
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", "Token 72f957f003d1ae579df255c5e46c5adefcb0d7c7");
+        myHeaders.append("Cookie", "csrftoken=XrZ21zawQLTzsfHhgMRb0aSPUt27OtRf; sessionid=tpxs6ge4xtu4f4shfqsqgnxc4niny1tz");
+
+        var formdata = new FormData();
+        formdata.append("gstnumber", gst);
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: formdata,
+            redirect: 'follow'
+        };
+
+        fetch("http://vismayvora.pythonanywhere.com/account/gstverify/", requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
@@ -133,7 +156,7 @@ const Profile2 = ({ navigation }) => {
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 10 }}>
 
                         <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Education</Text>
-                        <TouchableOpacity  onPress={toggleModalVisibility}>
+                        <TouchableOpacity onPress={toggleModalVisibility}>
 
                             <Text style={{ fontSize: 18, color: '#00CFDE' }}>Add</Text>
                         </TouchableOpacity>
@@ -148,9 +171,9 @@ const Profile2 = ({ navigation }) => {
                                     <View style={{ margin: 20, flexDirection: 'row', justifyContent: 'space-between' }}>
                                         <Icon name="book" size={20} color="#00CFDE" style={{ margin: 10, }} />
                                         <Text style={{ margin: 10 }}>Add/Edit Work Education</Text>
-                                        <Icon name="close" size={20} color="#00CFDE" style={{ margin: 10, }}     onPress={toggleModalVisibility}/>
+                                        <Icon name="close" size={20} color="#00CFDE" style={{ margin: 10, }} onPress={toggleModalVisibility} />
                                     </View>
-                                    <Subheading>Select school/college*</Subheading>
+                                    <Subheading>Select institute*</Subheading>
                                     <TextInput
                                         value={schoolname}
                                         onChangeText={setSchoolname}
@@ -192,7 +215,7 @@ const Profile2 = ({ navigation }) => {
                                             color: colors.text,
                                             //backgroundColor: colors.background,
                                         }}
-                                      
+
                                     />
                                     <Subheading>To*</Subheading>
                                     <TextInput
@@ -208,26 +231,26 @@ const Profile2 = ({ navigation }) => {
                                         }}
                                     />
                                     <RadioButton.Group onValueChange={j => setStudyhere(j)} value={studyhere}>
-                            <View style={{ flexDirection: 'column'}}>
-                                {study.map((i, k) => (
-                                    <View
-                                        style={{
-                                            flexDirection: 'row',
-                                            marginHorizontal: 10,
-                                            alignItems: 'center',
-                                        }}
-                                        key={k}>
-                                        <RadioButton value={i} color={colors.textAfter} />
-                                        <Text style={{ fontSize: 15 }}>{i}</Text>
-                                    </View>
-                                ))}
-                            </View>
-                        </RadioButton.Group>
+                                        <View style={{ flexDirection: 'column' }}>
+                                            {study.map((i, k) => (
+                                                <View
+                                                    style={{
+                                                        flexDirection: 'row',
+                                                        marginHorizontal: 10,
+                                                        alignItems: 'center',
+                                                    }}
+                                                    key={k}>
+                                                    <RadioButton value={i} color={colors.textAfter} />
+                                                    <Text style={{ fontSize: 15 }}>{i}</Text>
+                                                </View>
+                                            ))}
+                                        </View>
+                                    </RadioButton.Group>
                                     <View style={styles.button2}>
                                         <Button style={styles.button3} labelStyle={styles.label1} >Delete
                                         </Button>
-                                        <Button style={styles.button4} labelStyle={styles.label2} 
-                                        // onPress ={sendEducation}
+                                        <Button style={styles.button4} labelStyle={styles.label2}
+                                            onPress={sendEducation}
                                         >
                                             Save
                                         </Button>
@@ -235,100 +258,17 @@ const Profile2 = ({ navigation }) => {
                                 </View>
                             </View>
                         </Modal>
-                        
+
                     </View>
-                    <Text style={styles.nameInput}>Please add Education, Get immediate access to jobs.</Text>
+                    <Text style={styles.nameInput}>Please add Education, Get immediate access to mentors.</Text>
 
                 </View>
-                <View style={styles.card}>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 10 }}>
-
-                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Achievements</Text>
-                        <TouchableOpacity
-                         onPress={toggleModalVisibility1}
-                         >
-
-                            <Text style={{ fontSize: 18, color: '#00CFDE' }}>Add</Text>
-
-                        </TouchableOpacity>
-                        <Modal
-                            animationType="slide"
-                            transparent
-                            visible={isModalVisible1}
-                            presentationStyle="overFullScreen"
-                            onDismiss={toggleModalVisibility1}>
-                            <View style={styles.viewWrapper1}>
-                                <View style={styles.modalView1}>
-                                    <View style={{ margin: 20, flexDirection: 'row', justifyContent: 'space-between' }}>
-                                        <Icon name="book" size={20} color="#00CFDE" style={{ margin: 10, }} />
-                                        <Text style={{ margin: 10 }}>Add/Edit Achievement</Text>
-                                        <Icon name="close" size={20} color="#00CFDE" style={{ margin: 10, }}     onPress={toggleModalVisibility1}/>
-                                    </View>
-                                    <Subheading>Achievement*</Subheading>
-                                    <TextInput
-                                        value={achievement}
-                                        onChangeText={setAchievement}
-                                        underlineColorAndroid="transparent"
-                                        placeholderTextColor={colors.textAfter}
-                                        style={{
-                                            ...styles.nameInput5,
-                                            borderColor: colors.lightblack,
-                                            color: colors.text,
-                                            //backgroundColor: colors.background,
-                                        }}
-                                    />
-
-                                    <Subheading>Issuing Authority*</Subheading>
-
-
-                                    <TextInput
-                                        value={authority}
-                                        onChangeText={setAuthority}
-                                        underlineColorAndroid="transparent"
-                                        placeholderTextColor={colors.textAfter}
-                                        multiline
-                                        style={{
-                                            ...styles.nameInput5,
-                                            borderColor: colors.lightblack,
-                                            color: colors.text,
-                                            //backgroundColor: colors.background,
-                                        }}
-                                    />
-                                    <Subheading>Year*</Subheading>
-                                    <TextInput
-                                        value={year}
-                                        onChangeText={setYear}
-                                        underlineColorAndroid="transparent"
-                                        placeholderTextColor={colors.textAfter}
-                                        style={{
-                                            ...styles.nameInput5,
-                                            borderColor: colors.lightblack,
-                                            color: colors.text,
-                                            //backgroundColor: colors.background,
-                                        }}
-                                      
-                                    />
-                                  
-                                 
-                                    <View style={styles.button2}>
-                                        <Button style={styles.button3} labelStyle={styles.label1} >Delete
-                                        </Button>
-                                        <Button style={styles.button4} labelStyle={styles.label2}>Save
-                                        </Button>
-                                    </View>
-                                </View>
-                            </View>
-                        </Modal>
-                       
-                    </View>
-                    <Text style={styles.nameInput}>Please add Achievements, Get immediate access to jobs.</Text>
-
-                </View>
+               
                 <View style={styles.card}>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 10 }}>
 
                         <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Work Experience</Text>
-                        <TouchableOpacity  onPress={toggleModalVisibility2}>
+                        <TouchableOpacity onPress={toggleModalVisibility2}>
 
                             <Text style={{ fontSize: 18, color: '#00CFDE' }}>Add</Text>
                         </TouchableOpacity>
@@ -343,7 +283,7 @@ const Profile2 = ({ navigation }) => {
                                     <View style={{ margin: 20, flexDirection: 'row', justifyContent: 'space-between' }}>
                                         <Icon name="book" size={20} color="#00CFDE" style={{ margin: 10, }} />
                                         <Text style={{ margin: 10 }}>Add/Edit Work Experience</Text>
-                                        <Icon name="close" size={20} color="#00CFDE" style={{ margin: 10, }}     onPress={toggleModalVisibility2}/>
+                                        <Icon name="close" size={20} color="#00CFDE" style={{ margin: 10, }} onPress={toggleModalVisibility2} />
                                     </View>
                                     <Subheading>Company name*</Subheading>
                                     <TextInput
@@ -359,7 +299,7 @@ const Profile2 = ({ navigation }) => {
                                         }}
                                     />
 
-                                    <Subheading>Job Category*</Subheading>
+                                    <Subheading>Job Title</Subheading>
 
 
                                     <TextInput
@@ -387,9 +327,9 @@ const Profile2 = ({ navigation }) => {
                                             color: colors.text,
                                             //backgroundColor: colors.background,
                                         }}
-                                      
+
                                     />
-                                    <Subheading>To*</Subheading>
+                                     <Subheading>To*</Subheading>
                                     <TextInput
                                         value={enddate2}
                                         onChangeText={setEndDate2}
@@ -401,28 +341,30 @@ const Profile2 = ({ navigation }) => {
                                             color: colors.text,
                                             //backgroundColor: colors.background,
                                         }}
+
                                     />
+                                   
                                     <RadioButton.Group onValueChange={j => setWorkhere(j)} value={workhere}>
-                            <View style={{ flexDirection: 'column'}}>
-                                {works.map((i, k) => (
-                                    <View
-                                        style={{
-                                            flexDirection: 'row',
-                                            marginHorizontal: 10,
-                                            alignItems: 'center',
-                                        }}
-                                        key={k}>
-                                        <RadioButton value={i} color={colors.textAfter} />
-                                        <Text style={{ fontSize: 15 }}>{i}</Text>
-                                    </View>
-                                ))}
-                            </View>
-                        </RadioButton.Group>
+                                        <View style={{ flexDirection: 'column' }}>
+                                            {works.map((i, k) => (
+                                                <View
+                                                    style={{
+                                                        flexDirection: 'row',
+                                                        marginHorizontal: 10,
+                                                        alignItems: 'center',
+                                                    }}
+                                                    key={k}>
+                                                    <RadioButton value={i} color={colors.textAfter} />
+                                                    <Text style={{ fontSize: 15 }}>{i}</Text>
+                                                </View>
+                                            ))}
+                                        </View>
+                                    </RadioButton.Group>
                                     <View style={styles.button2}>
                                         <Button style={styles.button3} labelStyle={styles.label1} >Delete
                                         </Button>
-                                        <Button style={styles.button4} labelStyle={styles.label2} 
-                                        // onPress ={sendExperience()}
+                                        <Button style={styles.button4} labelStyle={styles.label2}
+                                            onPress={sendExperience}
                                         >Save
                                         </Button>
                                     </View>
@@ -430,13 +372,13 @@ const Profile2 = ({ navigation }) => {
                             </View>
                         </Modal>
                     </View>
-                    <Text style={styles.nameInput}>Please add Experience, Get immediate access to jobs.</Text>
+                    <Text style={styles.nameInput}>Please add Experience, Get immediate access to mentors.</Text>
 
                 </View>
                 <View style={styles.card}>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 10 }}>
 
-                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Certificates</Text>
+                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Startups</Text>
                         <TouchableOpacity onPress={toggleModalVisibility3}>
 
                             <Text style={{ fontSize: 18, color: '#00CFDE' }}>Add</Text>
@@ -451,13 +393,13 @@ const Profile2 = ({ navigation }) => {
                                 <View style={styles.modalView1}>
                                     <View style={{ margin: 20, flexDirection: 'row', justifyContent: 'space-between' }}>
                                         <Icon name="book" size={20} color="#00CFDE" style={{ margin: 10, }} />
-                                        <Text style={{ margin: 10 }}>Add/Edit Certificate</Text>
-                                        <Icon name="close" size={20} color="#00CFDE" style={{ margin: 10, }}     onPress={toggleModalVisibility3}/>
+                                        <Text style={{ margin: 10 }}>Enter you GST Number</Text>
+                                        <Icon name="close" size={20} color="#00CFDE" style={{ margin: 10, }} onPress={toggleModalVisibility3} />
                                     </View>
-                                    <Subheading>Certificate Name*</Subheading>
+                                    <Subheading>GST Number*</Subheading>
                                     <TextInput
-                                        value={certificate}
-                                        onChangeText={setCertificate}
+                                        value={gst}
+                                        onChangeText={setGst}
                                         underlineColorAndroid="transparent"
                                         placeholderTextColor={colors.textAfter}
                                         style={{
@@ -468,48 +410,19 @@ const Profile2 = ({ navigation }) => {
                                         }}
                                     />
 
-                                    <Subheading>Issuing Authority*</Subheading>
-
-
-                                    <TextInput
-                                        value={authority1}
-                                        onChangeText={setAuthority1}
-                                        underlineColorAndroid="transparent"
-                                        placeholderTextColor={colors.textAfter}
-                                        multiline
-                                        style={{
-                                            ...styles.nameInput5,
-                                            borderColor: colors.lightblack,
-                                            color: colors.text,
-                                            //backgroundColor: colors.background,
-                                        }}
-                                    />
-                                    <Subheading>Year*</Subheading>
-                                    <TextInput
-                                        value={year1}
-                                        onChangeText={setYear1}
-                                        underlineColorAndroid="transparent"
-                                        placeholderTextColor={colors.textAfter}
-                                        style={{
-                                            ...styles.nameInput5,
-                                            borderColor: colors.lightblack,
-                                            color: colors.text,
-                                            //backgroundColor: colors.background,
-                                        }}
-                                      
-                                    />
                                    
+
                                     <View style={styles.button2}>
                                         <Button style={styles.button3} labelStyle={styles.label1} >Delete
                                         </Button>
-                                        <Button style={styles.button4} labelStyle={styles.label2}>Save
+                                        <Button onPress = {sendStartups} style={styles.button4} labelStyle={styles.label2}>Save
                                         </Button>
                                     </View>
                                 </View>
                             </View>
                         </Modal>
                     </View>
-                    <Text style={styles.nameInput}>Please add Certificate, Get immediate access to jobs.</Text>
+                    <Text style={styles.nameInput}>Enter your GST Number to show us your startups.</Text>
 
                 </View>
                 <View style={styles.card2}>
@@ -539,7 +452,7 @@ const Profile2 = ({ navigation }) => {
 
                             <Text style={{ fontSize: 18, color: '#00CFDE' }}>Add</Text>
                         </TouchableOpacity>
-                    
+
                     </View>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                         <Text style={styles.nameInput4}>Date of Birth.</Text>
@@ -641,7 +554,7 @@ const styles = StyleSheet.create({
     },
     nameInput2: {
 
-        fontSize: 10,
+        fontSize: 12,
     },
     nameInput3: {
 
@@ -681,7 +594,7 @@ const styles = StyleSheet.create({
     },
     button1: {
         width: width * 0.27,
-        height: height * 0.04,
+        height: height * 0.05,
         backgroundColor: '#B9E6EB',
         margin: 3
     },
@@ -690,7 +603,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignSelf: 'center',
         flexDirection: 'row',
-        margin:10,
+        margin: 10,
     },
     button3: {
         width: width * 0.25,
@@ -731,7 +644,7 @@ const styles = StyleSheet.create({
         left: '50%',
         elevation: 5,
         transform: [{ translateX: -(width * 0.4) }, { translateY: -90 }],
-        height: height * 0.66,
+        height: height * 0.7,
         width: width * 0.8,
         backgroundColor: '#fff',
         borderRadius: 7,
@@ -750,7 +663,7 @@ const styles = StyleSheet.create({
         left: '50%',
         elevation: 5,
         transform: [{ translateX: -(width * 0.4) }, { translateY: -90 }],
-        height: height * 0.5,
+        height: height * 0.4,
         width: width * 0.8,
         backgroundColor: '#fff',
         borderRadius: 7,

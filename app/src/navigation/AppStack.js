@@ -44,6 +44,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import RazorpayScreens from '../pages/RazorpayScreens';
 import Profile1 from '../components/Profile/Profile1';
 import Profile2 from '../components/Profile/Profile2';
+import Location from '../pages/Maps';
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 const HomeStack = createNativeStackNavigator();
@@ -373,6 +374,19 @@ const AppStack = () => {
         <Drawer.Screen
           name="Help"
           component={ChatBot}
+          options={{
+            drawerIcon: ({color}) => (
+              <Ionicons
+                name="chatbox-ellipses-outline"
+                size={22}
+                color={color}
+              />
+            ),
+          }}
+        />
+         <Drawer.Screen
+          name="Maps"
+          component={Location}
           options={{
             drawerIcon: ({color}) => (
               <Ionicons
