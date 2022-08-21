@@ -73,28 +73,47 @@ const Gst = () => {
 
   const getData = async () => {
     // console.log(getFilterData(data))
-    var data = new FormData();
-    data.append('gstkey', '27AAICS1406R3ZV');
-    var config = {
-      method: 'post',
-      url: 'https://gst-verify-api.herokuapp.com/api/gstverify',
-      data : data
-    };
-    axios(config)
-      .then((response) => {
-        console.log(getFilterData(response.data));
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    // try {
-    //   const data = await getGst({gstkey: '37AADCS0472N2Z0'}).unwrap()
-    //   const x = getFilterData(data)
-    //   setInput('')
-    //   console.log(x)
-    // } catch (error) {
-    //   console.log(error)
-    // }
+    // let x = new FormData();
+    // x.append('gstnumber', '27AAICS1406R3ZV');
+    
+    // var config = {
+    //   method: 'post',
+    //   url: 'https://gst-verify-api.herokuapp.com/api/gstverify',
+    //   data : data
+    // };
+    // axios(config)
+    //   .then((response) => {
+    //     console.log(getFilterData(response.data));
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
+    // var myHeaders = new Headers();
+    // myHeaders.append("Authorization", "Token 8ee14cbf8c09c0baeae939b60041b703ed240e82");
+    // myHeaders.append("Cookie", "csrftoken=ONSFu7hzHlkazVZWCUFueznNNNq0ZUfY; sessionid=c8y0u0442udrp7etn5nkneeunl1pst68");
+
+    var formdata = new FormData();
+    formdata.append("gstnumber", input);
+
+    // var requestOptions = {
+    //   method: 'POST',
+    //   headers: myHeaders,
+    //   body: formdata,
+    //   redirect: 'follow'
+    // };
+
+    // fetch("http://vismayvora.pythonanywhere.com/account/gstverify/", requestOptions)
+    //   .then(response => response.text())
+    //   .then(result => console.log(result))
+    //   .catch(error => console.log('error', error));
+    try {
+      const data = await getGst(formdata).unwrap()
+      // const x = getFilterData(data)
+      setInput('')
+      console.log(data)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (

@@ -11,16 +11,7 @@ const baseQuery = fetchBaseQuery({
     }
 })
 
-const gstBaseQuery = fetchBaseQuery({
-    baseUrl: 'https://gst-verify-api.herokuapp.com/api',
-})
-
 export const apiSlice = createApi({
     baseQuery,
-    endpoints: builder => ({})
-})
-
-export const gstSlice = createApi({
-    baseQuery: gstBaseQuery,
     endpoints: builder => ({})
 })
