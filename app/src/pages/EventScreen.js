@@ -10,11 +10,13 @@ import {
 import {Button} from 'react-native-elements';
 import {Paragraph, Subheading, useTheme} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
 
-const EventScreen = ({route, navigation}) => {
+const EventScreen = ({route}) => {
   const {event} = route.params;
 
   const {colors} = useTheme();
+  const navigation = useNavigation();
 
   const Detail = ({name, value}) => {
     return (
@@ -118,6 +120,7 @@ const EventScreen = ({route, navigation}) => {
             />
             <Button
               title={'Donate'}
+              onPress={() => navigation.navigate('RazorpayScreens')}
               style={'solid'}
               buttonStyle={{
                 backgroundColor: colors.primary,

@@ -44,6 +44,7 @@ import SignUp1 from '../OnBoarding/SignUp1';
 import {JobDetail, Jobs, JobSeekers, MentorMenteesDetail} from '../pages';
 import SwiperScreens from '../OnBoarding/SwiperScreens';
 import {NavigationContainer} from '@react-navigation/native';
+import RazorpayScreens from '../pages/RazorpayScreens';
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 const HomeStack = createNativeStackNavigator();
@@ -201,6 +202,11 @@ const HomeStackScreen = () => {
       <HomeStack.Screen
         name="Chat"
         component={ChatScreen}
+        screenOptions={{headerShown: false}}
+      />
+       <HomeStack.Screen
+        name="RazorpayScreens"
+        component={RazorpayScreens}
         screenOptions={{headerShown: false}}
       />
     </HomeStack.Navigator>
