@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import RegisterMentee from "./components/Register/registerMentee";
 import RegisterMentor from "./components/Register/registerMentor";
@@ -30,8 +31,31 @@ import SingleMentor from "./components/SingleMentor/SingleMentor";
 import CreateEvents from "./components/CreateEvents/CreateEvents";
 import Header from "./components/Header/Header";
 
+const languages = [
+  { value: '', text: "Options" },
+  { value: 'en', text: "English" },
+  { value: 'hi', text: "Hindi" },
+  { value: 'gu', text: "Gujarati" },
+  { value: 'mr', text: "Marathi" },
+  { value: 'ta', text: "Tamil" }
+]
+
 function App() {
+  const { t } = useTranslation(); 
+  
+    const [lang, setLang] = useState('en');
+  
+    // This function put query that helps to 
+    // change the language
+    const handleChange = e => { 
+        setLang(e.target.value);
+        let loc = "http://localhost:3000/";
+        window.location.replace(loc + "?lng=" + e.target.value);
+    }
   return (
+    
+    <>
+    
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -62,6 +86,7 @@ function App() {
         <Route path="/header" element={<Header />} />
       </Routes>
     </Router>
+    </>
   );
 }
 

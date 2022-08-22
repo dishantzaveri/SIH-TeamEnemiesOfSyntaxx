@@ -1,9 +1,10 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
 import App from "./App";
 import "./index.css";
+import './i18n.js'
 import * as CONSTANTS from "./constants/constants";
 import { CometChat } from "@cometchat-pro/chat";
 const container = document.getElementById("root");
@@ -20,7 +21,9 @@ CometChat.init(CONSTANTS.APP_ID, appSetting).then(
     root.render(
       <React.StrictMode>
         <Provider store={store}>
+        <Suspense fallback="...loading">
           <App />
+          </Suspense>
         </Provider>
       </React.StrictMode>
     );

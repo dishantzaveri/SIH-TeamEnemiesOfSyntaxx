@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../../features/auth/authSlice";
@@ -11,8 +12,17 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Fade from '@mui/material/Fade';
+import logo from '../../assets/logo.png'
 
 const Header = ({ event }) => {
+    const languages = [
+        { value: '', text: "Options" },
+        { value: 'en', text: "English" },
+        { value: 'hi', text: "Hindi" },
+        { value: 'gu', text: "Gujarati" },
+        { value: 'mr', text: "Marathi" },
+        { value: 'ta', text: "Tamil" }
+      ]
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -30,19 +40,92 @@ const Header = ({ event }) => {
 	const handleChange = (event) => {
 		setActivities(event.target.value);
 	};
-	const DropdownExampleDropdown = () => (
-		<Dropdown text="File">
-			<Dropdown.Menu>
-				<Dropdown.Item text="New" />
-				<Dropdown.Item text="Open..." description="ctrl + o" />
-			</Dropdown.Menu>
-		</Dropdown>
-	);
+	
+    const { t } = useTranslation(); 
+  
+    const [lang, setLang] = useState('');
+  
+    // This function put query that helps to 
+    // change the language
+    const handleLanguage = e => { 
+        setLang(e.target.value);
+        let loc = "http://localhost:3000/header/";
+        window.location.replace(loc + "?lng=" + e.target.value);
+    }
 	return (
-		<div className="px-24 py-4 flex justify-between items-center border-b">
-			<Link className="font-bold text-3xl" to="/">
-				mentoree
+		<div className="px-12 py-2 flex justify-between items-center border-b">
+            {/* <h1>{t('welcome')}</h1> */}
+            <Link className="font-bold " to="/">
+				<img src={logo} style={{height:"80px", width:"100px"}} />
 			</Link>
+            <select value={lang} onChange={handleLanguage}>
+                {languages.map(item => {
+                    return (<option key={item.value} 
+                    value={item.value}>{item.text}</option>);
+                })}
+                </select>
+                
+            {/* <label>{t('choose')}</label> */}
+            {token && (
+				<div className="px-64 flex flex-row justify-between items-center flex-1">
+                   
+					{/* // <div className="flex flex-row justify-content items-center flex-1"> */}
+					<Link to="/feed">
+						<h1 className="font-medium text-lg"><label>{t('home')}</label></h1>
+					</Link>
+
+					<Link to="/mentors">
+						<h1 className="font-medium text-lg"><label>{t('startups')}</label></h1>
+					</Link>
+
+					<Link to="/chat">
+						<h1 className="font-medium text-lg"><label>{t('chat')}</label></h1>
+					</Link>
+
+					<Link to="/myProfile">
+						<h1 className="font-medium text-lg"><label>{t('profile')}</label></h1>
+					</Link>
+
+					
+                    <div>
+      <button
+        id="fade-button"
+        aria-controls={open ? 'fade-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}
+        style={{color:"black", fontWeight:500, fontSize:"1.125rem", lineHeight:"1.75rem"}}
+      >
+        <label>{t('activities')}</label>
+      </button>
+      <Menu
+        id="fade-menu"
+        fullwidth
+        MenuListProps={{
+          'aria-labelledby': 'fade-button',
+        }}
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        TransitionComponent={Fade}
+        sx={{margin:"10px", padding:"10px"}}
+      >
+        <Link to="/events">
+        <MenuItem   sx={{margin:"10px", padding:"10px", width:"120px"}}>Events</MenuItem>
+        </Link>
+        <Link to="/campaigns">
+        <MenuItem  sx={{margin:"10px", padding:"10px", width:"120px"}}>Campaigns</MenuItem>
+        </Link>
+      </Menu>
+    </div>
+				</div>
+			)}
+            
+            
+			{/* <Link className="font-bold " to="/">
+				<img src={logo} style={{height:"80px", width:"100px"}} />
+			</Link> */}
+            
 			{/* {token && ( */}
 			{/* <div className="header__search">
           <SearchIcon />
@@ -68,9 +151,11 @@ const Header = ({ event }) => {
             </button>
           </Link>
         </div> */}
-			{token && (
-				<div className="px-64 flex flex-row justify-between items-center  flex-1">
-					{/* // <div className="flex flex-row justify-content items-center flex-1"> */}
+
+
+			{/* {token && (
+				<div className="px-64 flex flex-row justify-between items-center flex-1">
+					
 					<Link to="/feed">
 						<h1 className="font-medium text-lg">Home</h1>
 					</Link>
@@ -87,53 +172,21 @@ const Header = ({ event }) => {
 						<h1 className="font-medium text-lg">Profile</h1>
 					</Link>
 
-					{/* <Link to="/myProfile"> */}
-					{/* <h1 className="font-medium text-lg">Activities</h1> */}
-					{/* <FormControl className="font-medium text-lg" variant="standard" sx={{ m: 1, minWidth: 120 , color:"black", fontSize:"25px"}}>
-							<InputLabel className="font-medium text-lg" sx={{color:"black", fontSize:"20px"}} >
-								Activities
-							</InputLabel>
-							<Select
-								labelId="demo-simple-select-standard-label"
-								id="demo-simple-select-standard"
-								value={activities}
-								onChange={handleChange}
-								label="activities"
-							><Link to="/events">
-								<MenuItem value={10}>Events</MenuItem>
-                                </Link>
-                                <Link to="/campaigns">
-								<MenuItem value={20}>Campaigns</MenuItem>
-                                </Link>
-							</Select>
-						</FormControl> */}
-					{/* <DropdownExampleDropdown /> */}
-					{/* <Dropdown text="Activities">
-						<Dropdown.Menu>
-							<Dropdown.Item text="Events" />
-							<Dropdown.Item text="Campaigns" />
-							<Dropdown.Item text='Open...' description='ctrl + o' />
-      <Dropdown.Item text='Save as...' description='ctrl + s' />
-						</Dropdown.Menu>
-					</Dropdown> */}
-					{/* </Link> */}
-
-					{/* <HeaderOption Icon={NotificationsIcon} title="Notifications" /> */}
-					{/* <HeaderOption avatar={user.photoUrl} title="me" /> */}
-					{/* </div> */}
+					
                     <div>
-      <Button
+      <button
         id="fade-button"
         aria-controls={open ? 'fade-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
-        sx={{color:"black", fontWeight:550, fontSize:"16px", lineHeight:"28px"}}
+        style={{color:"black", fontWeight:500, fontSize:"1.125rem", lineHeight:"1.75rem"}}
       >
         Activities
-      </Button>
+      </button>
       <Menu
         id="fade-menu"
+        fullwidth
         MenuListProps={{
           'aria-labelledby': 'fade-button',
         }}
@@ -141,19 +194,25 @@ const Header = ({ event }) => {
         open={open}
         onClose={handleClose}
         TransitionComponent={Fade}
+        sx={{margin:"10px", padding:"10px"}}
       >
-        <MenuItem onClick={handleClose}>Events</MenuItem>
-        <MenuItem onClick={handleClose}>Campaigns</MenuItem>
+        <Link to="/events">
+        <MenuItem   sx={{margin:"10px", padding:"10px", width:"120px"}}>Events</MenuItem>
+        </Link>
+        <Link to="/campaigns">
+        <MenuItem  sx={{margin:"10px", padding:"10px", width:"120px"}}>Campaigns</MenuItem>
+        </Link>
       </Menu>
     </div>
 				</div>
-			)}
+			)} */}
 			<button
 				className="uppercase rounded-full border w-[8vw] py-2 hover:bg-inherit hover:text-inherit bg-purple-gray-600 text-white transition-all duration-150"
 				onClick={() => dispatch(logout())}
 			>
 				Log out
 			</button>
+            {/* </select> */}
 		</div>
 	);
 };
