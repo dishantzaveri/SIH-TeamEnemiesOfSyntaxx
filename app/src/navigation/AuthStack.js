@@ -4,48 +4,70 @@ import Login from '../OnBoarding/Login';
 import Login1 from '../OnBoarding/Login1';
 import SignUp1 from '../OnBoarding/SignUp1';
 import {
-  ActiveMentorships,
-  JobDetail,
   Jobs,
   JobSeekers,
-  MentorMenteesDetail,
 } from '../pages';
 import SwiperScreens from '../OnBoarding/SwiperScreens';
 import SignUpMentor from '../OnBoarding/SignUpMentor';
+import Onboarding1 from '../pages/Onboarding1';
+import Onboarding2 from '../pages/Onboarding2';
+import Onboarding3 from '../pages/Onboarding3';
+import Onboarding4 from '../pages/Onboarding4';
+import Onboarding5 from '../pages/Onboarding5';
+import Profile1 from '../components/Profile/Profile1';
+import Profile2 from '../components/Profile/Profile2';
 
 const Stack = createNativeStackNavigator();
+const OnboardingStack = createNativeStackNavigator();
 
-function JobsTab() {
+
+const Onboarding = () => {
   return (
-    <Tab.Navigator
-      initialRouteName="Jobs"
-      screenOptions={({route}) => ({
-        tabBarIcon: () => icons[route.name],
-      })}
-      // tabBarOptions={{
-      //   activeTintColor: '#18a990',
-      //   inactiveTintColor: 'gray',
-      //   labelStyle: {
-      //     fontWeight: 'bold',
-      //     fontSize: 12,
-      //   },
-      // }}
-    >
-      <Tab.Screen name="Jobs" component={Jobs} options={{headerShown: false}} />
-      <Tab.Screen
-        name="JobSeekers"
-        component={JobSeekers}
-        options={{headerShown: false}}
+    <OnboardingStack.Navigator screenOptions={{headerShown: false}}>
+      <OnboardingStack.Screen
+        name="Onboarding1"
+        component={Onboarding1}
+        screenOptions={{headerShown: false}}
       />
-    </Tab.Navigator>
+      <OnboardingStack.Screen
+        name="Onboarding2"
+        component={Onboarding2}
+        screenOptions={{headerShown: false}}
+      />
+      <OnboardingStack.Screen
+        name="Onboarding3"
+        component={Onboarding3}
+        screenOptions={{headerShown: false}}
+      />
+      <OnboardingStack.Screen
+        name="Onboarding4"
+        component={Onboarding4}
+        screenOptions={{headerShown: false}}
+      />
+      <OnboardingStack.Screen
+        name="Onboarding5"
+        component={Onboarding5}
+        screenOptions={{headerShown: false}}
+      />
+      <OnboardingStack.Screen
+        name="Profile1"
+        component={Profile1}
+        screenOptions={{headerShown: false}}
+      />
+      <OnboardingStack.Screen
+        name="Profile2"
+        component={Profile2}
+        screenOptions={{headerShown: false}}
+      />
+    </OnboardingStack.Navigator>
   );
-}
+};
+
 
 const AuthStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{headerShown: false}}
-      // initialRouteName="AppStack"
     >
       <Stack.Screen name="SwiperScreens" component={SwiperScreens} />
       <Stack.Screen
@@ -65,25 +87,9 @@ const AuthStack = () => {
         component={SignUp1}
         options={{headerShown: false}}></Stack.Screen>
       <Stack.Screen
-        name="MentorMenteesDetail"
-        component={MentorMenteesDetail}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="ActiveMentorships"
-        component={ActiveMentorships}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="JobTabs"
-        component={JobsTab}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="JobDetail"
-        component={JobDetail}
-        options={{headerShown: false}}
-      />
+        name="Onboarding"
+        component={Onboarding}
+        options={{headerShown: false}}></Stack.Screen>
     </Stack.Navigator>
   );
 };

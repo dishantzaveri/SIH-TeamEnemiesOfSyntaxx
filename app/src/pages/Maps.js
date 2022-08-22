@@ -1,126 +1,104 @@
-import React, { useState ,useRef ,  useEffect } from 'react';
-import {  Text  ,Button  ,PermissionsAndroid , StyleSheet} from 'react-native';
-import MapView, { PROVIDER_GOOGLE ,Marker } from 'react-native-maps';
-import { Polyline } from "react-native-maps";
 
-import Geolocation from '@react-native-community/geolocation';
+import React, { useRef, useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import MapView, { Marker } from 'react-native-maps';
+import { moderateScale } from '../components/responsiveSize';
+import { getAddressFromLatLong } from '../../utils/helperFunctions';
+import { data } from '../latlong';
 
-function Map() {
- {
-    const mapRef = useRef(null);
 
-    const [location , setLocation] = useState({
-        latitude: 0,
-        longitude: 0,
+// create a component
+const Location = () => {
+    const [curLoc, setCurLoc] = useState({
+        latitude: 30.7993,
+        longitude: 76.9149,
         latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421});
-          
-      let  initialRegion={
-          latitude: 19.0760,
-          longitude: 72.8777,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }
-      // const [location]
-        const tokyoRegion = {
-            latitude: 35.6762,
-            longitude: 139.6503,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0922,
-          };
-          
+        longitudeDelta: 0.0421,
+    })
+    const [address, setAddress] = useState('')
 
-          var watchID = useRef(null)
+    const mapRef = useRef(null)
 
-        const goToTokyo = () => {
-            mapRef.current.animateToRegion(tokyoRegion, 3 * 1000);
-          };
+    const onCenter = () => {
+        console.log(mapRef)
+        mapRef.current.animateToRegion(curLoc)
+    }
 
-          useEffect(() => {
-            const requestLocationPermission = async () => {
-              if (Platform.OS === 'ios') {
-                getOneTimeLocation();
-              
-              } else {
-                try {
-                  const granted = await PermissionsAndroid.request(
-                    PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-                    {
-                      title: 'Location Access Required',
-                      message: 'This App needs to Access your location',
-                    },
-                  );
-                  if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-                     await getOneTimeLocation();
-                 
-                  } else {
-                    console.log('Permission Denied');
-                  }
-                } catch (err) {
-                  console.warn(err);
-                }
-              }
-            };
-            requestLocationPermission();
-            return () => {
-              Geolocation.clearWatch(watchID);
-            };
-          }, []);
+    // const onRegionChange = async(props) =>{
+    //     // console.log("props==>>>",props)
+    //     const {latitude, longitude} = props
+    //     const res = await getAddressFromLatLong(`${latitude}, ${longitude}`)
+    //     console.log("res==>>>>>",res)
+    //     setAddress(res.address)
 
-          const getOneTimeLocation = async() =>{
-            Geolocation.getCurrentPosition((pos) =>{
-              let latitude = pos.coords.latitude;
-              let longitude = pos.coords.longitude; 
-              let latitudeDelta = 0.092 ;
-              let longitudeDelta= 0.0421;
-            setLocation({latitude , longitude , latitudeDelta, longitudeDelta})
-            console.log(location )
-          },(err)=>{console.log(err)} , {enableHighAccuracy: true, timeout: 10000, maximumAge: 3000})
-          }
-
-
+    // }
     return (
-        <>
-      {/* <MapView
-         style={{ flex: 1 }}
-         provider={PROVIDER_GOOGLE}
-         initialRegion={tokyoRegion}
-         mapType = 'hybrid'
-         onRegionChangeComplete={(r) => setLocation(r)}
-         ref={mapRef}
-        //  showsUserLocation = {true}
-        //  showsMyLocationButton = {true}
-      >
-      </MapView> */}
-      <MapView
-        // ref={mapRef}
-        style={{ flex : 1}}
-        initialRegion={{
-          latitude: 19.0760,
-          longitude: 72.8777,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-        provider={PROVIDER_GOOGLE}
-        // onRegionChangeComplete={(region) => setRegion(region)}
-      />
-      <Button onPress={() => goToTokyo()} title="Go to Tokyo" />
-      {/* <Button onPress={() => getMyLocation()} title="Go to My location" /> */}
-      <Text style={styles.text}>Current latitude: {location.latitude}</Text>
-    <Text style={styles.text}>Current longitude: {location.longitude}</Text>
-      </>
+        <View style={{ flex: 1 }}>
+            <MapView
+                ref={mapRef}
+                style={StyleSheet.absoluteFill}
+                initialRegion={curLoc}
+                // onRegionChangeComplete={onRegionChange}
+            >
+
+                {data.map((val, i) => {
+                    return (
+                        <Marker
+                            coordinate={val.coords}
+                           
+                        />
+                    )
+                })}
+            </MapView>
+
+            {/* <View style={styles.headerView}>
+                <HomeHeader
+                    setting={imagePath.icSetting}
+                    centerText={address}
+                />
+            </View> */}
+            {/* <View style={styles.bottomView}>
+                <View style={{ flexDirection: 'row', alignItems: "center", justifyContent: 'space-between' }}>
+                    <Circulerbtn
+                        text={strings.MY_BITMOJI}
+                    />
+
+                    <TouchableOpacity onPress={onCenter} style={styles.navigationView}>
+                        <Image source={imagePath.icNavigation} />
+                    </TouchableOpacity>
+
+                    <Circulerbtn
+                        text={strings.FRIENDS}
+                    />
+                </View>
+            </View> */}
+        </View>
     );
-  }
-}
+};
 
-const styles = StyleSheet.create ({
-  map: {
-     height: 400,
-     marginTop: 80
-  },
-  text: {
-    color : "black"
-  }
-})
+// define your styles
+const styles = StyleSheet.create({
+    bottomView: {
+        position: 'absolute',
+        bottom: 24,
+        left: 24,
+        right: 24,
+    },
+    headerView: {
+        position: 'absolute',
+        top: 36,
+        left: 24,
+        right: 24,
+    },
+    navigationView: {
+        width: moderateScale(35),
+        height: moderateScale(35),
+        borderRadius: moderateScale(35 / 2),
+        backgroundColor: '#white',
+        alignItems: 'center',
+        justifyContent: 'center'
+    }
+});
 
-export default Map;
+//make this component available to the app
+export default Location;
