@@ -31,12 +31,13 @@ import ReferralClub from '../pages/ReferralClub';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import UploadPost from '../components/Posts/UploadPost';
 import AllPostMain from '../components/Posts/AllPostMain';
-
+import { NativeEventEmitter, NativeModules } from 'react-native';
 import {JobDetail, Jobs, JobSeekers, MentorMenteesDetail} from '../pages';
 import {NavigationContainer} from '@react-navigation/native';
 import RazorpayScreens from '../pages/RazorpayScreens';
 import Location from '../pages/Maps';
 import AddEventC from '../pages/AddEventC';
+import { AlanView } from '@alan-ai/alan-sdk-react-native';
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 const HomeStack = createNativeStackNavigator();
@@ -46,6 +47,11 @@ const HomeScreensStack = createNativeStackNavigator();
 
 const AllTabsStack = createNativeStackNavigator();
 const MentorStack = createNativeStackNavigator();
+const { AlanManager, AlanEventEmitter } = NativeModules;
+const alanEventEmitter = new NativeEventEmitter(AlanEventEmitter);
+const subscription = alanEventEmitter.addListener('command', (data) => {
+  console.log(`got command event ${JSON.stringify(data)}`);
+});
 
 const MentorsScreens = () => {
   return (
@@ -385,6 +391,7 @@ const AppStack = () => {
           }}
         />
       </Drawer.Navigator>
+      <AlanView projectid={'ecc5936429f8831a0a3f3bd73ff973822e956eca572e1d8b807a3e2338fdd0dc/stage'}/>
     </NavigationContainer>
   );
 };
