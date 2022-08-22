@@ -27,6 +27,8 @@ import MentorList from "./components/MentorsList/MentorsList";
 import Mentors from "./pages/Mentors";
 import SideNavbar from "./components/SideNavbar/SideNavbar";
 import SingleMentor from "./components/SingleMentor/SingleMentor";
+import CreateEvents from "./components/CreateEvents/CreateEvents";
+import Header from "./components/Header/Header";
 
 function App() {
   return (
@@ -56,6 +58,8 @@ function App() {
         <Route path="/mentors" element={<Mentors />} />
         <Route path="/sidenavbar" element={<SideNavbar />} />
         <Route path="/singleMentor" element={<SingleMentor />} />
+        <Route path="/createEvents" element={<CreateEvents />} />
+        <Route path="/header" element={<Header />} />
       </Routes>
     </Router>
   );
