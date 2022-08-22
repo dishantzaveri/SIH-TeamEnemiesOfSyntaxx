@@ -24,6 +24,7 @@ import ChatIcon from "@material-ui/icons/Chat";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import SearchIcon from "@material-ui/icons/Search";
 import PersonIcon from "@material-ui/icons/Person";
+import Navbar from "../Navbar";
 
 function HeaderOption({ avatar, Icon, title }) {
   return (
@@ -136,7 +137,8 @@ function Feed() {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
+      <Navbar />
       <div className="grid grid-cols-12 p-8 gap-8">
         <div className="col-span-1"></div>
         <div className="feed col-span-6">
