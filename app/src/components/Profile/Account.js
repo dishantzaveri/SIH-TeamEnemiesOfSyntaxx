@@ -15,7 +15,7 @@ export default function Account() {
     var myHeaders = new Headers();
     myHeaders.append(
       'Authorization',
-      `Token f86a8dbc11c67d9ea8a20fe53c2fc740570e872f`,
+      `Token 72f957f003d1ae579df255c5e46c5adefcb0d7c7`,
     );
 
     var requestOptions = {

@@ -11,7 +11,7 @@ import {
   FlatList,
 } from 'react-native';
 
-const Link = (props) => {
+const Link = props => {
   return (
     <TouchableOpacity onPress={() => Linking.openURL(props.url)}>
       <Text style={props.style || styles.link}> {props.text} </Text>
@@ -19,7 +19,7 @@ const Link = (props) => {
   );
 };
 
-const EventInfo = (props) => {
+const EventInfo = props => {
   return (
     <View style={styles.eventBox}>
       <View
@@ -86,7 +86,7 @@ const EventInfo = (props) => {
   );
 };
 
-const Events = (props) => {
+const Events = props => {
   var data = [
     {
       event_name: 'Q/A About Technical Interviews with Orhan ÖZALP',

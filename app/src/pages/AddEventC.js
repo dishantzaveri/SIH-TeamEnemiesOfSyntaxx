@@ -8,14 +8,20 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {launchImageLibrary} from 'react-native-image-picker';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-const UploadPost = () => {
+import DropDownPicker from 'react-native-dropdown-picker';
+import axios from 'axios';
+const AddEventC = () => {
   const [title, setTitle] = useState('');
   const [desc, setDesc] = useState('');
   const [image, setImage] = useState('');
   const [ytLink, setYtLink] = useState('');
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [items, setItems] = useState([]);
+  const [startups, setStartups] = useState([]);
   const post = async () => {
     console.log(image);
     const formdata = new FormData();
@@ -60,6 +66,34 @@ const UploadPost = () => {
       type: res.assets[0].type,
     });
   };
+
+  const getStartUps = async () => {
+    var config = {
+      method: 'get',
+      url: 'https://vismayvora.pythonanywhere.com/account/startup/',
+      headers: {
+        Authorization: 'Token 72f957f003d1ae579df255c5e46c5adefcb0d7c7',
+      },
+    };
+    axios(config)
+      .then(function (response) {
+        const sups = [];
+        console.log(response.data);
+        const s = response.data;
+        s.map(startup => {
+          sups.push({label: startup.legalNameOfBusiness, value: startup.id});
+        });
+        setItems(sups);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getStartUps();
+  }, []);
+
   return (
     <View
       style={{
@@ -78,7 +112,7 @@ const UploadPost = () => {
             fontSize: 18,
             fontWeight: 'bold',
           }}>
-          Upload A Post
+          Upload A Campaign
         </Text>
       </View>
       <ScrollView>
@@ -108,6 +142,17 @@ const UploadPost = () => {
             }}>
             Enter Details
           </Text>
+          {items && (
+            <DropDownPicker
+              open={open}
+              value={value}
+              items={items}
+              setOpen={setOpen}
+              setValue={setValue}
+              setItems={setItems}
+              placeholder="Select a Startup"
+            />
+          )}
           <View
             style={{
               padding: 5,
@@ -203,7 +248,7 @@ const UploadPost = () => {
   );
 };
 
-export default UploadPost;
+export default AddEventC;
 
 const styles = StyleSheet.create({
   textInput: {

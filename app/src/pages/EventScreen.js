@@ -10,7 +10,7 @@ import {
 import {Button} from 'react-native-elements';
 import {Paragraph, Subheading, useTheme} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 const EventScreen = ({route}) => {
   const {event} = route.params;
@@ -34,7 +34,6 @@ const EventScreen = ({route}) => {
       </View>
     );
   };
-
 
   return (
     <ImageBackground source={{uri: event.images}} style={styles.container}>
@@ -90,10 +89,7 @@ const EventScreen = ({route}) => {
             name={'Event Date'}
             value={new Date(event.event_date).toLocaleDateString()}
           />
-          <Detail
-            name={'No. of Volunteers Required'}
-            value={event.startup}
-          />
+          <Detail name={'No. of Volunteers Required'} value={event.startup} />
           {/* <Detail name={'Location'} value={event.address} /> */}
           <View
             style={{
@@ -101,7 +97,6 @@ const EventScreen = ({route}) => {
               marginTop: 10,
               justifyContent: 'space-evenly',
             }}>
-        
             <Button
               title={'Donate'}
               onPress={() => navigation.navigate('RazorpayScreens')}
@@ -123,12 +118,10 @@ const EventScreen = ({route}) => {
             title={'Chat'}
             style={'solid'}
             onPress={() => {
-
-               
               navigation.navigate('Chat');
             }}
             buttonStyle={{
-              backgroundColor:'#00CFDE',
+              backgroundColor: '#00CFDE',
               height: 50,
               width: 120,
               borderRadius: 30,

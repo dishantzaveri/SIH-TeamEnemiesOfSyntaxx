@@ -44,6 +44,7 @@ import RazorpayScreens from '../pages/RazorpayScreens';
 import Profile1 from '../components/Profile/Profile1';
 import Profile2 from '../components/Profile/Profile2';
 import Location from '../pages/Maps';
+import AddEventC from '../pages/AddEventC';
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 const HomeStack = createNativeStackNavigator();
@@ -61,9 +62,7 @@ function JobsTab() {
       initialRouteName="Jobs"
       screenOptions={({route}) => ({
         tabBarIcon: () => icons[route.name],
-      })}
-
-    >
+      })}>
       <Tab.Screen name="Jobs" component={Jobs} options={{headerShown: false}} />
       <Tab.Screen
         name="JobSeekers"
@@ -153,9 +152,13 @@ function Tabs() {
         }}
       />
 
-      <Tab.Screen name="Upload" component={UploadPost}  options={{
+      <Tab.Screen
+        name="Upload"
+        component={UploadPost}
+        options={{
           headerShown: false,
-        }}/>
+        }}
+      />
 
       <Tab.Screen
         name="AllMentors"
@@ -191,6 +194,11 @@ const HomeStackScreen = () => {
       <HomeStack.Screen
         name="Event"
         component={EventScreen}
+        screenOptions={{headerShown: false}}
+      />
+      <HomeStack.Screen
+        name="Add Event"
+        component={AddEventC}
         screenOptions={{headerShown: false}}
       />
       <HomeStack.Screen
@@ -371,16 +379,12 @@ const AppStack = () => {
             ),
           }}
         />
-         <Drawer.Screen
+        <Drawer.Screen
           name="Maps"
           component={Location}
           options={{
             drawerIcon: ({color}) => (
-              <Ionicons
-                name="location"
-                size={22}
-                color={color}
-              />
+              <Ionicons name="location" size={22} color={color} />
             ),
           }}
         />
