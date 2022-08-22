@@ -83,6 +83,14 @@ class MentorProfileSerializer(serializers.ModelSerializer):
         model = MentorProfile
         fields = ['id', 'expertise', 'experience', 'education', 'latitude', 'longitude']
 
+class MentorLocationSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(read_only=True)
+    name = serializers.CharField(source = 'user.name',read_only=True)
+
+    class Meta:
+        model = MentorProfile
+        fields = ['id', 'name', 'latitude', 'longitude']
+
 # class RelatedFieldAlternative(serializers.PrimaryKeyRelatedField):
 #     def __init__(self, **kwargs):
 #         self.serializer = kwargs.pop('serializer', None)

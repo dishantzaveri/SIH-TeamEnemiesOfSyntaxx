@@ -152,6 +152,16 @@ class MentorsList(GenericAPIView):
 		serializer = MentorProfileSerializer(mentors, many=True)
 		return Response(serializer.data)
 
+class MentorsLocationList(GenericAPIView):
+	serializer_class = MentorLocationSerializer
+
+	permission_classes = [permissions.AllowAny]
+
+	def get(self,request):
+		mentors = MentorProfile.objects.all()
+		serializer = MentorLocationSerializer(mentors, many=True)
+		return Response(serializer.data)
+
 class EntrepreneurProfileViewSet(viewsets.ModelViewSet):
 	queryset = EntrepreneurProfile.objects.all()
 	serializer_class = EntrepreneurProfileSerializer
