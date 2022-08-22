@@ -133,7 +133,7 @@ class MentorProfileViewSet(viewsets.ModelViewSet):
 	permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 	def get_queryset(self):
-		return MentorProfile.objects.get(user=self.request.user)
+		return MentorProfile.objects.filter(user=self.request.user)
 	
 	def perform_create(self,serializer):
 		serializer.save(user = self.request.user)
@@ -158,7 +158,7 @@ class EntrepreneurProfileViewSet(viewsets.ModelViewSet):
 	permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 	def get_queryset(self):
-		return EntrepreneurProfile.objects.get(user=self.request.user)
+		return EntrepreneurProfile.objects.filter(user=self.request.user)
 	
 	def perform_create(self,serializer):
 		serializer.save(user = self.request.user)
@@ -224,7 +224,7 @@ class ConnectMenteeView(GenericAPIView):
 	permission_classes = [custom_permissions.IsMentorOrReadOnly]
 
 	def get(self):
-		return Mentorship.objects.all(mentor = self.request.user)
+		return Mentorship.objects.filter(mentor = self.request.user)
 	
 	def post(self,serializer):
 		data = self.request.data

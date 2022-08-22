@@ -56,6 +56,10 @@ class User(AbstractUser):
         token = Token.objects.get(user=User.objects.get(email=self.email))
         return token.key
 
+def user_directory_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
+    return 'user_{0}/{1}'.format(instance.user.name, filename)
+
 class Startup(models.Model):
     user = models.ForeignKey(User, related_name = 'startup', on_delete=models.CASCADE)
     legalNameOfBusiness = models.CharField(max_length=255,null=True, blank=True)
@@ -71,6 +75,7 @@ class Startup(models.Model):
     stateJurisdiction = models.CharField(max_length=255, null=True, blank=True)
     centerJurisdiction = models.CharField(max_length=255, null=True, blank=True)
     aadhaar_linked = models.CharField(max_length=255, null=True, blank=True)
+    pitch_deck = models.FileField(upload_to=user_directory_path,null=True,blank=True)
 
     def __str__(self):
         return self.tradeName
