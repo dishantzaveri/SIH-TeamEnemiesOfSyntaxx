@@ -78,10 +78,11 @@ class MentorProfileSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
     experience = WorkExperienceSerializer(source = 'user.experience', many=True, read_only=True)
     education = EducationSerializer(source = 'user.education', many=True, read_only=True)
+    profile_pic = serializers.ImageField(source = 'user.profile_pic', read_only=True)
 
     class Meta:
         model = MentorProfile
-        fields = ['id', 'expertise', 'experience', 'education', 'latitude', 'longitude']
+        fields = ['id', 'expertise', 'experience', 'education', 'latitude', 'longitude','profile_pic']
 
 class MentorLocationSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
@@ -115,10 +116,11 @@ class EntrepreneurProfileSerializer(serializers.ModelSerializer):
     # mentor = RelatedFieldAlternative(queryset=MentorProfile.objects.all(), serializer=MentorProfileSerializer,required=False)
     experience = WorkExperienceSerializer(source = 'user.experience', many=True, read_only=True)
     education = EducationSerializer(source = 'user.education', many=True, read_only=True)
+    profile_pic = serializers.ImageField(source = 'user.profile_pic', read_only=True)
 
     class Meta:
         model = EntrepreneurProfile
-        fields = ['name','id','startup', 'mentor', 'experience', 'education']
+        fields = ['name','id','startup', 'mentor', 'experience', 'education', 'profile_pic']
     
     def get_mentor(self,obj):
         current_entrepreneur = None
