@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { BiSearch, BiRightArrowAlt } from "react-icons/bi";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../features/auth/authSlice.js";
 import { useEffect } from "react";
+import { SimpleMap } from "../components/Map/Map.jsx";
+import { useGetFundingPlacesQuery, useGetFundingRegionBarQuery } from "../features/list/listAPISlice.jsx";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -101,11 +103,41 @@ const Footer = () => {
 };
 
 const Home = () => {
+  const {data, isLoading} = useGetFundingPlacesQuery()
+  // const {data, isLoading} = useGetFundingRegionBarQuery()
+  // const {data, isLoading} = useGetFundingPlacesQuery()
+  // const {data, isLoading} = useGetFundingPlacesQuery()
+  // const {data, isLoading} = useGetFundingPlacesQuery()
+  // const {data, isLoading} = useGetFundingPlacesQuery()
+  // const {data, isLoading} = useGetFundingPlacesQuery()
+  // const {data, isLoading} = useGetFundingPlacesQuery()
+  const [locations, setLocations] = useState(null)
+  console.log(data)
+  useEffect(() => {
+    console.log(data)
+    if(data){
+      let array = []
+      Object.values(data)[0].map((item, i) => {
+        array.push({
+          lat: data.Latitude[i],
+          lng: data.Longitude[i],
+          name: data.city[i]
+        })
+      })
+      setLocations(array)
+    }
+    console.log(locations)
+  }, [data])
   return (
     <div className="bg-gray-50">
       <Header />
       <Categories />
       <Section1 />
+      {locations && 
+        <div className="px-24">
+          <SimpleMap location={locations} zoomLevel={4} h={'700px'} />
+        </div>
+      }
       <Footer />
     </div>
   );

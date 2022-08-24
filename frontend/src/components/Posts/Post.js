@@ -6,7 +6,7 @@ import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import ChatOutlinedIcon from '@material-ui/icons/ChatOutlined';
 import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
 import SendOutlinedIcon from '@material-ui/icons/SendOutlined';
-import { useGetPostsQuery } from '../../features/feed/postSlice';
+import { useGetPostsQuery } from '../../features/feed/postAPISlice';
 import { VscLoading } from 'react-icons/vsc';
 
 const Post = forwardRef(({ name, description, message, photoUrl }, ref) => {

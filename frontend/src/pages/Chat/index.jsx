@@ -24,7 +24,7 @@ const Chat = () => {
   }, []);
 
   return (
-    <div className="flex">
+    <div className="flex w-screen h-screen overflow-hidden">
       <Sidebar usersList={users} />
       <Room />
     </div>

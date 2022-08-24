@@ -13,7 +13,7 @@ import InsertLinkIcon from "@material-ui/icons/InsertLink";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import OndemandVideoIcon from '@material-ui/icons/OndemandVideo';
 import { imageUploadHandler } from "./Post.utils";
-import { usePostPostMutation } from "../../features/feed/postSlice";
+import { usePostPostMutation } from "../../features/feed/postAPISlice";
 
 const CreatePosts = () => {
   const classes = Styles();
