@@ -12,7 +12,7 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Fade from '@mui/material/Fade';
-import logo from '../../assets/logo.png'
+import logo from '../../assets/logo2.png'
 
 const Header = ({ event }) => {
     const languages = [

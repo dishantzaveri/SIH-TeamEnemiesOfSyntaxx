@@ -19,7 +19,8 @@ const Item = styled(Paper)(({ theme }) => ({
 	color: theme.palette.text.secondary,
 }));
 
-export default function MentorsList() {
+export default function MentorsList({data}) {
+	console.log(data)
 	return (
         <>
         <div className="searchbar" class=" py-4" >

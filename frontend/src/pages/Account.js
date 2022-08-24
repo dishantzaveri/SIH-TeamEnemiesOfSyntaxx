@@ -4,37 +4,11 @@ import { MdEmail } from "react-icons/md";
 import { FaBirthdayCake } from "react-icons/fa";
 import { AiFillEdit } from "react-icons/ai";
 import { useSelector } from "react-redux";
+import { useGetProfileQuery } from "../features/profile/profileAPISlice";
 const Account = () => {
-  const [data, setData] = useState([]);
-  const { token } = useSelector((state) => state.auth);
-  useEffect(() => {
-    console.log(token);
-    var myHeaders = new Headers();
-    myHeaders.append(
-      "Authorization",
-      `Token 72f957f003d1ae579df255c5e46c5adefcb0d7c7`
-    );
-
-    var requestOptions = {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow",
-    };
-
-    fetch(
-      "https://vismayvora.pythonanywhere.com/account/entrepreneur/",
-      requestOptions
-    )
-      .then((response) => response.text())
-      .then((result) => {
-        console.log(result);
-        // console.log(JSON.parse(result)[0].startup);
-
-        console.log("hello");
-        setData(JSON.parse(result)[0]);
-      })
-      .catch((error) => console.log("error", error));
-  }, []);
+  const {is_entrepreneur} = useSelector(state => state.auth);
+  const {data, isLoading, error} = useGetProfileQuery(is_entrepreneur ? 'entrepreneur' : 'mentor');
+  console.log(data, error)
   return (
     <div>
       <Navbar />

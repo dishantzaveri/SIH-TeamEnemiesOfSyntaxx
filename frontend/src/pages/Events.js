@@ -6,6 +6,8 @@ import GrainOutlined from "@material-ui/icons/GrainOutlined";
 import { logout } from "../features/auth/authSlice";
 import "./Events.css";
 import axios from "axios";
+import { useGetEventsQuery } from "../features/events/eventsAPISlice";
+import { VscLoading } from "react-icons/vsc";
 
 const Event = ({ event }) => {
   return (
@@ -44,20 +46,21 @@ const Event = ({ event }) => {
 };
 
 const Events = () => {
-  const [events, setEvents] = useState([]);
-  useEffect(() => {
-    getEvents();
-  }, []);
+  // const [events, setEvents] = useState([]);
+  // useEffect(() => {
+  //   getEvents();
+  // }, []);
 
-  const getEvents = async () => {
-    const res = await axios.get(
-      "https://vismayvora.pythonanywhere.com/api/session/"
-    );
+  // const getEvents = async () => {
+  //   const res = await axios.get(
+  //     "https://vismayvora.pythonanywhere.com/api/session/"
+  //   );
 
-    console.log(res.data);
-    setEvents(res.data);
-  };
+  //   console.log(res.data);
+  //   setEvents(res.data);
+  // };
 
+  const { data, isLoading, error } = useGetEventsQuery()
   const Header = () => {
     const dispatch = useDispatch();
     const { token } = useSelector((state) => state.auth);
@@ -174,10 +177,17 @@ const Events = () => {
             rowGap: "50px",
           }}
         >
-          {events.map((event) => (
+          {data && data.map((event) => (
             <Event event={event} />
           ))}
         </div>
+        {
+          isLoading && 
+          <div className='w-full flex flex-col justify-center items-center my-8'>
+            <VscLoading className='w-8 h-8 animate-spin text-center text-gray-600' />
+            <h1 className='text-xl mt-2'>Loading...</h1>
+          </div>
+        }
       </div>
     </div>
   );

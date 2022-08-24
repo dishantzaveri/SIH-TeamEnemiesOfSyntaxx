@@ -6,6 +6,7 @@ import "../../static/css/login.css";
 import { useNavigate } from "react-router-dom";
 import { CometChat } from "@cometchat-pro/chat";
 import * as CONSTANTS from "../../constants/constants";
+import { usePostMutation } from "../../features/profile/profileAPISlice";
 // Importing componenets
 // import FacebookLogin from "./facebook";
 
@@ -20,6 +21,17 @@ const RegisterMentee = () => {
   });
   const [pass, setPass] = useState("");
   const [registerMentee] = useRegisterMenteeMutation();
+  const [post] = usePostMutation();
+
+  const postProfile = async (user) => {
+    const userProfile = {}
+    try {
+      const profile = await post({profile: userProfile, type: 'entrepreneur'}).unwrap();
+      console.log(profile)
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const register = async () => {
     if (pass !== inputs.password) {
@@ -31,7 +43,10 @@ const RegisterMentee = () => {
           email: inputs.email,
           password: inputs.password,
         }).unwrap();
-        const user = { ...data, isMentee: true, isMentor: false };
+        const user = { ...data };
+        if(data) {
+          postProfile(user);
+        }
         dispatch(setCredentails(user));
         localStorage.setItem("user", JSON.stringify(user));
         const uuid = inputs.name.split(" ")[0] + inputs.email.split("@")[0];
