@@ -110,7 +110,7 @@ function SignUpMentor({navigation}) {
         style={styles.button}
         onPress={() => {
           saveData();
-          navigation.navigate('Login');
+          navigation.navigate('Onboarding');
           // console.log("Signed Up");
         }}>
         <Text style={styles.textStyle}>Sign Up</Text>

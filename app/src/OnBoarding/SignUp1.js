@@ -110,7 +110,7 @@ function SignUp1({navigation}) {
         style={styles.button}
         onPress={() => {
           saveData();
-          navigation.navigate('Login1');
+          navigation.navigate('Onboarding1');
           // console.log("Signed Up");
         }}>
         <Text style={styles.textStyle}>Sign Up</Text>

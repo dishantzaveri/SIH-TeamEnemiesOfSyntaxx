@@ -23,7 +23,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Profile2 = ({ navigation }) => {
     const { colors } = useTheme();
-    const [gst,setGst] = useState('');
+    const [gst, setGst] = useState('');
     const [isModalVisible, setModalVisible] = useState(false);
     const [startdate, setStartDate] = useState('');
     const [enddate, setEndDate] = useState('');
@@ -89,7 +89,7 @@ const Profile2 = ({ navigation }) => {
 
         var formdata = new FormData();
         formdata.append("job_title", jobcategory);
-        formdata.append("company_name",companyname);
+        formdata.append("company_name", companyname);
         formdata.append("start_date", startdate2);
         formdata.append("end_date", enddate2);
 
@@ -263,7 +263,7 @@ const Profile2 = ({ navigation }) => {
                     <Text style={styles.nameInput}>Please add Education, Get immediate access to mentors.</Text>
 
                 </View>
-               
+
                 <View style={styles.card}>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 10 }}>
 
@@ -329,7 +329,7 @@ const Profile2 = ({ navigation }) => {
                                         }}
 
                                     />
-                                     <Subheading>To*</Subheading>
+                                    <Subheading>To*</Subheading>
                                     <TextInput
                                         value={enddate2}
                                         onChangeText={setEndDate2}
@@ -343,7 +343,7 @@ const Profile2 = ({ navigation }) => {
                                         }}
 
                                     />
-                                   
+
                                     <RadioButton.Group onValueChange={j => setWorkhere(j)} value={workhere}>
                                         <View style={{ flexDirection: 'column' }}>
                                             {works.map((i, k) => (
@@ -410,12 +410,12 @@ const Profile2 = ({ navigation }) => {
                                         }}
                                     />
 
-                                   
+
 
                                     <View style={styles.button2}>
                                         <Button style={styles.button3} labelStyle={styles.label1} >Delete
                                         </Button>
-                                        <Button onPress = {sendStartups} style={styles.button4} labelStyle={styles.label2}>Save
+                                        <Button onPress={sendStartups} style={styles.button4} labelStyle={styles.label2}>Save
                                         </Button>
                                     </View>
                                 </View>
@@ -478,19 +478,14 @@ const Profile2 = ({ navigation }) => {
                         <Text style={styles.nameInput4}>Expected Salary.</Text>
                         <Text style={styles.nameInput3}>6 LPA.</Text>
                     </View>
-
-
-
-
                 </View>
-
-
-
-
-
-
-
-
+                <View>
+                    <Button style={styles.button5} labelStyle={styles.label2}
+                        onPress={() =>
+                            navigation.navigate('Login')
+                        }>Next
+                    </Button>
+                </View>
             </ScrollView>
         </View >
     );
@@ -503,16 +498,18 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         marginHorizontal: 20,
         marginVertical: 10,
-        // elevation: 3,
-        // backgroundColor: '#fff',
-        // shadowOffset: { width: 1, height: 1 },
-        // shadowColor: '#333',
-        // shadowOpacity: 0.05,
-        // shadowRadius: 1,
         borderRadius: 15,
         height: height * 0.13,
         borderColor: '#D9D9D9',
         borderWidth: 1,
+    },
+    button5: {
+        width: width * 0.2,
+        alignSelf: 'flex-end',
+        backgroundColor: '#00CFDE',
+        margin: 20,
+        borderWidth: 1,
+        borderRadius: 10,
     },
     card2: {
         padding: 10,
@@ -537,12 +534,6 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         marginHorizontal: 20,
         marginVertical: 10,
-        // elevation: 3,
-        // backgroundColor: '#fff',
-        // shadowOffset: { width: 1, height: 1 },
-        // shadowColor: '#333',
-        // shadowOpacity: 0.05,
-        // shadowRadius: 1,
         borderRadius: 15,
         height: height * 0.3,
         borderColor: '#D9D9D9',

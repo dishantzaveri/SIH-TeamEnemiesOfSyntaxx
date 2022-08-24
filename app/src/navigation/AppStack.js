@@ -7,11 +7,6 @@ import VideoCall from '../components/App/VideoCall';
 import Account from '../components/Profile/Account';
 import ChatBot from '../components/ChatBot';
 import {ActiveMentorships, Mentees, Mentors, WelcomePage} from '../pages';
-import Onboarding1 from '../pages/Onboarding1';
-import Onboarding2 from '../pages/Onboarding2';
-import Onboarding3 from '../pages/Onboarding3';
-import Onboarding4 from '../pages/Onboarding4';
-import Onboarding5 from '../pages/Onboarding5';
 import Careertv from '../pages/Careertv';
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -36,42 +31,27 @@ import ReferralClub from '../pages/ReferralClub';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import UploadPost from '../components/Posts/UploadPost';
 import AllPostMain from '../components/Posts/AllPostMain';
-
+import { NativeEventEmitter, NativeModules } from 'react-native';
 import {JobDetail, Jobs, JobSeekers, MentorMenteesDetail} from '../pages';
-import SwiperScreens from '../OnBoarding/SwiperScreens';
 import {NavigationContainer} from '@react-navigation/native';
 import RazorpayScreens from '../pages/RazorpayScreens';
-import Profile1 from '../components/Profile/Profile1';
-import Profile2 from '../components/Profile/Profile2';
 import Location from '../pages/Maps';
 import AddEventC from '../pages/AddEventC';
+import { AlanView } from '@alan-ai/alan-sdk-react-native';
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 const HomeStack = createNativeStackNavigator();
-const OnboardingStack = createNativeStackNavigator();
 const BlogStack = createNativeStackNavigator();
 const ResumeStack = createNativeStackNavigator();
 const HomeScreensStack = createNativeStackNavigator();
-const AuthStack = createNativeStackNavigator();
+
 const AllTabsStack = createNativeStackNavigator();
 const MentorStack = createNativeStackNavigator();
-
-function JobsTab() {
-  return (
-    <Tab.Navigator
-      initialRouteName="Jobs"
-      screenOptions={({route}) => ({
-        tabBarIcon: () => icons[route.name],
-      })}>
-      <Tab.Screen name="Jobs" component={Jobs} options={{headerShown: false}} />
-      <Tab.Screen
-        name="JobSeekers"
-        component={JobSeekers}
-        options={{headerShown: false}}
-      />
-    </Tab.Navigator>
-  );
-}
+const { AlanManager, AlanEventEmitter } = NativeModules;
+const alanEventEmitter = new NativeEventEmitter(AlanEventEmitter);
+const subscription = alanEventEmitter.addListener('command', (data) => {
+  console.log(`got command event ${JSON.stringify(data)}`);
+});
 
 const MentorsScreens = () => {
   return (
@@ -152,13 +132,9 @@ function Tabs() {
         }}
       />
 
-      <Tab.Screen
-        name="Upload"
-        component={UploadPost}
-        options={{
+      <Tab.Screen name="Upload" component={UploadPost}  options={{
           headerShown: false,
-        }}
-      />
+        }}/>
 
       <Tab.Screen
         name="AllMentors"
@@ -214,48 +190,6 @@ const HomeStackScreen = () => {
     </HomeStack.Navigator>
   );
 };
-const Onboarding = () => {
-  return (
-    <OnboardingStack.Navigator screenOptions={{headerShown: false}}>
-      <OnboardingStack.Screen
-        name="Onboarding1"
-        component={Onboarding1}
-        screenOptions={{headerShown: false}}
-      />
-      <OnboardingStack.Screen
-        name="Onboarding2"
-        component={Onboarding2}
-        screenOptions={{headerShown: false}}
-      />
-      <OnboardingStack.Screen
-        name="Onboarding3"
-        component={Onboarding3}
-        screenOptions={{headerShown: false}}
-      />
-      <OnboardingStack.Screen
-        name="Onboarding4"
-        component={Onboarding4}
-        screenOptions={{headerShown: false}}
-      />
-      <OnboardingStack.Screen
-        name="Onboarding5"
-        component={Onboarding5}
-        screenOptions={{headerShown: false}}
-      />
-      <OnboardingStack.Screen
-        name="Profile1"
-        component={Profile1}
-        screenOptions={{headerShown: false}}
-      />
-      <OnboardingStack.Screen
-        name="Profile2"
-        component={Profile2}
-        screenOptions={{headerShown: false}}
-      />
-    </OnboardingStack.Navigator>
-  );
-};
-
 const ResumeStackScreen = () => {
   return (
     <ResumeStack.Navigator screenOptions={{headerShown: false}}>
@@ -379,25 +313,19 @@ const AppStack = () => {
             ),
           }}
         />
-        <Drawer.Screen
+         <Drawer.Screen
           name="Maps"
           component={Location}
           options={{
             drawerIcon: ({color}) => (
-              <Ionicons name="location" size={22} color={color} />
+              <Ionicons
+                name="location"
+                size={22}
+                color={color}
+              />
             ),
           }}
         />
-        <Drawer.Screen
-          name="Onboarding"
-          component={Onboarding}
-          options={{
-            drawerIcon: ({color}) => (
-              <Entypo name="paper-plane" size={22} color={color} />
-            ),
-          }}
-        />
-
         <Drawer.Screen
           name="Careertv"
           component={Careertv}
@@ -463,6 +391,7 @@ const AppStack = () => {
           }}
         />
       </Drawer.Navigator>
+      <AlanView projectid={'ecc5936429f8831a0a3f3bd73ff973822e956eca572e1d8b807a3e2338fdd0dc/stage'}/>
     </NavigationContainer>
   );
 };
