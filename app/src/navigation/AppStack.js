@@ -5,7 +5,6 @@ import CustomDrawer from '../components/CustomDrawer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import VideoCall from '../components/App/VideoCall';
 import Account from '../components/Profile/Account';
-import ChatBot from '../components/ChatBot';
 import {ActiveMentorships, Mentees, Mentors, WelcomePage} from '../pages';
 import Careertv from '../pages/Careertv';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -300,7 +299,7 @@ const AppStack = () => {
           }}
         />
 
-        <Drawer.Screen
+        {/* <Drawer.Screen
           name="Help"
           component={ChatBot}
           options={{
@@ -312,7 +311,7 @@ const AppStack = () => {
               />
             ),
           }}
-        />
+        /> */}
          <Drawer.Screen
           name="Maps"
           component={Location}
