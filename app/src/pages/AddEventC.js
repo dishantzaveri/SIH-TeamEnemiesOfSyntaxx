@@ -17,18 +17,24 @@ const AddEventC = () => {
   const [title, setTitle] = useState('');
   const [desc, setDesc] = useState('');
   const [image, setImage] = useState('');
-  const [ytLink, setYtLink] = useState('');
+  const [targetAmount, setTargetAmount] = useState(0);
+  const [collectedAmount, setCollectedAmount] = useState(0);
+  const [eventDate, setEventDate] = useState('');
+  const [targetVolunteers, setTargetVolunteers] = useState(0);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState([]);
-  const [startups, setStartups] = useState([]);
   const post = async () => {
-    console.log(image);
+    console.log(value);
     const formdata = new FormData();
     formdata.append('title', title);
-    formdata.append('body', desc);
-    formdata.append('images_post', image);
-
+    formdata.append('description', desc);
+    formdata.append('images', image);
+    formdata.append('targetAmount', parseInt(targetAmount));
+    formdata.append('collectedAmount', parseInt(collectedAmount));
+    formdata.append('event_date', eventDate);
+    formdata.append('targetVolunteers', parseInt(targetVolunteers));
+    formdata.append('startup', value);
     var myHeaders = new Headers();
     myHeaders.append(
       'Authorization',
@@ -46,14 +52,13 @@ const AddEventC = () => {
       redirect: 'follow',
     };
 
-    fetch('https://vismayvora.pythonanywhere.com/api/posts/', requestOptions)
+    fetch('https://vismayvora.pythonanywhere.com/news/funding/', requestOptions)
       .then(response => response.text())
       .then(result => console.log(result))
       .catch(error => console.log('error', error));
 
     setTitle('');
     setDesc('');
-    setYtLink('');
   };
   const selectImage = async () => {
     const res = await launchImageLibrary({
@@ -151,6 +156,9 @@ const AddEventC = () => {
               setValue={setValue}
               setItems={setItems}
               placeholder="Select a Startup"
+              textStyle={{
+                fontSize: 16,
+              }}
             />
           )}
           <View
@@ -159,7 +167,7 @@ const AddEventC = () => {
               borderRadius: 10,
               elevation: 2,
               backgroundColor: 'white',
-              marginBottom: 20,
+              marginVertical: 20,
             }}>
             <TextInput
               value={title}
@@ -187,6 +195,42 @@ const AddEventC = () => {
           </View>
           <View
             style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}>
+            <View
+              style={{
+                padding: 5,
+                borderRadius: 10,
+                elevation: 2,
+                backgroundColor: 'white',
+                marginVertical: 20,
+              }}>
+              <TextInput
+                value={targetAmount}
+                onChangeText={e => setTargetAmount(e)}
+                style={styles.textInput}
+                placeholder="Targeted Amount"
+              />
+            </View>
+            <View
+              style={{
+                padding: 5,
+                borderRadius: 10,
+                elevation: 2,
+                backgroundColor: 'white',
+                marginVertical: 20,
+              }}>
+              <TextInput
+                value={collectedAmount}
+                onChangeText={e => setCollectedAmount(e)}
+                style={styles.textInput}
+                placeholder="Collected Amount"
+              />
+            </View>
+          </View>
+          <View
+            style={{
               padding: 5,
               borderRadius: 10,
               elevation: 2,
@@ -194,10 +238,25 @@ const AddEventC = () => {
               marginVertical: 20,
             }}>
             <TextInput
-              value={ytLink}
-              onChangeText={e => setYtLink(e)}
+              value={eventDate}
+              onChangeText={e => setEventDate(e)}
               style={styles.textInput}
-              placeholder="Enter YouTube Link"
+              placeholder="Event Date in DD-MM-YYYY"
+            />
+          </View>
+          <View
+            style={{
+              padding: 5,
+              borderRadius: 10,
+              elevation: 2,
+              backgroundColor: 'white',
+              marginVertical: 20,
+            }}>
+            <TextInput
+              value={targetVolunteers}
+              onChangeText={e => setTargetVolunteers(e)}
+              style={styles.textInput}
+              placeholder="Target Volunteers"
             />
           </View>
           <View
