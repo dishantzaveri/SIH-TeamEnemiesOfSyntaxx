@@ -1,9 +1,14 @@
-import React from "react";
-import  Navbar  from "../components/Navbar";
+import React, { useEffect, useState } from "react";
+import Navbar from "../components/Navbar";
 import { MdEmail } from "react-icons/md";
 import { FaBirthdayCake } from "react-icons/fa";
 import { AiFillEdit } from "react-icons/ai";
+import { useSelector } from "react-redux";
+import { useGetProfileQuery } from "../features/profile/profileAPISlice";
 const Account = () => {
+  const {is_entrepreneur} = useSelector(state => state.auth);
+  const {data, isLoading, error} = useGetProfileQuery(is_entrepreneur ? 'entrepreneur' : 'mentor');
+  console.log(data, error)
   return (
     <div>
       <Navbar />
@@ -16,7 +21,7 @@ const Account = () => {
             />
 
             <h1 className="font-bold text-lg cursor-pointer mt-4 self-center">
-              Angelina
+              {data?.name}
             </h1>
             <div className="mt-4">
               <div className="flex items-center mt-2">
@@ -39,30 +44,54 @@ const Account = () => {
               </div>
               <div>
                 <p className="font-semibold text-base">Experience : </p>
-                <p>
-                  <span className="font-semibold">Company</span> : Google
-                </p>
-                <p>
-                  <span className="font-semibold">Role</span> : Software
-                  Engineer
-                </p>
-                <p>
-                  <span className="font-semibold">Period</span> : 2020 June -
-                  2021 July
-                </p>
+                {data?.experience?.map((exp) => (
+                  <>
+                    <p>
+                      <span className="font-semibold">Company</span> :{" "}
+                      {exp.company_name}
+                    </p>
+                    <p>
+                      <span className="font-semibold">Role</span> :{" "}
+                      {exp.job_title}
+                    </p>
+                    <p>
+                      <span className="font-semibold">Period</span> :{" "}
+                      {exp.start_date} - {exp.end_date}
+                    </p>
+                    <p>
+                      <span className="font-semibold">Location</span> :{" "}
+                      {exp.location}
+                    </p>
+                    <p>
+                      <span className="font-semibold">Industry</span> :{" "}
+                      {exp.industry}
+                    </p>
+                  </>
+                ))}
               </div>
               <div className="mt-4">
                 <p className="font-semibold text-base">Education : </p>
-                <p>
-                  <span className="font-semibold">College</span> : DJ Sanghvi
-                </p>
-                <p>
-                  <span className="font-semibold">Year</span> : 2018-2022
-                </p>
-                <p>
-                  <span className="font-semibold">Course</span> : Computer
-                  Engineering
-                </p>
+                {data?.education?.map((edu) => (
+                  <>
+                    <p>
+                      <span className="font-semibold">College</span> :{" "}
+                      {edu.institute}
+                    </p>
+                    <p>
+                      <span className="font-semibold">Year</span> :{" "}
+                      {edu.start_date.split("-")[0]} -{" "}
+                      {edu.end_date.split("-")[0]}
+                    </p>
+                    <p>
+                      <span className="font-semibold">Course</span> :{" "}
+                      {edu.degree} in {edu.study_field}
+                    </p>
+                    <p>
+                      <span className="font-semibold">Grade</span> : {edu.grade}{" "}
+                      cgpa
+                    </p>
+                  </>
+                ))}
               </div>
             </div>
             <div className="ml-8 mt-4 shadow bg-white shadow-gray-300  p-[20px] rounded min-w-[600px] max-w-[700px]">

@@ -59,7 +59,7 @@ const Sidebar = ({ usersList }) => {
           />
         </div>
       </div>
-      <div className="overflow-auto">
+      <div className="h-[609px] scroll-smooth scrollbar-thin scrollbar-thumb-purple-gray-700 scrollbar-track-purple-gray-100 overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full">
         {usersList.map((user) => (
           <ChatTile key={user.uid} user={user} />
         ))}

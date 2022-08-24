@@ -23,9 +23,6 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 body: { ...credentials }
             })
         }),
-        getProfile: builder.query({
-            query: () => '/news/funding/'
-        }),
     })
 })
 

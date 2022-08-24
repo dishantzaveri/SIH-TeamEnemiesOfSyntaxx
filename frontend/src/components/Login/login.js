@@ -25,7 +25,8 @@ const Login = ({ setLogin }) => {
         email: inputs.email,
         password: inputs.password,
       }).unwrap();
-      const user = { ...data, isMentee: false, isMentor: true };
+      console.log(data)
+      const user = { ...data };
       dispatch(setCredentails(user));
       localStorage.setItem("user", JSON.stringify(user));
       const uuid = data.name.split(" ")[0] + data.email.split("@")[0];
