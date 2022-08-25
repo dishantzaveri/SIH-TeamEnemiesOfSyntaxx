@@ -82,7 +82,7 @@ const Onboarding1 = ({route}) => {
             );
           })
           .catch(error => console.log('error', error));
-        navigation.navigate('Profile2', {
+        navigation.navigate('Onboarding2', {
           token: JSON.parse(result).token,
         });
       })

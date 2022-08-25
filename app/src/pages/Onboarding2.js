@@ -15,7 +15,7 @@ import {height, width} from '../Consts';
 import {useTheme} from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import {useNavigation} from '@react-navigation/native';
-
+import gstLogo from '../assets/gst.png';
 export default function Onboarding2({}) {
   const {colors} = useTheme();
   const navigation = useNavigation();
@@ -45,111 +45,36 @@ export default function Onboarding2({}) {
           style={{
             marginTop: 10,
           }}>
-          <Text style={styles.text}>Please tell about your education.</Text>
+          <Text style={styles.text}>Eligibility Criteria for a Startup.</Text>
         </View>
         <View
           style={{
-            alignSelf: 'stretch',
-            paddingHorizontal: 20,
+            alignItems: 'center',
+            padding: 20,
           }}>
-          <View
+          <Image
+            source={gstLogo}
             style={{
-              padding: 5,
-              borderRadius: 10,
-              elevation: 2,
-              backgroundColor: 'white',
-              marginVertical: 10,
-            }}>
-            <TextInput
-              value={institute}
-              onChangeText={e => setInstitute(e)}
-              style={styles.textInput}
-              placeholder="Enter Institute"
-            />
-          </View>
-          <View
+              width: 70,
+              height: 70,
+            }}
+          />
+          <Text
             style={{
-              padding: 5,
-              borderRadius: 10,
-              elevation: 2,
-              backgroundColor: 'white',
-              marginVertical: 10,
+              fontSize: 16,
+              fontWeight: 'bold',
+              marginTop: 20,
             }}>
-            <TextInput
-              value={institute}
-              onChangeText={e => setInstitute(e)}
-              style={styles.textInput}
-              placeholder="Enter Degree"
-            />
-          </View>
-          <View
+            Gst Number of Company
+          </Text>
+          <Text
             style={{
-              padding: 5,
-              borderRadius: 10,
-              elevation: 2,
-              backgroundColor: 'white',
-              marginVertical: 10,
+              fontSize: 14,
+              marginTop: 20,
+              color: 'gray',
             }}>
-            <TextInput
-              value={institute}
-              onChangeText={e => setInstitute(e)}
-              style={styles.textInput}
-              placeholder="Enter Study Field"
-            />
-          </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}>
-            <View
-              style={{
-                padding: 5,
-                borderRadius: 10,
-                elevation: 2,
-                backgroundColor: 'white',
-                marginVertical: 10,
-                width: '40%',
-              }}>
-              <TextInput
-                value={startDate}
-                onChangeText={e => setStartDate(e)}
-                style={styles.textInput}
-                placeholder="Start Date"
-              />
-            </View>
-            <View
-              style={{
-                padding: 5,
-                borderRadius: 10,
-                elevation: 2,
-                backgroundColor: 'white',
-                marginVertical: 10,
-                width: '40%',
-              }}>
-              <TextInput
-                value={endDate}
-                onChangeText={e => setEndDate(e)}
-                style={styles.textInput}
-                placeholder="End Date"
-              />
-            </View>
-          </View>
-          <View
-            style={{
-              padding: 5,
-              borderRadius: 10,
-              elevation: 2,
-              backgroundColor: 'white',
-              marginVertical: 10,
-            }}>
-            <TextInput
-              value={institute}
-              onChangeText={e => setInstitute(e)}
-              style={styles.textInput}
-              placeholder="Enter Grades"
-            />
-          </View>
+            Enter your GST number and we will fetch your company details
+          </Text>
         </View>
         <View style={styles.button}>
           <Button
