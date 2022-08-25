@@ -37,6 +37,8 @@ import RazorpayScreens from '../pages/RazorpayScreens';
 import Location from '../pages/Maps';
 import AddEventC from '../pages/AddEventC';
 import { AlanView } from '@alan-ai/alan-sdk-react-native';
+import Charts from '../pages/Charts';
+import Partners from '../pages/Partners';
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 const HomeStack = createNativeStackNavigator();
@@ -300,8 +302,8 @@ const AppStack = () => {
         />
 
         {/* <Drawer.Screen
-          name="Help"
-          component={ChatBot}
+          name="Partners"
+          component={Partners}
           options={{
             drawerIcon: ({color}) => (
               <Ionicons
@@ -315,6 +317,19 @@ const AppStack = () => {
          <Drawer.Screen
           name="Maps"
           component={Location}
+          options={{
+            drawerIcon: ({color}) => (
+              <Ionicons
+                name="location"
+                size={22}
+                color={color}
+              />
+            ),
+          }}
+        />
+         <Drawer.Screen
+          name="Charts"
+          component={Charts}
           options={{
             drawerIcon: ({color}) => (
               <Ionicons
@@ -346,7 +361,7 @@ const AppStack = () => {
           }}
         />
         <Drawer.Screen
-          name="Search Jobs"
+          name="Search Companies"
           component={SearchJobs}
           options={{
             headerShown: false,
