@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../../features/auth/authSlice";
@@ -8,65 +8,70 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { Dropdown } from "semantic-ui-react";
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import Fade from '@mui/material/Fade';
-import logo from '../../assets/logo2.png'
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Fade from "@mui/material/Fade";
+import logo from "../../assets/logo2.png";
 
 const Header = ({ event }) => {
-    const languages = [
-        { value: '', text: "Options" },
-        { value: 'en', text: "English" },
-        { value: 'hi', text: "Hindi" },
-        { value: 'gu', text: "Gujarati" },
-        { value: 'mr', text: "Marathi" },
-        { value: 'ta', text: "Tamil" }
-      ]
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const open = Boolean(anchorEl);
-    const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
-    };
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
-	const dispatch = useDispatch();
-	const { token } = useSelector((state) => state.auth);
-	console.log(token);
+  const languages = [
+    { value: "", text: "Options" },
+    { value: "en", text: "English" },
+    { value: "hi", text: "Hindi" },
+    { value: "gu", text: "Gujarati" },
+    { value: "mr", text: "Marathi" },
+    { value: "ta", text: "Tamil" },
+  ];
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const dispatch = useDispatch();
+  const { token } = useSelector((state) => state.auth);
+  console.log(token);
 
-	const [activities, setActivities] = React.useState("");
+  const [activities, setActivities] = React.useState("");
 
-	const handleChange = (event) => {
-		setActivities(event.target.value);
-	};
-	
-    const { t } = useTranslation(); 
-  
-    const [lang, setLang] = useState('');
-  
-    // This function put query that helps to 
-    // change the language
-    const handleLanguage = e => { 
-        setLang(e.target.value);
-        let loc = "http://localhost:3000/header/";
-        window.location.replace(loc + "?lng=" + e.target.value);
-    }
-	return (
-		<div className="px-12 py-2 flex justify-between items-center border-b">
-            {/* <h1>{t('welcome')}</h1> */}
+  const handleChange = (event) => {
+    setActivities(event.target.value);
+  };
+
+  const { t } = useTranslation();
+
+  const [lang, setLang] = useState("");
+
+  // This function put query that helps to
+  // change the language
+  const handleLanguage = (e) => {
+    setLang(e.target.value);
+    let loc = "http://localhost:3000/header/";
+    window.location.replace(loc + "?lng=" + e.target.value);
+  };
+  return (
+    <div className="px-12 py-2 flex justify-between items-center border-b">
+      {/* <h1>{t('welcome')}</h1> */}
       <Link className="font-bold " to="/">
-        <img src={logo} style={{height:"80px", width:"100px"}} />
+        <img src={logo} style={{ width: "100px" }} />
       </Link>
-      {(window.location.pathname === '/') && <select value={lang} onChange={handleLanguage}>
-        {languages.map(item => {
-            return (<option key={item.value} 
-            value={item.value}>{item.text}</option>);
-        })}
-        </select>}
-                
-            {/* <label>{t('choose')}</label> */}
-            {/* {token && (
+      {window.location.pathname === "/" && (
+        <select value={lang} onChange={handleLanguage}>
+          {languages.map((item) => {
+            return (
+              <option key={item.value} value={item.value}>
+                {item.text}
+              </option>
+            );
+          })}
+        </select>
+      )}
+
+      {/* <label>{t('choose')}</label> */}
+      {/* {token && (
 				<div className="px-64 flex flex-row justify-between items-center flex-1">
                    
 					<Link to="/feed">
@@ -119,20 +124,19 @@ const Header = ({ event }) => {
     </div>
 				</div>
 			)} */}
-            
-            
-			{/* <Link className="font-bold " to="/">
+
+      {/* <Link className="font-bold " to="/">
 				<img src={logo} style={{height:"80px", width:"100px"}} />
 			</Link> */}
-            
-			{/* {token && ( */}
-			{/* <div className="header__search">
+
+      {/* {token && ( */}
+      {/* <div className="header__search">
           <SearchIcon />
           <input type="text" placeholder="Search bar" />
         </div> */}
-			{/* )} */}
+      {/* )} */}
 
-			{/* <div className={`flex gap-4 ${token && "hidden"} items-center`}>
+      {/* <div className={`flex gap-4 ${token && "hidden"} items-center`}>
           <Link className="font-semibold text-xl" to="/registermentor">
             Become a Mentor
           </Link>
@@ -151,35 +155,37 @@ const Header = ({ event }) => {
           </Link>
         </div> */}
 
+      {token ? (
+        <div className="flex flex-row justify-end items-center flex-1 gap-8">
+          <Link to="/feed">
+            <h1 className="font-medium text-lg">Home</h1>
+          </Link>
 
-			{token ? (
-				<div className="flex flex-row justify-end items-center flex-1 gap-8">
-					
-					<Link to="/feed">
-						<h1 className="font-medium text-lg">Home</h1>
-					</Link>
+          <Link to="/mentors">
+            <h1 className="font-medium text-lg">Startups</h1>
+          </Link>
 
-					<Link to="/mentors">
-						<h1 className="font-medium text-lg">Startups</h1>
-					</Link>
+          <Link to="/chat">
+            <h1 className="font-medium text-lg">Chat</h1>
+          </Link>
 
-					<Link to="/chat">
-						<h1 className="font-medium text-lg">Chat</h1>
-					</Link>
+          <Link to="/myProfile">
+            <h1 className="font-medium text-lg">Profile</h1>
+          </Link>
 
-					<Link to="/myProfile">
-						<h1 className="font-medium text-lg">Profile</h1>
-					</Link>
-
-					
           <div>
             <button
               id="fade-button"
-              aria-controls={open ? 'fade-menu' : undefined}
+              aria-controls={open ? "fade-menu" : undefined}
               aria-haspopup="true"
-              aria-expanded={open ? 'true' : undefined}
+              aria-expanded={open ? "true" : undefined}
               onClick={handleClick}
-              style={{color:"black", fontWeight:500, fontSize:"1.125rem", lineHeight:"1.75rem"}}
+              style={{
+                color: "black",
+                fontWeight: 500,
+                fontSize: "1.125rem",
+                lineHeight: "1.75rem",
+              }}
             >
               Activities
             </button>
@@ -187,19 +193,27 @@ const Header = ({ event }) => {
               id="fade-menu"
               fullwidth
               MenuListProps={{
-                'aria-labelledby': 'fade-button',
+                "aria-labelledby": "fade-button",
               }}
               anchorEl={anchorEl}
               open={open}
               onClose={handleClose}
               TransitionComponent={Fade}
-              sx={{margin:"10px", padding:"10px"}}
+              sx={{ margin: "10px", padding: "10px" }}
             >
               <Link to="/events">
-              <MenuItem   sx={{margin:"10px", padding:"10px", width:"120px"}}>Events</MenuItem>
+                <MenuItem
+                  sx={{ margin: "10px", padding: "10px", width: "120px" }}
+                >
+                  Events
+                </MenuItem>
               </Link>
               <Link to="/campaigns">
-              <MenuItem  sx={{margin:"10px", padding:"10px", width:"120px"}}>Campaigns</MenuItem>
+                <MenuItem
+                  sx={{ margin: "10px", padding: "10px", width: "120px" }}
+                >
+                  Campaigns
+                </MenuItem>
               </Link>
             </Menu>
           </div>
@@ -209,8 +223,8 @@ const Header = ({ event }) => {
           >
             Log out
           </button>
-				</div>
-			) : (
+        </div>
+      ) : (
         <div className={`flex gap-4 ${token && "hidden"} items-center`}>
           <Link className="font-semibold text-xl" to="/registermentor">
             Become a Mentor
@@ -230,8 +244,8 @@ const Header = ({ event }) => {
           </Link>
         </div>
       )}
-		</div>
-	);
+    </div>
+  );
 };
 
 export default Header;
