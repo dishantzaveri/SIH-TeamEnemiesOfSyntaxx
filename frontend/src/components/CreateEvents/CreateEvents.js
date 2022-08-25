@@ -11,7 +11,10 @@ import Stack from '@mui/material/Stack';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
 export default function CreateEvents() {
-    const [value, setValue] = React.useState(new Date());
+  const [value3, setValue3] = React.useState(new Date('2022-01-01T00:00:00.000Z'));
+  const [value4, setValue4] = React.useState(new Date('2022-01-01T00:00:00.000Z'));
+    const [value1, setValue1] = React.useState(new Date());
+    const [value2, setValue2] = React.useState(new Date());
   // work 
   const [item, setItem] = useState(['div'])
   function addNewDiv() {
@@ -41,11 +44,11 @@ export default function CreateEvents() {
   const modes = [
     {
       value: 'online',
-      label: 'online',
+      label: 'Online',
     },
     {
       value: 'offline',
-      label: 'offline',
+      label: 'Offline',
     },
   ];
   const [mode, setMode] = React.useState('online');
@@ -70,28 +73,8 @@ class="bg-purple-gray-500 "
       noValidate
       autoComplete="off"
     >
-      <div><h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}>Email</h1>
-      <TextField
-          required
-          id="standard-required"
-          label=""
-          variant="standard"
-        //   placeholder='Email'
-        //   sx={{display:"inline-block"}}
-        />
-      </div>
-      <div><h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}>Name</h1>
-      <TextField
-          required
-          id="standard-required"
-          label=""
-          variant="standard"
-        //   placeholder='Name'
-        />
-      </div>
 
   <Box className='event'>
-        <h2 style={{fontSize:20, margin:10, paddingRight:"20px"}}><b>Work Experience : </b></h2>
 <div>
   {/* {item?.map((currentItem, index) => { */}
    {/* return */}
@@ -114,6 +97,23 @@ class="bg-purple-gray-500 "
    //   placeholder='Name'
    />
  </div>
+ <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}>Image of the Event  </h1>
+ <TextField
+     required
+     id="standard-required"
+     label=""
+     variant="standard"
+   //   placeholder='Name'
+   />
+ </div>
+ <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}> Description about the Event </h1>
+ <TextField
+     id="standard-textarea"
+     label=""
+     multiline
+     variant="standard"
+   />
+ </div>
  <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}> Mode of the Event</h1>
  <TextField
           id="outlined-select-mode"
@@ -131,16 +131,15 @@ class="bg-purple-gray-500 "
         </TextField>
  </div>
  <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}> Start Date </h1>
- <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <Stack spacing={3}>
+ <LocalizationProvider dateAdapter={AdapterDateFns} >
+      <Stack spacing={3} >
       <DatePicker
-          disableFuture
           label="Responsive"
           openTo="year"
           views={['year', 'month', 'day']}
-          value={value}
+          value={value1}
           onChange={(newValue) => {
-            setValue(newValue);
+            setValue1(newValue);
           }}
           renderInput={(params) => <TextField {...params} />}
         />
@@ -148,6 +147,46 @@ class="bg-purple-gray-500 "
     </LocalizationProvider>
  </div>
  <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}>Start Time  </h1>
+ <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <Stack spacing={3}>
+      <TimePicker
+          value={value3}
+          onChange={setValue3}
+          renderInput={(params) => <TextField {...params} />}
+        />
+      </Stack>
+    </LocalizationProvider>
+ </div>
+ <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}> End Date</h1>
+ <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <Stack spacing={3} >
+      <DatePicker
+          disableFuture
+          label="End Date"
+          openTo="month"
+          views={['month', 'day']}
+          value={value2}
+          onChange={(newValue) => {
+            setValue2(newValue);
+          }}
+          renderInput={(params) => <TextField {...params} />}
+          
+        />
+      </Stack>
+    </LocalizationProvider>
+ </div>
+ <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}>End Time  </h1>
+ <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <Stack spacing={3}>
+      <TimePicker
+          value={value4}
+          onChange={setValue4}
+          renderInput={(params) => <TextField {...params} />}
+        />
+      </Stack>
+    </LocalizationProvider>
+ </div>
+ <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}>Maximum number of Registrations  </h1>
  <TextField
      required
      id="standard-required"
@@ -156,24 +195,25 @@ class="bg-purple-gray-500 "
    //   placeholder='Name'
    />
  </div>
- <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}> End Date</h1>
- <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <Stack spacing={3}>
-      <DatePicker
-          disableFuture
-          label="Responsive"
-          openTo="year"
-          views={['year', 'month', 'day']}
-          value={value}
-          onChange={(newValue) => {
-            setValue(newValue);
-          }}
-          renderInput={(params) => <TextField {...params} />}
-        />
-      </Stack>
-    </LocalizationProvider>
+ <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}>Meet Link (if online) </h1>
+ <TextField
+     required
+     id="standard-required"
+     label=""
+     variant="standard"
+   //   placeholder='Name'
+   />
  </div>
- <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}>End Time  </h1>
+ <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}>Venue of Event (if offline)  </h1>
+ <TextField
+     required
+     id="standard-required"
+     label=""
+     variant="standard"
+   //   placeholder='Name'
+   />
+ </div>
+ <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}>Price per ticket  </h1>
  <TextField
      required
      id="standard-required"
