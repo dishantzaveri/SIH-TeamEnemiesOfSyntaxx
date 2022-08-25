@@ -430,7 +430,7 @@ const Home = () => {
               </div>
             }
             {
-              !monthlyFunding && 
+              (!sector?.sector || !sector?.stage) && 
               <div className="h-[350px] animate-pulse">
                 <div className="h-full w-full bg-slate-500 rounded-xl">
                   <div className='w-full h-full flex flex-col justify-center items-center'>
