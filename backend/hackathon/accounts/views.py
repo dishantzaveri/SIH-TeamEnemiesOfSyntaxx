@@ -90,7 +90,7 @@ class StartupDetails(viewsets.ModelViewSet):
 class StartupsList(GenericAPIView):
 	serializer_class = StartupSerializer
 
-	permission_classes = [permissions.IsAuthenticated]
+	permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 	def get(self,request):
 		startups = Startup.objects.all()
@@ -184,7 +184,7 @@ class EntrepreneurProfileViewSet(viewsets.ModelViewSet):
 class EntrepreneursList(GenericAPIView):
 	serializer_class = EntrepreneurProfileSerializer
 
-	permission_classes = [permissions.IsAuthenticated]
+	permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 	def get(self,request):
 		entrepreneurs = EntrepreneurProfile.objects.all()
@@ -305,5 +305,17 @@ class ConnectMentorView(GenericAPIView):
 		if serializer.is_valid():
 			serializer.save()
 		return JsonResponse(serializer.data, status = status.HTTP_202_ACCEPTED)
+
+class ProfileSearch(GenericAPIView):
+	queryset = MentorProfile.objects.all()
+	serializer_class = MentorProfileSerializer
+
+	def post(self,request):
+		expertise = request.POST.get('expertise')
+		expertise_list = MentorProfile.objects.filter(expertise=expertise)
+		print(expertise_list)
+		serializer = MentorProfileSerializer(expertise_list, many=True)
+		return Response(serializer.data)
+
 
 

@@ -86,12 +86,12 @@ class SchemeList(generics.ListCreateAPIView):
 class SchemeDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Scheme.objects.all()
     serializer_class = SchemeSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 class FundingList(generics.ListCreateAPIView):
     queryset = Funding.objects.all()
     serializer_class = FundingSerializer
-    #permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
         serializer.save()
