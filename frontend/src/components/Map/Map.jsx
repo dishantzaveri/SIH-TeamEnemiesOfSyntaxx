@@ -10,10 +10,10 @@ mapboxGl.accessToken =
 export const SimpleMap = ({ zoomLevel, location, h }) => {
   console.log(location)
   return (
-    <div className='rounded-xl'>
+    <div className=''>
       <ReactMapGL
         initialViewState={{
-          latitude: 20.5937,  
+          latitude: 20.5937,
           longitude: 78.9629,
           zoom: zoomLevel,
         }}
@@ -22,7 +22,7 @@ export const SimpleMap = ({ zoomLevel, location, h }) => {
         mapboxAccessToken={MAPBOX_TOKEN}
       >
         {location.map((item, i) => (
-            <Marker longitude={item.lng} latitude={item.lat} anchor='bottom-left'>
+            <Marker longitude={item.longitude} latitude={item.latitude} anchor='bottom-left'>
             <div>
                 <div className="p-1 bg-white border-[1px] rounded border-gray-400">
                     <h1>{item.name}</h1>

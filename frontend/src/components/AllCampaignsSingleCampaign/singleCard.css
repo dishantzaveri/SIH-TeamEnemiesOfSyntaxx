@@ -7,14 +7,15 @@
                0 0  0 2px rgb(255,255,255),
                0.2em 0.2em 0.5em rgba(0,0,0,0.3); */
     box-shadow: 0.2em 0.2em 0.5em rgba(0,0,0,0.3);
-    height: 400px !important;
+    height: 450px !important;
     box-sizing: border-box;
     overflow: hidden;
     margin:2em;
     padding: 5px;
     margin-bottom: 2% !important;
     transition: all 0.3s;
-    display: inline-block
+    display: inline-block;
+    padding: 20px;
 }
 .single-campaign-card:hover{
     /* border: 1px solid gray; */

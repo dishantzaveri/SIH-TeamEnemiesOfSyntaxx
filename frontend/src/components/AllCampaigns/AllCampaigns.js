@@ -9,6 +9,7 @@ import SideNavbar from '../SideNavbar/SideNavbar';
 import { useGetFundsQuery } from '../../features/funding/fundingAPISlice';
 import Location from "@material-ui/icons/LocationOnOutlined";
 import GrainOutlined from "@material-ui/icons/GrainOutlined";
+import Header from '../Header/Header';
 
 const AllCampaigns = () => {
     // const { campaigns, loading, message } = useContext(AllCampaignsContext);
@@ -17,6 +18,7 @@ const AllCampaigns = () => {
     
     return (
         <div className="">
+          <Header />
             {/* {loading ? <Loader /> : null} */}
             {/* <NavBar /> */}
             {/* {message ? */}
@@ -24,7 +26,7 @@ const AllCampaigns = () => {
              {/* : null} */}
             {/* {campaigns ? */}
                 <div className="">
-                    <Navbar />
+                    {/* <Navbar /> */}
                     <div className="px-32 bg-gradient-to-r from-[#2eb6b8] via-blue-300  to-[#DAF0F4] w-full h-64 relative">
         <div className="py-[80px]">
           <h1 className="text-5xl">Funding Campaigns</h1>
