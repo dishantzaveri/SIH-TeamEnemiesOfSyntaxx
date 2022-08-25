@@ -164,22 +164,34 @@ const SwiperScreens = ({navigation}) => {
           loop={false}
           style={styles.animation}
         />
-        <View style={{flexDirection: 'row', alignSelf: 'center', margin: 40}}>
+        <View
+          style={{
+            margin: 40,
+          }}>
+          <Text
+            style={{
+              fontSize: 20,
+              fontWeight: 'bold',
+            }}>
+            Get Started with any one role!
+          </Text>
+        </View>
+        <View style={{flexDirection: 'row', alignSelf: 'center'}}>
+          <TouchableOpacity
+            style={styles.signupButton}
+            onPress={() => {
+              navigation.navigate('SignUp');
+              console.log('Logged In');
+            }}>
+            <Text style={styles.signupTextStyle}>Sign Up</Text>
+          </TouchableOpacity>
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
               navigation.navigate('Login');
               console.log('Logged In');
             }}>
-            <Text style={styles.textStyle}>Mentor</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              navigation.navigate('Login1');
-              console.log('Logged In');
-            }}>
-            <Text style={styles.textStyle}>Entreprenaur</Text>
+            <Text style={styles.textStyle}>Login</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -270,7 +282,10 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     color: 'white',
-
+    fontSize: 18,
+  },
+  signupTextStyle: {
+    color: '#0065ff',
     fontSize: 18,
   },
   button: {
@@ -278,7 +293,20 @@ const styles = StyleSheet.create({
     marginHorizontal: 25,
     padding: 10,
     borderRadius: 10,
-    marginTop: height * 0.2,
+
+    width: 100,
+    alignItems: 'center',
+  },
+  signupButton: {
+    backgroundColor: '#FFFFFF',
+    marginHorizontal: 25,
+    padding: 10,
+    borderRadius: 10,
+
+    width: 100,
+    alignItems: 'center',
+    borderColor: '#0065ff',
+    borderWidth: 1,
   },
 });
 

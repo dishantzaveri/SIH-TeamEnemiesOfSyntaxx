@@ -23,13 +23,17 @@ import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {Dimensions} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {CometChat} from '@cometchat-pro/react-native-chat';
+import {useDispatch, useSelector} from 'react-redux';
+import {setSignUpToken} from '../redux/reducers/user';
 
 const Onboarding1 = ({route}) => {
   const [filePath, setFilePath] = useState({});
   const [Pic, SetPic] = useState('');
   const {colors} = useTheme();
   const navigation = useNavigation();
-  const [token, setToken] = useState('');
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
     console.log(route.params);
   }, []);
@@ -57,13 +61,16 @@ const Onboarding1 = ({route}) => {
     };
 
     fetch(
-      'https://vismayvora.pythonanywhere.com/account/mentor_register/',
+      route.params.role === 'mentor'
+        ? 'https://vismayvora.pythonanywhere.com/account/mentor_register/'
+        : 'https://vismayvora.pythonanywhere.com/account/entrepreneur_register/',
       requestOptions,
     )
       .then(response => response.text())
       .then(result => {
         console.log(result);
         console.log(JSON.parse(result).token);
+        dispatch(setSignUpToken(JSON.parse(result).token));
         const uuid =
           route.params.name.split(' ')[0] + route.params.email.split('@')[0];
         console.log(uuid);

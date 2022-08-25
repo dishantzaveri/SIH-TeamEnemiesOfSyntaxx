@@ -7,6 +7,9 @@ import {
   TouchableOpacity,
   TextInput,
   Image,
+  Dimensions,
+  ScrollView,
+  KeyboardAvoidingView,
 } from 'react-native';
 import PasswordInput from '../components/PassInput';
 import Textinp from '../components/Textinp';
@@ -14,69 +17,30 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {CometChat} from '@cometchat-pro/react-native-chat';
-import * as CONSTANTS from '../CONSTANTS';
+import signInLogo from '../assets/signin.png';
+import DropDownPicker from 'react-native-dropdown-picker';
 function SignUpMentor({navigation}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  // const saveData = async () => {
-  //   var myHeaders = new Headers();
-  //   myHeaders.append(
-  //     'Cookie',
-  //     'csrftoken=o4q1Ihf3JTBVbPIRuFvCtHZVT3RHp0X8; sessionid=0rx0ut9910ocx5ggaz1l6en6khbzxg1n',
-  //   );
-
-  //   var formdata = new FormData();
-  //   formdata.append('email', email);
-  //   formdata.append('password', password);
-  //   formdata.append('name', name);
-
-  //   var requestOptions = {
-  //     method: 'POST',
-  //     headers: myHeaders,
-  //     body: formdata,
-  //     redirect: 'follow',
-  //   };
-
-  //   fetch(
-  //     'https://vismayvora.pythonanywhere.com/account/mentor_register/',
-  //     requestOptions,
-  //   )
-  //     .then(response => response.text())
-  //     .then(result => {
-  //       console.log(result);
-  //       const uuid = name.split(' ')[0] + email.split('@')[0];
-  //       console.log(uuid);
-  //       var cometUser = new CometChat.User(uuid);
-  //       cometUser.setName(name);
-  //       CometChat.createUser(cometUser, CONSTANTS.AUTH_KEY)
-  //         .then(user => {
-  //           console.log('user created', user);
-  //           CometChat.login(uuid, CONSTANTS.AUTH_KEY).then(
-  //             user => {
-  //               console.log('Signup Successful:', {user});
-  //             },
-  //             error => {
-  //               console.log('Login failed with exception:', {error});
-  //             },
-  //           );
-  //         })
-  //         .catch(error => console.log('error', error));
-  //     })
-  //     .catch(error => console.log('error', error));
-  // };
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [items, setItems] = useState([
+    {label: 'Entrepreneur', value: 'entrepreneur'},
+    {label: 'Mentor', value: 'mentor'},
+  ]);
   return (
-    <View style={styles.container}>
-      {/* <LottieView
-        source={require('../assets/owner.json')}
-        autoPlay={true}
-        loop={false}
-
-        style={styles.animation}
-      /> */}
+    <KeyboardAvoidingView style={styles.container}>
+      <Image
+        source={signInLogo}
+        style={{
+          width: Dimensions.get('screen').width,
+          height: 300,
+        }}
+        resizeMode="center"
+      />
       <Textinp
-        marginTop={50}
+        marginTop={20}
         iconShape="person"
         placeholder="Name"
         value={name}
@@ -106,6 +70,22 @@ function SignUpMentor({navigation}) {
         }}
         placeholderTextColor="grey"
       />
+      <DropDownPicker
+        open={open}
+        value={value}
+        items={items}
+        setOpen={setOpen}
+        setValue={setValue}
+        setItems={setItems}
+        placeholder="Select a Role"
+        textStyle={{
+          fontSize: 16,
+        }}
+        containerStyle={{
+          paddingHorizontal: 20,
+          marginTop: 20,
+        }}
+      />
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
@@ -116,20 +96,20 @@ function SignUpMentor({navigation}) {
               email: email,
               password: password,
               name: name,
+              role: value,
             },
           });
           // console.log("Signed Up");
         }}>
         <Text style={styles.textStyle}>Sign Up</Text>
       </TouchableOpacity>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
   },
