@@ -7,65 +7,68 @@ Column,
 FooterLink,
 Heading,
 } from "./FooterStyles";
+import logo from "../../assets/logo2.png";
+import { Link } from "react-router-dom";
+import GoogleIcon from '@mui/icons-material/Google';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import TwitterIcon from '@mui/icons-material/Twitter';
 
 const Footer = () => {
 return (
-	<Box>
+	<Box className="create-button bg-gradient-to-r from-[#c0edf5] via-blue-300  to-[#2eb6b8]">
 	<h1 className="text-purple-gray-600" style={{ textAlign: "center",
-				marginTop: "-50px", marginBottom:"20px" }}>
+				marginTop: "-50px", marginBottom:"20px", fontSize:"20px"}}>
 		MentorDots : Learning from someone who wants you to grow
 	</h1>
-	<Container>
+	<Container >
 		<Row>
 		<Column>
-			<Heading>About Us</Heading>
+			<Heading>Important Links</Heading>
+			<FooterLink href="#">About Us</FooterLink>
 			<FooterLink href="#">FAQ's</FooterLink>
-			<FooterLink href="#">Vision</FooterLink>
 		</Column>
 		<Column>
-			<Heading>Services</Heading>
-			<FooterLink href="#">Writing</FooterLink>
-			<FooterLink href="#">Internships</FooterLink>
-			<FooterLink href="#">Coding</FooterLink>
-			<FooterLink href="#">Teaching</FooterLink>
+			<Heading>Activities</Heading>
+			<FooterLink href="#">Events</FooterLink>
+			<FooterLink href="#">Campaigns</FooterLink>
+            <FooterLink href="#">Government Schemes</FooterLink>
 		</Column>
-		<Column>
-			<Heading>Contact Us</Heading>
-			<FooterLink href="#">Uttar Pradesh</FooterLink>
-			<FooterLink href="#">Ahemdabad</FooterLink>
-			<FooterLink href="#">Indore</FooterLink>
-			<FooterLink href="#">Mumbai</FooterLink>
-		</Column>
-		<Column>
-			<Heading>Social Media</Heading>
+		<Column style={{display:"inline-block", justifyContent:"center"}}>
+        <Link className="font-bold " to="/">
+        <img src={logo} style={{ width: "100px", marginBottom:"10px", justifyContent:"center", alignContent:"center" }} />
+      </Link>
+			{/* <Heading>Social Media</Heading> */}
+            <div style={{marginTop:"50px"}}>
 			<FooterLink href="#">
 			<i className="fab fa-facebook-f">
 				<span style={{ marginLeft: "10px" }}>
-				Facebook
+				<GoogleIcon />
 				</span>
 			</i>
 			</FooterLink>
 			<FooterLink href="#">
 			<i className="fab fa-instagram">
 				<span style={{ marginLeft: "10px" }}>
-				Instagram
+				<GitHubIcon />
 				</span>
 			</i>
 			</FooterLink>
 			<FooterLink href="#">
 			<i className="fab fa-twitter">
-				<span style={{ marginLeft: "10px" }}>
-				Twitter
+				<span >
+				<YouTubeIcon />
 				</span>
 			</i>
 			</FooterLink>
-			<FooterLink href="#">
+			{/* <FooterLink href="#">
 			<i className="fab fa-youtube">
-				<span style={{ marginLeft: "10px" }}>
-				Youtube
+				<span >
+				<TwitterIcon />
 				</span>
 			</i>
-			</FooterLink>
+			</FooterLink> */}
+            </div>
 		</Column>
 		</Row>
 	</Container>
