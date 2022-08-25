@@ -288,7 +288,8 @@ const Home = () => {
       <Section1 />
       <Eligibility />
       <div className="px-24 bg-white h-screen mt-4">
-        <h1 className="text-center text-5xl font-bold py-16">Activities</h1>
+        <h1 className="text-center text-5xl font-bold pt-20">Activities</h1>
+        <h1 className="text-xl text-gray-500 text-center mt-6 mb-12">Find investors & incubators in your region that can support your startup's growth...</h1>
         <div className="grid grid-cols-2 gap-16 my-6">
           <div className="h-full w-full flex flex-col justify-center">
             <h1 className="text-xl font-semibold mb-2">Top Funding Places</h1>
@@ -307,8 +308,9 @@ const Home = () => {
             )}
           </div>
           <div className="h-full w-full flex flex-col justify-center">
-            <h1 className="text-xl font-semibold mb-2">Mentors Located</h1>
-            {mentorLocationLoading && (
+            <h1 className="text-xl font-semibold mb-2">Incubators Located</h1>
+            {
+              mentorLocationLoading && 
               <div className="h-[350px] animate-pulse">
                 <div className="h-full w-full bg-slate-500 rounded-xl">
                   <div className="w-full h-full flex flex-col justify-center items-center">
@@ -317,7 +319,7 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-            )}
+            }
             {mentorLocation && (
               <SimpleMap location={mentorLocation} zoomLevel={3} h={"350px"} />
             )}
