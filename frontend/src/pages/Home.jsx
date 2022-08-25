@@ -31,6 +31,7 @@ import {
 } from "recharts";
 import Header from "../components/Header/Header.js";
 import Eligibility from "../components/Eligibility.js";
+import alanBtn from "@alan-ai/alan-sdk-web";
 
 // const Header = () => {
 //   const dispatch = useDispatch();
@@ -280,6 +281,12 @@ const Home = () => {
       console.log(sector);
     }
   }, [stageSector]);
+
+  useEffect(() => {
+    alanBtn({
+      key: 'ecc5936429f8831a0a3f3bd73ff973822e956eca572e1d8b807a3e2338fdd0dc/stage',
+    });
+  }, []);
 
   return (
     <div className="bg-gray-50">
