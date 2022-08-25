@@ -18,7 +18,7 @@ from rest_framework.decorators import action,api_view
 from rest_framework import generics
 from .recommendation import Myrecommend
 from django.contrib.auth import get_user_model
-
+from django.db.models import Case, When
 import requests, datetime
 from hackathon import settings
 import numpy as np 
@@ -346,11 +346,10 @@ class getRating(GenericAPIView):
 
 	def get(self,request):
 		if not request.user.is_authenticated:
-			return Response("Login first")
+			return Response("Login first")	
 		df=pd.DataFrame(list(Myrating.objects.all().values()))
-		nu=df.user_id.unique().shape[0]
-		current_user_id= request.user.id
-
+		#nu=df.user_id.unique().shape[0]
+		current_user_id= request.user.user.id
 		print("Current user id: ",current_user_id)
 		prediction_matrix,Ymean = Myrecommend()
 		my_predictions = prediction_matrix[:,current_user_id-1]+Ymean.flatten()
@@ -359,8 +358,10 @@ class getRating(GenericAPIView):
 		pred_idxs_sorted=pred_idxs_sorted+1
 		print(pred_idxs_sorted)
 		preserved = Case(*[When(pk=pk, then=pos) for pos, pk in enumerate(pred_idxs_sorted)])
-		movie_list=list(User.objects.filter(id__in = pred_idxs_sorted,).order_by(preserved)[:10])
-		return Response({'movie_list':movie_list})
+		movie_list=list(Myrating.objects.filter(id__in = pred_idxs_sorted,).order_by(preserved)[:10])
+		data = myrating_serializer(movie_list,many=True).data
+		print(movie_list)
+		return Response({'movie_list':data})
 
 
 

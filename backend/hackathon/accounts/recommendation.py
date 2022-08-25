@@ -43,12 +43,17 @@ def Myrecommend():
 		return flattenParams(Xgrad, Thetagrad)
 
 	df=pd.DataFrame(list(Myrating.objects.all().values()))
-	mynu=df.user_id.unique().shape[0]
-	mynm=df.movie_id.unique().shape[0]
+	print(df)
+	mynu=df.entrepreneur_profile_id.unique().shape[0]
+	mynm=df.mentor_profile_id.unique().shape[0]
 	mynf=10
 	Y=np.zeros((mynm,mynu))
 	for row in df.itertuples():
-		Y[row[2]-1, row[4]-1] = row[3]
+		print(row)
+		try:
+			Y[row[2]-1, row[4]-1] = row[3]
+		except:
+			Y[0,0]=row[3]
 	R=np.zeros((mynm,mynu))
 	for i in range(Y.shape[0]):
 		for j in range(Y.shape[1]):
@@ -63,6 +68,8 @@ def Myrecommend():
 	result = scipy.optimize.fmin_cg(cofiCostFunc,x0=myflat,fprime=cofiGrad,args=(Y,R,mynu,mynm,mynf,mylambda),maxiter=40,disp=True,full_output=True)
 	resX, resTheta = reshapeParams(result[0], mynm, mynu, mynf)
 	prediction_matrix = resX.dot(resTheta.T)
+	print(prediction_matrix)
+	print(Ymean)
 	return prediction_matrix,Ymean
 	
 

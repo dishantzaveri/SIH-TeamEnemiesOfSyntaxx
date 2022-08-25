@@ -129,6 +129,6 @@ class Coins(models.Model):
     date_modified = models.DateField(default=datetime.date.today)
 
 class Myrating(models.Model):
-    user    = models.ForeignKey(User,on_delete=models.CASCADE,related_name='rating_entrepreneur') 
-    mentor   = models.ForeignKey(User,on_delete=models.CASCADE,related_name='rating_mentor')
+    entrepreneur_profile = models.ForeignKey(EntrepreneurProfile,on_delete=models.CASCADE,related_name='rating_entrepreneur',null=True) 
+    mentor_profile  = models.ForeignKey(MentorProfile,on_delete=models.CASCADE,related_name='rating_mentor',null=True)
     rating  = models.IntegerField(default=1,validators=[MaxValueValidator(5),MinValueValidator(0)])

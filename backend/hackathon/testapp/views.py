@@ -42,6 +42,16 @@ class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CommentSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+    def retrieve(self,request,pk=None):
+        like = Comment.objects.filter(post=pk)
+        data = CommentSerializer(like,many=True)
+        return Response(data.data)
+
+    def delete(self,request,pk=None):
+        like = Comment.objects.filter(post=pk)
+        like.delete()
+        return Response("successfully deleted")
+
 ########################Category part begins####################################
 
 class CategoryList(generics.ListCreateAPIView):
@@ -71,6 +81,16 @@ class LikePost_destroy_view(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post_Like.objects.all()
     serializer_class = PostLikeSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+    def retrieve(self,request,pk=None):
+        like = Post_Like.objects.filter(group_post=pk)
+        data = PostLikeSerializer(like,many=True)
+        return Response(data.data)
+
+    def delete(self,request,pk=None):
+        like = Post_Like.objects.filter(group_post=pk)
+        like.delete()
+        return Response("successfully deleted")
 
 class SessionViewSet(viewsets.ModelViewSet):
     queryset = Session.objects.all()
