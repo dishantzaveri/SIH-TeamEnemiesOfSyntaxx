@@ -5,7 +5,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../features/auth/authSlice.js";
 import { useEffect } from "react";
 import { SimpleMap } from "../components/Map/Map.jsx";
-import { useGetFundingPlacesQuery, useGetFundingRegionBarQuery } from "../features/list/listAPISlice.jsx";
+import { useGetCompanyCPMBarQuery, useGetFundingPlacesQuery, useGetFundingRegionBarQuery, useGetMentorsLocationQuery, useGetMonthWiseFundingPieQuery, useGetStageSectorMixPieQuery, useGetStateFundedCompanyCountPieQuery, useGetTop25FundedCompanyBarQuery } from "../features/list/listAPISlice.jsx";
+import { VscLoading } from "react-icons/vsc";
+import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie } from 'recharts';
 import Header from "../components/Header/Header.js";
 
 // const Header = () => {
@@ -104,41 +106,373 @@ const Footer = () => {
 };
 
 const Home = () => {
-  const {data, isLoading} = useGetFundingPlacesQuery()
-  // const {data, isLoading} = useGetFundingRegionBarQuery()
-  // const {data, isLoading} = useGetFundingPlacesQuery()
-  // const {data, isLoading} = useGetFundingPlacesQuery()
-  // const {data, isLoading} = useGetFundingPlacesQuery()
-  // const {data, isLoading} = useGetFundingPlacesQuery()
-  // const {data, isLoading} = useGetFundingPlacesQuery()
-  // const {data, isLoading} = useGetFundingPlacesQuery()
+  const {data: fundingPlaces, isLoading: fundingPlacesLoading} = useGetFundingPlacesQuery()
+  const {data: mentorLocation, isLoading: mentorLocationLoading} = useGetMentorsLocationQuery()
+  const {data: fundingRegion, isLoading: fundingRegionLoading} = useGetFundingRegionBarQuery()
+  const {data: top25FundedCompany, isLoading: top25FundedCompanyLoading} = useGetTop25FundedCompanyBarQuery()
+  const {data: companyCmp, isLoading: companyCmpLoading} = useGetCompanyCPMBarQuery()
+  const {data: monthWiseFunding, isLoading: monthWiseFundingLoading} = useGetMonthWiseFundingPieQuery()
+  const {data: stageSector, isLoading: stageSectorLoading} = useGetStageSectorMixPieQuery()
+  const {data: stateFundingCompany, isLoading: stateFundingCompanyLoading} = useGetStateFundedCompanyCountPieQuery()
   const [locations, setLocations] = useState(null)
-  console.log(data)
+  const [regions, setRegions] = useState(null)
+  const [state, setState] = useState(null)
+  const [topFunds, setTopFunds] = useState(null)
+  const [companyCMP, setCompanyCMP] = useState(null)
+  const [monthlyFunding, setMonthlyFunding] = useState(null)
+  const [sector, setSector] = useState(null)
   useEffect(() => {
-    console.log(data)
-    if(data){
+    if(fundingPlaces){
       let array = []
-      Object.values(data)[0].map((item, i) => {
+      Object.values(fundingPlaces)[0].forEach((item, i) => {
         array.push({
-          lat: data.Latitude[i],
-          lng: data.Longitude[i],
-          name: data.city[i]
+          latitude: fundingPlaces.Latitude[i],
+          longitude: fundingPlaces.Longitude[i],
+          name: fundingPlaces.city[i]
         })
       })
       setLocations(array)
     }
     console.log(locations)
-  }, [data])
+  }, [fundingPlaces])
+  useEffect(() => {
+    if(fundingRegion) {
+      console.log(fundingRegion)
+      let array = []
+      const data = Object.values(fundingRegion)[0]
+      data.forEach((item, i) => {
+        array.push({
+          x: fundingRegion.x[i],
+          name: fundingRegion.y[i]
+        })
+      })
+      console.log(array)
+      setRegions(array)
+    }
+  }, [fundingRegion])
+  useEffect(() => {
+    if(top25FundedCompany) {
+      let array = []
+      const data = Object.values(top25FundedCompany)[0]
+      data.forEach((item, i) => {
+        array.push({
+          x: top25FundedCompany.y[i],
+          name: top25FundedCompany.x[i]
+        })
+      })
+      // console.log(array)
+      setTopFunds(array)
+    }
+  }, [top25FundedCompany])
+  useEffect(() => {
+    if(companyCmp) {
+      let array = []
+      const data = Object.values(companyCmp)[0]
+      data.forEach((item, i) => {
+        array.push({
+          x: companyCmp.y[i],
+          name: companyCmp.x[i]
+        })
+      })
+      setCompanyCMP(array)
+    }
+  }, [companyCmp])
+  useEffect(() => {
+    if(monthWiseFunding) {
+      let array = []
+      console.log(monthWiseFunding)
+      const data = Object.values(monthWiseFunding)[0]
+      data.forEach((item, i) => {
+        array.push({
+          x: monthWiseFunding.percent[i],
+          name: monthWiseFunding.labels[i]
+        })
+      })
+      console.log(array)
+      setMonthlyFunding(array)
+    }
+  }, [monthWiseFunding])
+  useEffect(() => {
+    if(monthWiseFunding) {
+      let array = []
+      console.log(monthWiseFunding)
+      const data = Object.values(monthWiseFunding)[0]
+      data.forEach((item, i) => {
+        array.push({
+          x: monthWiseFunding.percent[i],
+          name: monthWiseFunding.labels[i]
+        })
+      })
+      console.log(array)
+      setMonthlyFunding(array)
+    }
+  }, [monthWiseFunding])
+  useEffect(() => {
+    if(stateFundingCompany) {
+      let array = []
+      console.log(stateFundingCompany)
+      const data = Object.values(stateFundingCompany)[0]
+      data.forEach((item, i) => {
+        array.push({
+          x: stateFundingCompany.percent[i],
+          name: stateFundingCompany.labels[i]
+        })
+      })
+      console.log(array)
+      setState(array)
+    }
+  }, [stateFundingCompany])
+  useEffect(() => {
+    if(stageSector) {
+      let array = []
+      console.log(stageSector)
+      const data = Object.values(stageSector)[0]
+      data.forEach((item, i) => {
+        array.push({
+          x: stageSector.percent_sector[i],
+          name: stageSector.labels_sector[i]
+        })
+      })
+      setSector({
+        sector: array
+      })
+      array = []
+      data.forEach((item, i) => {
+        array.push({
+          x: stageSector.percent_stage[i],
+          name: stageSector.labels_stage[i]
+        })
+      })
+      setSector(prevState => ({
+        ...prevState,
+        stage: array
+      }))
+      console.log(sector)
+    }
+  }, [stageSector])
   return (
     <div className="bg-gray-50">
-      <Header/>
+      <Header />
       <Categories />
       <Section1 />
-      {locations && 
-        <div className="px-24">
-          <SimpleMap location={locations} zoomLevel={4} h={'700px'} />
+      <div className="px-24 bg-gray-100 h-screen">
+        <h1 className="text-center text-5xl font-bold py-16">Activities</h1>
+        <div className="grid grid-cols-2 gap-16 my-6">
+          <div className="h-full w-full flex flex-col justify-center">
+            <h1 className="text-xl font-semibold mb-2">Top Funding Places</h1>
+            {
+              locations && 
+              <SimpleMap location={locations} zoomLevel={3} h={'350px'} />
+            }
+            {
+              fundingPlacesLoading && 
+              <div className="h-[350px] animate-pulse">
+                <div className="h-full w-full bg-slate-500 rounded-xl">
+                  <div className='w-full h-full flex flex-col justify-center items-center'>
+                    <VscLoading className='w-8 h-8 animate-spin text-center text-gray-600' />
+                    <h1 className='text-xl mt-2'>Loading...</h1>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+          <div className="h-full w-full flex flex-col justify-center">
+            <h1 className="text-xl font-semibold mb-2">Mentors Located</h1>
+            {
+              mentorLocationLoading && 
+              <div className="h-[350px] animate-pulse">
+                <div className="h-full w-full bg-slate-500 rounded-xl">
+                  <div className='w-full h-full flex flex-col justify-center items-center'>
+                    <VscLoading className='w-8 h-8 animate-spin text-center text-gray-600' />
+                    <h1 className='text-xl mt-2'>Loading...</h1>
+                  </div>
+                </div>
+              </div>
+            }
+            {mentorLocation && <SimpleMap location={mentorLocation} zoomLevel={3} h={'350px'} />}
+          </div>
         </div>
-      }
+      </div>
+      <div className="w-full px-24">
+        <h1 className="text-center text-5xl font-bold py-16">Statistics</h1>
+        <div className="grid grid-cols-3 gap-16 my-6">
+          <div className="h-full w-full flex flex-col justify-center">
+            <h1 className="text-xl font-semibold mb-2">Top Company Funds</h1>
+            {topFunds && 
+              <div className="h-[350px] w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart width={500} height={350} data={topFunds}>
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <Tooltip />
+                    <Bar dataKey="x" fill="#7B1FA2" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            }
+            {
+              !topFunds && 
+              <div className="h-[350px] animate-pulse">
+                <div className="h-full w-full bg-slate-500 rounded-xl">
+                  <div className='w-full h-full flex flex-col justify-center items-center'>
+                    <VscLoading className='w-8 h-8 animate-spin text-center text-gray-600' />
+                    <h1 className='text-xl mt-2'>Loading...</h1>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+          <div className="h-full w-full flex flex-col justify-center">
+            <h1 className="text-xl font-semibold mb-2">Top Company Funds</h1>
+            {regions && 
+              <div className="h-[350px] w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart width={500} height={350} data={regions}>
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <Tooltip />
+                    <Bar dataKey="x" fill="#7B1FA2" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            }
+            {
+              !regions && 
+              <div className="h-[350px] animate-pulse">
+                <div className="h-full w-full bg-slate-500 rounded-xl">
+                  <div className='w-full h-full flex flex-col justify-center items-center'>
+                    <VscLoading className='w-8 h-8 animate-spin text-center text-gray-600' />
+                    <h1 className='text-xl mt-2'>Loading...</h1>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+          <div className="h-full w-full flex flex-col justify-center">
+            <h1 className="text-xl font-semibold mb-2">Company Counts per Month</h1>
+            {companyCMP && 
+              <div className="h-[350px] w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart width={500} height={350} data={companyCMP}>
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <Tooltip />
+                    <Bar dataKey="x" fill="#7B1FA2" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            }
+            {
+              !companyCMP && 
+              <div className="h-[350px] animate-pulse">
+                <div className="h-full w-full bg-slate-500 rounded-xl">
+                  <div className='w-full h-full flex flex-col justify-center items-center'>
+                    <VscLoading className='w-8 h-8 animate-spin text-center text-gray-600' />
+                    <h1 className='text-xl mt-2'>Loading...</h1>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+          <div className="h-full w-full flex flex-col justify-center">
+            <h1 className="text-xl font-semibold mb-2">Monthwise Funding</h1>
+            {monthlyFunding && 
+              <div className="h-[350px] w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart width={500} height={350} data={monthlyFunding}>
+                    <Pie
+                      dataKey="x"
+                      data={monthlyFunding}
+                      outerRadius={120}
+                      fill="#7B1FA2"
+                      label
+                    />
+                    <Tooltip />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+            }
+            {
+              !monthlyFunding && 
+              <div className="h-[350px] animate-pulse">
+                <div className="h-full w-full bg-slate-500 rounded-xl">
+                  <div className='w-full h-full flex flex-col justify-center items-center'>
+                    <VscLoading className='w-8 h-8 animate-spin text-center text-gray-600' />
+                    <h1 className='text-xl mt-2'>Loading...</h1>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+          <div className="h-full w-full flex flex-col justify-center">
+            <h1 className="text-xl font-semibold mb-2">Funding in Sectors & Stage</h1>
+            {sector?.sector && sector?.stage && 
+              <div className="h-[350px] w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart width={500} height={350} data={monthlyFunding}>
+                    <Pie
+                      dataKey="x"
+                      data={sector.sector}
+                      outerRadius={80}
+                      fill="#7B1FA2"
+                    />
+                    <Pie
+                      dataKey="x"
+                      data={sector.stage}
+                      innerRadius={100}
+                      outerRadius={120}
+                      fill="#7B1FA2"
+                      label
+                    />
+                    <Tooltip />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+            }
+            {
+              !monthlyFunding && 
+              <div className="h-[350px] animate-pulse">
+                <div className="h-full w-full bg-slate-500 rounded-xl">
+                  <div className='w-full h-full flex flex-col justify-center items-center'>
+                    <VscLoading className='w-8 h-8 animate-spin text-center text-gray-600' />
+                    <h1 className='text-xl mt-2'>Loading...</h1>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+          <div className="h-full w-full flex flex-col justify-center">
+            <h1 className="text-xl font-semibold mb-2">Companies Funded Per State</h1>
+            {state && 
+              <div className="h-[350px] w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart width={500} height={350} data={state}>
+                    <Pie
+                      dataKey="x"
+                      data={state}
+                      outerRadius={120}
+                      fill="#7B1FA2"
+                      label
+                    />
+                    <Tooltip />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+            }
+            {
+              !state && 
+              <div className="h-[350px] animate-pulse">
+                <div className="h-full w-full bg-slate-500 rounded-xl">
+                  <div className='w-full h-full flex flex-col justify-center items-center'>
+                    <VscLoading className='w-8 h-8 animate-spin text-center text-gray-600' />
+                    <h1 className='text-xl mt-2'>Loading...</h1>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
       <Footer />
     </div>
   );

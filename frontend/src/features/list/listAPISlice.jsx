@@ -2,11 +2,14 @@ import { apiSlice } from "../../app/api/apiSlice";
 
 export const listSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
+        getMentorsList: builder.query({
+            query: () => '/account/mentor/'
+        }),
         getFundingPlaces: builder.query({
             query: () => '/news/latitudelongitueAPI/'
         }),
-        getMentorsList: builder.query({
-            query: () => '/account/mentor/'
+        getMentorsLocation: builder.query({
+            query: () => '/account/mentors_location/'
         }),
         getFundingRegionBar: builder.query({
             query: () => '/news/Fundingperregionbargraphapi/'
@@ -30,8 +33,9 @@ export const listSlice = apiSlice.injectEndpoints({
 })
 
 export const {
-    useGetFundingPlacesQuery,
     useGetMentorsListQuery,
+    useGetMentorsLocationQuery,
+    useGetFundingPlacesQuery,
     useGetFundingRegionBarQuery,
     useGetTop25FundedCompanyBarQuery,
     useGetCompanyCPMBarQuery,
