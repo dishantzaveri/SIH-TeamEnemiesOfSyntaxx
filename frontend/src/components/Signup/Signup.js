@@ -73,109 +73,154 @@ export default function Signup() {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Stepper nonLinear activeStep={activeStep}>
-        {steps.map((label, index) => (
-          <Step key={label} completed={completed[index]}>
-            <StepButton color="inherit" onClick={handleStep(index)}>
-              {label}
-            </StepButton>
-          </Step>
-        ))}
-      </Stepper>
+      
       <div>
         { activeStep === 1 ? (
-          <React.Fragment>
-            <Component1 />
-            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-              <Button
-                color="inherit"
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                sx={{ mr: 1 }}
-              >
-                Back
-              </Button>
-              <Box sx={{ flex: '1 1 auto' }} />
-              {activeStep !== steps.length &&
-                  <Button onClick={handleComplete}>
-                    {completedSteps() === totalSteps() - 1
-                      ? 'Finish'
-                      : 'Next'}
+          <div class="container max-w-[50%] mx-auto flex-1 flex flex-col items-center justify-center px-1 py-4">
+              <h1 className='text-2xl m-8 font-bold'>Profile Details </h1>
+              <div className='w-full my-4'>
+                <Stepper nonLinear activeStep={activeStep}>
+                  {steps.map((label, index) => (
+                    <Step key={label} completed={completed[index]}>
+                      <StepButton color="inherit" onClick={handleStep(index)}>
+                        {label}
+                      </StepButton>
+                    </Step>
+                  ))}
+                </Stepper>
+              </div>
+              <Component1 />
+              <div className='w-full'>
+                <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                  <Button
+                    color="inherit"
+                    disabled={activeStep === 0}
+                    onClick={handleBack}
+                    sx={{ mr: 1 }}
+                  >
+                    Back
                   </Button>
-                }
-              {/* {activeStep !== steps.length &&
-                (completed[activeStep] ? (
-                  <Typography variant="caption" sx={{ display: 'inline-block' }}>
-                    Step {activeStep + 1} already completed
-                  </Typography>
-                ) : (
-                  <Button onClick={handleComplete}>
-                    {completedSteps() === totalSteps() - 1
-                      ? 'Finish'
-                      : 'Complete Step'}
-                  </Button>
-                ))} */}
-            </Box>
-          </React.Fragment>
+                  <Box sx={{ flex: '1 1 auto' }} />
+                  {activeStep !== steps.length &&
+                      <Button onClick={handleComplete}>
+                        {completedSteps() === totalSteps() - 1
+                          ? 'Finish'
+                          : 'Next'}
+                      </Button>
+                    }
+                  {/* {activeStep !== steps.length &&
+                    (completed[activeStep] ? (
+                      <Typography variant="caption" sx={{ display: 'inline-block' }}>
+                        Step {activeStep + 1} already completed
+                      </Typography>
+                    ) : (
+                      <Button onClick={handleComplete}>
+                        {completedSteps() === totalSteps() - 1
+                          ? 'Finish'
+                          : 'Complete Step'}
+                      </Button>
+                    ))} */}
+                </Box>
+              </div>
+            </div>
         ): activeStep === 2 ? (
-            <React.Fragment>
-              <Component3 />
-              <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                <Button
-                  color="inherit"
-                  disabled={activeStep === 0}
-                  onClick={handleBack}
-                  sx={{ mr: 1 }}
-                >
-                  Back
-                </Button>
-                <Box sx={{ flex: '1 1 auto' }} />
-                {activeStep !== steps.length &&
-                    <Button onClick={handleComplete}>
-                      {completedSteps() === totalSteps() - 1
-                        ? 'Finish'
-                        : 'Next'}
+              <div class="container max-w-[50%] mx-auto flex-1 flex flex-col items-center justify-center px-1 py-4">
+                <h1 className='text-2xl m-8 font-bold'>Profile Details </h1>
+                <div className='w-full my-4'>
+                <Stepper nonLinear activeStep={activeStep}>
+                  {steps.map((label, index) => (
+                    <Step key={label} completed={completed[index]}>
+                      <StepButton color="inherit" onClick={handleStep(index)}>
+                        {label}
+                      </StepButton>
+                    </Step>
+                  ))}
+                </Stepper>
+              </div>
+                <Component3 />
+                <div className='w-full'>
+                  <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                    <Button
+                      color="inherit"
+                      disabled={activeStep === 0}
+                      onClick={handleBack}
+                      sx={{ mr: 1 }}
+                    >
+                      Back
                     </Button>
-                  }
-                {/* {activeStep !== steps.length &&
-                  (completed[activeStep] ? (
-                    <Typography variant="caption" sx={{ display: 'inline-block' }}>
-                      Step {activeStep + 1} already completed
-                    </Typography>
-                  ) : (
-                    <Button onClick={handleComplete}>
-                      {completedSteps() === totalSteps() - 1
-                        ? 'Finish'
-                        : 'Complete Step'}
-                    </Button>
-                  ))} */}
-              </Box>
-            </React.Fragment>
+                    <Box sx={{ flex: '1 1 auto' }} />
+                    {activeStep !== steps.length &&
+                        <Button onClick={handleComplete}>
+                          {completedSteps() === totalSteps() - 1
+                            ? 'Finish'
+                            : 'Next'}
+                        </Button>
+                      }
+                    {/* {activeStep !== steps.length &&
+                      (completed[activeStep] ? (
+                        <Typography variant="caption" sx={{ display: 'inline-block' }}>
+                          Step {activeStep + 1} already completed
+                        </Typography>
+                      ) : (
+                        <Button onClick={handleComplete}>
+                          {completedSteps() === totalSteps() - 1
+                            ? 'Finish'
+                            : 'Complete Step'}
+                        </Button>
+                      ))} */}
+                  </Box>
+                </div>
+              </div>
           ) : (
-            <React.Fragment>
-            <Component2 />
-            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-              <Button
-                color="inherit"
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                sx={{ mr: 1 }}
-              >
-                Back
-              </Button>
-              <Box sx={{ flex: '1 1 auto' }} />
-              {/* <Button onClick={handleNext} sx={{ mr: 1 }}>
-                Next
-              </Button> */}
-              {activeStep !== steps.length &&
-                  <Button onClick={handleComplete}>
-                    {completedSteps() === totalSteps() - 1
-                      ? 'Finish'
-                      : 'Next'}
-                  </Button>
-                }
-            </Box>
-            </React.Fragment>
+            <div class="container max-w-[50%] mx-auto flex-1 flex flex-col items-center justify-center px-1 py-4">
+              <h1 className='text-2xl m-8 font-bold'>Profile Details </h1>
+              <div className='w-full my-4'>
+                <Stepper nonLinear activeStep={activeStep}>
+                  {steps.map((label, index) => (
+                    <Step key={label} completed={completed[index]}>
+                      <StepButton color="inherit" onClick={handleStep(index)}>
+                        {label}
+                      </StepButton>
+                    </Step>
+                  ))}
+                </Stepper>
+              </div>
+
+                <Component2 />
+                <div className='w-full'>
+
+                  <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                    <Button
+                      color="inherit"
+                      disabled={activeStep === 0}
+                      onClick={handleBack}
+                      sx={{ mr: 1 }}
+                    >
+                      Back
+                    </Button>
+                    <Box sx={{ flex: '1 1 auto' }} />
+                    {activeStep !== steps.length &&
+                        <Button onClick={handleComplete}>
+                          {completedSteps() === totalSteps() - 1
+                            ? 'Finish'
+                            : 'Next'}
+                        </Button>
+                      }
+                    {/* {activeStep !== steps.length &&
+                      (completed[activeStep] ? (
+                        <Typography variant="caption" sx={{ display: 'inline-block' }}>
+                          Step {activeStep + 1} already completed
+                        </Typography>
+                      ) : (
+                        <Button onClick={handleComplete}>
+                          {completedSteps() === totalSteps() - 1
+                            ? 'Finish'
+                            : 'Complete Step'}
+                        </Button>
+                      ))} */}
+                  </Box>
+                </div>
+              </div>
           )}
       </div>
     </Box>

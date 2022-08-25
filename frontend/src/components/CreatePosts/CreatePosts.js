@@ -15,7 +15,7 @@ import OndemandVideoIcon from '@material-ui/icons/OndemandVideo';
 import { imageUploadHandler } from "./Post.utils";
 import { usePostPostMutation } from "../../features/feed/postAPISlice";
 
-const CreatePosts = () => {
+const   CreatePosts = () => {
   const classes = Styles();
   const theme = useTheme();
   const [postPost, {isLoading}] = usePostPostMutation()
@@ -34,11 +34,16 @@ const CreatePosts = () => {
     youtube: '',
   });
 
-  const handleSubmitButton = async (e) => {
-    e.preventDefault();
-
+  const handleSubmitButton = async () => {
+    var form_data = new FormData()
+    if(uploadData.file) form_data.append('images_post', uploadData.file, uploadData.file.name)
+    // else form_data.append('images_post', null)
+    form_data.set("title", '')
+    form_data.set("body", uploadData.description)
+    form_data.set("youtube_link", URL.youtube)
+    console.log(uploadData.file)
     // verify atleast one of the input fields are not empyt
-    if (uploadData.description || uploadData.file || URL) {
+    if (uploadData.description || uploadData.file || URL.photo || URL.youtube) {
       if (URL.photo !== "" || URL.youtube !== "") {
         if (URL.photo.startsWith("data") || URL.youtube.startsWith("data")) {
           swal(
@@ -58,8 +63,9 @@ const CreatePosts = () => {
           });
         } else {
           try {
-            console.log({'title': '', 'body': uploadData.description, "images_post": uploadData.data ? uploadData.data : URL.photo, "youtube_link": URL.youtube})
-            const data = await postPost({'title': null, 'body': uploadData.description, "images_post": uploadData.data ? uploadData.data : URL.photo, "youtube_link": URL.youtube}).unwrap()
+            console.log(form_data)
+            console.log(uploadData)
+            const data = await postPost(form_data).unwrap()
             console.log(data)
           } catch (error) {
             console.log(error);
@@ -67,8 +73,9 @@ const CreatePosts = () => {
         }
       } else {
         try {
-          console.log({'title': '', 'body': uploadData.description, "images_post": uploadData.file ? uploadData.file : null, "youtube_link": null})
-          const data = await postPost({'title': '', 'body': uploadData.description, "images_post": uploadData.file ? uploadData.file : null, "youtube_link": null}).unwrap()
+          console.log(form_data)
+          console.log(uploadData)
+          const data = await postPost(form_data).unwrap()
           console.log(data)
         } catch (error) {
           console.log(error);
@@ -124,7 +131,7 @@ const CreatePosts = () => {
   return (
     <Paper className={classes.upload}>
       <div className={classes.upload__header}>
-        <form className={classes.header__form} onSubmit={handleSubmitButton}>
+        <div className={classes.header__form}>
           <CreateIcon />
           <input
             placeholder="Start a post"
@@ -159,8 +166,8 @@ const CreatePosts = () => {
               });
             }}
           />
-          <button type="submit">Post</button>
-        </form>
+          <button onClick={() => handleSubmitButton()}>Post</button>
+        </div>
       </div>
       {!openURL.photo && !openURL.youtube && !progress && uploadData.file && (
         <div className={classes.selectedFile}>
