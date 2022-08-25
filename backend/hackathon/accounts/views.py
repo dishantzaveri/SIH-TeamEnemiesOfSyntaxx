@@ -16,11 +16,13 @@ from rest_framework.views import APIView
 from rest_framework.generics import GenericAPIView
 from rest_framework.decorators import action,api_view
 from rest_framework import generics
-
+from .recommendation import Myrecommend
 from django.contrib.auth import get_user_model
 
 import requests, datetime
 from hackathon import settings
+import numpy as np 
+import pandas as pd
 
 User = get_user_model()
 
@@ -316,6 +318,50 @@ class ProfileSearch(GenericAPIView):
 		print(expertise_list)
 		serializer = MentorProfileSerializer(expertise_list, many=True)
 		return Response(serializer.data)
+
+class Rating(GenericAPIView):
+	queryset = Myrating.objects.all()
+	serializer_class = myrating_serializer
+
+	def post(self,request):
+		if not request.user.is_authenticated:
+			return Response("login")
+	#for rating
+
+		date = datetime.datetime.now()-timedelta(days=180)
+		mentor = request.POST.get('mentor')
+		modelsof = Mentorship.objects.filter(entrepreneur = self.request.user,mentor = mentor)
+		rate = request.POST.get('rating')
+		if modelsof['created_at'] - datetime.datetime.now() >180:
+			serializer = self.serializer_class(data=request.data)
+			if serializer.is_valid():
+				serializer.save(user=self.request.user)
+			#messages.success(request,"Your Rating is submited ")
+			return Response("Your Rating is Submited")
+		return Response("you are not able to rate the mentor")
+
+class getRating(GenericAPIView):
+	queryset = Myrating.objects.all()
+	serializer_class = myrating_serializer
+
+	def get(self,request):
+		if not request.user.is_authenticated:
+			return Response("Login first")
+		df=pd.DataFrame(list(Myrating.objects.all().values()))
+		nu=df.user_id.unique().shape[0]
+		current_user_id= request.user.id
+
+		print("Current user id: ",current_user_id)
+		prediction_matrix,Ymean = Myrecommend()
+		my_predictions = prediction_matrix[:,current_user_id-1]+Ymean.flatten()
+		pred_idxs_sorted = np.argsort(my_predictions)
+		pred_idxs_sorted[:] = pred_idxs_sorted[::-1]
+		pred_idxs_sorted=pred_idxs_sorted+1
+		print(pred_idxs_sorted)
+		preserved = Case(*[When(pk=pk, then=pos) for pos, pk in enumerate(pred_idxs_sorted)])
+		movie_list=list(User.objects.filter(id__in = pred_idxs_sorted,).order_by(preserved)[:10])
+		return Response({'movie_list':movie_list})
+
 
 
 

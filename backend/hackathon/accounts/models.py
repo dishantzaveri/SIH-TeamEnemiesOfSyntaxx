@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.base_user import BaseUserManager
 from django.db import models
 from rest_framework.authtoken.models import Token
+from django.core.validators import MaxValueValidator, MinValueValidator
 import datetime
 
 
@@ -126,3 +127,8 @@ class Coins(models.Model):
     coins = models.PositiveIntegerField(null=True, blank=True,default=30)
     user = models.ForeignKey(User, on_delete = models.CASCADE, related_name = 'coins')
     date_modified = models.DateField(default=datetime.date.today)
+
+class Myrating(models.Model):
+    user    = models.ForeignKey(User,on_delete=models.CASCADE,related_name='rating_entrepreneur') 
+    mentor   = models.ForeignKey(User,on_delete=models.CASCADE,related_name='rating_mentor')
+    rating  = models.IntegerField(default=1,validators=[MaxValueValidator(5),MinValueValidator(0)])

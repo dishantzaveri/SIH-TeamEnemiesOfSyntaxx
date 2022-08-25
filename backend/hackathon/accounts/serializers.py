@@ -156,7 +156,12 @@ class MentorshipSerializer(serializers.ModelSerializer):
     #     entrepreneur_email = request.data.get('entrepreneur')
     #     entrepreneur = User.objects.get(email = entrepreneur_email)
     #     return entrepreneur
-        
+class myrating_serializer(serializers.ModelSerializer):
+    class Meta:
+        model = Myrating
+        fields = '__all__'
+                
+
 class CoinsSerializer(serializers.ModelSerializer):
 
     class Meta:
