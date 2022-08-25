@@ -308,6 +308,19 @@ class PANVerification(APIView):
 		else:
 			return JsonResponse(response,safe=False)
 
+class PatentVerification(APIView):
+	def post(self,request):
+		DiaryNo = request.data['DiaryNo']
+		RocNo = request.data['RocNo']
+		url = f"http://www.copyright.gov.in/CopyrightROC_Details.aspx?DiaryNo={DiaryNo}&RocNo={RocNo}"
+
+		response = requests.get(url)
+		print(response)
+		if response.status_code == 200:
+			return Response("Web site exists!")
+		else:
+			JsonResponse('Web site does not exist!') 
+
 class ConnectMenteeView(GenericAPIView):
 	queryset = Mentorship.objects.all()
 	serializer_class = MentorshipSerializer
