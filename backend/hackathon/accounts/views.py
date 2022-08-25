@@ -308,9 +308,6 @@ class PANVerification(APIView):
 		else:
 			return JsonResponse(response,safe=False)
 
-class PatentVerification
-
-
 class ConnectMenteeView(GenericAPIView):
 	queryset = Mentorship.objects.all()
 	serializer_class = MentorshipSerializer
