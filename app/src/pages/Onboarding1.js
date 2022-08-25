@@ -1,5 +1,5 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { height, width } from '../Consts';
+import React, {useRef, useState, useEffect} from 'react';
+import {height, width} from '../Consts';
 import {
   SafeAreaView,
   StyleSheet,
@@ -8,29 +8,86 @@ import {
   TouchableOpacity,
   Image,
   Platform,
-  PermissionsAndroid, TouchableHighlight,
+  PermissionsAndroid,
+  TouchableHighlight,
 } from 'react-native';
-import { Button } from 'react-native-paper';
+import {Button} from 'react-native-paper';
 import logo from '../assets/logo.jpg';
 import Uploadpic from '../assets/uploadpic.png';
 import Selectpic from '../assets/selectpic.png';
 import LinearGradient from 'react-native-linear-gradient';
-import { useTheme } from '@react-navigation/native';
+import {useTheme} from '@react-navigation/native';
 import Circle1 from '../assets/circle1.png';
+import * as CONSTANTS from '../CONSTANTS';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import {Dimensions} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {CometChat} from '@cometchat-pro/react-native-chat';
 
-import {
-  launchCamera,
-  launchImageLibrary
-} from 'react-native-image-picker';
-import { Dimensions } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-
-const Onboarding1 = () => {
+const Onboarding1 = ({route}) => {
   const [filePath, setFilePath] = useState({});
   const [Pic, SetPic] = useState('');
-  const { colors } = useTheme();
+  const {colors} = useTheme();
   const navigation = useNavigation();
+  const [token, setToken] = useState('');
+  useEffect(() => {
+    console.log(route.params);
+  }, []);
+  const saveData = async () => {
+    var myHeaders = new Headers();
+    myHeaders.append(
+      'Cookie',
+      'csrftoken=o4q1Ihf3JTBVbPIRuFvCtHZVT3RHp0X8; sessionid=0rx0ut9910ocx5ggaz1l6en6khbzxg1n',
+    );
 
+    var formdata = new FormData();
+    formdata.append('email', route.params.email);
+    formdata.append('password', route.params.password);
+    formdata.append('name', route.params.name);
+    formdata.append('profile_pic', {
+      uri: Pic.uri,
+      name: Pic.fileName,
+      type: Pic.type,
+    });
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: formdata,
+      redirect: 'follow',
+    };
+
+    fetch(
+      'https://vismayvora.pythonanywhere.com/account/mentor_register/',
+      requestOptions,
+    )
+      .then(response => response.text())
+      .then(result => {
+        console.log(result);
+        console.log(JSON.parse(result).token);
+        const uuid =
+          route.params.name.split(' ')[0] + route.params.email.split('@')[0];
+        console.log(uuid);
+        var cometUser = new CometChat.User(uuid);
+        cometUser.setName(route.params.name);
+        CometChat.createUser(cometUser, CONSTANTS.AUTH_KEY)
+          .then(user => {
+            console.log('user created', user);
+            CometChat.login(uuid, CONSTANTS.AUTH_KEY).then(
+              user => {
+                console.log('Signup Successful:', {user});
+              },
+              error => {
+                console.log('Login failed with exception:', {error});
+              },
+            );
+          })
+          .catch(error => console.log('error', error));
+        navigation.navigate('Profile2', {
+          token: JSON.parse(result).token,
+        });
+      })
+      .catch(error => console.log('error', error));
+  };
   const requestCameraPermission = async () => {
     if (Platform.OS === 'android') {
       try {
@@ -70,7 +127,7 @@ const Onboarding1 = () => {
     } else return true;
   };
 
-  const captureImage = async (type) => {
+  const captureImage = async type => {
     let options = {
       mediaType: type,
       maxWidth: 300,
@@ -83,7 +140,7 @@ const Onboarding1 = () => {
     let isCameraPermitted = await requestCameraPermission();
     let isStoragePermitted = await requestExternalWritePermission();
     if (isCameraPermitted && isStoragePermitted) {
-      launchCamera(options, (response) => {
+      launchCamera(options, response => {
         console.log('Response = ', response);
 
         if (response.didCancel) {
@@ -106,7 +163,7 @@ const Onboarding1 = () => {
         console.log('fileSize -> ', response.fileSize);
         console.log('type -> ', response.type);
         console.log('fileName -> ', response.fileName);
-        setFilePath(response);
+        SetPic(response.assets[0]);
       });
     }
   };
@@ -121,7 +178,6 @@ const Onboarding1 = () => {
     launchImageLibrary(options, response => {
       if (response.didCancel) {
         setToastMessage('Cancelled image selection');
-
       } else if (response.errorCode == 'permission') {
         setToastMessage('Permission not satisfied');
       } else if (response.errorCode == 'others') {
@@ -133,46 +189,93 @@ const Onboarding1 = () => {
         //     [{text: 'OK'}],
         //   );
       } else {
-        SetPic(response.assets[0].base64);
+        SetPic(response.assets[0]);
       }
     });
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{flex: 1}}>
       <LinearGradient
         colors={[colors.primary, '#ADD8E6']}
-        style={{ width: '100%', height: 200, position: 'relative' }}></LinearGradient>
+        style={{
+          width: '100%',
+          height: 200,
+          position: 'relative',
+        }}></LinearGradient>
 
       <View style={styles.card}>
-        <Image
-          source={Circle1}
-
-        />
+        <Image source={Circle1} />
         <Text style={styles.text}>Please upload your picture..</Text>
         <View>
-          <TouchableOpacity onPress={() => uploadImage('photo')}>
-            <Image
-              source={Uploadpic}
-              style={styles.uploadImg}
-            />
-          </TouchableOpacity>
-        </View>
-        <View>
-          <TouchableOpacity onPress={() => captureImage('photo')}>
-            <Image
-              source={Selectpic}
-            />
-          </TouchableOpacity>
+          {Pic ? (
+            <View>
+              <Image
+                source={{
+                  uri: Pic.uri,
+                }}
+                style={{
+                  height: 100,
+                  width: 100,
+                  borderRadius: 50,
+                  alignSelf: 'center',
+                }}
+              />
+            </View>
+          ) : null}
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+              marginTop: 20,
+            }}>
+            <TouchableOpacity
+              style={{
+                marginTop: 10,
+                padding: 10,
+                backgroundColor: colors.primary,
+                borderRadius: 10,
+                marginRight: 10,
+              }}
+              onPress={() => uploadImage('photo')}>
+              <Text
+                style={{
+                  color: 'white',
+                  fontSize: 16,
+                }}>
+                Upload Image
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={{
+                marginTop: 10,
+                padding: 10,
+                backgroundColor: colors.primary,
+                borderRadius: 10,
+              }}
+              onPress={() => captureImage('photo')}>
+              <Text
+                style={{
+                  color: 'white',
+                  fontSize: 16,
+                }}>
+                Take a picture
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
 
         <View style={styles.button}>
-          <Button labelStyle={styles.text3} onPress={() => navigation.navigate('Onboarding2')}>
+          <Button
+            labelStyle={styles.text3}
+            onPress={() => {
+              saveData();
+            }}>
             Next
           </Button>
         </View>
       </View>
-
     </SafeAreaView>
   );
 };
@@ -188,10 +291,10 @@ const styles = StyleSheet.create({
   },
   text3: {
     fontSize: 15,
-    fontWeight: "bold",
-    color: "white",
-    textAlign: "center",
-},
+    fontWeight: 'bold',
+    color: 'white',
+    textAlign: 'center',
+  },
   titleText: {
     fontSize: 22,
     fontWeight: 'bold',
@@ -218,7 +321,7 @@ const styles = StyleSheet.create({
   img: {
     height: 150,
     width: 150,
-    margin: 20
+    margin: 20,
   },
   logoImg: {
     alignContent: 'center',
@@ -239,7 +342,7 @@ const styles = StyleSheet.create({
   card: {
     elevation: 10,
     backgroundColor: '#fff',
-    shadowOffset: { width: 5, height: 5 },
+    shadowOffset: {width: 5, height: 5},
     shadowColor: '#333',
     shadowOpacity: 0.5,
     shadowRadius: 2,
@@ -252,7 +355,7 @@ const styles = StyleSheet.create({
     width: width * 0.9,
   },
   image: {
-    margin: height * 0.030,
+    margin: height * 0.03,
   },
   button: {
     width: width * 0.25,
@@ -270,9 +373,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
     color: '#00CFDE',
-    fontWeight: "500",
+    fontWeight: '500',
     marginBottom: height * 0.035,
-    margin: 10
+    margin: 10,
   },
-
 });

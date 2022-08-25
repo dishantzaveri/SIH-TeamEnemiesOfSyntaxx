@@ -13,10 +13,7 @@ export default function Account() {
   useEffect(() => {
     console.log(user);
     var myHeaders = new Headers();
-    myHeaders.append(
-      'Authorization',
-      `Token 72f957f003d1ae579df255c5e46c5adefcb0d7c7`,
-    );
+    myHeaders.append('Authorization', `Token ${user.token}`);
 
     var requestOptions = {
       method: 'GET',
@@ -25,7 +22,9 @@ export default function Account() {
     };
 
     fetch(
-      'https://vismayvora.pythonanywhere.com/account/entrepreneur/',
+      `https://vismayvora.pythonanywhere.com/account/${
+        user?.is_mentor ? 'mentor' : 'entrepreneur'
+      }/`,
       requestOptions,
     )
       .then(response => response.text())
@@ -61,8 +60,8 @@ export default function Account() {
             }}>
             <Image
               source={{
-                uri: data?.profile_image
-                  ? data?.profile_image
+                uri: data?.profile_pic
+                  ? data?.profile_pic
                   : 'https://campussafetyconference.com/wp-content/uploads/2020/08/iStock-476085198.jpg',
               }}
               style={{
@@ -228,109 +227,114 @@ export default function Account() {
               ))}
             </View>
           </View>
-          <View
-            style={{
-              backgroundColor: 'white',
-              padding: 20,
-              elevation: 3,
-              borderRadius: 20,
-              marginTop: 20,
-              marginBottom: 100,
-            }}>
-            <View
-              style={{
-                borderBottomColor: 'lightgray',
-                borderBottomWidth: 1,
-                paddingBottom: 10,
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}>
-              <Text style={{fontSize: 16, fontWeight: 'bold', color: 'black'}}>
-                Startups
-              </Text>
-              <AntDesign name="edit" color={colors.primary} size={22} />
-            </View>
-            {data?.startup?.length <= 0 ? (
-              <Text
+          {user.is_mentor ? null : (
+            <>
+              <View
                 style={{
-                  marginTop: 10,
-                  alignSelf: 'center',
-                  fontSize: 16,
+                  backgroundColor: 'white',
+                  padding: 20,
+                  elevation: 3,
+                  borderRadius: 20,
+                  marginTop: 20,
+                  marginBottom: 100,
                 }}>
-                No Startups Added
-              </Text>
-            ) : (
-              <View>
                 <View
                   style={{
-                    marginVertical: 10,
+                    borderBottomColor: 'lightgray',
+                    borderBottomWidth: 1,
+                    paddingBottom: 10,
                     flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
                   }}>
-                  <Image
-                    source={{
-                      uri: 'https://upload.wikimedia.org/wikipedia/commons/e/e8/Tesla_logo.png',
-                    }}
-                    style={{
-                      width: 70,
-                      height: 70,
-                      borderRadius: 100,
-                    }}
-                  />
-                  <View style={{width: '80%', marginLeft: 10}}>
-                    <Text
-                      style={{
-                        fontSize: 16,
-                        color: 'black',
-                        fontWeight: 'bold',
-                      }}>
-                      Tesla
-                    </Text>
-                    <Text style={{color: 'black'}}>
-                      Tesla, Inc. is an American multinational automotive and
-                      clean .......
-                    </Text>
-                    <Text style={{color: 'black', fontWeight: '600'}}>
-                      2020 June - Present
-                    </Text>
-                  </View>
+                  <Text
+                    style={{fontSize: 16, fontWeight: 'bold', color: 'black'}}>
+                    Startups
+                  </Text>
+                  <AntDesign name="edit" color={colors.primary} size={22} />
                 </View>
-                <View
-                  style={{
-                    marginVertical: 10,
-                    flexDirection: 'row',
-                  }}>
-                  <Image
-                    source={{
-                      uri: 'https://upload.wikimedia.org/wikipedia/commons/e/e8/Tesla_logo.png',
-                    }}
+                {data?.startup?.length <= 0 ? (
+                  <Text
                     style={{
-                      width: 70,
-                      height: 70,
-                      borderRadius: 100,
-                    }}
-                  />
-                  <View style={{width: '80%', marginLeft: 10}}>
-                    <Text
+                      marginTop: 10,
+                      alignSelf: 'center',
+                      fontSize: 16,
+                    }}>
+                    No Startups Added
+                  </Text>
+                ) : (
+                  <View>
+                    <View
                       style={{
-                        fontSize: 16,
-                        color: 'black',
-                        fontWeight: 'bold',
+                        marginVertical: 10,
+                        flexDirection: 'row',
                       }}>
-                      Tesla
-                    </Text>
-                    <Text style={{color: 'black'}}>
-                      Tesla, Inc. is an American multinational automotive and
-                      clean .......
-                    </Text>
-                    <Text style={{color: 'black', fontWeight: '600'}}>
-                      2020 June - Present
-                    </Text>
+                      <Image
+                        source={{
+                          uri: 'https://upload.wikimedia.org/wikipedia/commons/e/e8/Tesla_logo.png',
+                        }}
+                        style={{
+                          width: 70,
+                          height: 70,
+                          borderRadius: 100,
+                        }}
+                      />
+                      <View style={{width: '80%', marginLeft: 10}}>
+                        <Text
+                          style={{
+                            fontSize: 16,
+                            color: 'black',
+                            fontWeight: 'bold',
+                          }}>
+                          Tesla
+                        </Text>
+                        <Text style={{color: 'black'}}>
+                          Tesla, Inc. is an American multinational automotive
+                          and clean .......
+                        </Text>
+                        <Text style={{color: 'black', fontWeight: '600'}}>
+                          2020 June - Present
+                        </Text>
+                      </View>
+                    </View>
+                    <View
+                      style={{
+                        marginVertical: 10,
+                        flexDirection: 'row',
+                      }}>
+                      <Image
+                        source={{
+                          uri: 'https://upload.wikimedia.org/wikipedia/commons/e/e8/Tesla_logo.png',
+                        }}
+                        style={{
+                          width: 70,
+                          height: 70,
+                          borderRadius: 100,
+                        }}
+                      />
+                      <View style={{width: '80%', marginLeft: 10}}>
+                        <Text
+                          style={{
+                            fontSize: 16,
+                            color: 'black',
+                            fontWeight: 'bold',
+                          }}>
+                          Tesla
+                        </Text>
+                        <Text style={{color: 'black'}}>
+                          Tesla, Inc. is an American multinational automotive
+                          and clean .......
+                        </Text>
+                        <Text style={{color: 'black', fontWeight: '600'}}>
+                          2020 June - Present
+                        </Text>
+                      </View>
+                    </View>
                   </View>
-                </View>
+                )}
               </View>
-            )}
-          </View>
+            </>
+          )}
         </View>
       </ScrollView>
     </View>

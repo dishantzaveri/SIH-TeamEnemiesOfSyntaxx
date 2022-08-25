@@ -20,52 +20,52 @@ function SignUpMentor({navigation}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  const saveData = async () => {
-    var myHeaders = new Headers();
-    myHeaders.append(
-      'Cookie',
-      'csrftoken=o4q1Ihf3JTBVbPIRuFvCtHZVT3RHp0X8; sessionid=0rx0ut9910ocx5ggaz1l6en6khbzxg1n',
-    );
+  // const saveData = async () => {
+  //   var myHeaders = new Headers();
+  //   myHeaders.append(
+  //     'Cookie',
+  //     'csrftoken=o4q1Ihf3JTBVbPIRuFvCtHZVT3RHp0X8; sessionid=0rx0ut9910ocx5ggaz1l6en6khbzxg1n',
+  //   );
 
-    var formdata = new FormData();
-    formdata.append('email', email);
-    formdata.append('password', password);
-    formdata.append('name', name);
+  //   var formdata = new FormData();
+  //   formdata.append('email', email);
+  //   formdata.append('password', password);
+  //   formdata.append('name', name);
 
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: formdata,
-      redirect: 'follow',
-    };
+  //   var requestOptions = {
+  //     method: 'POST',
+  //     headers: myHeaders,
+  //     body: formdata,
+  //     redirect: 'follow',
+  //   };
 
-    fetch(
-      'https://vismayvora.pythonanywhere.com/account/mentor_register/',
-      requestOptions,
-    )
-      .then(response => response.text())
-      .then(result => {
-        console.log(result);
-        const uuid = name.split(' ')[0] + email.split('@')[0];
-        console.log(uuid);
-        var cometUser = new CometChat.User(uuid);
-        cometUser.setName(name);
-        CometChat.createUser(cometUser, CONSTANTS.AUTH_KEY)
-          .then(user => {
-            console.log('user created', user);
-            CometChat.login(uuid, CONSTANTS.AUTH_KEY).then(
-              user => {
-                console.log('Signup Successful:', {user});
-              },
-              error => {
-                console.log('Login failed with exception:', {error});
-              },
-            );
-          })
-          .catch(error => console.log('error', error));
-      })
-      .catch(error => console.log('error', error));
-  };
+  //   fetch(
+  //     'https://vismayvora.pythonanywhere.com/account/mentor_register/',
+  //     requestOptions,
+  //   )
+  //     .then(response => response.text())
+  //     .then(result => {
+  //       console.log(result);
+  //       const uuid = name.split(' ')[0] + email.split('@')[0];
+  //       console.log(uuid);
+  //       var cometUser = new CometChat.User(uuid);
+  //       cometUser.setName(name);
+  //       CometChat.createUser(cometUser, CONSTANTS.AUTH_KEY)
+  //         .then(user => {
+  //           console.log('user created', user);
+  //           CometChat.login(uuid, CONSTANTS.AUTH_KEY).then(
+  //             user => {
+  //               console.log('Signup Successful:', {user});
+  //             },
+  //             error => {
+  //               console.log('Login failed with exception:', {error});
+  //             },
+  //           );
+  //         })
+  //         .catch(error => console.log('error', error));
+  //     })
+  //     .catch(error => console.log('error', error));
+  // };
   return (
     <View style={styles.container}>
       {/* <LottieView
@@ -109,8 +109,15 @@ function SignUpMentor({navigation}) {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          saveData();
-          navigation.navigate('Onboarding');
+          //saveData();
+          navigation.navigate('Onboarding', {
+            screen: 'Onboarding1',
+            params: {
+              email: email,
+              password: password,
+              name: name,
+            },
+          });
           // console.log("Signed Up");
         }}>
         <Text style={styles.textStyle}>Sign Up</Text>
