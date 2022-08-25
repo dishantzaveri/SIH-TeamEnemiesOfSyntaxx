@@ -10,7 +10,7 @@ import { useGetPostsQuery } from "../../features/feed/postAPISlice";
 import { VscLoading } from "react-icons/vsc";
 
 const Post = forwardRef(({ name, description, message, photoUrl }, ref) => {
-  const { data, isLoading, error } = useGetPostsQuery().useLazyQuery();
+  const { data, isLoading, error } = useGetPostsQuery()
   function InputOption({ Icon, title, color }) {
     return (
       <div className="inputOption">
@@ -23,7 +23,7 @@ const Post = forwardRef(({ name, description, message, photoUrl }, ref) => {
     var regExp =
       /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
     var match = url.match(regExp);
-    return match && match[7].length == 11 ? match[7] : false;
+    return match && match[7].length === 11 ? match[7] : false;
   }
 
   console.log(data);
