@@ -60,8 +60,8 @@ export default function CreateEvents() {
 <div 
 class="bg-purple-gray-500 "
 // class=" bg-purple-gray-500"
- >
-     <div class="container max-w-[50%] mx-auto flex-1 flex flex-col items-center justify-center px-1 "> <h1 style={{fontSize:30, margin:"10%", fontWeight:"bolder" , color:"#F1F2F7"}}>Event Details</h1>
+>
+     {/* <div class="container max-w-[50%] mx-auto flex-1 flex flex-col items-center justify-center px-1 "> <h1 style={{fontSize:30, margin:"10%", fontWeight:"bolder" , color:"#F1F2F7"}}>Event Details</h1> */}
 
      <div class="bg-purple-gray-100 px-6 py-8 rounded shadow-md text-black w-full mb-10"
     // class="bg-purple-gray-100"
@@ -240,7 +240,7 @@ class="bg-purple-gray-500 "
 
   <button class="w-full bg-purple-gray-500 hover:bg-purple-gray-600 text-white font-bold py-2 px-4 rounded">Submit</button>
   </div>
-  </div>
+  {/* </div> */}
 
 
   

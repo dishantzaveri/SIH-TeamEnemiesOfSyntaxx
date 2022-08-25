@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from "react";
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Location from "@material-ui/icons/LocationOnOutlined";
@@ -8,8 +12,11 @@ import "./Events.css";
 import axios from "axios";
 import { useGetEventsQuery } from "../features/events/eventsAPISlice";
 import { VscLoading } from "react-icons/vsc";
+import CreateEvents from "../components/CreateEvents/CreateEvents";
+
 
 const Event = ({ event }) => {
+  
   return (
     <div>
       <img
@@ -45,6 +52,19 @@ const Event = ({ event }) => {
   );
 };
 
+const style = {
+  position: 'absolute',
+  top: '80%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  // width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+  overflow:"scroll"
+};
+
 const Events = () => {
   // const [events, setEvents] = useState([]);
   // useEffect(() => {
@@ -59,12 +79,16 @@ const Events = () => {
   //   console.log(res.data);
   //   setEvents(res.data);
   // };
-
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const { data, isLoading, error } = useGetEventsQuery()
   const Header = () => {
     const dispatch = useDispatch();
     const { token } = useSelector((state) => state.auth);
     console.log(token);
+
+    
 
     return (
       <div className="px-24 py-4 flex justify-between items-center border-b">
@@ -134,6 +158,18 @@ const Events = () => {
         <div className="py-[80px]">
           <h1 className="text-5xl">Events by Top Entrepreneurs</h1>
           <h1 className="text-2xl mt-4 text-slate-700">Book Your Seats Now!</h1>
+        <Button onClick={handleOpen} >Create Event</Button>
+        <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        sx={{overflow:"scroll"}}
+      >
+        <Box sx={style}>
+          <CreateEvents />
+        </Box>
+      </Modal>
         </div>
         <div>
           <div className="flex justify-between items-center p-2 bg-white rounded-3xl shadow-lg mt-[-25px]">
