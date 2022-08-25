@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -18,6 +18,34 @@ import {resetUser} from '../redux/reducers/user';
 const CustomDrawer = props => {
   const dispatch = useDispatch();
   const {user} = useSelector(state => state.user);
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    console.log(user);
+    var myHeaders = new Headers();
+    myHeaders.append('Authorization', `Token ${user.token}`);
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow',
+    };
+
+    fetch(
+      `https://vismayvora.pythonanywhere.com/account/${
+        user?.is_mentor ? 'mentor' : 'entrepreneur'
+      }/`,
+      requestOptions,
+    )
+      .then(response => response.text())
+      .then(result => {
+        console.log(result);
+        console.log(JSON.parse(result)[0].startup);
+
+        console.log('hello');
+        setData(JSON.parse(result)[0]);
+      })
+      .catch(error => console.log('error', error));
+  }, []);
   const logout = async () => {
     await AsyncStorage.removeItem('@save_token');
     dispatch(resetUser());
@@ -32,7 +60,7 @@ const CustomDrawer = props => {
           style={{padding: 20}}>
           <Image
             source={{
-              uri: 'https://www.pinkvilla.com/files/styles/amp_metadata_content_image/public/sini-shetty-.jpg',
+              uri: data?.profile_pic,
             }}
             style={{height: 80, width: 80, borderRadius: 40, marginBottom: 10}}
           />
@@ -52,7 +80,7 @@ const CustomDrawer = props => {
                 fontFamily: 'Roboto-Regular',
                 marginRight: 5,
               }}>
-              You have 120 Coins 
+              You have 120 Coins
             </Text>
             <FontAwesome5 name="coins" size={14} color="#fff" />
           </View>
@@ -75,7 +103,6 @@ const CustomDrawer = props => {
           </TouchableOpacity>
         </View>
       </DrawerContentScrollView>
-  
     </View>
   );
 };
