@@ -13,6 +13,7 @@ import axios from "axios";
 import { useGetEventsQuery } from "../features/events/eventsAPISlice";
 import { VscLoading } from "react-icons/vsc";
 import CreateEvents from "../components/CreateEvents/CreateEvents";
+import Header from "../components/Header/Header";
 
 
 const Event = ({ event }) => {
@@ -83,18 +84,18 @@ const Events = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const { data, isLoading, error } = useGetEventsQuery()
-  const Header = () => {
-    const dispatch = useDispatch();
-    const { token } = useSelector((state) => state.auth);
-    console.log(token);
+  // const Header = () => {
+  //   const dispatch = useDispatch();
+  //   const { token } = useSelector((state) => state.auth);
+  //   console.log(token);
 
     
 
-    return (
-      <div className="px-24 py-4 flex justify-between items-center border-b">
-        <Link className="font-bold text-3xl" to="/">
-          mentoree
-        </Link>
+    // return (
+    //   <div className="px-24 py-4 flex justify-between items-center border-b">
+    //     <Link className="font-bold text-3xl" to="/">
+    //       mentoree
+    //     </Link>
         {/* {token && ( */}
         {/* <div className="header__search">
           <SearchIcon />
@@ -102,44 +103,44 @@ const Events = () => {
         </div> */}
         {/* )} */}
 
-  //       {/* <div className={`flex gap-4 ${token && "hidden"} items-center`}>
-  //         <Link className="font-semibold text-xl" to="/registermentor">
-  //           Become a Mentor
-  //         </Link>
-  //         <Link className="font-semibold text-xl" to="/registermentor">
-  //           Find a Mentor
-  //         </Link>
-  //         <Link to="/registermentee">
-  //           <button className="uppercase rounded-full border w-[8vw] py-2 hover:bg-purple-gray-600 hover:text-white transition-all duration-150">
-  //             Sign Up
-  //           </button>
-  //         </Link>
-  //         <Link to="/login">
-  //           <button className="uppercase rounded-full border w-[8vw] py-2 hover:bg-inherit hover:text-inherit bg-purple-gray-600 text-white transition-all duration-150">
-  //             Log in
-  //           </button>
-  //         </Link>
-  //       </div> */}
-  //       {token && (
-  //         <div className="px-64 flex flex-row justify-between items-center  flex-1">
-  //           {/* // <div className="flex flex-row justify-content items-center flex-1"> */}
-  //           <Link to="/feed">
-  //             <h1 className="font-medium text-lg">Home</h1>
-  //           </Link>
+        {/* <div className={`flex gap-4 ${token && "hidden"} items-center`}>
+          <Link className="font-semibold text-xl" to="/registermentor">
+            Become a Mentor
+          </Link>
+          <Link className="font-semibold text-xl" to="/registermentor">
+            Find a Mentor
+          </Link>
+          <Link to="/registermentee">
+            <button className="uppercase rounded-full border w-[8vw] py-2 hover:bg-purple-gray-600 hover:text-white transition-all duration-150">
+              Sign Up
+            </button>
+          </Link>
+          <Link to="/login">
+            <button className="uppercase rounded-full border w-[8vw] py-2 hover:bg-inherit hover:text-inherit bg-purple-gray-600 text-white transition-all duration-150">
+              Log in
+            </button>
+          </Link>
+        </div> */}
+        // {token && (
+        //   <div className="px-64 flex flex-row justify-between items-center  flex-1">
+        //     {/* // <div className="flex flex-row justify-content items-center flex-1"> */}
+        //     <Link to="/feed">
+        //       <h1 className="font-medium text-lg">Home</h1>
+        //     </Link>
 
-  //           <h1 className="font-medium text-lg">Mentors</h1>
+        //     <h1 className="font-medium text-lg">Mentors</h1>
 
-  //           <Link to="/chat">
-  //             <h1 className="font-medium text-lg">Chat</h1>
-  //           </Link>
+        //     <Link to="/chat">
+        //       <h1 className="font-medium text-lg">Chat</h1>
+        //     </Link>
 
-  //           <Link to="/myProfile">
-  //             <h1 className="font-medium text-lg">Profile</h1>
-  //           </Link>
+        //     <Link to="/myProfile">
+        //       <h1 className="font-medium text-lg">Profile</h1>
+        //     </Link>
 
-  //           {/* <HeaderOption Icon={NotificationsIcon} title="Notifications" /> */}
-  //           {/* <HeaderOption avatar={user.photoUrl} title="me" /> */}
-  //           {/* </div> */}
+            {/* <HeaderOption Icon={NotificationsIcon} title="Notifications" /> */}
+            {/* <HeaderOption avatar={user.photoUrl} title="me" /> */}
+            {/* </div> */}
   //         </div>
   //       )}
   //       <button

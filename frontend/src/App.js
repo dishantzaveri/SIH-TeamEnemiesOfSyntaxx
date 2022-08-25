@@ -32,6 +32,7 @@ import CreateEvents from "./components/CreateEvents/CreateEvents";
 import Header from "./components/Header/Header";
 import Signup from './components/Signup/Signup';
 import Steps from './components/Steps/Steps';
+import CreateCampaigns from './CreateCampaigns/CreateCampaigns';
 
 const languages = [
   { value: '', text: "Options" },
@@ -88,6 +89,7 @@ function App() {
         <Route path="/header" element={<Header />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/steps" element={<Steps />} />
+        <Route path="/createCampaigns" element={<CreateCampaigns />} />
       </Routes>
     </Router>
     </>

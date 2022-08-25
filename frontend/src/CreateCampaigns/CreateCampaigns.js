@@ -10,7 +10,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Stack from '@mui/material/Stack';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
-export default function CreateEvents() {
+export default function CreateCampaigns() {
   const [value3, setValue3] = React.useState(new Date('2022-01-01T00:00:00.000Z'));
   const [value4, setValue4] = React.useState(new Date('2022-01-01T00:00:00.000Z'));
     const [value1, setValue1] = React.useState(new Date());
@@ -59,10 +59,10 @@ export default function CreateEvents() {
   return (
 <div 
 // class=" bg-purple-gray-500"
-><h2 style={{fontSize:"22px", textAlign:"center",}}>Create your Event</h2>
+> <h2 style={{fontSize:"22px", textAlign:"center",}}>Create your Campaign</h2>
      {/* <div class="container max-w-[50%] mx-auto flex-1 flex flex-col items-center justify-center px-1 "> <h1 style={{fontSize:30, margin:"10%", fontWeight:"bolder" , color:"#F1F2F7"}}>Event Details</h1> */}
 
-     <div class="bg-purple-gray-100 px-6 py-8 rounded shadow-md text-black w-full"
+     <div class="bg-purple-gray-100 px-6 py-8 rounded shadow-md text-black w-full "
     // class="bg-purple-gray-100"
       component="form"
       sx={{
@@ -78,7 +78,7 @@ export default function CreateEvents() {
   {/* {item?.map((currentItem, index) => { */}
    {/* return */}
     <div >
- <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}>Organiser  </h1>
+ <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}>Company Name  </h1>
  <TextField
      required
      id="standard-required"
@@ -87,7 +87,7 @@ export default function CreateEvents() {
    //   placeholder='Name'
    />
  </div>
- <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}>Name of the Event  </h1>
+ <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}>Title of campaign</h1>
  <TextField
      required
      id="standard-required"
@@ -96,7 +96,7 @@ export default function CreateEvents() {
    //   placeholder='Name'
    />
  </div>
- <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}>Image of the Event  </h1>
+ <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}>Description about the campaign  </h1>
  <TextField
      required
      id="standard-required"
@@ -113,7 +113,23 @@ export default function CreateEvents() {
      variant="standard"
    />
  </div>
- <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}> Mode of the Event</h1>
+ <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}>Target Amount for the campaign </h1>
+ <TextField
+     id="standard-textarea"
+     label=""
+     multiline
+     variant="standard"
+   />
+ </div>
+ <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}>Amount collected till now </h1>
+ <TextField
+     id="standard-textarea"
+     label=""
+     multiline
+     variant="standard"
+   />
+ </div>
+ {/* <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}> Mode of the Event</h1>
  <TextField
           id="outlined-select-mode"
           select
@@ -133,7 +149,7 @@ export default function CreateEvents() {
  <LocalizationProvider dateAdapter={AdapterDateFns} >
       <Stack spacing={3} >
       <DatePicker
-          label=""
+          label="Responsive"
           openTo="year"
           views={['year', 'month', 'day']}
           value={value1}
@@ -228,7 +244,7 @@ export default function CreateEvents() {
      multiline
      variant="standard"
    />
- </div>
+ </div> */}
  {/* <button onClick={() => addNewDiv()}  class="w-[40%] items-center justify-center bg-purple-gray-500 hover:bg-purple-gray-600 text-white font-bold py-2 px-4 rounded m-5 "> Add Work Experience</button>
  <button onClick={() => removeDiv()}  class="w-[40%] items-center justify-center bg-purple-gray-500 hover:bg-purple-gray-600 text-white font-bold py-2 px-4 rounded m-5"> Remove Work Experience</button> */}
  </div>
@@ -241,59 +257,6 @@ export default function CreateEvents() {
   </div>
   {/* </div> */}
 
-
-  
-
-      {/* <div>
-        <TextField
-          required
-          id="standard-required"
-          label="Required"
-          defaultValue="Hello World"
-          variant="standard"
-        />
-        <TextField
-          disabled
-          id="standard-disabled"
-          label="Disabled"
-          defaultValue="Hello World"
-          variant="standard"
-        />
-        <TextField
-          id="standard-password-input"
-          label="Password"
-          type="password"
-          autoComplete="current-password"
-          variant="standard"
-        />
-        <TextField
-          id="standard-read-only-input"
-          label="Name"
-        //   defaultValue="Hello World"
-          variant="standard"
-        />
-        <TextField
-          id="standard-number"
-          label="Number"
-          type="number"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          variant="standard"
-        />
-        <TextField
-          id="standard-search"
-          label="Search field"
-          type="search"
-          variant="standard"
-        />
-        <TextField
-          id="standard-helperText"
-          label="Helper text"
-          defaultValue="Default Value"
-          variant="standard"
-        />
-      </div> */}
     </div>
   );
 }
