@@ -30,6 +30,8 @@ import SideNavbar from "./components/SideNavbar/SideNavbar";
 import SingleMentor from "./components/SingleMentor/SingleMentor";
 import CreateEvents from "./components/CreateEvents/CreateEvents";
 import Header from "./components/Header/Header";
+import Signup from './components/Signup/Signup';
+import Steps from './components/Steps/Steps';
 
 const languages = [
   { value: '', text: "Options" },
@@ -84,6 +86,8 @@ function App() {
         <Route path="/singleMentor" element={<SingleMentor />} />
         <Route path="/createEvents" element={<CreateEvents />} />
         <Route path="/header" element={<Header />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/steps" element={<Steps />} />
       </Routes>
     </Router>
     </>

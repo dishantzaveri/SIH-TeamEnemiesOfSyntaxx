@@ -43,6 +43,8 @@
     "react-i18next": "^11.18.4",
     "react-icons": "^4.4.0",
     "react-map-gl": "^7.0.19",
+    "react-multiple-image-uploader": "^1.0.3",
+    "react-papaparse": "^4.1.0",
     "react-player": "^2.10.1",
     "react-pptx": "^2.15.0",
     "react-redux": "^8.0.2",
