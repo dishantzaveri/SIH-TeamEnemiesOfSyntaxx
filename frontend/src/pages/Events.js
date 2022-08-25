@@ -14,7 +14,7 @@ import { useGetEventsQuery } from "../features/events/eventsAPISlice";
 import { VscLoading } from "react-icons/vsc";
 import CreateEvents from "../components/CreateEvents/CreateEvents";
 import Header from "../components/Header/Header";
-
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 const Event = ({ event }) => {
   
@@ -155,11 +155,13 @@ const Events = () => {
   return (
     <div>
       <Header />
-      <div className="px-32 bg-gradient-to-r from-[#2eb6b8] via-blue-300  to-[#DAF0F4] w-full h-64 relative">
-        <div className="py-[80px]">
+      <div className="px-32 bg-gradient-to-r from-[#2eb6b8] via-blue-300  to-[#DAF0F4] w-full h-64 relative ">
+        <div className="py-[80px] flex">
+          <div className="content ">
           <h1 className="text-5xl">Events by Top Entrepreneurs</h1>
           <h1 className="text-2xl mt-4 text-slate-700">Book Your Seats Now!</h1>
-        <Button onClick={handleOpen} >Create Event</Button>
+          </div>
+        <button onClick={handleOpen} className="create-button bg-gradient-to-r from-[#c0edf5] via-blue-300  to-[#2eb6b8] text-white self-end p-2 px-4 rounded-2xl ml-[37%] "><AddCircleIcon /> Create Event</button>
         <Modal
         open={open}
         onClose={handleClose}
