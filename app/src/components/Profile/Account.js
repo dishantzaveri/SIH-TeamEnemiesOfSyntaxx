@@ -227,7 +227,7 @@ export default function Account() {
               ))}
             </View>
           </View>
-          {user.is_mentor ? null : (
+          {user?.is_mentor ? null : (
             <>
               <View
                 style={{

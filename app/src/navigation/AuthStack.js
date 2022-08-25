@@ -3,10 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Login from '../OnBoarding/Login';
 import Login1 from '../OnBoarding/Login1';
 import SignUp1 from '../OnBoarding/SignUp1';
-import {
-  Jobs,
-  JobSeekers,
-} from '../pages';
+import {Jobs, JobSeekers} from '../pages';
 import SwiperScreens from '../OnBoarding/SwiperScreens';
 import SignUpMentor from '../OnBoarding/SignUpMentor';
 import Onboarding1 from '../pages/Onboarding1';
@@ -16,10 +13,10 @@ import Onboarding4 from '../pages/Onboarding4';
 import Onboarding5 from '../pages/Onboarding5';
 import Profile1 from '../components/Profile/Profile1';
 import Profile2 from '../components/Profile/Profile2';
+import AddStartups from '../components/Profile/AddStartups';
 
 const Stack = createNativeStackNavigator();
 const OnboardingStack = createNativeStackNavigator();
-
 
 const Onboarding = () => {
   return (
@@ -59,16 +56,18 @@ const Onboarding = () => {
         component={Profile2}
         screenOptions={{headerShown: false}}
       />
+      <OnboardingStack.Screen
+        name="AddStartUp"
+        component={AddStartups}
+        screenOptions={{headerShown: false}}
+      />
     </OnboardingStack.Navigator>
   );
 };
 
-
 const AuthStack = () => {
   return (
-    <Stack.Navigator
-      screenOptions={{headerShown: false}}
-    >
+    <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="SwiperScreens" component={SwiperScreens} />
       <Stack.Screen
         name="Login"

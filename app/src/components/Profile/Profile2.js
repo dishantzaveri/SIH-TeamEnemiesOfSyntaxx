@@ -36,7 +36,7 @@ const Profile2 = ({navigation, route}) => {
   const [studyhere, setStudyhere] = useState('');
   const [workhere, setWorkhere] = useState('');
   const [expertise, setExpertise] = useState('');
-  const {signUpToken} = useSelector(state => state.user);
+  const {signUpToken, signUpRole} = useSelector(state => state.user);
   const toggleModalVisibility = () => {
     setModalVisible(!isModalVisible);
   };
@@ -59,6 +59,31 @@ const Profile2 = ({navigation, route}) => {
   };
 
   useEffect(() => {}, []);
+
+  const savePost = async () => {
+    if (signUpRole === 'mentor') {
+      var myHeaders = new Headers();
+      myHeaders.append('Authorization', `Token ${signUpToken}`);
+      myHeaders.append(
+        'Cookie',
+        'csrftoken=XrZ21zawQLTzsfHhgMRb0aSPUt27OtRf; sessionid=tpxs6ge4xtu4f4shfqsqgnxc4niny1tz',
+      );
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        redirect: 'follow',
+      };
+      fetch(
+        'https://vismayvora.pythonanywhere.com/account/mentor/',
+        requestOptions,
+      )
+        .then(response => response.text())
+        .then(result => {
+          console.log(result);
+        })
+        .catch(error => console.log('error', error));
+    }
+  };
 
   const sendEducation = () => {
     var myHeaders = new Headers();
@@ -123,7 +148,7 @@ const Profile2 = ({navigation, route}) => {
       .then(response => response.text())
       .then(result => {
         console.log(result);
-        toggleModalVisibility1();
+        toggleModalVisibility2();
       })
       .catch(error => console.log('error', error));
   };
@@ -605,7 +630,7 @@ const Profile2 = ({navigation, route}) => {
             Please add Experience, Get immediate access to mentors.
           </Text>
         </View>
-        <View style={styles.card}>
+        {/* <View style={styles.card}>
           <View
             style={{
               flexDirection: 'row',
@@ -714,7 +739,7 @@ const Profile2 = ({navigation, route}) => {
           <Text style={styles.nameInput}>
             Enter your GST/CIN/PAN Number to show us your startups.
           </Text>
-        </View>
+        </View> */}
 
         <View style={styles.card}>
           <View
@@ -863,7 +888,14 @@ const Profile2 = ({navigation, route}) => {
           <Button
             style={styles.button5}
             labelStyle={styles.label2}
-            onPress={() => navigation.navigate('Login')}>
+            onPress={() => {
+              savePost();
+              if (signUpRole === 'mentor') {
+                navigation.navigate('Login');
+              } else {
+                navigation.navigate('AddStartUp');
+              }
+            }}>
             Next
           </Button>
         </View>

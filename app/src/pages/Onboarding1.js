@@ -24,7 +24,7 @@ import {Dimensions} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {CometChat} from '@cometchat-pro/react-native-chat';
 import {useDispatch, useSelector} from 'react-redux';
-import {setSignUpToken} from '../redux/reducers/user';
+import {setSignUpRole, setSignUpToken} from '../redux/reducers/user';
 
 const Onboarding1 = ({route}) => {
   const [filePath, setFilePath] = useState({});
@@ -34,9 +34,6 @@ const Onboarding1 = ({route}) => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log(route.params);
-  }, []);
   const saveData = async () => {
     var myHeaders = new Headers();
     myHeaders.append(
@@ -71,6 +68,7 @@ const Onboarding1 = ({route}) => {
         console.log(result);
         console.log(JSON.parse(result).token);
         dispatch(setSignUpToken(JSON.parse(result).token));
+        dispatch(setSignUpRole(route.params.role));
         const uuid =
           route.params.name.split(' ')[0] + route.params.email.split('@')[0];
         console.log(uuid);
