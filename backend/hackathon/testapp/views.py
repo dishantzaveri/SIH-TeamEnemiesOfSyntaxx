@@ -99,6 +99,7 @@ class SessionRegisterView(generics.GenericAPIView):
         request.data._mutable = True
         request.data['user'] = self.request.user.email
         request.data_mutable = False
+        
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             serializer.save()

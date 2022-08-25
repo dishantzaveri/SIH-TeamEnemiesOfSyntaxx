@@ -24,5 +24,7 @@ urlpatterns = [
     path('startups_list/',views.StartupsList.as_view(), name = 'Startupss'),
     path('connect_mentee/',views.ConnectMenteeView.as_view(), name = 'Connect Mentee'),
     path('connect_mentor/',views.ConnectMentorView.as_view(), name = 'Connect Mentor'),
+    path('rating/',views.Rating.as_view(), name = 'Rating'),
+    path('recommend/',views.getRating.as_view(),name='getRating')
 
 ]
