@@ -33,6 +33,7 @@ import Header from "./components/Header/Header";
 import Signup from './components/Signup/Signup';
 import Steps from './components/Steps/Steps';
 import CreateCampaigns from './CreateCampaigns/CreateCampaigns';
+import Footer from './components/Footer/Footer';
 
 const languages = [
   { value: '', text: "Options" },
@@ -92,6 +93,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/steps" element={<Steps />} />
         <Route path="/createCampaigns" element={<CreateCampaigns />} />
+        <Route path="/footer" element={<Footer />} />
       </Routes>
     </Router>
     </>

@@ -3,18 +3,15 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-// import NavBar from '../Navbar/Navbar';
-// import Loader from '../Loader/Loader';
 import SingleCampaign from '../AllCampaignsSingleCampaign/SingleCampaign';
 import Navbar from '../Navbar';
 import SideNavbar from '../SideNavbar/SideNavbar';
-// import Footer from '../Footer/Footer';
-// import { AllCampaignsContext } from '../../contexts/allCampaignsContext';
 import { useGetFundsQuery } from '../../features/funding/fundingAPISlice';
 import Location from "@material-ui/icons/LocationOnOutlined";
 import GrainOutlined from "@material-ui/icons/GrainOutlined";
 import Header from '../Header/Header';
 import CreateCampaigns from '../../CreateCampaigns/CreateCampaigns';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 const style = {
   position: 'absolute',
@@ -35,7 +32,38 @@ const AllCampaigns = () => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const {data, isLoading} = useGetFundsQuery()
-    console.log(data)
+    console.log(data);
+
+    const create = async () => {
+      var myHeaders = new Headers();
+myHeaders.append("Authorization", "Token 8ee14cbf8c09c0baeae939b60041b703ed240e82");
+
+var formdata = new FormData();
+formdata.append("name", "Greha Shah");
+formdata.append("description", "GDSC Lead 2022");
+formdata.append("images", "");
+formdata.append("targetAmount", "20000");
+formdata.append("collectedAmount", "100");
+formdata.append("event_date", "20-08-2022");
+formdata.append("contributors", "Mihir Shinde");
+formdata.append("subEvents", "");
+formdata.append("targetVolunteers", "");
+formdata.append("registeredVolunteers", "");
+formdata.append("address", "D. J. Sanghvi College of Engineering");
+formdata.append("startup", "15");
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: formdata,
+  redirect: 'follow'
+};
+
+fetch("https://vismayvora.pythonanywhere.com/news/funding/?Authorization=Token 8ee14cbf8c09c0baeae939b60041b703ed240e82", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+    }
     
     return (
         <div className="">
@@ -49,9 +77,11 @@ const AllCampaigns = () => {
                 <div className="">
                     {/* <Navbar /> */}
                     <div className="px-32 bg-gradient-to-r from-[#2eb6b8] via-blue-300  to-[#DAF0F4] w-full h-64 relative">
-        <div className="py-[80px]">
+        <div className="py-[80px] flex">
+        <div className="content ">
           <h1 className="text-5xl">Funding Campaigns</h1>
           <h1 className="text-2xl mt-4 text-slate-700">Help the Entrepreneurs by Donating in their Startups</h1>
+          </div>
           <button onClick={handleOpen} className="create-button bg-gradient-to-r from-[#c0edf5] via-blue-300  to-[#2eb6b8] text-white self-end p-2 px-4 rounded-2xl ml-[37%] "><AddCircleIcon /> Create Campaign</button>
         <Modal
         open={open}
