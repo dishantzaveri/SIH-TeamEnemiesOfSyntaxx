@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { useGetGstMutation } from '../features/gst/gstAPISlice'
+import { usePostGstMutation } from '../features/gst/gstAPISlice'
 
 const keys = ['Legal Name of Business', 'Trade Name', 'GSTIN/UIN Number', 'GSTIN / UIN Status', 'Registration Date', 'Constitution of Business', 'Taxpayer Type', 'Date of Cancellation', 'Nature of Business Activities', 'Recipient of Goods or Services', 'Warehouse / Depot', 'State Jurisdiction', 'State Code', 'Centre Jurisdiction', 'Centre Code']
 
@@ -10,8 +10,7 @@ const data = {
 
 const Gst = () => {
   const [input, setInput] = useState('')
-  const [getGst] = useGetGstMutation()
-
+  const [getGst] = usePostGstMutation()
   const getFilterData = (data) => {
     let x = data.data.split('\n')
     console.log(x)
@@ -88,7 +87,7 @@ const Gst = () => {
     tradeName: "TATA MOTORS LIMITED"
   }
 
-  const getData = async () => {
+  const submit = async () => {
     // console.log(getFilterData(data))
     // let x = new FormData();
     // x.append('gstnumber', '27AAICS1406R3ZV');
@@ -136,7 +135,7 @@ const Gst = () => {
   return (
     <div>
       <input value={input} onChange={e => setInput(e.target.value)} type="text" />
-      <button onClick={() => getData()}>submit</button>
+      <button onClick={() => submit()}>submit</button>
     </div>
   )
 }
