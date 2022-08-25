@@ -37,14 +37,6 @@ const CreatePosts = () => {
   });
 
   const handleSubmitButton = async () => {
-    var form_data = new FormData();
-    if (uploadData.file)
-      form_data.append("images_post", uploadData.file, uploadData.file.name);
-    // else form_data.append('images_post', null)
-    form_data.set("title", "");
-    form_data.set("body", uploadData.description);
-    form_data.set("youtube_link", URL.youtube);
-    console.log(uploadData.file);
     // verify atleast one of the input fields are not empyt
     if (uploadData.description || uploadData.file || URL.photo || URL.youtube) {
       if (URL.photo !== "" || URL.youtube !== "") {
@@ -99,11 +91,6 @@ const CreatePosts = () => {
               description: "",
               file: null,
             });
-
-            console.log(form_data);
-            console.log(uploadData);
-            const data = await postPost(form_data).unwrap();
-            console.log(data);
           } catch (error) {
             console.log(error);
           }
@@ -145,11 +132,6 @@ const CreatePosts = () => {
             description: "",
             file: null,
           });
-
-          console.log(form_data);
-          console.log(uploadData);
-          const data = await postPost(form_data).unwrap();
-          console.log(data);
         } catch (error) {
           console.log(error);
         }
