@@ -8,18 +8,29 @@ import Component3 from './Component3';
 import { usePostGstMutation } from '../../features/gst/gstAPISlice';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 const GST = ({ gst }) => {
+  const [data, setData] = useState(["div"]);
+  function removeGst() {
+		const curr = [...data];
+		curr.pop();
+		setData(curr);
+	}
   console.log(gst);
   return (
-    <div>
-      <div className="bg-white flex justify-between self-center max-w-[280px] bottom-[-40px] p-2 rounded-b-2xl shadow-lg">
-        <div className="">
+    <div className='flex items-center justify-center'>
+      <div className="bg-white flex self-center w-[100%] p-2 shadow-lg">
+        <div className="flex">
+          <div>
           <h1
             className="text-lg font-bold mt-2"
           >Name: {gst.legalNameOfBusiness}
           </h1>
           <h1 className="mt-[5px]">GST IN : {gst.gstin}</h1>
+          </div>
+          <button onClick={() => removeGst()}
+									class=" bg-purple-gray-500 hover:bg-purple-gray-600 text-white font-bold py-2 px-4 rounded m-5 "><CancelIcon /></button>
         </div>    
       </div>
     </div>
@@ -69,9 +80,11 @@ export default function FormPropsTextFields() {
   
   return (
     <div className="bg-purple-gray-100 px-6 py-8 rounded shadow-md text-black w-full" >
-      <h1 className='text-2xl font-semibold uppercase mb-4'>gst</h1>
-      <input className='px-3 py-2' placeholder='Enter GST Number' value={input} onChange={e => setInput(e.target.value)} type="text" />
-      <button className='px-3 py-2 bg-purple-gray-700' onClick={() => submit()}>add</button>
+      <h1 className='text-2xl font-semibold uppercase mb-4 w-full'>gst</h1>
+      <div className='w-full'>
+      <input className='px-3 py-2 w-[91%]' placeholder='Enter GST Number' value={input} onChange={e => setInput(e.target.value)} type="text" />
+      <button className='px-4 py-2 bg-purple-gray-700' onClick={() => submit()}>Add</button>
+      </div>
       <div className="w-full">
         {startups!==[] && startups.map((gst) => (
           <GST gst={gst} />
