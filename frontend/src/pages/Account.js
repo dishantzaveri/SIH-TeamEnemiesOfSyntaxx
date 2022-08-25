@@ -5,13 +5,15 @@ import { FaBirthdayCake } from "react-icons/fa";
 import { AiFillEdit } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { useGetProfileQuery } from "../features/profile/profileAPISlice";
+import Header from "../components/Header/Header";
 const Account = () => {
   const {is_entrepreneur} = useSelector(state => state.auth);
   const {data, isLoading, error} = useGetProfileQuery(is_entrepreneur ? 'entrepreneur' : 'mentor');
   console.log(data, error)
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
+      <Header />
       <div className="px-64 bg-gradient-to-r from-[#2eb6b8] via-blue-300  to-[#DAF0F4] w-full h-64 relative">
         <div className="flex justify-between absolute  top-[100px] ">
           <div className="shadow bg-white shadow-gray-300 p-8 flex flex-col rounded h-fit">
@@ -19,7 +21,6 @@ const Account = () => {
               className="w-[80px] h-[80px] rounded-full object-cover self-center"
               src="https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg.jpg"
             />
-
             <h1 className="font-bold text-lg cursor-pointer mt-4 self-center">
               {data?.name}
             </h1>

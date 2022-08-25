@@ -9,6 +9,7 @@ import { Grid } from "@mui/material/node";
 import SideNavbar from "../components/SideNavbar/SideNavbar";
 import { useGetMentorsListQuery } from "../features/list/listAPISlice";
 import { VscLoading } from "react-icons/vsc";
+import Header from "../components/Header/Header";
 
 
 export default function Mentors() {
@@ -16,7 +17,8 @@ export default function Mentors() {
 
     return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
+      <Header />
       <Grid container sm={12}>
       <Grid item sm={3.8}>
         <div style={{margin:"3%", height:"100%"}}>
