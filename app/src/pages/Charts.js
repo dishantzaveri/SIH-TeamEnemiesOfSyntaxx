@@ -1,7 +1,6 @@
-import VerticalBarGraph from '@chartiful/react-native-vertical-bar-graph';
-import { View, StyleSheet } from 'react-native';
+
+import { View, StyleSheet,Text } from 'react-native';
 import LineGraph from '@chartiful/react-native-line-graph';
-import HorizontalBarGraph from '@chartiful/react-native-horizontal-bar-graph';
 import React, { useEffect, useState } from 'react'
 import { ScrollView } from 'react-native-gesture-handler';
 import {
@@ -67,8 +66,8 @@ export default function Charts() {
     };
 
     const progressdata = {
-        labels: ["Swim", "Bike", "Run"], // optional
-        data: [0.4, 0.6, 0.8]
+        labels: ["Bhilwara","Kochi","Orissia","Powai ","Nagpur"], // optional
+        data: [8000000,800000,5000000,400000,350000]
     };
 
     const chartConfig = {
@@ -78,13 +77,13 @@ export default function Charts() {
         backgroundGradientToOpacity: 0.5,
         color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
         strokeWidth: 2, // optional, default 3
-        barPercentage: 0.5,
+        barPercentage: 0.7,
         useShadowColorFromDataset: false // optional
     };
 
     return (
         <ScrollView>
-            <View style={{ flex: 1, margin: 10, alignSelf: "center", alignContent: "center", justifyContent: "center" }}>
+            <View style={{ flex: 1, margin: 10, alignSelf: "center", alignContent: "center", justifyContent: "center" ,alignItems: "center" }}>
 
                 <BarGraph />
                 <LineGraph
@@ -96,6 +95,7 @@ export default function Charts() {
                     baseConfig={config1}
                     style={styles.chart1}
                 />
+                 <Text style={{ fontSize: 20, textAlign: 'center',margin:10 }}>Company count per month</Text>
                 <ProgressChart
                     data={progressdata}
                     width={width * 0.8}
@@ -105,6 +105,7 @@ export default function Charts() {
                     chartConfig={chartConfig}
                     hideLegend={false}
                 />
+                 <Text style={{ fontSize: 20, textAlign: 'center',margin:10 }}>Company count per month</Text>
             </View>
         </ScrollView>
     );

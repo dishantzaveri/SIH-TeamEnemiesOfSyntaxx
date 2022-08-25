@@ -96,7 +96,7 @@ function Tabs() {
           if (route.name === 'Home') {
             return <Entypo name="home" size={27} color={color} />;
           }
-          if (route.name === 'AllMentors') {
+          if (route.name === 'Mentors') {
             return <FontAwesome5 name="people-carry" size={27} color={color} />;
           }
           if (route.name === 'Mentees') {
@@ -137,7 +137,7 @@ function Tabs() {
         }}/>
 
       <Tab.Screen
-        name="AllMentors"
+        name="Mentors"
         component={MentorsScreens}
         options={{
           headerShown: false,

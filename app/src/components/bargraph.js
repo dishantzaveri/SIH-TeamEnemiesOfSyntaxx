@@ -30,7 +30,7 @@ export default function BarGraph() {
         }}
         width={Dimensions.get('window').width - 30}
         height={230}
-        yAxisLabel={'$ - '}
+        // yAxisLabel={'$ - '}
         chartConfig={{
           backgroundColor: '#1cc910',
           backgroundGradientFrom: '#458336',
@@ -43,7 +43,7 @@ export default function BarGraph() {
         }}
       />
  
-      <Text style={{ fontSize: 28, textAlign: 'center' }}>Company count per month</Text>
+      <Text style={{ fontSize: 20, textAlign: 'center' ,margin:10}}>Company count per month</Text>
  
     </View>
   );

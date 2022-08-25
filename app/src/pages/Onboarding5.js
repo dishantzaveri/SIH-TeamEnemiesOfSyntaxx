@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    fontSize: 16,
+    fontSize: 20,
     alignContent: 'center',
     alignItems: 'center',
     justifyContent: 'center',

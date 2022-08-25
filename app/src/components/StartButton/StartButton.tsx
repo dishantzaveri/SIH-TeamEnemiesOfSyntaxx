@@ -17,6 +17,7 @@ const StartButton = ({ onPress, disabled, starting }: Props) => {
         disabled={disabled}
         label={starting ? 'Joining...' : 'Join call'}
         robotId={'robots-start-call'}
+      
       />
     </View>
   );

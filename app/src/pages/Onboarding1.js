@@ -234,7 +234,7 @@ const Onboarding1 = ({route}) => {
               justifyContent: 'center',
               marginTop: 20,
             }}>
-            <TouchableOpacity
+            {/* <TouchableOpacity
               style={{
                 marginTop: 10,
                 padding: 10,
@@ -250,20 +250,21 @@ const Onboarding1 = ({route}) => {
                 }}>
                 Upload Image
               </Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
             <TouchableOpacity
               style={{
                 marginTop: 10,
                 padding: 10,
-                backgroundColor: colors.primary,
-                borderRadius: 10,
+                backgroundColor: '#00CFDE',
+       
               }}
               onPress={() => captureImage('photo')}>
               <Text
                 style={{
                   color: 'white',
                   fontSize: 16,
+                fontWeight: 'bold'
                 }}>
                 Take a picture
               </Text>
