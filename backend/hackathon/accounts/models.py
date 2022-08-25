@@ -67,7 +67,9 @@ class Startup(models.Model):
     tradeName = models.CharField(max_length=255)
     is_verified = models.BooleanField(default=False, null=True, blank=True)
     gstin = models.CharField(max_length=255, unique=True, null=True, blank=True)
+    cin = models.CharField(max_length=255, unique=True, null=True, blank=True)
     gstnStatus = models.CharField(max_length=255, null=True, blank=True)
+    cin_status = models.CharField(max_length=255, null=True, blank=True)
     dateOfRegistration = models.CharField(max_length = 255,null=True,blank=True)
     constitutionOfBusiness = models.CharField(max_length=255, null=True, blank=True)
     taxpayerType = models.CharField(max_length=255, null=True, blank=True)
@@ -129,6 +131,7 @@ class Coins(models.Model):
     date_modified = models.DateField(default=datetime.date.today)
 
 class Myrating(models.Model):
-    entrepreneur_profile = models.ForeignKey(EntrepreneurProfile,on_delete=models.CASCADE,related_name='rating_entrepreneur',null=True) 
-    mentor_profile  = models.ForeignKey(MentorProfile,on_delete=models.CASCADE,related_name='rating_mentor',null=True)
+
+    entrepreneur_profile   = models.ForeignKey(EntrepreneurProfile,on_delete=models.CASCADE,related_name='rating_entrepreneur',null=True, blank=True) 
+    mentor_profile  = models.ForeignKey(MentorProfile,on_delete=models.CASCADE,related_name='rating_mentor',null=True, blank=True)
     rating  = models.IntegerField(default=1,validators=[MaxValueValidator(5),MinValueValidator(0)])

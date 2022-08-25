@@ -14,6 +14,12 @@ class FundingSerializer(serializers.ModelSerializer):
 		model = Funding
 		fields = '__all__'
 
+# class CollectedAmount(serializers.ModelSerializer):
+
+# 	class Meta:
+# 		model = ProvideFund
+# 		fields = '__all__'
+
 class RecomendationSeizlizer(serializers.ModelSerializer):
 	class Meta:
 		model = Recomendation

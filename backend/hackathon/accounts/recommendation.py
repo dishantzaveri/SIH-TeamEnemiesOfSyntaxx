@@ -41,7 +41,6 @@ def Myrecommend():
 		Xgrad += mylambda * myX
 		Thetagrad += mylambda * myTheta
 		return flattenParams(Xgrad, Thetagrad)
-
 	df=pd.DataFrame(list(Myrating.objects.all().values()))
 	print(df)
 	mynu=df.entrepreneur_profile_id.unique().shape[0]
@@ -71,6 +70,36 @@ def Myrecommend():
 	print(prediction_matrix)
 	print(Ymean)
 	return prediction_matrix,Ymean
+
+	df=pd.DataFrame(list(Myrating.objects.all().values()))
+	print(df)
+	# mynu=df.entrepreneur_profile_id.unique().shape[0]
+	mynu = 5
+	# mynm=df.mentor_profile_id.unique().shape[0]
+	mynm = 5
+	mynf=10
+	Y=np.zeros((mynm,mynu))
+	for row in df.itertuples():
+		print(row)
+		print(row[2])
+		print(row[4])
+		Y[row[2]-1, row[4]-1] = row[3]
+	R=np.zeros((mynm,mynu))
+	for i in range(Y.shape[0]):
+		for j in range(Y.shape[1]):
+			if Y[i][j]!=0:
+				R[i][j]=1
+
+	Ynorm, Ymean = normalizeRatings(Y,R)
+	X = np.random.rand(mynm,mynf)
+	Theta = np.random.rand(mynu,mynf)
+	myflat = flattenParams(X, Theta)
+	mylambda = 12.2
+	result = scipy.optimize.fmin_cg(cofiCostFunc,x0=myflat,fprime=cofiGrad,args=(Y,R,mynu,mynm,mynf,mylambda),maxiter=40,disp=True,full_output=True)
+	resX, resTheta = reshapeParams(result[0], mynm, mynu, mynf)
+	prediction_matrix = resX.dot(resTheta.T)
+	return prediction_matrix,Ymean
+
 	
 
 
