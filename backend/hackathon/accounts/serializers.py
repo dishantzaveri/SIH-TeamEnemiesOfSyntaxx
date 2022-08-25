@@ -76,13 +76,14 @@ class StartupSerializer(serializers.ModelSerializer):
 
 class MentorProfileSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
+    name = serializers.CharField(source='user.name',read_only=True)
     experience = WorkExperienceSerializer(source = 'user.experience', many=True, read_only=True)
     education = EducationSerializer(source = 'user.education', many=True, read_only=True)
     profile_pic = serializers.ImageField(source = 'user.profile_pic', read_only=True)
 
     class Meta:
         model = MentorProfile
-        fields = ['id', 'expertise', 'experience', 'education', 'latitude', 'longitude','profile_pic']
+        fields = ['id','name', 'expertise', 'experience', 'education', 'latitude', 'longitude','profile_pic']
 
 class MentorLocationSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
