@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@alan-ai/alan-sdk-web": "^1.8.34",
     "@cometchat-pro/chat": "^3.0.6",
     "@daily-co/daily-js": "^0.29.0",
     "@emotion/react": "^11.10.0",

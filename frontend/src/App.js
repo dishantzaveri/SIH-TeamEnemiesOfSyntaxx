@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import RegisterMentee from "./components/Register/registerMentee";
@@ -33,6 +33,7 @@ import Header from "./components/Header/Header";
 import Signup from './components/Signup/Signup';
 import Steps from './components/Steps/Steps';
 import CreateCampaigns from './CreateCampaigns/CreateCampaigns';
+import alanBtn from "@alan-ai/alan-sdk-web";
 
 const languages = [
   { value: '', text: "Options" },
@@ -42,6 +43,7 @@ const languages = [
   { value: 'mr', text: "Marathi" },
   { value: 'ta', text: "Tamil" }
 ]
+
 
 function App() {
   const { t } = useTranslation(); 
@@ -55,6 +57,16 @@ function App() {
         let loc = "http://localhost:3000/";
         window.location.replace(loc + "?lng=" + e.target.value);
     }
+    useEffect(() => {
+      alanBtn({
+          key: 'ecc5936429f8831a0a3f3bd73ff973822e956eca572e1d8b807a3e2338fdd0dc/stage',
+          onCommand: (commandData) => {
+              if (commandData.command === 'go:back') {
+                  // Call the client code that will react to the received command
+              }
+          }
+      });
+  }, []);
   return (
     
     <>
