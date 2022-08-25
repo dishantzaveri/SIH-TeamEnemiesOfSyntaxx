@@ -65,7 +65,6 @@ export default function FormPropsTextFields() {
   useEffect(() => {
     getStartups()
   }, []);
-  console.log(startups[0].id);
   
   
   return (
