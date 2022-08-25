@@ -157,8 +157,6 @@ class MentorshipSerializer(serializers.ModelSerializer):
     #     entrepreneur = User.objects.get(email = entrepreneur_email)
     #     return entrepreneur
 class myrating_serializer(serializers.ModelSerializer):
-    mentor_profile = MentorProfileSerializer(read_only=True)
-    entrepreneur_profile = EntrepreneurProfileSerializer(read_only=True)
     class Meta:
         model = Myrating
         fields = ['mentor_profile','entrepreneur_profile','rating']

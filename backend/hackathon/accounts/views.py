@@ -1,3 +1,5 @@
+from nturl2path import url2pathname
+from xml.dom import UserDataHandler
 from django.shortcuts import render
 
 from django.contrib.auth import authenticate,login
@@ -16,7 +18,7 @@ from rest_framework.views import APIView
 from rest_framework.generics import GenericAPIView
 from rest_framework.decorators import action,api_view
 from rest_framework import generics
-# from .recommendation import Myrecommend
+from .recommendation import Myrecommend
 from django.contrib.auth import get_user_model
 from django.db.models import Case, When
 import requests, datetime
@@ -319,7 +321,7 @@ class PatentVerification(APIView):
 		if response.status_code == 200:
 			return Response("Web site exists!")
 		else:
-			JsonResponse('Web site does not exist!') 
+			Response('Web site does not exist!') 
 
 class ConnectMenteeView(GenericAPIView):
 	queryset = Mentorship.objects.all()
@@ -413,23 +415,25 @@ class ProfileSearch(GenericAPIView):
 class Rating(GenericAPIView):
 	queryset = Myrating.objects.all()
 	serializer_class = myrating_serializer
-
+	
 	def post(self,request):
 		if not request.user.is_authenticated:
 			return Response("login")
 	#for rating
-
-		date = datetime.datetime.now()-timedelta(days=180)
-		mentor = request.POST.get('mentor')
-		modelsof = Mentorship.objects.filter(entrepreneur = self.request.user,mentor = mentor)
+		mentor_email = request.POST.get('mentor_email')
+		modelsof = Mentorship.objects.filter(entrepreneur = self.request.user,mentor = mentor_email)
 		rate = request.POST.get('rating')
-		if modelsof['created_at'] - datetime.datetime.now() >180:
-			serializer = self.serializer_class(data=request.data)
+		mentor_profile = MentorProfile.objects.get(user = mentor_email)
+		entrepreneur_profile = EntrepreneurProfile.objects.get(user = self.request.user)
+
+
+		if True:
+		  #  if (datetime.date.today() - modelsof.created_at).days > 180:
+			serializer = self.serializer_class(mentor_profile = mentor_profile.id, entrepreneur_profile = entrepreneur_profile.id, rating = rate)
 			if serializer.is_valid():
-				serializer.save(user=self.request.user)
+				serializer.save()
 			#messages.success(request,"Your Rating is submited ")
 			return Response("Your Rating is Submited")
-		return Response("you are not able to rate the mentor")
 
 class getRating(GenericAPIView):
 	queryset = Myrating.objects.all()
