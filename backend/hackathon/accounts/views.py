@@ -310,18 +310,20 @@ class PANVerification(APIView):
 		else:
 			return JsonResponse(response,safe=False)
 
-class PatentVerification(APIView):
-	def post(self,request):
-		DiaryNo = request.data['DiaryNo']
-		RocNo = request.data['RocNo']
-		url = f"http://www.copyright.gov.in/CopyrightROC_Details.aspx?DiaryNo={DiaryNo}&RocNo={RocNo}"
+# class PatentVerification(APIView):
+# 	def post(self,request):
+# 		DiaryNo = request.data['DiaryNo']
+# 		RocNo = request.data['RocNo']
+# 		url = f"http://www.copyright.gov.in/CopyrightROC_Details.aspx?DiaryNo={DiaryNo}&RocNo={RocNo}"
 
-		response = requests.get(url)
-		print(response)
-		if response.status_code == 200:
-			return Response("Web site exists!")
-		else:
-			Response('Web site does not exist!') 
+# 		response = requests.head(url)
+# 		print(response)
+# 		print(response.status_code)
+# 		try:
+# 			if response.status_code == 200:
+# 				return Response("Web site exists!")
+# 		except:
+# 			return Response('Web site does not exist!') 
 
 class ConnectMenteeView(GenericAPIView):
 	queryset = Mentorship.objects.all()
@@ -425,11 +427,16 @@ class Rating(GenericAPIView):
 		rate = request.POST.get('rating')
 		mentor_profile = MentorProfile.objects.get(user = mentor_email)
 		entrepreneur_profile = EntrepreneurProfile.objects.get(user = self.request.user)
-
+		_mutable = request.data._mutable
+		request.data._mutable = True
+		request.data['mentor_profile'] = mentor_profile
+		request.data['entrepreneur_profile'] = entrepreneur_profile
+		request.data['rating'] = rate
+		request.data._mutable = _mutable
 
 		if True:
 		  #  if (datetime.date.today() - modelsof.created_at).days > 180:
-			serializer = self.serializer_class(mentor_profile = mentor_profile.id, entrepreneur_profile = entrepreneur_profile.id, rating = rate)
+			serializer = self.serializer_class(data=request.data)
 			if serializer.is_valid():
 				serializer.save()
 			#messages.success(request,"Your Rating is submited ")
