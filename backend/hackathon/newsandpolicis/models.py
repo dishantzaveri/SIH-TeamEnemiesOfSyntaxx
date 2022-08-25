@@ -33,6 +33,12 @@ class Funding(models.Model):
     longitude           = models.CharField(max_length=255, blank=True, null=True)
     created_at          = models.DateTimeField(auto_now_add=True)
 
+# class Investor(models.model):
+#     funding = models.ForeignKey(Funding, related_name = 'investor')
+#     amount = models.PositiveIntegerField()
+#     startup = models.ForeignKey(Startup)
+#     investor_name = models.CharField(max_length=255)
+
 class Recomendation(models.Model):
     owner       = models.ForeignKey(User,on_delete=models.CASCADE,related_name='owner')
     created_at  = models.DateTimeField(auto_now_add=True)

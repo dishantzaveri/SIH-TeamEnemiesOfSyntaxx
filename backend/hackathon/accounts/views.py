@@ -228,6 +228,23 @@ class GstVerification(APIView):
 		else:
 			return JsonResponse(response,safe=False)
 
+# class CINVerification(APIView):
+# 	url = "https://mca-corporate-verifications.p.rapidapi.com/v3/tasks/async/verify_with_source/ind_mca"
+	
+# 	payload = {
+# 	"task_id": "74f4c926-250c-43ca-9c53-453e87ceacd1",
+# 	"group_id": "8e16424a-58fc-4ba4-ab20-5bc8e7c3c41e",
+# 	"data": {"cin": "123456789012345678901"}
+# 	}
+
+# 	headers = {
+# 	"content-type": "application/json",
+# 	"X-RapidAPI-Key": "51a9253bb6msh6d7025d3464a282p1c4678jsn8834fd97d815",
+# 	"X-RapidAPI-Host": "mca-corporate-verifications.p.rapidapi.com"
+# 	}
+	
+# 	response = requests.request("POST", url, json=payload, headers=headers)
+
 class ConnectMenteeView(GenericAPIView):
 	queryset = Mentorship.objects.all()
 	serializer_class = MentorshipSerializer
