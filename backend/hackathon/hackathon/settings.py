@@ -162,9 +162,9 @@ MEDIA_URL = '/media/'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')  #your email goes here
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD') #password
+#EMAIL_HOST_USER = env('EMAIL_HOST_USER')  #your email goes here
+#EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD') #password
  
-X_RapidAPI_Key = env('X_RapidAPI_Key')
-X_RapidAPI_Host = env('X_RapidAPI_Host')
+#X_RapidAPI_Key = env('X_RapidAPI_Key')
+#X_RapidAPI_Host = env('X_RapidAPI_Host')
 

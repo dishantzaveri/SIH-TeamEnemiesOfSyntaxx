@@ -118,7 +118,7 @@ class Top25Fundedcompanybargraphapi(APIView):
 	def get(self,request):
 		df_top_25_funded_companies = df.sort_values('Amount ($)', ascending=False).head(25)
 		#df_top_25_funded_companies = df_top_25_funded_companies.drop([956])
-		data = {'x':df_top_25_funded_companies['Company/Brand'],'y':df_top_25_funded_companies['Amount ($)']}
+		data = {'x':df_top_25_funded_companies['Company/Brand'].head(5),'y':df_top_25_funded_companies['Amount ($)'].head(5)}
 		return Response(data)
 
 class statefundedcompanycountPIE(APIView):
@@ -145,7 +145,9 @@ class latitudelongitueAPI(APIView):
 class companycountpermonthBARAPI(APIView):
 	def get(self,request):
 		df_comp_count_per_month = df_full['Month'].value_counts().rename_axis('month').to_frame('count')
-		data = {'x':df_comp_count_per_month.index,'y':df_comp_count_per_month['count']}
+		x = [df_comp_count_per_month.index[8],df_comp_count_per_month.index[10],df_comp_count_per_month.index[6],df_comp_count_per_month.index[7],df_comp_count_per_month.index[11],df_comp_count_per_month.index[3],df_comp_count_per_month.index[1],df_comp_count_per_month.index[0],df_comp_count_per_month.index[4],df_comp_count_per_month.index[9],df_comp_count_per_month.index[5]]
+		y = [df_comp_count_per_month['count'].iloc[8],df_comp_count_per_month['count'].iloc[10],df_comp_count_per_month['count'].iloc[6],df_comp_count_per_month['count'].iloc[7],df_comp_count_per_month['count'].iloc[11],df_comp_count_per_month['count'].iloc[3],df_comp_count_per_month['count'].iloc[1],df_comp_count_per_month['count'].iloc[0],df_comp_count_per_month['count'].iloc[4],df_comp_count_per_month['count'].iloc[9],df_comp_count_per_month['count'].iloc[5]]
+		data = {'x':x,'y':y}
 		return Response(data)
 
 class monthwisefundingPIE(APIView):
@@ -170,5 +172,7 @@ class Fundingperregionbargraphapi(APIView):
 		funding_per_region = funding_per_region.sort_values('Amount ($)', ascending= False)
 		funding_per_region = funding_per_region.head(20)
 		#df_top_25_funded_companies = df_top_25_funded_companies.drop([956])
-		data = {'x':funding_per_region['Amount ($)'],'y':funding_per_region['Headquarters']}
+		x = [funding_per_region['Amount ($)'].iloc[2],funding_per_region['Amount ($)'].iloc[3],funding_per_region['Amount ($)'].iloc[9],funding_per_region['Amount ($)'].iloc[17],funding_per_region['Amount ($)'].iloc[19]]
+		y = [funding_per_region['Headquarters'].iloc[2],funding_per_region['Headquarters'].iloc[3],funding_per_region['Headquarters'].iloc[9],funding_per_region['Headquarters'].iloc[17],funding_per_region['Headquarters'].iloc[19]]
+		data = {'x':x,'y':y}
 		return Response(data)
