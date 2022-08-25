@@ -284,12 +284,13 @@ class CINVerification(APIView):
 
 class PANVerification(APIView):
 	def post(self,request):
+		pannumber = request.data['pannumber']
 		url = "https://pan-card-verification1.p.rapidapi.com/v3/tasks/sync/verify_with_source/ind_pan"
 		
 		payload = {
 			"task_id": "74f4c926-250c-43ca-9c53-453e87ceacd1",
 			"group_id": "8e16424a-58fc-4ba4-ab20-5bc8e7c3c41e",
-			"data": {"id_number": "AADCS0472N"}
+			"data": {"id_number": f"{pannumber}"}
 			}
 			
 		headers = {
@@ -306,6 +307,8 @@ class PANVerification(APIView):
 			return JsonResponse(response_dict, safe=False,status = status.HTTP_200_OK)
 		else:
 			return JsonResponse(response,safe=False)
+
+class PatentVerification
 
 
 class ConnectMenteeView(GenericAPIView):
