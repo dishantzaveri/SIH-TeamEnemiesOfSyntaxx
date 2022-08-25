@@ -188,10 +188,52 @@ const Profile2 = ({ navigation, route }) => {
       .catch(error => console.log('error', error));
   };
 
+  const sendCin = () => {
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Token 8ee14cbf8c09c0baeae939b60041b703ed240e82");
+    myHeaders.append("Cookie", "csrftoken=XrZ21zawQLTzsfHhgMRb0aSPUt27OtRf; sessionid=tpxs6ge4xtu4f4shfqsqgnxc4niny1tz");
+
+    var formdata = new FormData();
+    formdata.append("cinnumber", "U74899DL1993PTC055015");
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: formdata,
+      redirect: 'follow'
+    };
+
+    fetch("https://vismayvora.pythonanywhere.com/account/cinverify/", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+  };
+
+  const sendPan = () => {
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Token 8ee14cbf8c09c0baeae939b60041b703ed240e82");
+    myHeaders.append("Cookie", "csrftoken=XrZ21zawQLTzsfHhgMRb0aSPUt27OtRf; sessionid=tpxs6ge4xtu4f4shfqsqgnxc4niny1tz");
+
+    var formdata = new FormData();
+    formdata.append("pannumber", "AADCS0472N");
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: formdata,
+      redirect: 'follow'
+    };
+
+    fetch("https://vismayvora.pythonanywhere.com/account/panverify/", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+  };
+
   return (
     <View style={{ flex: 1, backgroundColor: 'white' }}>
       <ScrollView>
-       
+
         <View style={styles.card}>
           <View
             style={{
@@ -636,7 +678,11 @@ const Profile2 = ({ navigation, route }) => {
                       Cancel
                     </Button>
                     <Button
-                      onPress={sendStartups}
+                      onPress={{
+                        sendStartups,
+                        sendCin,
+                        sendPan,
+                      }}
                       style={styles.button4}
                       labelStyle={styles.label2}>
                       Save

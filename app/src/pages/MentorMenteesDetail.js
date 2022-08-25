@@ -20,7 +20,6 @@ import { Divider } from 'react-native-elements';
 import WebView from 'react-native-webview';
 import axios from 'axios';
 import StarRating from 'react-native-star-rating-widget';
-// import marked from 'marked';
 
 import {
   Github,
@@ -494,6 +493,17 @@ const MentorMenteesDetail = ({ route, navigation, props }) => {
 };
 
 const styles = StyleSheet.create({
+
+  container: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+		backgroundColor: 'white',
+	},
+	chart: {
+		width: 200,
+		height: 200,
+	},
   mainView: {
     backgroundColor: 'white',
     flex: 1,

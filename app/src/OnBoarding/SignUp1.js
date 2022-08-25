@@ -119,8 +119,8 @@ function SignUp1({ navigation }) {
               name: name,
             },
           });
-        }
-        }>
+          // console.log("Signed Up");
+        }}>
         <Text style={styles.textStyle}>Sign Up</Text>
       </TouchableOpacity>
     </View>

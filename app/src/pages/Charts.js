@@ -13,6 +13,8 @@ import {
     StackedBarChart
 } from "react-native-chart-kit";
 import { height, width } from '../Consts';
+import BarGraph from '../components/bargraph';
+
 
 
 export default function Charts() {
@@ -54,13 +56,6 @@ export default function Charts() {
         fetchGraphs();
     }, []);
 
-    const config = {
-        hasXAxisBackgroundLines: false,
-        xAxisLabelStyle: {
-            position: 'right',
-            prefix: '$'
-        }
-    };
 
     const config1 = {
         startAtZero: false,
@@ -71,8 +66,7 @@ export default function Charts() {
         }
     };
 
-
-    const progress = {
+    const progressdata = {
         labels: ["Swim", "Bike", "Run"], // optional
         data: [0.4, 0.6, 0.8]
     };
@@ -88,27 +82,11 @@ export default function Charts() {
         useShadowColorFromDataset: false // optional
     };
 
-    const bardata = {
-        labels: ["January", "February", "March", "April", "May", "June"],
-        datasets: [
-            {
-                data: [20, 45, 28, 80, 99, 43]
-            }
-        ]
-    };
     return (
         <ScrollView>
-            <View  style={{ flex: 1, margin: 10 ,alignSelf: "center",alignContent: "center" ,justifyContent: "center" }}>
-                <BarChart
-                    // style={graphStyle}
-                    data={bardata}
-                    width={width * 0.8}
-                    height={height * 0.3}
+            <View style={{ flex: 1, margin: 10, alignSelf: "center", alignContent: "center", justifyContent: "center" }}>
 
-                    yAxisLabel="$"
-                    chartConfig={chartConfig}
-                    verticalLabelRotation={30}
-                />
+                <BarGraph />
                 <LineGraph
                     data={[10, 15, 7, 20, 14, 12, 10, 20]}
                     width={width * 0.8}
@@ -119,7 +97,7 @@ export default function Charts() {
                     style={styles.chart1}
                 />
                 <ProgressChart
-                    data={progress}
+                    data={progressdata}
                     width={width * 0.8}
                     height={height * 0.3}
                     strokeWidth={16}
@@ -141,7 +119,7 @@ const styles = StyleSheet.create({
 
         borderRadius: 20,
         backgroundColor: 'green',
-        width: 350, alignSelf: "center",alignContent: "center" ,justifyContent: "center"
+        width: 350, alignSelf: "center", alignContent: "center", justifyContent: "center"
     },
     chart1: {
         margin: 20,
@@ -149,7 +127,7 @@ const styles = StyleSheet.create({
 
         borderRadius: 20,
         width: 350,
-        backgroundColor: 'lightblue', alignSelf: "center",alignContent: "center" ,justifyContent: "center"
+        backgroundColor: 'lightblue', alignSelf: "center", alignContent: "center", justifyContent: "center"
     },
     chart2:
     {
@@ -158,6 +136,6 @@ const styles = StyleSheet.create({
         paddingTop: 20,
         borderRadius: 20,
         width: 350,
-        backgroundColor: 'green' ,alignSelf: "center",alignContent: "center" ,justifyContent: "center"
+        backgroundColor: 'green', alignSelf: "center", alignContent: "center", justifyContent: "center"
     }
 });
