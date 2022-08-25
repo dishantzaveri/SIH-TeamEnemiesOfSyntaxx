@@ -16,7 +16,7 @@ from rest_framework.views import APIView
 from rest_framework.generics import GenericAPIView
 from rest_framework.decorators import action,api_view
 from rest_framework import generics
-from .recommendation import Myrecommend
+# from .recommendation import Myrecommend
 from django.contrib.auth import get_user_model
 
 import requests, datetime
@@ -230,22 +230,83 @@ class GstVerification(APIView):
 		else:
 			return JsonResponse(response,safe=False)
 
-# class CINVerification(APIView):
-# 	url = "https://mca-corporate-verifications.p.rapidapi.com/v3/tasks/async/verify_with_source/ind_mca"
-	
-# 	payload = {
-# 	"task_id": "74f4c926-250c-43ca-9c53-453e87ceacd1",
-# 	"group_id": "8e16424a-58fc-4ba4-ab20-5bc8e7c3c41e",
-# 	"data": {"cin": "123456789012345678901"}
-# 	}
+class CINVerification(APIView):
+	def post(self,request):
+		cinnumber = request.data['cinnumber']
+		url = "https://mca-corporate-verifications.p.rapidapi.com/v3/tasks/async/verify_with_source/ind_mca"
+		
+		payload = {
+			"task_id": "74f4c926-250c-43ca-9c53-453e87ceacd1",
+			"group_id": "8e16424a-58fc-4ba4-ab20-5bc8e7c3c41e",
+			"data": {"cin": f"{cinnumber}"}
+			}
+			
+		headers = {
+			"content-type": "application/json",
+			"X-RapidAPI-Key": "51a9253bb6msh6d7025d3464a282p1c4678jsn8834fd97d815",
+			"X-RapidAPI-Host": "mca-corporate-verifications.p.rapidapi.com"
+			}
+			
+		response = requests.request("POST", url, json=payload, headers=headers)
 
-# 	headers = {
-# 	"content-type": "application/json",
-# 	"X-RapidAPI-Key": "51a9253bb6msh6d7025d3464a282p1c4678jsn8834fd97d815",
-# 	"X-RapidAPI-Host": "mca-corporate-verifications.p.rapidapi.com"
-# 	}
-	
-# 	response = requests.request("POST", url, json=payload, headers=headers)
+		url = "https://mca-corporate-verifications.p.rapidapi.com/v3/tasks"
+		response = response.json()
+		request_id = response['request_id']
+		querystring = {"request_id":f"{request_id}"}
+		
+		headers = {
+			"X-RapidAPI-Key": "51a9253bb6msh6d7025d3464a282p1c4678jsn8834fd97d815",
+			"X-RapidAPI-Host": "mca-corporate-verifications.p.rapidapi.com"
+			}
+			
+		response = requests.request("GET", url, headers=headers, params=querystring)
+		
+		if response is not None:
+			print(response)
+			response_dict = response.json()
+			# response_dict['Verified'] = "Successfully Verified!"	
+			# print(response_dict)
+			# trimmed_response = {}
+			# trimmed_response['is_verified'] = True
+			# print(response_dict[0])
+			# trimmed_response['tradeName'] = response_dict[0]['request_id'][].pop('company_name')
+			# trimmed_response['cin'] = response_dict["0"]["result"].pop('cin')
+			# trimmed_response['dateOfRegistration'] = response_dict["0"]["result"].pop('date_of_incorporation')
+			# trimmed_response['constitutionOfBusiness'] = response_dict["0"]["result"].pop('class_of_company')
+			# trimmed_response['principalPlaceOfBusinessAddress'] = response_dict["0"]["result"].pop('registered_address')
+			# trimmed_response['cin_status'] = response_dict["0"]["result"].pop('company_status')
+			# serializer = StartupSerializer(data = trimmed_response)
+			# serializer.is_valid(raise_exception=True)
+			# serializer.save(user=self.request.user)
+			return JsonResponse(response_dict, safe=False,status = status.HTTP_200_OK)
+		else:
+			return JsonResponse(response,safe=False)
+
+class PANVerification(APIView):
+	def post(self,request):
+		url = "https://pan-card-verification1.p.rapidapi.com/v3/tasks/sync/verify_with_source/ind_pan"
+		
+		payload = {
+			"task_id": "74f4c926-250c-43ca-9c53-453e87ceacd1",
+			"group_id": "8e16424a-58fc-4ba4-ab20-5bc8e7c3c41e",
+			"data": {"id_number": "AADCS0472N"}
+			}
+			
+		headers = {
+			"content-type": "application/json",
+			"X-RapidAPI-Key": "51a9253bb6msh6d7025d3464a282p1c4678jsn8834fd97d815",
+			"X-RapidAPI-Host": "pan-card-verification1.p.rapidapi.com"
+			}
+		
+		response = requests.request("POST", url, json=payload, headers=headers)
+
+		if response is not None:
+			print(response)
+			response_dict = response.json()
+			return JsonResponse(response_dict, safe=False,status = status.HTTP_200_OK)
+		else:
+			return JsonResponse(response,safe=False)
+
 
 class ConnectMenteeView(GenericAPIView):
 	queryset = Mentorship.objects.all()
@@ -336,48 +397,49 @@ class ProfileSearch(GenericAPIView):
 		serializer = MentorProfileSerializer(expertise_list, many=True)
 		return Response(serializer.data)
 
-class Rating(GenericAPIView):
-	queryset = Myrating.objects.all()
-	serializer_class = myrating_serializer
+# class Rating(GenericAPIView):
+# 	queryset = Myrating.objects.all()
+# 	serializer_class = myrating_serializer
 
-	def post(self,request):
-		if not request.user.is_authenticated:
-			return Response("login")
-	#for rating
+# 	def post(self,request):
+# 		if not request.user.is_authenticated:
+# 			return Response("login")
+# 	#for rating
 
-		date = datetime.datetime.now()-timedelta(days=180)
-		mentor = request.POST.get('mentor')
-		modelsof = Mentorship.objects.filter(entrepreneur = self.request.user,mentor = mentor)
-		rate = request.POST.get('rating')
-		if modelsof['created_at'] - datetime.datetime.now() >180:
-			serializer = self.serializer_class(data=request.data)
-			if serializer.is_valid():
-				serializer.save(user=self.request.user)
-			#messages.success(request,"Your Rating is submited ")
-			return Response("Your Rating is Submited")
-		return Response("you are not able to rate the mentor")
+# 		date = datetime.datetime.now()-timedelta(days=180)
+# 		mentor = request.POST.get('mentor')
+# 		modelsof = Mentorship.objects.filter(entrepreneur = self.request.user,mentor = mentor)
+# 		rate = request.POST.get('rating')
+# 		if modelsof['created_at'] - datetime.datetime.now() >180:
+# 			serializer = self.serializer_class(data=request.data)
+# 			if serializer.is_valid():
+# 				serializer.save(user=self.request.user)
+# 			#messages.success(request,"Your Rating is submited ")
+# 			return Response("Your Rating is Submited")
+# 		return Response("you are not able to rate the mentor")
 
-class getRating(GenericAPIView):
-	queryset = Myrating.objects.all()
-	serializer_class = myrating_serializer
+# class getRating(GenericAPIView):
+# 	queryset = Myrating.objects.all()
+# 	serializer_class = myrating_serializer
 
-	def get(self,request):
-		if not request.user.is_authenticated:
-			return Response("Login first")
-		df=pd.DataFrame(list(Myrating.objects.all().values()))
-		nu=df.user_id.unique().shape[0]
-		current_user_id= request.user.id
+# 	def get(self,request):
+# 		if not request.user.is_authenticated:
+# 			return Response("Login first")
+# 		df=pd.DataFrame(list(Myrating.objects.all().values()))
+# 		# nu=df.user_id.unique().shape[0]
+# 		current_user_id = request.user.user.id
+# 		print(request.user.user)
 
-		print("Current user id: ",current_user_id)
-		prediction_matrix,Ymean = Myrecommend()
-		my_predictions = prediction_matrix[:,current_user_id-1]+Ymean.flatten()
-		pred_idxs_sorted = np.argsort(my_predictions)
-		pred_idxs_sorted[:] = pred_idxs_sorted[::-1]
-		pred_idxs_sorted=pred_idxs_sorted+1
-		print(pred_idxs_sorted)
-		preserved = Case(*[When(pk=pk, then=pos) for pos, pk in enumerate(pred_idxs_sorted)])
-		movie_list=list(User.objects.filter(id__in = pred_idxs_sorted,).order_by(preserved)[:10])
-		return Response({'movie_list':movie_list})
+# 		print("Current user id: ",current_user_id)
+# 		prediction_matrix,Ymean = Myrecommend()
+# 		my_predictions = prediction_matrix[:,current_user_id-1]+Ymean.flatten()
+# 		pred_idxs_sorted = np.argsort(my_predictions)
+# 		pred_idxs_sorted[:] = pred_idxs_sorted[::-1]
+# 		pred_idxs_sorted=pred_idxs_sorted+1
+# 		print(pred_idxs_sorted)
+# 		preserved = Case(*[When(pk=pk, then=pos) for pos, pk in enumerate(pred_idxs_sorted)])
+# 		movie_list=list(User.objects.filter(id__in = pred_idxs_sorted,).order_by(preserved)[:10])
+# 		return Response({'movie_list':movie_list})
 
 
 

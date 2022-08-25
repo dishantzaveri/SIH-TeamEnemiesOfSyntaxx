@@ -17,6 +17,8 @@ urlpatterns = [
     path('entrepreneur_register/', views.EntrepreneurRegisterAPI.as_view(), name = 'Entrepreneur Registration'),
     path('login/', views.LoginAPI.as_view(), name = 'Login'),
     path('gstverify/',views.GstVerification.as_view(), name = 'Gst Verify'),
+    path('cinverify/',views.CINVerification.as_view(), name = 'CIN Verify'),
+    path('panverify/',views.PANVerification.as_view(), name = 'PAN Verify'),
     path('mentors_list/',views.MentorsList.as_view(), name = 'Mentors'),
     path('search_mentors/',views.ProfileSearch.as_view(), name = 'Search Mentors'),
     path('mentors_location/',views.MentorsLocationList.as_view(), name = 'Mentors Location'),
@@ -24,7 +26,7 @@ urlpatterns = [
     path('startups_list/',views.StartupsList.as_view(), name = 'Startupss'),
     path('connect_mentee/',views.ConnectMenteeView.as_view(), name = 'Connect Mentee'),
     path('connect_mentor/',views.ConnectMentorView.as_view(), name = 'Connect Mentor'),
-    path('rating/',views.Rating.as_view(), name = 'Rating'),
-    path('recommend/',views.getRating.as_view(),name='getRating')
+    # path('rating/',views.Rating.as_view(), name = 'Rating'),
+    # path('recommend/',views.getRating.as_view(),name='getRating')
 
 ]
