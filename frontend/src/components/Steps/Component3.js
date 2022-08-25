@@ -8,7 +8,23 @@ import Component3 from './Component3';
 import { usePostGstMutation } from '../../features/gst/gstAPISlice';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-// import { AutoCompletePlaces } from "./AutoCompletePlaces";
+
+const GST = ({ gst }) => {
+  console.log(gst);
+  return (
+    <div>
+      <div className="bg-white flex justify-between self-center max-w-[280px] bottom-[-40px] p-2 rounded-b-2xl shadow-lg">
+        <div className="">
+          <h1
+            className="text-lg font-bold mt-2"
+          >Name: {gst.legalNameOfBusiness}
+          </h1>
+          <h1 className="mt-[5px]">GST IN : {gst.gstin}</h1>
+        </div>    
+      </div>
+    </div>
+  );
+};
 
 export default function FormPropsTextFields() {
   const [input, setInput] = useState('')
@@ -27,12 +43,13 @@ export default function FormPropsTextFields() {
     axios(config)
     .then(function (response) {
       console.log(JSON.stringify(response.data));
-      setStartups(response.data)
+      setStartups(response.data);
     })
     .catch(function (error) {
       console.log(error);
     });
-  }
+  };
+  
   const submit = async () => {
     var formdata = new FormData();
     formdata.append("gstnumber", input);
@@ -47,7 +64,8 @@ export default function FormPropsTextFields() {
   }
   useEffect(() => {
     getStartups()
-  }, [])
+  }, []);
+  console.log(startups[0].id);
   
   
   return (
@@ -55,7 +73,12 @@ export default function FormPropsTextFields() {
       <h1 className='text-2xl font-semibold uppercase mb-4'>gst</h1>
       <input className='px-3 py-2' placeholder='Enter GST Number' value={input} onChange={e => setInput(e.target.value)} type="text" />
       <button className='px-3 py-2 bg-purple-gray-700' onClick={() => submit()}>add</button>
-
+      <div className="data">
+      {startups!==[] && startups.map((gst) => (
+            <GST gst={gst} />
+          ))}
+      {/* <h3>Legal name of business : </h3> */}
+</div>
     </div>
   );
 }
