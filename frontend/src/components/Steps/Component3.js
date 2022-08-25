@@ -72,12 +72,11 @@ export default function FormPropsTextFields() {
       <h1 className='text-2xl font-semibold uppercase mb-4'>gst</h1>
       <input className='px-3 py-2' placeholder='Enter GST Number' value={input} onChange={e => setInput(e.target.value)} type="text" />
       <button className='px-3 py-2 bg-purple-gray-700' onClick={() => submit()}>add</button>
-      <div className="data">
-      {startups!==[] && startups.map((gst) => (
-            <GST gst={gst} />
-          ))}
-      {/* <h3>Legal name of business : </h3> */}
-</div>
+      <div className="w-full">
+        {startups!==[] && startups.map((gst) => (
+          <GST gst={gst} />
+        ))}
+      </div>
     </div>
   );
 }

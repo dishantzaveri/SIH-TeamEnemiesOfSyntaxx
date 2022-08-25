@@ -10,7 +10,7 @@ import { useGetPostsQuery } from "../../features/feed/postAPISlice";
 import { VscLoading } from "react-icons/vsc";
 
 const Post = forwardRef(({ name, description, message, photoUrl }, ref) => {
-  const { data, isLoading, error } = useGetPostsQuery();
+  const { data, isLoading, error } = useGetPostsQuery().useLazyQuery();
   function InputOption({ Icon, title, color }) {
     return (
       <div className="inputOption">
