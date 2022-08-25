@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -14,9 +14,9 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {CometChat} from '@cometchat-pro/react-native-chat';
+import { CometChat } from '@cometchat-pro/react-native-chat';
 import * as CONSTANTS from '../CONSTANTS';
-function SignUp1({navigation}) {
+function SignUp1({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
@@ -55,10 +55,10 @@ function SignUp1({navigation}) {
             console.log('user created', user);
             CometChat.login(uuid, CONSTANTS.AUTH_KEY).then(
               user => {
-                console.log('Signup Successful:', {user});
+                console.log('Signup Successful:', { user });
               },
               error => {
-                console.log('Login failed with exception:', {error});
+                console.log('Login failed with exception:', { error });
               },
             );
           })
@@ -108,11 +108,19 @@ function SignUp1({navigation}) {
       />
       <TouchableOpacity
         style={styles.button}
+
         onPress={() => {
-          saveData();
-          navigation.navigate('Onboarding1');
-          // console.log("Signed Up");
-        }}>
+          //saveData();
+          navigation.navigate('Onboarding', {
+            screen: 'Onboarding1',
+            params: {
+              email: email,
+              password: password,
+              name: name,
+            },
+          });
+        }
+        }>
         <Text style={styles.textStyle}>Sign Up</Text>
       </TouchableOpacity>
     </View>

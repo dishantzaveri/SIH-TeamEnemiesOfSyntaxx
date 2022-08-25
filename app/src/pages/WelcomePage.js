@@ -38,8 +38,8 @@ const WelcomePage = props => {
           flexDirection: 'row',
           alignItems: 'center',
         }}>
-        <Github width={24} height={24} />
-        <Text style={styles.text1Style}> Feel free to contribute! </Text>
+        {/* <Github width={24} height={24} />
+        <Text style={styles.text1Style}> Feel free to contribute! </Text> */}
       </TouchableOpacity>
       <View style={{marginHorizontal: 19}}>
       </View>

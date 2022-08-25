@@ -31,13 +31,12 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import UploadPost from '../components/Posts/UploadPost';
 import AllPostMain from '../components/Posts/AllPostMain';
 import { NativeEventEmitter, NativeModules } from 'react-native';
-import {JobDetail, Jobs, JobSeekers, MentorMenteesDetail} from '../pages';
+import { MentorMenteesDetail} from '../pages';
 import {NavigationContainer} from '@react-navigation/native';
 import RazorpayScreens from '../pages/RazorpayScreens';
 import Location from '../pages/Maps';
 import AddEventC from '../pages/AddEventC';
 import { AlanView } from '@alan-ai/alan-sdk-react-native';
-import Charts from '../pages/Charts';
 import Partners from '../pages/Partners';
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
@@ -327,19 +326,6 @@ const AppStack = () => {
             ),
           }}
         />
-         <Drawer.Screen
-          name="Charts"
-          component={Charts}
-          options={{
-            drawerIcon: ({color}) => (
-              <Ionicons
-                name="location"
-                size={22}
-                color={color}
-              />
-            ),
-          }}
-        />
         <Drawer.Screen
           name="Careertv"
           component={Careertv}
@@ -361,7 +347,7 @@ const AppStack = () => {
           }}
         />
         <Drawer.Screen
-          name="Search Companies"
+          name="Search Startups"
           component={SearchJobs}
           options={{
             headerShown: false,

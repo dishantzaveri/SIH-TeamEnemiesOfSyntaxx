@@ -96,48 +96,6 @@ export default function Charts() {
             }
         ]
     };
-
-
-    const piedata = [
-        {
-            name: "Pristyn Care",
-            population: 96000000,
-            color: "rgba(131, 167, 234, 1)",
-            legendFontColor: "#7F7F7F",
-            legendFontSize: 15
-        },
-        {
-            name: "MPL",
-            population: 91000000,
-            color: "#F00",
-            legendFontColor: "#7F7F7F",
-            legendFontSize: 15
-        },
-        {
-            name: "Lenskart",
-            population: 85000000,
-            color: "red",
-            legendFontColor: "#7F7F7F",
-            legendFontSize: 15
-        },
-        {
-            name: "ByteLearn",
-            population: 92000000,
-            color: "#ffffff",
-            legendFontColor: "#7F7F7F",
-            legendFontSize: 15
-        },
-        {
-            name: "Skeps",
-            population: 90000000,
-            color: "rgb(0, 0, 255)",
-            legendFontColor: "#7F7F7F",
-            legendFontSize: 15
-        }
-    ];
-
-
-
     return (
         <ScrollView>
             <View  style={{ flex: 1, margin: 10 ,alignSelf: "center",alignContent: "center" ,justifyContent: "center" }}>

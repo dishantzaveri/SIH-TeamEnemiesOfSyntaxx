@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   SafeAreaView,
   Text,
@@ -10,8 +10,8 @@ import {
   StatusBar,
 } from 'react-native';
 import axios from 'axios';
-import {Card} from '../components/MentorMentees';
-import {SearchBar} from '../components/SearchBar';
+import { Card } from '../components/MentorMentees';
+import { SearchBar } from '../components/SearchBar';
 
 const Mentors = (props) => {
   const [person, setPerson] = useState(['']);
@@ -30,26 +30,32 @@ const Mentors = (props) => {
     console.log('mentors' + count);
   };
 
-  const renderItem = ({item}) => (
+  const renderItem = ({ item }) => (
     <Card data={item} navigation={props.navigation} listType="name" />
   );
 
   const filteredData = text
     ? person.filter((item) => {
-        const itemData = item.name.toUpperCase();
-        const textData = text.toUpperCase();
-        return itemData.indexOf(textData) > -1;
-      })
+      const itemData = item.name.toUpperCase();
+      const textData = text.toUpperCase();
+      return itemData.indexOf(textData) > -1;
+    })
     : person;
 
   const count = Object.keys(person).length;
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{
+      flex: 1, backgroundColor: 'white', padding: 10,
+      alignSelf: 'center',
+      elevation: 3,
+      backgroundColor: '#fff',
+      shadowOffset: { width: 3, height: 3 },
+      shadowColor: '#333',
+      shadowOpacity: 0.2,
+      shadowRadius: 1,
+    }}>
       <StatusBar backgroundColor="black" />
-      <View style={styles.headerView}>
-        <Text style={styles.headerText}>👉Mentors ({count})</Text>
-      </View>
       <View style={styles.searchView}>
         <SearchBar
           onSearch={(text) => setText(text)}
@@ -59,11 +65,11 @@ const Mentors = (props) => {
         />
       </View>
       {loading ? (
-        <View style={{marginVertical: 10}}>
+        <View style={{ marginVertical: 10 }}>
           <ActivityIndicator size="large" color="#32475b" />
         </View>
       ) : (
-        <View style={{flex: 1}}>
+        <View style={{ flex: 1 }}>
           <FlatList
             data={filteredData}
             keyExtractor={(_, index) => index.toString()}
@@ -108,4 +114,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export {Mentors};
+export { Mentors };

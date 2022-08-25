@@ -39,16 +39,21 @@ const Mentees = (props) => {
     : person;
   const count = Object.keys(person).length;
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{flex: 1,backgroundColor: 'white',padding:10,
+    alignSelf: 'center',
+ 
+    elevation: 3,
+    backgroundColor: '#fff',
+    shadowOffset: { width: 3, height: 3},
+    shadowColor: '#333',
+    shadowOpacity: 0.2,
+    shadowRadius: 1,}}>
       <StatusBar backgroundColor="black" />
-      <View style={styles.headerView}>
-        <Text style={styles.headerText}>👉Mentees ({count})</Text>
-      </View>
       <View style={styles.searchView}>
         <SearchBar
           onSearch={(text) => setText(text)}
           value={text}
-          placeHolder="Search in mentees by name..."
+          placeHolder="Search in entrepreneurss by name..."
           placeHolderTextColor="black"
         />
       </View>

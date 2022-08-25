@@ -287,7 +287,7 @@ const VideoCall = () => {
             >
               <Image
                 style={styles.logo}
-                source={require('../../assets/logo.jpg')}
+                source={require('../../assets/mentordots.png')}
               />
               <View style={styles.buttonContainer}>
                 <Text style={styles.bodyText}>
@@ -364,7 +364,7 @@ const VideoCall = () => {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: theme.colors.greyLightest,
+    backgroundColor: 'white',
   },
   container: {
     flex: 1,

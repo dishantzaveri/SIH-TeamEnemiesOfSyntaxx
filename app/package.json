@@ -59,6 +59,7 @@
     "react-native-screens": "^3.15.0",
     "react-native-snap-carousel": "^3.9.1",
     "react-native-splash-screen": "^3.3.0",
+    "react-native-star-rating-widget": "^1.2.0",
     "react-native-svg": "^12.4.4",
     "react-native-swiper": "^1.6.0",
     "react-native-touch-id": "^4.4.1",

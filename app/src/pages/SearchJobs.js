@@ -1,15 +1,17 @@
 import React from 'react';
 import {
     View, StyleSheet, Image,
-    TextInput, SafeAreaView, 
+    TextInput, SafeAreaView,
 } from 'react-native';
 import {
-    Text,Button
+    Text, Button
 } from 'react-native-paper';;
 import Laptop from '../assets/laptop.png';
 import { height, width } from '../Consts';
 import { useTheme } from '@react-navigation/native';
 import CompanyJobs from '../components/CompanyJobs';
+import { ScrollView } from 'react-native-gesture-handler';
+import Charts from './Charts';
 
 
 const SearchJobs = ({ navigation }) => {
@@ -18,40 +20,34 @@ const SearchJobs = ({ navigation }) => {
 
     return (
         <SafeAreaView style={styles.container} >
-            {/* <Header title={'Search Jobs'} /> */}
-            <View style={styles.view2}>
-                <Text style={styles.title}>Search Companies</Text>
-                <TextInput placeholderTextColor={colors.placeholder2}
-                    style={{
-                        ...styles.nameInput,
-                        borderBottomColor: colors.textAfter,
-                        color: colors.text,
-                    }}
-                    placeholder="Enter skills, designations, companies">
-                </TextInput>
-                <TextInput placeholderTextColor={colors.placeholder2}
-                    style={{
-                        ...styles.nameInput,
-                        borderBottomColor: colors.textAfter,
-                        color: colors.text,
-                    }}
-                    placeholder="Enter location">
-                </TextInput>
-            </View>
-            {/* <View style={styles.button}>
-          <Button labelStyle={styles.text3} >
-          Search Companies
-          </Button>
-        </View> */}
-            <View style={styles.view}>
-                <Text style={styles.text}>Top companies</Text>
-                <Text style={styles.text2}>View all</Text>
-            </View>
-            <CompanyJobs />
-            <Image style={styles.image}
-                source={Laptop}
-            />
-
+            <ScrollView>
+                {/* <Header title={'Search Jobs'} /> */}
+                <View style={styles.view2}>
+                    <Text style={styles.title}>Search Startups</Text>
+                    <TextInput placeholderTextColor={colors.placeholder2}
+                        style={{
+                            ...styles.nameInput,
+                            borderBottomColor: colors.textAfter,
+                            color: colors.text,
+                        }}
+                        placeholder="Enter skills, designations, companies">
+                    </TextInput>
+                    <TextInput placeholderTextColor={colors.placeholder2}
+                        style={{
+                            ...styles.nameInput,
+                            borderBottomColor: colors.textAfter,
+                            color: colors.text,
+                        }}
+                        placeholder="Enter location">
+                    </TextInput>
+                </View>
+                <View style={styles.view}>
+                    <Text style={styles.text}>Top startups</Text>
+                    <Text style={styles.text2}>View all</Text>
+                </View>
+                <CompanyJobs />
+              <Charts/>
+            </ScrollView>
         </SafeAreaView>
     );
 }
@@ -71,7 +67,7 @@ const styles = StyleSheet.create({
         margin: 20,
         backgroundColor: '#00CFDE',
         color: '#fff',
-      },
+    },
     nameInput: {
         height: 45,
         borderBottomWidth: 1,
@@ -99,7 +95,7 @@ const styles = StyleSheet.create({
     },
     text3: {
         fontSize: 13,
-    
+
         color: "white",
         textAlign: "center",
     },
