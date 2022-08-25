@@ -52,7 +52,7 @@ const AllCampaigns = () => {
         <div className="py-[80px]">
           <h1 className="text-5xl">Funding Campaigns</h1>
           <h1 className="text-2xl mt-4 text-slate-700">Help the Entrepreneurs by Donating in their Startups</h1>
-          <Button onClick={handleOpen} >Create Campaign</Button>
+          <button onClick={handleOpen} className="create-button bg-gradient-to-r from-[#c0edf5] via-blue-300  to-[#2eb6b8] text-white self-end p-2 px-4 rounded-2xl ml-[37%] "><AddCircleIcon /> Create Campaign</button>
         <Modal
         open={open}
         onClose={handleClose}

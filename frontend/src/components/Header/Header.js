@@ -24,12 +24,20 @@ const Header = ({ event }) => {
     { value: "ta", text: "Tamil" },
   ];
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl1, setAnchorEl1] = React.useState(null);
   const open = Boolean(anchorEl);
+  const open1 = Boolean(anchorEl1);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+  const handleClick1 = (event) => {
+    setAnchorEl1(event.currentTarget);
+  };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+  const handleClose1 = () => {
+    setAnchorEl1(null);
   };
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.auth);
@@ -169,17 +177,13 @@ const Header = ({ event }) => {
             <h1 className="font-medium text-lg">Chat</h1>
           </Link>
 
-          <Link to="/myProfile">
-            <h1 className="font-medium text-lg">Profile</h1>
-          </Link>
-
           <div>
             <button
               id="fade-button"
-              aria-controls={open ? "fade-menu" : undefined}
+              aria-controls={open1 ? "fade-menu" : undefined}
               aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-              onClick={handleClick}
+              aria-expanded={open1 ? "true" : undefined}
+              onClick={handleClick1}
               style={{
                 color: "black",
                 fontWeight: 500,
@@ -195,9 +199,9 @@ const Header = ({ event }) => {
               MenuListProps={{
                 "aria-labelledby": "fade-button",
               }}
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
+              anchorEl={anchorEl1}
+              open={open1}
+              onClose={handleClose1}
               TransitionComponent={Fade}
               sx={{ margin: "10px", padding: "10px" }}
             >
@@ -217,12 +221,59 @@ const Header = ({ event }) => {
               </Link>
             </Menu>
           </div>
-          <button
+
+          <div>
+            <button
+              id="fade-button"
+              aria-controls={open ? "fade-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+              onClick={handleClick}
+              style={{
+                color: "black",
+                fontWeight: 500,
+                fontSize: "1.125rem",
+                lineHeight: "1.75rem",
+              }}
+            >
+              Profile
+            </button>
+            <Menu
+              id="fade-menu"
+              fullwidth
+              MenuListProps={{
+                "aria-labelledby": "fade-button",
+              }}
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              TransitionComponent={Fade}
+              sx={{ margin: "10px", padding: "10px" }}
+            >
+              <Link to="/myProfile">
+                <MenuItem
+                  sx={{ margin: "10px", padding: "10px", width: "120px" }}
+                >
+                  My Profile
+                </MenuItem>
+              </Link>
+              {/* <Link to="/campaigns"> */}
+                <MenuItem onClick={() => dispatch(logout())}
+                  sx={{ margin: "10px", padding: "10px", width: "120px" }}
+                >
+                  Logout
+                </MenuItem>
+              {/* </Link> */}
+            </Menu>
+          </div>
+
+          
+          {/* <button
             className="uppercase rounded-full border w-[8vw] py-2 hover:bg-inherit hover:text-inherit bg-purple-gray-600 text-white transition-all duration-150"
             onClick={() => dispatch(logout())}
           >
             Log out
-          </button>
+          </button> */}
         </div>
       ) : (
         <div className={`flex gap-4 ${token && "hidden"} items-center`}>
