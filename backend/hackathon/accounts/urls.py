@@ -26,7 +26,13 @@ urlpatterns = [
     path('startups_list/',views.StartupsList.as_view(), name = 'Startupss'),
     path('connect_mentee/',views.ConnectMenteeView.as_view(), name = 'Connect Mentee'),
     path('connect_mentor/',views.ConnectMentorView.as_view(), name = 'Connect Mentor'),
-    # path('rating/',views.Rating.as_view(), name = 'Rating'),
-    # path('recommend/',views.getRating.as_view(),name='getRating')
+    path('rating/',views.Rating.as_view(), name = 'Rating'),
+    path('recommend/',views.getRating.as_view(),name='getRating'),
+    path('peopleyoumayknowformentee/',views.peopleyoumayknowformentee.as_view(),name='peopleyoumayknow'),
+    path('peopleyoumayknowformentor/',views.peopleyoumayknowformentor.as_view(),name='peopleyoumayknowformentor'),
+    path('Searchstartup/',views.Searchstartup.as_view(),name='Searchstartup'),
+    path('prototypeview/',views.prototypeview.as_view(),name='prototypeview'),
+    path('PrototypeDetail/',views.PrototypeDetail.as_view(),name='PrototypeDetail'),
+    
 
 ]
