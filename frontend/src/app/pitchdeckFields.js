@@ -33,8 +33,8 @@ export const fields = {
             h: 1,
             fontSize: 36,
             align: "center",
-            fill: { color: "e4eef7" },
-            color: "008899",
+            fill: { color: "black" },
+            color: "FFFFFF",
         }
     },
     2: {
@@ -47,7 +47,7 @@ export const fields = {
             h: 1,
             fontSize: 23,
             align: "center",
-            color: "008899",
+            color: "#FFFFFF",
         }
     },
     3: {
@@ -61,7 +61,7 @@ export const fields = {
             fontSize: 36,
             align: "center",
             fill: { color: "D3E3F3" },
-            color: "008899",
+            color: "FFFFFF",
         }
     },
     4: {
@@ -75,7 +75,7 @@ export const fields = {
             fontSize: 26,
             align: "left",
             // fill: { color: "D3E3F3" },
-            color: "008899",
+            color: "black",
         }
     },
     5: {
@@ -89,7 +89,7 @@ export const fields = {
             fontSize: 18,
             align: "left",
             // fill: { color: "D3E3F3" },
-            color: "000000",
+            color: "black",
         }
     },
     6: {
@@ -103,7 +103,7 @@ export const fields = {
             fontSize: 36,
             align: "center",
             fill: { color: "D3E3F3" },
-            color: "008899",
+            color: "#b4b4b4",
         }
     },
     7: {
@@ -117,7 +117,7 @@ export const fields = {
             fontSize: 25,
             align: "center",
             // fill: { color: "D3E3F3" },
-            color: "008899",
+            color: "#b4b4b4",
         }
     },
     8: {
@@ -131,7 +131,7 @@ export const fields = {
             fontSize: 25,
             align: "center",
             fill: { color: "D3E3F3" },
-            color: "008899",
+            color: "#3c3c3c",
         }
     },
     9: {
@@ -144,7 +144,7 @@ export const fields = {
             h: 1,
             fontSize: 36,
             align: "center",
-            fill: { color: "D3E3F3" },
+            fill: { color: "#b4b4b4" },
             color: "008899",
         }
     },
@@ -152,24 +152,24 @@ export const fields = {
         id: 'marketValidationName',
         title: 'Market Validation Name',
         style: {
-            x: 1.5,
+            x: 2.5,
             y: 2.5,
             w: "20%", 
             fontSize: 36,
             align: "center",
-            color: "008899",
+            color: "black",
         }
     },
     11: {
         id: 'marketValidationDescription',
         title: 'Market Validation Description',
         style: {
-            x: 1.5,
+            x: 2.5,
             y: 3.5,
             w: "20%",  
             fontSize: 18,
             align: "center",     
-            color: "000000",
+            color: "black",
         }
     },
     12: {
@@ -182,8 +182,8 @@ export const fields = {
             h: 1,
             fontSize: 36,
             align: "center",
-            fill: { color: "D3E3F3" },
-            color: "008899",
+            fill: { color: "#b4b4b4" },
+            color: "black",
         }
     },
     13: {
@@ -196,7 +196,7 @@ export const fields = {
             h: 2,
             fontSize: 25,
             align: "center",
-            fill: { color: "008899" },
+            fill: { color: "#b4b4b4" },
             color: "ffffff",
         }
     },
@@ -223,7 +223,7 @@ export const fields = {
             h: 1,
             fontSize: 36,
             align: "center",
-            fill: { color: "D3E3F3" },
+            fill: { color: "#b4b4b4" },
             color: "008899",
         }
     },
@@ -238,7 +238,7 @@ export const fields = {
             fontSize: 25,
             align: "center",
             // fill: { color: "D3E3F3" },
-            color: "008899",
+            color: "black",
         }
     },
     17: {
@@ -251,8 +251,8 @@ export const fields = {
             h: 1.5,
             fontSize: 25,
             align: "center",
-            fill: { color: "D3E3F3" },
-            color: "008899",
+            fill: { color: "#b4b4b4" },
+            color: "black",
             border:"blue",
             // shadow:"000000"
         }
@@ -267,8 +267,8 @@ export const fields = {
             h: 1,
             fontSize: 36,
             align: "center",
-            fill: { color: "D3E3F3" },
-            color: "008899",
+            fill: { color: "#b4b4b4" },
+            color: "black",
         }
     },
     19: {
@@ -282,7 +282,7 @@ export const fields = {
             fontSize: 25,
             align: "center",
             // fill: { color: "D3E3F3" },
-            color: "008899",
+            color: "black",
         }
     },
     20: {
@@ -296,7 +296,7 @@ export const fields = {
             fontSize: 25,
             align: "center",
             // fill: { color: "D3E3F3" },
-            color: "008899",
+            color: "black",
             border:"blue",
             // shadow:"000000"
         }
@@ -327,7 +327,7 @@ export const fields = {
             h: 1,
             fontSize: 36,
             align: "center",
-            fill: { color: "D3E3F3" },
+            fill: { color: "#b4b4b4" },
             color: "008899",
         }
     },
@@ -341,8 +341,8 @@ export const fields = {
             h: 1,
             fontSize: 15,
             align: "center",
-            fill: { color: "D3E3F3" },
-            color: "008899",
+            fill: { color: "b4b4b4" },
+            color: "#3c3c3c",
             // shadow:"000000"
         }
     },
@@ -357,7 +357,7 @@ export const fields = {
             fontSize: 15,
             align: "center",
             // fill: { color: "D3E3F3" },
-            color: "008899",
+            color: "#b4b4b4",
             // shadow:"000000"
         }
     },
@@ -371,8 +371,8 @@ export const fields = {
             h: 1,
             fontSize: 36,
             align: "center",
-            fill: { color: "D3E3F3" },
-            color: "008899",
+            fill: { color: "#b4b4b4" },
+            color: "#3c3c3c",
         }
     },
     26: {
@@ -385,8 +385,8 @@ export const fields = {
             h: 0.5,
             fontSize: 20,
             align: "center",
-            fill: { color: "D3E3F3" },
-            color: "008899",
+            fill: { color: "#b4b4b4" },
+            color: "#3c3c3c",
         }
     },
     27: {
@@ -400,7 +400,7 @@ export const fields = {
             fontSize: 15,
             align: "center",
             // fill: { color: "D3E3F3" },
-            color: "000000",
+            color: "#3c3c3c",
         }
     },
 }
