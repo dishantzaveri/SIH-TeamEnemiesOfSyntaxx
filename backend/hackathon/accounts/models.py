@@ -134,6 +134,10 @@ class Myrating(models.Model):
     entrepreneur_profile   = models.ForeignKey(EntrepreneurProfile,on_delete=models.CASCADE,related_name='rating_entrepreneur',null=True, blank=True) 
     mentor_profile  = models.ForeignKey(MentorProfile,on_delete=models.CASCADE,related_name='rating_mentor',null=True, blank=True)
     rating  = models.IntegerField(default=1,validators=[MaxValueValidator(5),MinValueValidator(0)])
-
     class Meta:
         unique_together=('mentor_profile','entrepreneur_profile')
+class Prototype(models.Model):
+     videofile= models.FileField(blank=True, null=True)
+     user = models.ForeignKey(User, on_delete = models.CASCADE)
+     description= models.TextField(True, null=True)
+     paper = models.FileField(blank=True, null=True)

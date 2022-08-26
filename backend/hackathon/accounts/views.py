@@ -25,6 +25,8 @@ import requests, datetime
 from hackathon import settings
 import numpy as np 
 import pandas as pd
+from rest_framework import status,permissions
+from django.db.models import F, ExpressionWrapper, Q
 
 User = get_user_model()
 
@@ -442,28 +444,94 @@ class Rating(GenericAPIView):
 			#messages.success(request,"Your Rating is submited ")
 			return Response("Your Rating is Submited")
 
-class getRating(GenericAPIView):
-	queryset = Myrating.objects.all()
-	serializer_class = myrating_serializer
+class peopleyoumayknowformentee(generics.ListAPIView):
+	serializer_class = MentorProfileSerializer
+	permission_classes = (permissions.IsAuthenticated,)
+	def list(self, request):
+		user = self.request.user
+		orgnization = Education.objects.filter(user=user).values_list('institute',flat=True)
+		if orgnization is not None:
+			if user.is_mentor:
+				mento_exp = Education.objects.filter(Q(institute__in=orgnization)).exclude(user=self.request.user)
+				serializer1 = MentorProfileSerializer(mento_exp,many=True,context={
+                                           'request': self.request}).data
+		Workexperience = WorkExperience.objects.filter(user=user).values_list('company_name',flat=True)
+		if Workexperience is not None:
+			if user.is_mentor:
+				mento_work = WorkExperience.objects.filter(Q(company_name__in=Workexperience)).exclude(user=self.request.user)
+				serializer2 = MentorProfileSerializer(mento_work,many=True,context={
+                                           'request': self.request}).data
+		degree = Education.objects.filter(user=user).values_list('degree',flat=True)
+		if degree is not None:
+			if user.is_mentor:
+				mento_degree = Education.objects.filter(Q(degree__in=degree)).exclude(user=self.request.user)
+				serializer3 = MentorProfileSerializer(mento_degree,many=True,context={
+                                           'request': self.request}).data
 
-	def get(self,request):
-		if not request.user.is_authenticated:
-			return Response("Login first")
-		df=pd.DataFrame(list(Myrating.objects.all().values()))
-		# nu=df.user_id.unique().shape[0]
-		current_user_id = request.user.user.id
-		print(request.user.user)
+		serializer = serializer1+serializer2+serializer3
+		return Response(serializer)
 
-		print("Current user id: ",current_user_id)
-		prediction_matrix,Ymean = Myrecommend()
-		my_predictions = prediction_matrix[:,current_user_id-1]+Ymean.flatten()
-		pred_idxs_sorted = np.argsort(my_predictions)
-		pred_idxs_sorted[:] = pred_idxs_sorted[::-1]
-		pred_idxs_sorted=pred_idxs_sorted+1
-		print(pred_idxs_sorted)
-		preserved = Case(*[When(pk=pk, then=pos) for pos, pk in enumerate(pred_idxs_sorted)])
-		movie_list=list(User.objects.filter(id__in = pred_idxs_sorted,).order_by(preserved)[:10])
-		return Response({'movie_list':movie_list})
+class peopleyoumayknowformentor(generics.ListAPIView):
+	serializer_class = MentorProfileSerializer
+	permission_classes = (permissions.IsAuthenticated,)
+	def list(self, request):
+		user = self.request.user
+		orgnization = Education.objects.filter(user=user).values_list('institute',flat=True)
+		if orgnization is not None:
+			if user.is_entrepreneur:
+				mento_exp = Education.objects.filter(Q(institute__in=orgnization)).exclude(user=self.request.user)
+				serializer1 = MentorProfileSerializer(mento_exp,many=True,context={
+                                           'request': self.request}).data
+		Workexperience = WorkExperience.objects.filter(user=user).values_list('company_name',flat=True)
+		if Workexperience is not None:
+			if user.is_entrepreneur:
+				mento_work = WorkExperience.objects.filter(Q(company_name__in=Workexperience)).exclude(user=self.request.user)
+				serializer2 = MentorProfileSerializer(mento_work,many=True,context={
+                                           'request': self.request}).data
+		degree = Education.objects.filter(user=user).values_list('degree',flat=True)
+		if degree is not None:
+			if user.is_entrepreneur:
+				mento_degree = Education.objects.filter(Q(degree__in=degree)).exclude(user=self.request.user)
+				serializer3 = MentorProfileSerializer(mento_degree,many=True,context={
+                                           'request': self.request}).data
+
+		serializer = serializer1+serializer2+serializer3
+		return Response(serializer)
+
+class prototypeview(generics.ListCreateAPIView):
+	serializer_class = Prototypeserializer
+	queryset = Prototype.objects.all()
+	permission_classes = [permissions.IsAuthenticated]
+	def perform_create(self, serializer):
+		serializer.save(owner=self.request.user)
+
+class PrototypeDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Prototype.objects.all()
+    serializer_class = Prototypeserializer
+    permission_classes = [permissions.IsAuthenticated]
+
+class Searchstartup(generics.ListAPIView):
+	serializer_class = StartupSerializer
+	permission_classes = (permissions.IsAuthenticated,)
+	def list(self, request):
+		user = self.request.user
+		orgnization = Startup.objects.filter(user=user).values_list('natureOfBusinessActivity',flat=True)
+		if orgnization is not None:
+			if user.is_mentor:
+				mento_exp = Startup.objects.filter(Q(natureOfBusinessActivity__in=orgnization)).exclude(user=self.request.user)
+				serializer1 = MentorProfileSerializer(mento_exp,many=True,context={
+                                           'request': self.request}).data
+		Workexperience = Startup.objects.filter(user=user).values_list('constitutionOfBusiness',flat=True)
+		if Workexperience is not None:
+			if user.is_mentor:
+				mento_work = Startup.objects.filter(Q(constitutionOfBusiness__in=Workexperience)).exclude(user=self.request.user)
+				serializer2 = MentorProfileSerializer(mento_work,many=True,context={
+                                           'request': self.request}).data
+
+		serializer = serializer1+serializer2
+		return Response(serializer)
+
+		
 
 
 

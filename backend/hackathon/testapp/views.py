@@ -47,11 +47,7 @@ class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
         data = CommentSerializer(like,many=True)
         return Response(data.data)
 
-    def delete(self,request,pk=None):
-        like = Comment.objects.filter(post=pk)
-        like.delete()
-        return Response("successfully deleted")
-
+    
 ########################Category part begins####################################
 
 class CategoryList(generics.ListCreateAPIView):
@@ -87,10 +83,6 @@ class LikePost_destroy_view(generics.RetrieveUpdateDestroyAPIView):
         data = PostLikeSerializer(like,many=True)
         return Response(data.data)
 
-    def delete(self,request,pk=None):
-        like = Post_Like.objects.filter(group_post=pk)
-        like.delete()
-        return Response("successfully deleted")
 
 class SessionViewSet(viewsets.ModelViewSet):
     queryset = Session.objects.all()

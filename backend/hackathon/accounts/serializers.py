@@ -190,3 +190,7 @@ class EntrepreneurProfileSerializer(serializers.ModelSerializer):
         mentor_queryset = MentorProfile.objects.filter(user__in=mentors_list)
         print(mentor_queryset)
         return MentorProfileSerializer(mentor_queryset, many=True).data
+class Prototypeserializer(serializers.ModelSerializer):
+    class Meta:
+        model = Prototype
+        fields = '__all__'
