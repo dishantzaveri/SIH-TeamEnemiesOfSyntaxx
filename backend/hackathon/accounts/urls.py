@@ -19,6 +19,7 @@ urlpatterns = [
     path('gstverify/',views.GstVerification.as_view(), name = 'Gst Verify'),
     path('cinverify/',views.CINVerification.as_view(), name = 'CIN Verify'),
     path('panverify/',views.PANVerification.as_view(), name = 'PAN Verify'),
+    # path('patentverify/',views.PatentVerification.as_view(), name = 'Patent Verify'),
     path('mentors_list/',views.MentorsList.as_view(), name = 'Mentors'),
     path('search_mentors/',views.ProfileSearch.as_view(), name = 'Search Mentors'),
     path('mentors_location/',views.MentorsLocationList.as_view(), name = 'Mentors Location'),
