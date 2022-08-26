@@ -7,9 +7,10 @@ import Button from '@mui/material/node/Button';
 import Component3 from './Component3';
 import { usePostGstMutation } from '../../features/gst/gstAPISlice';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { useNavigate } from 'react-router-dom';
+import { setField } from '../../features/auth/registerSlice';
 
 const GST = ({ gst }) => {
   const [data, setData] = useState(["div"]);
@@ -43,8 +44,10 @@ export default function FormPropsTextFields() {
   const navigate = useNavigate();
   const [input, setInput] = useState('')
   const [startups, setStartups] = useState([])
+  const [select, setSelect] = useState('GST')
   const {token} = useSelector(state => state.auth)
   const [postGst] = usePostGstMutation()
+  const dispatch = useDispatch()
   const getStartups = () => {
     let config = {
       method: 'get',
@@ -83,15 +86,41 @@ export default function FormPropsTextFields() {
   //       console.log(error);
   //     });
   // };
+
   
   const submit = async () => {
-    var formdata = new FormData();
-    formdata.append("gstnumber", input);
-    try {
-      const data = await postGst(formdata).unwrap();
-      console.log(data)
-    } catch (error) {
-      console.log(error);
+    if(select === 'GST') {
+      var formdata = new FormData();
+      formdata.append("gstnumber", input);
+      try {
+        const data = await postGst(formdata).unwrap();
+        console.log(data)
+        dispatch(setField({field: 'verification', value: data}))
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      var data = new FormData();
+      data.append('pannumber', 'AAACT2803M');
+
+      var config = {
+        method: 'post',
+        url: 'https://vismayvora.pythonanywhere.com/account/panverify/',
+        headers: { 
+          'Authorization': 'Token 8ee14cbf8c09c0baeae939b60041b703ed240e82', 
+        },
+        data : data
+      };
+
+      axios(config)
+      .then(function (response) {
+        dispatch(setField({field: 'verification', value: response.data}))
+        navigate('/login')
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     }
   }
   useEffect(() => {
@@ -101,11 +130,22 @@ export default function FormPropsTextFields() {
   return (
     <div className='w-full'>
       <div className="bg-purple-gray-100 px-6 py-8 rounded shadow-md text-black w-full" >
-        <h1 className='text-2xl font-semibold uppercase mb-4'>gst</h1>
-        <input className='px-3 py-2' placeholder='Enter GST Number' value={input} onChange={e => setInput(e.target.value)} type="text" />
+        <div className='pt-2'>
+          <h1 className='text-purplegray-400 mb-2'>Choose</h1>
+          <div className={`flex'} gap-1`}>
+            {['PAN', 'GST'].map(option => (
+              <label class={`flex items-center gap-1'} text-sm text-purplezinc`}>
+                <input type="radio" checked={select === option} onChange={e => setSelect(e.target.value)} value={option} class="w-4 h-4 accent-purplegray-600 bg-gray-100 border-gray-300" />
+                {option}
+              </label>
+            ))}
+          </div>
+        <h1 className='text-2xl font-semibold uppercase mb-4'>{select}</h1>
+        <input className='px-3 py-2' placeholder={`Enter ${select} Number`} value={input} onChange={e => setInput(e.target.value)} type="text" />
         <button className='px-3 py-2 bg-purple-gray-700' onClick={() => submit()}>add</button>
         <div className="w-full flex flex-col gap-4 mt-4">
-          {startups!==[] && startups.map((gst) => (
+        </div>
+          {startups!==[] && select==='GST' && startups.map((gst) => (
             <GST gst={gst} />
           ))}
         </div>
