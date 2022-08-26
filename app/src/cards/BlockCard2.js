@@ -34,7 +34,7 @@ const BlockCard2 = ({ style, imageStyle, item, onPress }) => {
              height={110}
           />
         <View>
-          <Text style={{ color: '#000000', fontSize: 16 }}>Find interviews in Zomato</Text>
+          <Text style={{ color: '#000000', fontSize: 13}}>{item.description}</Text>
           <TouchableOpacity>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' ,borderTopColor: '#000000',borderTopWidth: 1,marginVertical:5}}>
               <Ionicons

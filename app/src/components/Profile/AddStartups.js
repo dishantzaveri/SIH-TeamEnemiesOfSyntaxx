@@ -1,17 +1,21 @@
 import {
-  Button,
   ScrollView,
   StyleSheet,
   Text,
   TextInput,
   View,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
-import {RadioButton} from 'react-native-paper';
-import {useSelector} from 'react-redux';
-const GSTNumber = () => {
+import React, { useEffect, useState } from 'react';
+import { RadioButton, Button } from 'react-native-paper';
+import { useSelector } from 'react-redux';
+import { width, height } from '../../Consts'
+import { useNavigation } from '@react-navigation/native';
+
+const GSTNumber = ({ }) => {
   const [gstNumber, setGstNumber] = useState(0);
-  const {signUpToken} = useSelector(state => state.user);
+  const { signUpToken } = useSelector(state => state.user);
+
+  const navigation = useNavigation();
   useEffect(() => {
     console.log(signUpToken);
   }, []);
@@ -60,23 +64,23 @@ const GSTNumber = () => {
           onChangeText={e => setGstNumber(e)}
         />
       </View>
-      <Button
-        title="Add Startup"
-        onPress={() => {
+      <View style={styles.button}>
+        <Button style={styles.button1} labelStyle={styles.label1} onPress={() => {
           gstVerification();
-        }}
-      />
+        }}>Add Startup</Button>
+
+      </View>
     </View>
   );
 };
 
-const CINNumber = () => {
+const CINNumber = ({ }) => {
   const [name, setName] = useState('');
   const [cin, setCinNumber] = useState('');
   const [date, setDate] = useState('');
   const [location, setLocation] = useState('');
   const [type, setType] = useState('');
-  const {signUpToken} = useSelector(state => state.user);
+  const { signUpToken } = useSelector(state => state.user);
   const sendCin = () => {
     var myHeaders = new Headers();
     myHeaders.append('Authorization', `Token ${signUpToken}`);
@@ -180,7 +184,10 @@ const CINNumber = () => {
           onChangeText={e => setLocation(e)}
         />
       </View>
-      <Button title="Add Startup" onPress={() => sendCin()} />
+      <View style={styles.button}>
+        <Button style={styles.button1} labelStyle={styles.label1} onPress={() => sendCin()}>Add Startup</Button>
+
+      </View>
     </View>
   );
 };
@@ -191,7 +198,7 @@ const PanNumber = () => {
   const [date, setDate] = useState('');
   const [location, setLocation] = useState('');
   const [type, setType] = useState('');
-  const {signUpToken} = useSelector(state => state.user);
+  const { signUpToken } = useSelector(state => state.user);
   const sendPan = () => {
     var myHeaders = new Headers();
     myHeaders.append('Authorization', `Token ${signUpToken}`);
@@ -295,24 +302,27 @@ const PanNumber = () => {
           onChangeText={e => setLocation(e)}
         />
       </View>
-      <Button
-        title="Add Startup"
-        onPress={() => {
+
+      <View style={styles.button}>
+        <Button style={styles.button1} labelStyle={styles.label1} onPress={() => {
           sendPan();
-        }}
-      />
+        }} >Add Startup</Button>
+
+      </View>
     </View>
   );
 };
 
-const PatentNumber = () => {
+const PatentNumber = ({ }) => {
   const [name, setName] = useState('');
   const [diaryNo, setDiaryNo] = useState('');
   const [date, setDate] = useState('');
   const [location, setLocation] = useState('');
   const [type, setType] = useState('');
   const [rockNo, setRockNo] = useState('');
-  const {signUpToken} = useSelector(state => state.user);
+  const { signUpToken } = useSelector(state => state.user);
+
+  const navigation = useNavigation();
   const sendPatent = async () => {
     var myHeaders = new Headers();
     myHeaders.append('Authorization', `Token ${signUpToken}`);
@@ -430,7 +440,10 @@ const PatentNumber = () => {
           onChangeText={e => setLocation(e)}
         />
       </View>
-      <Button title="Add Startup" onPress={() => sendPatent()} />
+      <View style={styles.button}>
+        <Button style={styles.button1} labelStyle={styles.label1} onPress={() => sendPatent()} >Add Startup</Button>
+        <Button style={styles.button2} labelStyle={styles.label2} onPress={() => navigation.navigate('Login')} >Next </Button>
+      </View>
     </View>
   );
 };
@@ -545,4 +558,49 @@ const AddStartups = () => {
 
 export default AddStartups;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+
+  button: {
+
+    justifyContent: 'space-between',
+    alignSelf: 'center',
+    flexDirection: 'row',
+  },
+  button1: {
+    width: width * 0.35,
+    alignSelf: 'center',
+    backgroundColor: 'white',
+    flexDirection: 'row',
+    margin: 10,
+    alignContent: 'center',
+    borderColor: '#EBE9E9',
+    borderWidth: 1,
+    borderRadius: 10,
+
+
+  },
+  button2: {
+    width: width * 0.2,
+    alignSelf: 'center',
+    backgroundColor: '#00CFDE',
+    flexDirection: 'row',
+    margin: 10,
+    alignContent: 'center',
+    borderWidth: 1,
+    borderRadius: 10,
+  },
+  label1: {
+    color: '#00CFDE',
+    fontWeight: '100',
+    fontSize: 12,
+
+
+  },
+  label2: {
+
+    color: 'white',
+    fontWeight: '100',
+    fontSize: 12,
+  },
+
+});
