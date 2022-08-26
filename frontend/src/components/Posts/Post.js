@@ -1,5 +1,5 @@
 import { Avatar } from "@material-ui/core";
-import React, { forwardRef, useEffect } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 // import InputOption from '../Feed/InputOption';
 import "./Post.css";
 import ThumbUpAltOutlinedIcon from "@material-ui/icons/ThumbUpAltOutlined";
@@ -8,12 +8,84 @@ import ShareOutlinedIcon from "@material-ui/icons/ShareOutlined";
 import SendOutlinedIcon from "@material-ui/icons/SendOutlined";
 import { useGetPostsQuery } from "../../features/feed/postAPISlice";
 import { VscLoading } from "react-icons/vsc";
+import axios from "axios";
+import { useSelector } from "react-redux";
+
+const commentBody = () => {
+  return
+}
 
 const Post = forwardRef(({ name, description, message, photoUrl }, ref) => {
-  const { data, isLoading, error } = useGetPostsQuery()
-  function InputOption({ Icon, title, color }) {
+  const {token} = useSelector(state => state.auth)
+  const [data, setData] = useState([])
+  const [liked, setLiked] = useState(false)
+  const [likedId, setLikedId] = useState(null)
+  const like = id => {
+    var data = new FormData();
+    data.append('group_post', id);
+    console.log(id)
+    var config = {
+      method: 'post',
+      url: 'https://vismayvora.pythonanywhere.com/api/post-like/',
+      headers: { 
+        'Authorization': 'Token '+token, 
+      },
+      data : data
+    };
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      setLikedId(response.data.id)
+      getPosts()
+      setLiked(true)
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+  const dislike = () => {
+    var config = {
+      method: 'delete',
+      url: 'https://vismayvora.pythonanywhere.com/api/post-like/'+likedId,
+      headers: { 
+        'Authorization': 'Token '+token, 
+      },
+      data : data
+    };
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        getPosts()
+        setLiked(false)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+  const getPosts = () => {
+    var config = {
+      method: 'get',
+      url: 'https://vismayvora.pythonanywhere.com/api/posts/',
+      headers: { 
+        'Authorization': 'Token '+token, 
+      },
+    };
+
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      setData(response.data)
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+  useEffect(() => {
+    getPosts()
+  } , [])
+  function InputOption({ Icon, title, color, id }) {
     return (
-      <div className="inputOption">
+      <div className="inputOption" onClick={() => liked ? dislike() : like(id)} >
         <Icon style={{ color: color }} />
         <h4>{title}</h4>
       </div>
@@ -26,7 +98,60 @@ const Post = forwardRef(({ name, description, message, photoUrl }, ref) => {
     return match && match[7].length === 11 ? match[7] : false;
   }
 
-  console.log(data);
+  const Post = ({post}) => {
+    console.log(post)
+    return(
+      <div ref={ref} key={post.id} className="post shadow-xl">
+        <div className="post_header items-center gap-4 p-3 border-b">
+          <Avatar src={photoUrl}></Avatar>
+          <div className="">
+            <h2 className="text-xl font-semibold">{post.owner}</h2>
+            {/* <p className="text-xs text-gray-600">{post.title}</p> */}
+          </div>
+        </div>
+        <div className="post_body px-4">
+          <p>{post.body}</p>
+          {post.images_post && (
+            <img src={post.images_post} alt="new" className="img" />
+          )}
+          {post.youtube_link && (
+            <div className="mt-2">
+              <iframe
+                width="100%"
+                height="500"
+                src={
+                  "https://www.youtube.com/embed/" +
+                  youtube_parser(post.youtube_link)
+                }
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+          )}
+        </div>
+        <div className="px-4 flex justify-between text-xs mb-1">
+          <h1>{post.like_on_post_count} likes</h1>
+          <h1>{post.comment_on_post_count} comments</h1>
+        </div>
+        <div className="post_buttons pb-3 border-t">
+          <InputOption
+            Icon={ThumbUpAltOutlinedIcon}
+            title="Like"
+            color={liked ? 'red' : "gray"}
+            id={post.id}
+          />
+          <InputOption
+            Icon={ChatOutlinedIcon}
+            title="Comment"
+            color="gray"
+            id={post.id}
+          />
+        </div>
+      </div>
+    )
+  }
 
   return (
     <>
@@ -35,62 +160,10 @@ const Post = forwardRef(({ name, description, message, photoUrl }, ref) => {
           .slice()
           .reverse()
           .map((post) => (
-            <div ref={ref} key={post.id} className="post shadow-xl">
-              <div className="post_header items-center gap-4">
-                <Avatar src={photoUrl}></Avatar>
-                <div className="">
-                  <h2 className="text-xl font-semibold">{post.title}</h2>
-                  <p className="text-xs text-gray-600">by {post.owner}</p>
-                </div>
-              </div>
-              <div className="post_body">
-                {post.images_post && (
-                  <img src={post.images_post} alt="new" className="img" />
-                )}
-                <p>{post.body}</p>
-                {post.youtube_link && (
-                  <div className="mt-2">
-                    {/* <a target='_blank' className='text-blue-400' href={post.youtube_link}>{post.youtube_link}</a> */}
-                    <iframe
-                      width="100%"
-                      height="500"
-                      src={
-                        "https://www.youtube.com/embed/" +
-                        youtube_parser(post.youtube_link)
-                      }
-                      title="YouTube video player"
-                      frameborder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowfullscreen
-                    ></iframe>
-                  </div>
-                )}
-              </div>
-              <div className="post_buttons">
-                <InputOption
-                  Icon={ThumbUpAltOutlinedIcon}
-                  title="Like"
-                  color="gray"
-                />
-                <InputOption
-                  Icon={ChatOutlinedIcon}
-                  title="Comment"
-                  color="gray"
-                />
-                <InputOption
-                  Icon={ShareOutlinedIcon}
-                  title="Share"
-                  color="gray"
-                />
-                <InputOption
-                  Icon={SendOutlinedIcon}
-                  title="Send"
-                  color="gray"
-                />
-              </div>
-            </div>
-          ))}
-      {isLoading && (
+            <Post post={post} />
+          ))
+      }
+      {!(data===[]) && (
         <div className="w-full flex flex-col justify-center items-center my-8">
           <VscLoading className="w-8 h-8 animate-spin text-center text-gray-600" />
           <h1 className="text-xl mt-2">Loading...</h1>
