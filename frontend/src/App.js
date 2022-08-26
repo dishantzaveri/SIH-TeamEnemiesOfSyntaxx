@@ -37,6 +37,7 @@ import Footer from "./components/Footer/Footer";
 import MatchedMentor from "./components/MatchedMentors/MatchedMentor";
 import MatchedEntrepreneurs from "./components/MatchedEntrepreneurs/MatchedEntrepreneurs";
 import RequireAuth from './ProtectedRoute';
+import Schemes from "./components/GovernmentSchemes/GovernmentSchemes";
 
 const languages = [
   { value: "", text: "Options" },
@@ -97,6 +98,7 @@ function App() {
           <Route path="/createCampaigns" element={<CreateCampaigns />} />
           <Route path="/footer" element={<Footer />} />
           <Route path="/matchedmentors" element={<MatchedMentor />} />
+          <Route path="/schemes" element={<Schemes />} />
           <Route
             path="/requestedentrepreneurs"
             element={<MatchedEntrepreneurs />}
