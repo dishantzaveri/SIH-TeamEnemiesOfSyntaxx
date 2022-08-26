@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { Button } from 'react-native-paper';
-import coin from '../assets/coin.png';
 import { height, width } from '../Consts';
 
 const ReferEarn = ({ }) => {

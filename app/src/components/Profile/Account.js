@@ -263,7 +263,7 @@ export default function Account() {
                     No Startups Added
                   </Text>
                 ) : (
-                  data.startup.map(s => (
+                  data?.startup?.map(s => (
                     <View>
                       <View
                         style={{

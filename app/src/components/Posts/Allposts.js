@@ -14,12 +14,13 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import theme from '../../theme';
 import Fontisto from 'react-native-vector-icons/Fontisto';
-import Feather from 'react-native-vector-icons/Feather';
+import {useDispatch, useSelector} from 'react-redux';
 
 export default function AllPosts({navigation}) {
   const [search, setSearch] = useState('');
   const [filteredData, setFilteredData] = useState([]);
   const [masterData, setMasterData] = useState([]);
+  const {user} = useSelector(state => state.user);
   const onShare = async () => {
     try {
       const result = await Share.share({

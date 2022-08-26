@@ -13,7 +13,6 @@ import {
 
 const SwiperScreens = ({navigation}) => {
   const {colors} = useTheme();
-  // const {setToken, setCurrentUser} = useContext(AuthContext);
   const learn = require('../assets/learn.jpg');
   const create = require('../assets/create.jpg');
   const connect = require('../assets/connect.jpg');

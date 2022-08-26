@@ -53,7 +53,7 @@ const Mentees = (props) => {
         <SearchBar
           onSearch={(text) => setText(text)}
           value={text}
-          placeHolder="Search in entrepreneurss by name..."
+          placeHolder="Search in entrepreneurs by name..."
           placeHolderTextColor="black"
         />
       </View>
