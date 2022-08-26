@@ -10,9 +10,13 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import {Routes, Route, useNavigate} from 'react-router-dom';
+import {Routes, Route, useNavigate, useLocation} from 'react-router-dom';
+import Header from "../Header/Header";
 
 const SingleMentor = () => {
+	const location = useLocation();
+	const {mentor} = location.state
+	console.log(mentor)
 	const [open, setOpen] = React.useState(false);
 
 	const handleClickOpen = () => {
@@ -32,16 +36,17 @@ const SingleMentor = () => {
 
 	return (
 		<div>
-			<Navbar />
+			{/* <Navbar /> */}
+			<Header />
 			<div className="px-60 py-14 bg-gradient-to-r from-[#2eb6b8] via-blue-300  to-[#DAF0F4] w-full h-64 relative">
 				<div className="flex items-center pb-4">
 					<img
 						className="w-[150px] h-[150px] rounded-full object-cover self-center"
-						src="https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg.jpg"
+						src={'https://vismayvora.pythonanywhere.com/'+mentor.profile_pic}
 					/>
 					<div className="ml-5">
 						<h1 className="font-extrabold text-[35px] cursor-pointer ml-4 self-center">
-							Disha Pattani
+							{mentor.name}
 						</h1>
 						<h4 className="font-bold text-[23px] cursor-pointer ml-4 self-center">
 							Company Name

@@ -10,6 +10,7 @@ import { Box, Modal } from "@mui/material/node";
 import CreateCampaigns from "../CreateCampaigns/CreateCampaigns";
 import { useGetStartupsQuery } from "../features/gst/gstAPISlice";
 import { Link } from "react-router-dom";
+import { base64 } from "ethers/lib/utils";
 const style = {
   position: 'absolute',
   top: '50%',
@@ -23,11 +24,12 @@ const style = {
   // overflow:"scroll"
 };
 const Startup = ({startup}) => {
-  const getBase64 = (file) => {
+  const [idCardBase64, setIdCardBase64] = useState('')
+  const getBase64 = (file, cb) => {
     let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function () {
-      return reader.result
+      cb(reader.result)
     };
     reader.onerror = function (error) {
         console.log('Error: ', error);
@@ -44,7 +46,7 @@ const Startup = ({startup}) => {
           GST number - {startup.gstin}
         </p>
         <p className="font-semibold">{startup.dateOfRegistration} - Present</p>
-        {ppt && <a href={ppt} download>ppt</a>}
+        {idCardBase64 && <a className="px-2 py-1 border border-purple-gray-600 rounded-full bg-purple-gray-700 text-gray-100" href={idCardBase64} download>View Ppt</a>}
         <div className="mt-2">
           <Link to='/pitchdeck-form'>
             <button className="bg-purple-gray-500 text-sm font-semibold py-2 px-4 mr-4 rounded-full">Generate Pitchdeck</button>
@@ -61,8 +63,10 @@ const Startup = ({startup}) => {
             application/vnd.openxmlformats-officedocument.presentationml.presentation"
             hidden
             onChange={(e) => {
-              setPpt(getBase64(e.target.files[0]));
-              console.log(e.target.files[0]);
+              setPpt(getBase64(e.target.files[0], (result) => {
+                setIdCardBase64(result)
+              }));
+              console.log(getBase64(e.target.files[0]));
             }}
           />
           <label htmlFor="upload-image" className="bg-purple-gray-500 text-sm font-semibold py-2 px-4 rounded-full">Upload Pitchdeck</label>
