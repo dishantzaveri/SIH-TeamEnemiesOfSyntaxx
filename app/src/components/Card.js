@@ -5,7 +5,7 @@ import Layout from '../constants/Layout'
 
 const BOTTOM_BAR_HEIGHT = !Platform.isPad ? 29 : 49 
 
-export const Card = ({ pic, title, caption }) => (
+export const Card = ({ pic, title, caption,navigation }) => (
   <Tile
     imageSrc={pic}
     imageContainerStyle={styles.imageContainer}

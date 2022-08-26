@@ -1,6 +1,4 @@
-
-import { View, StyleSheet,Text } from 'react-native';
-import LineGraph from '@chartiful/react-native-line-graph';
+import { View, StyleSheet, Text } from 'react-native';
 import React, { useEffect, useState } from 'react'
 import { ScrollView } from 'react-native-gesture-handler';
 import {
@@ -12,7 +10,6 @@ import {
     StackedBarChart
 } from "react-native-chart-kit";
 import { height, width } from '../Consts';
-import BarGraph from '../components/bargraph';
 
 
 
@@ -66,8 +63,57 @@ export default function Charts() {
     };
 
     const progressdata = {
-        labels: ["Bhilwara","Kochi","Orissia","Powai ","Nagpur"], // optional
-        data: [8000000,800000,5000000,400000,350000]
+        labels: ["Bhilwara", "Kochi", "Orissia", "Powai ", "Nagpur"], // optional
+        data: [8000000, 800000, 5000000, 400000, 350000]
+    };
+
+    const linedata = {
+        labels: ["Bangalore",
+            "Mumbai",
+            "Gurugram",
+            "New Delhi",
+            "Pune",
+            "Chennai",
+            "Noida",
+            "Hyderabad",
+            "Gurgaon",
+            "Jaipur"],
+        datasets: [
+            {
+                data: [438,
+                    213,
+                    155,
+                    144,
+                    51,
+                    41,
+                    37,
+                    35,
+                    15,
+                    12],
+                color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`, // optional
+                strokeWidth: 2 // optional
+            }
+        ],
+        legend: ["Rainy Days"] // optional
+    };
+
+    const bardata = {
+        labels: ["January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",],
+        datasets: [
+            {
+                data: [82,
+                    62,
+                    92,
+                    87,
+                    62,
+                    122,]
+            }
+        ]
     };
 
     const chartConfig = {
@@ -83,19 +129,25 @@ export default function Charts() {
 
     return (
         <ScrollView>
-            <View style={{ flex: 1, margin: 10, alignSelf: "center", alignContent: "center", justifyContent: "center" ,alignItems: "center" }}>
+            <View style={{ flex: 1, margin: 10, alignSelf: "center", alignContent: "center", justifyContent: "center", alignItems: "center" }}>
 
-                <BarGraph />
-                <LineGraph
-                    data={[10, 15, 7, 20, 14, 12, 10, 20]}
+                <BarChart
+                    // style={graphStyle}
+                    data={bardata}
                     width={width * 0.8}
                     height={height * 0.3}
-                    isBezier
-                    hasShadow
-                    baseConfig={config1}
-                    style={styles.chart1}
+                    yAxisLabel="$"
+                    chartConfig={chartConfig}
+                    verticalLabelRotation={30}
                 />
-                 <Text style={{ fontSize: 20, textAlign: 'center',margin:10 }}>Company count per month</Text>
+                <Text style={{ fontSize: 20, textAlign: 'center' ,margin:10}}>Company count per month</Text>
+                <LineChart
+                    data={linedata}
+                    width={width * 0.8}
+                    height={height * 0.3}
+                    chartConfig={chartConfig}
+                />
+                <Text style={{ fontSize: 20, textAlign: 'center', margin: 10 }}>State Funded Companies</Text>
                 <ProgressChart
                     data={progressdata}
                     width={width * 0.8}
@@ -105,7 +157,7 @@ export default function Charts() {
                     chartConfig={chartConfig}
                     hideLegend={false}
                 />
-                 <Text style={{ fontSize: 20, textAlign: 'center',margin:10 }}>Company count per month</Text>
+                <Text style={{ fontSize: 20, textAlign: 'center', margin: 10 }}>Top 5 funded companies</Text>
             </View>
         </ScrollView>
     );
