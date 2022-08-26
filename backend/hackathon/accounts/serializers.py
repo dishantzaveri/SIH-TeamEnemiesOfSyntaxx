@@ -74,16 +74,6 @@ class StartupSerializer(serializers.ModelSerializer):
         fields = ['id','legalNameOfBusiness','tradeName','is_verified','gstin', 'gstnStatus', 'dateOfRegistration', 'constitutionOfBusiness',
         'taxpayerType', 'natureOfBusinessActivity','principalPlaceOfBusinessAddress', 'stateJurisdiction', 'centerJurisdiction', 'aadhaar_linked','pitch_deck']
 
-class MentorProfileSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField(read_only=True)
-    name = serializers.CharField(source='user.name',read_only=True)
-    experience = WorkExperienceSerializer(source = 'user.experience', many=True, read_only=True)
-    education = EducationSerializer(source = 'user.education', many=True, read_only=True)
-    profile_pic = serializers.ImageField(source = 'user.profile_pic', read_only=True)
-
-    class Meta:
-        model = MentorProfile
-        fields = ['id','name', 'expertise', 'experience', 'education', 'latitude', 'longitude','profile_pic']
 
 class MentorLocationSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
@@ -108,32 +98,6 @@ class MentorLocationSerializer(serializers.ModelSerializer):
 #         if self.serializer:
 #             return self.serializer(instance, context=self.context).data
 #         return super().to_representation(instance)
-
-class EntrepreneurProfileSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField(read_only=True)
-    name = serializers.CharField(source='user.name',read_only=True)
-    startup = StartupSerializer(source = 'user.startup', many=True, read_only=True)
-    mentor = serializers.SerializerMethodField(read_only=True)
-    # mentor = RelatedFieldAlternative(queryset=MentorProfile.objects.all(), serializer=MentorProfileSerializer,required=False)
-    experience = WorkExperienceSerializer(source = 'user.experience', many=True, read_only=True)
-    education = EducationSerializer(source = 'user.education', many=True, read_only=True)
-    profile_pic = serializers.ImageField(source = 'user.profile_pic', read_only=True)
-
-    class Meta:
-        model = EntrepreneurProfile
-        fields = ['name','id','startup', 'mentor', 'experience', 'education', 'profile_pic']
-    
-    def get_mentor(self,obj):
-        current_entrepreneur = None
-        request = self.context.get("request")
-        if request and hasattr(request, "user"):
-            current_entrepreneur = request.user
-            print(current_entrepreneur)
-        mentors_list = Mentorship.objects.filter(entrepreneur=current_entrepreneur).values_list('mentor')
-        print(mentors_list)
-        mentor_queryset = MentorProfile.objects.filter(user__in=mentors_list)
-        print(mentor_queryset)
-        return MentorProfileSerializer(mentor_queryset, many=True).data
 
 
 class MentorshipSerializer(serializers.ModelSerializer):
@@ -161,9 +125,68 @@ class myrating_serializer(serializers.ModelSerializer):
         model = Myrating
         fields = ['mentor_profile','entrepreneur_profile','rating']
 
-
 class CoinsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Coins
         fields = '__all__'
+
+class MentorProfileSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(read_only=True)
+    name = serializers.CharField(source='user.name',read_only=True)
+    experience = WorkExperienceSerializer(source = 'user.experience', many=True, read_only=True)
+    education = EducationSerializer(source = 'user.education', many=True, read_only=True)
+    profile_pic = serializers.ImageField(source = 'user.profile_pic', read_only=True)
+    rating = serializers.SerializerMethodField(read_only=True)
+    coins = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = MentorProfile
+        fields = ['id','name', 'expertise', 'experience', 'education', 'latitude', 'longitude','profile_pic','coins','rating']
+    
+    def get_rating(self,obj):
+        request = self.context.get("request")
+        if request and hasattr(request, "user"):
+            current_user = request.user
+        # mentors_list = Mentorship.objects.filter(entrepreneur=current_entrepreneur).values_list('mentor')
+        mentor_profile = MentorProfile.objects.get(user=current_user)
+        myrating_objects = Myrating.objects.filter(mentor_profile = mentor_profile).values_list('rating')
+        sum = 0
+        for i in myrating_objects:
+            sum = sum + i
+        print(sum)
+        return sum
+    
+    def get_coins(self,obj):
+        request = self.context.get("request")
+        if request and hasattr(request, "user"):
+            current_user = request.user
+        coin_obj = Coins.objects.get(user = current_user)
+        return coin_obj.coins
+
+class EntrepreneurProfileSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(read_only=True)
+    name = serializers.CharField(source='user.name',read_only=True)
+    startup = StartupSerializer(source = 'user.startup', many=True, read_only=True)
+    mentor = serializers.SerializerMethodField(read_only=True)
+    # mentor = RelatedFieldAlternative(queryset=MentorProfile.objects.all(), serializer=MentorProfileSerializer,required=False)
+    experience = WorkExperienceSerializer(source = 'user.experience', many=True, read_only=True)
+    education = EducationSerializer(source = 'user.education', many=True, read_only=True)
+    profile_pic = serializers.ImageField(source = 'user.profile_pic', read_only=True)
+    coins = CoinsSerializer(source = 'user.coins', read_only=True)
+
+    class Meta:
+        model = EntrepreneurProfile
+        fields = ['name','id','startup', 'mentor', 'experience', 'education', 'profile_pic','coins']
+    
+    def get_mentor(self,obj):
+        current_entrepreneur = None
+        request = self.context.get("request")
+        if request and hasattr(request, "user"):
+            current_entrepreneur = request.user
+            print(current_entrepreneur)
+        mentors_list = Mentorship.objects.filter(entrepreneur=current_entrepreneur).values_list('mentor')
+        print(mentors_list)
+        mentor_queryset = MentorProfile.objects.filter(user__in=mentors_list)
+        print(mentor_queryset)
+        return MentorProfileSerializer(mentor_queryset, many=True).data
