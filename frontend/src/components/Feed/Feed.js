@@ -137,9 +137,18 @@ function Feed() {
   //   };
 
   return (
-    <>
+    <div>
       <Header />
-      {/* <Navbar /> */}
+      <div className="">
+          <div className="px-32 bg-gradient-to-r from-[#2eb6b8] via-blue-300  to-[#DAF0F4] w-full h-64 relative">
+        <div className="py-[80px] flex">
+        <div className="content">
+          <h1 className="text-5xl">Feed</h1>
+          <h1 className="text-2xl mt-4 text-slate-700">Explore what others are doing</h1>
+          </div>
+        </div>
+        </div>
+      </div>
       <div className="grid grid-cols-12 p-8 gap-8">
         <div className="col-span-1"></div>
         <div className="feed col-span-6">
@@ -164,7 +173,7 @@ function Feed() {
           <News />
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

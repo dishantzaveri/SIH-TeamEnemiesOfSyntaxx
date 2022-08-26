@@ -37,6 +37,8 @@ import Footer from "./components/Footer/Footer";
 import MatchedMentor from "./components/MatchedMentors/MatchedMentor";
 import MatchedEntrepreneurs from "./components/MatchedEntrepreneurs/MatchedEntrepreneurs";
 import RequireAuth from "./ProtectedRoute";
+import ObjectDetection from "./pages/ObjectDetection";
+import SignDetection from "./pages/SignDetection";
 
 const languages = [
   { value: "", text: "Options" },
@@ -70,6 +72,8 @@ function App() {
         <Route path="/registerMentee" element={<RegisterMentee />} /> */}
           <Route path="/signup" element={<Signup />} />
           <Route element={<RequireAuth />}>
+            <Route path="/object-detection" element={<ObjectDetection />} />
+            <Route path="/sign-detection" element={<SignDetection />} />
             <Route path="/gst" element={<Gst />} />
             <Route path="/myprofile" element={<Account />} />
             <Route path="/uploadDocs" element={<UploadDocs />} />

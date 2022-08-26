@@ -60,17 +60,6 @@ const Eligibility = () => {
 
   return (
     <div className="px-24 bg-gray-100">
-      {window.location.pathname === "/" && (
-        <select value={lang} onChange={handleLanguage}>
-          {languages.map((item) => {
-            return (
-              <option key={item.value} value={item.value}>
-                {item.text}
-              </option>
-            );
-          })}
-        </select>
-      )}
       <h1 className="text-4xl font-bold pt-16 pb-8">
       {t("eligibility")}
       </h1>

@@ -9,6 +9,7 @@ import { MdAddCircleOutline, MdKeyboardArrowDown } from "react-icons/md";
 import ReactImageUploading from "react-images-uploading";
 import { setField } from '../../features/auth/registerSlice';
 import { setCredentails } from '../../features/auth/authSlice';
+import { Checkbox, FormControlLabel } from '@mui/material/node';
 
 const Photo = ({inputs, setInputs}) => {
     const onChange = (imageList, addUpdateIndex) => {
@@ -134,7 +135,7 @@ export default function FormPropsTextFields() {
             alert('Please fill all the fields');
         }
     }
-
+    localStorage.setItem('disabled', false)
   return (
     <div className="bg-purple-gray-100 px-6 py-8 rounded shadow-md text-black w-full"
         component="form"
@@ -181,6 +182,10 @@ export default function FormPropsTextFields() {
                         onChange={(e) => setInputs(prevState => ({...prevState, password: e.target.value}))}
                     />  
                 </div>
+                <FormControlLabel control={<Checkbox onChange={e => {
+                    console.log(e.target.checked);
+                    localStorage.setItem('disabled', e.target.checked)
+                }} />} label="Disabled" />
                 <div className="flex gap-4 items-center">
                     <h1 className='text-lg'>Choose</h1>
                     <DropDown inputs={inputs} setInputs={setInputs} />

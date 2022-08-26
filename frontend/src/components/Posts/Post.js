@@ -11,8 +11,76 @@ import { VscLoading } from "react-icons/vsc";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
-const commentBody = () => {
-  return
+const CommentBody = ({comment, comments}) => {
+  const {token} = useSelector(state => state.auth)
+  const [body, setBody] = useState('')
+  const [list, setList] = useState([])
+  console.log(comment, comments);
+  const getComments = comment => {
+    var config = {
+      method: 'get',
+      url: 'https://vismayvora.pythonanywhere.com/api/comments/'+comment+'/',
+      headers: { 
+        'Authorization': 'Token '+token,
+      },
+      data : ''
+    };
+    
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      setList(response.data)
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+  const postComment = () => {
+    var data = new FormData();
+    data.append('body', body);
+    data.append('post', comment);
+
+    var config = {
+      method: 'post',
+      url: 'https://vismayvora.pythonanywhere.com/api/comments/',
+      headers: { 
+        'Authorization': 'Token '+token, 
+      },
+      data : data
+    };
+
+    axios(config)
+    .then(function (response) {
+      setList(prevState => [...prevState, response.data])
+      setBody('')
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+  useEffect(() => {
+    getComments(comment)
+  }, [])
+
+  const Tile = ({item}) => {
+    return(
+      <div className="w-full border-t p-2">
+        <h1 className="">{item.body}</h1>
+        <h1 className="text-xs text-gray-400">by {item.owner}</h1>
+      </div>
+    )
+  }
+  
+  return (
+    <div className="p-2">
+      <div className="flex w-full">
+        <input className='px-3 py-2 grow border' placeholder='Enter Comment' value={body} onChange={e => setBody(e.target.value)} type="text" />
+        <button className='px-3 py-2 bg-purple-gray-700' onClick={() => postComment()}>add</button>
+      </div>
+      <h1 className="p-2 text-lg font-semibold">Comments:</h1>
+      {list.map(item => <Tile item={item} />)}
+    </div>
+  )
 }
 
 const Post = forwardRef(({ name, description, message, photoUrl }, ref) => {
@@ -20,6 +88,7 @@ const Post = forwardRef(({ name, description, message, photoUrl }, ref) => {
   const [data, setData] = useState([])
   const [liked, setLiked] = useState(false)
   const [likedId, setLikedId] = useState(null)
+  const [comments, setComments] = useState(null)
   const like = id => {
     var data = new FormData();
     data.append('group_post', id);
@@ -62,6 +131,7 @@ const Post = forwardRef(({ name, description, message, photoUrl }, ref) => {
         console.log(error);
       });
   }
+  
   const getPosts = () => {
     var config = {
       method: 'get',
@@ -83,9 +153,17 @@ const Post = forwardRef(({ name, description, message, photoUrl }, ref) => {
   useEffect(() => {
     getPosts()
   } , [])
-  function InputOption({ Icon, title, color, id }) {
+  function InputLikeOption({ Icon, title, color, id }) {
     return (
       <div className="inputOption" onClick={() => liked ? dislike() : like(id)} >
+        <Icon style={{ color: color }} />
+        <h4>{title}</h4>
+      </div>
+    );
+  }
+  function InputCommentOption({ Icon, title, color, id }) {
+    return (
+      <div className="inputOption" onClick={() => comments===id ? setComments(null) : setComments(id)}>
         <Icon style={{ color: color }} />
         <h4>{title}</h4>
       </div>
@@ -99,7 +177,6 @@ const Post = forwardRef(({ name, description, message, photoUrl }, ref) => {
   }
 
   const Post = ({post}) => {
-    console.log(post)
     return(
       <div ref={ref} key={post.id} className="post shadow-xl">
         <div className="post_header items-center gap-4 p-3 border-b">
@@ -136,19 +213,20 @@ const Post = forwardRef(({ name, description, message, photoUrl }, ref) => {
           <h1>{post.comment_on_post_count} comments</h1>
         </div>
         <div className="post_buttons pb-3 border-t">
-          <InputOption
+          <InputLikeOption
             Icon={ThumbUpAltOutlinedIcon}
             title="Like"
             color={liked ? 'red' : "gray"}
             id={post.id}
           />
-          <InputOption
+          <InputCommentOption
             Icon={ChatOutlinedIcon}
             title="Comment"
             color="gray"
             id={post.id}
           />
         </div>
+        {comments===post.id && <CommentBody comment={post.id} comments={comments}/>}
       </div>
     )
   }
