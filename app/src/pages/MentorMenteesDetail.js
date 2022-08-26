@@ -47,6 +47,30 @@ const MentorMenteesDetail = ({ route, navigation, props }) => {
   const githubUrl = person.github;
   const scrollRef = useRef();
 
+  const sendRating = () => {
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Token 72f957f003d1ae579df255c5e46c5adefcb0d7c7");
+    myHeaders.append("Cookie", "csrftoken=XrZ21zawQLTzsfHhgMRb0aSPUt27OtRf; sessionid=tpxs6ge4xtu4f4shfqsqgnxc4niny1tz");
+
+    var formdata = new FormData();
+    formdata.append("rating ", "4");
+    formdata.append("mentor_email", "emiwaybantai@gmail.com");
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: formdata,
+      redirect: 'follow'
+    };
+
+    fetch("https://vismayvora.pythonanywhere.com/account/rating/", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+  }
+
+
+
   const getPersonInfo = async (slug) => {
     setReadMe('');
     const response = await axios.get('https://findmentor.network/persons.json');
@@ -351,6 +375,7 @@ const MentorMenteesDetail = ({ route, navigation, props }) => {
               <StarRating
                 rating={rating}
                 onChange={setRating}
+                onPress={sendRating}
               />
             </View>
             <ScrollView
@@ -495,15 +520,15 @@ const MentorMenteesDetail = ({ route, navigation, props }) => {
 const styles = StyleSheet.create({
 
   container: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: 'white',
-	},
-	chart: {
-		width: 200,
-		height: 200,
-	},
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+  },
+  chart: {
+    width: 200,
+    height: 200,
+  },
   mainView: {
     backgroundColor: 'white',
     flex: 1,

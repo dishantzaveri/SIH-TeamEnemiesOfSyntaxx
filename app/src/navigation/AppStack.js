@@ -1,11 +1,11 @@
 import React from 'react';
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import CustomDrawer from '../components/CustomDrawer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import VideoCall from '../components/App/VideoCall';
 import Account from '../components/Profile/Account';
-import {ActiveMentorships, Mentees, Mentors, WelcomePage} from '../pages';
+import { ActiveMentorships, Mentees, Mentors, WelcomePage } from '../pages';
 import Careertv from '../pages/Careertv';
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -19,7 +19,7 @@ import OpenBlogScreen from '../pages/OpenBlogScreen';
 import HomeScreen from '../pages/HomeScreen';
 import EventScreen from '../pages/EventScreen';
 import ChatScreen from '../pages/ChatScreen';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Resume2 from '../pages/Resume2';
 import Resume1 from '../pages/Resume1';
 import Resume3 from '../pages/Resume3';
@@ -31,19 +31,22 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import UploadPost from '../components/Posts/UploadPost';
 import AllPostMain from '../components/Posts/AllPostMain';
 import { NativeEventEmitter, NativeModules } from 'react-native';
-import { MentorMenteesDetail} from '../pages';
-import {NavigationContainer} from '@react-navigation/native';
+import { MentorMenteesDetail } from '../pages';
+import { NavigationContainer } from '@react-navigation/native';
 import RazorpayScreens from '../pages/RazorpayScreens';
 import Location from '../pages/Maps';
 import AddEventC from '../pages/AddEventC';
 import { AlanView } from '@alan-ai/alan-sdk-react-native';
-import Partners from '../pages/Partners';
+import Matching from '../pages/Matching';
+import ProfileScreen from '../pages/ProfileScreen';
+import TopPicksScreen from '../pages/TopPicksScreen';
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 const HomeStack = createNativeStackNavigator();
 const BlogStack = createNativeStackNavigator();
 const ResumeStack = createNativeStackNavigator();
 const HomeScreensStack = createNativeStackNavigator();
+const MatchScreensStack = createNativeStackNavigator();
 
 const AllTabsStack = createNativeStackNavigator();
 const MentorStack = createNativeStackNavigator();
@@ -55,16 +58,16 @@ const subscription = alanEventEmitter.addListener('command', (data) => {
 
 const MentorsScreens = () => {
   return (
-    <MentorStack.Navigator screenOptions={{headerShown: false}}>
+    <MentorStack.Navigator screenOptions={{ headerShown: false }}>
       <MentorStack.Screen
         name="Mentors"
         component={Mentors}
-        screenOptions={{headerShown: false}}
+        screenOptions={{ headerShown: false }}
       />
       <MentorStack.Screen
         name="MentorMenteesDetail"
         component={MentorMenteesDetail}
-        screenOptions={{headerShown: false}}
+        screenOptions={{ headerShown: false }}
       />
     </MentorStack.Navigator>
   );
@@ -72,27 +75,48 @@ const MentorsScreens = () => {
 
 const HomeScreens = () => {
   return (
-    <HomeScreensStack.Navigator screenOptions={{headerShown: false}}>
+    <HomeScreensStack.Navigator screenOptions={{ headerShown: false }}>
       <HomeScreensStack.Screen
-        name="HomeMain"
+        name="WelcomePage"
         component={WelcomePage}
-        screenOptions={{headerShown: false}}
+        screenOptions={{ headerShown: false }}
       />
       <HomeScreensStack.Screen
-        name="ActiveMentorships"
-        component={ActiveMentorships}
-        screenOptions={{headerShown: false}}
+        name="TopPicksScreen"
+        component={TopPicksScreen}
+        screenOptions={{ headerShown: false }}
       />
     </HomeScreensStack.Navigator>
   );
 };
 
+const MatchingScreens = () => {
+  return (
+    <MatchScreensStack.Navigator screenOptions={{ headerShown: false }}>
+      <MatchScreensStack.Screen
+        name="Matching"
+        component={Matching}
+        screenOptions={{ headerShown: false }}
+      />
+      <MatchScreensStack.Screen
+
+        name="ProfileScreen"
+        component={ProfileScreen}
+        screenOptions={{ headerShown: false }}
+
+      />
+    </MatchScreensStack.Navigator>
+  );
+};
+
+
+
 function Tabs() {
   return (
     <Tab.Navigator
       initialRouteName="Home"
-      screenOptions={({route}) => ({
-        tabBarIcon: ({focused, color, size}) => {
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
           if (route.name === 'Home') {
             return <Entypo name="home" size={27} color={color} />;
           }
@@ -122,7 +146,7 @@ function Tabs() {
       <Tab.Screen
         name="Home"
         component={HomeScreens}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Tab.Screen
         name="Posts"
@@ -132,9 +156,9 @@ function Tabs() {
         }}
       />
 
-      <Tab.Screen name="Upload" component={UploadPost}  options={{
-          headerShown: false,
-        }}/>
+      <Tab.Screen name="Upload" component={UploadPost} options={{
+        headerShown: false,
+      }} />
 
       <Tab.Screen
         name="Mentors"
@@ -150,10 +174,11 @@ function Tabs() {
           },
         }}
       />
+
       <Tab.Screen
         name="Mentees"
         component={Mentees}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
     </Tab.Navigator>
   );
@@ -161,67 +186,67 @@ function Tabs() {
 
 const HomeStackScreen = () => {
   return (
-    <HomeStack.Navigator screenOptions={{headerShown: false}}>
+    <HomeStack.Navigator screenOptions={{ headerShown: false }}>
       <HomeStack.Screen
         name="HomeMain"
         component={HomeScreen}
-        screenOptions={{headerShown: false}}
+        screenOptions={{ headerShown: false }}
       />
       <HomeStack.Screen
         name="Event"
         component={EventScreen}
-        screenOptions={{headerShown: false}}
+        screenOptions={{ headerShown: false }}
       />
       <HomeStack.Screen
         name="Add Event"
         component={AddEventC}
-        screenOptions={{headerShown: false}}
+        screenOptions={{ headerShown: false }}
       />
       <HomeStack.Screen
         name="Chat"
         component={ChatScreen}
-        screenOptions={{headerShown: false}}
+        screenOptions={{ headerShown: false }}
       />
       <HomeStack.Screen
         name="RazorpayScreens"
         component={RazorpayScreens}
-        screenOptions={{headerShown: false}}
+        screenOptions={{ headerShown: false }}
       />
     </HomeStack.Navigator>
   );
 };
 const ResumeStackScreen = () => {
   return (
-    <ResumeStack.Navigator screenOptions={{headerShown: false}}>
+    <ResumeStack.Navigator screenOptions={{ headerShown: false }}>
       <ResumeStack.Screen
         name="Resume1"
         component={Resume1}
-        screenOptions={{headerShown: false}}
+        screenOptions={{ headerShown: false }}
       />
       <ResumeStack.Screen
         name="Resume2"
         component={Resume2}
-        screenOptions={{headerShown: false}}
+        screenOptions={{ headerShown: false }}
       />
       <ResumeStack.Screen
         name="Resume3"
         component={Resume3}
-        screenOptions={{headerShown: false}}
+        screenOptions={{ headerShown: false }}
       />
       <ResumeStack.Screen
         name="Resume4"
         component={Resume4}
-        screenOptions={{headerShown: false}}
+        screenOptions={{ headerShown: false }}
       />
       <ResumeStack.Screen
         name="Resume5"
         component={Resume5}
-        screenOptions={{headerShown: false}}
+        screenOptions={{ headerShown: false }}
       />
       <ResumeStack.Screen
         name="Resume6"
         component={Resume6}
-        screenOptions={{headerShown: false}}
+        screenOptions={{ headerShown: false }}
       />
     </ResumeStack.Navigator>
   );
@@ -229,16 +254,16 @@ const ResumeStackScreen = () => {
 
 const Blog = () => {
   return (
-    <BlogStack.Navigator screenOptions={{headerShown: false}}>
+    <BlogStack.Navigator screenOptions={{ headerShown: false }}>
       <BlogStack.Screen
         name="Blogs"
         component={Blogs}
-        screenOptions={{headerShown: false}}
+        screenOptions={{ headerShown: false }}
       />
       <BlogStack.Screen
         name="OpenBlogScreen"
         component={OpenBlogScreen}
-        screenOptions={{headerShown: false}}
+        screenOptions={{ headerShown: false }}
       />
     </BlogStack.Navigator>
   );
@@ -246,11 +271,11 @@ const Blog = () => {
 
 const AllTabs = () => {
   return (
-    <AllTabsStack.Navigator screenOptions={{headerShown: false}}>
+    <AllTabsStack.Navigator screenOptions={{ headerShown: false }}>
       <AllTabsStack.Screen
         name="Tabs"
         component={Tabs}
-        screenOptions={{headerShown: false}}
+        screenOptions={{ headerShown: false }}
       />
     </AllTabsStack.Navigator>
   );
@@ -276,7 +301,7 @@ const AppStack = () => {
           name="Dashboard"
           component={AllTabs}
           options={{
-            drawerIcon: ({color}) => (
+            drawerIcon: ({ color }) => (
               <Ionicons name="home-outline" size={22} color={color} />
             ),
           }}
@@ -285,7 +310,7 @@ const AppStack = () => {
           name="Profile"
           component={Account}
           options={{
-            drawerIcon: ({color}) => (
+            drawerIcon: ({ color }) => (
               <Ionicons name="person-outline" size={22} color={color} />
             ),
           }}
@@ -294,30 +319,30 @@ const AppStack = () => {
           name="VideoCall"
           component={VideoCall}
           options={{
-            drawerIcon: ({color}) => (
+            drawerIcon: ({ color }) => (
               <Ionicons name="md-videocam" size={22} color={color} />
             ),
           }}
         />
 
-        {/* <Drawer.Screen
-          name="Partners"
-          component={Partners}
+        <Drawer.Screen
+          name="Browse"
+          component={MatchingScreens}
           options={{
-            drawerIcon: ({color}) => (
+            drawerIcon: ({ color }) => (
               <Ionicons
-                name="chatbox-ellipses-outline"
+                name="person"
                 size={22}
                 color={color}
               />
             ),
           }}
-        /> */}
-         <Drawer.Screen
+        />
+        <Drawer.Screen
           name="Maps"
           component={Location}
           options={{
-            drawerIcon: ({color}) => (
+            drawerIcon: ({ color }) => (
               <Ionicons
                 name="location"
                 size={22}
@@ -331,7 +356,7 @@ const AppStack = () => {
           component={Careertv}
           options={{
             headerShown: false,
-            drawerIcon: ({color}) => (
+            drawerIcon: ({ color }) => (
               <Ionicons name="play-circle-outline" size={22} color={color} />
             ),
           }}
@@ -341,7 +366,7 @@ const AppStack = () => {
           component={ResumeStackScreen}
           options={{
             headerShown: false,
-            drawerIcon: ({color}) => (
+            drawerIcon: ({ color }) => (
               <Ionicons name="document" size={22} color={color} />
             ),
           }}
@@ -351,7 +376,7 @@ const AppStack = () => {
           component={SearchJobs}
           options={{
             headerShown: false,
-            drawerIcon: ({color}) => (
+            drawerIcon: ({ color }) => (
               <Ionicons name="search" size={22} color={color} />
             ),
           }}
@@ -361,7 +386,7 @@ const AppStack = () => {
           component={Blog}
           options={{
             headerShown: false,
-            drawerIcon: ({color}) => (
+            drawerIcon: ({ color }) => (
               <MaterialCommunityIcons
                 name="typewriter"
                 size={22}
@@ -375,7 +400,7 @@ const AppStack = () => {
           component={HomeStackScreen}
           options={{
             headerShown: false,
-            drawerIcon: ({color}) => (
+            drawerIcon: ({ color }) => (
               <MaterialIcons name="emoji-events" size={22} color={color} />
             ),
           }}
@@ -385,13 +410,13 @@ const AppStack = () => {
           component={ReferralClub}
           options={{
             headerShown: false,
-            drawerIcon: ({color}) => (
+            drawerIcon: ({ color }) => (
               <EvilIcons name="pointer" size={22} color={color} />
             ),
           }}
         />
       </Drawer.Navigator>
-      <AlanView projectid={'ecc5936429f8831a0a3f3bd73ff973822e956eca572e1d8b807a3e2338fdd0dc/stage'}/>
+      <AlanView projectid={'ecc5936429f8831a0a3f3bd73ff973822e956eca572e1d8b807a3e2338fdd0dc/stage'} />
     </NavigationContainer>
   );
 };
