@@ -43,6 +43,7 @@ class User(AbstractUser):
     profile_pic = models.ImageField(null=True,blank=True)
     is_entrepreneur = models.BooleanField(default=False)
     is_mentor = models.BooleanField(default=False)
+    is_event_manager = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS=[]

@@ -444,6 +444,30 @@ class Rating(GenericAPIView):
 			#messages.success(request,"Your Rating is submited ")
 			return Response("Your Rating is Submited")
 
+class getRating(GenericAPIView):
+	queryset = Myrating.objects.all()
+	serializer_class = myrating_serializer
+
+	def get(self,request):
+		if not request.user.is_authenticated:
+			return Response("Login first")
+		df=pd.DataFrame(list(Myrating.objects.all().values()))
+		# nu=df.user_id.unique().shape[0]
+		current_user_id = request.user.user.id
+		print(request.user.user)
+
+		print("Current user id: ",current_user_id)
+		prediction_matrix,Ymean = Myrecommend()
+		my_predictions = prediction_matrix[:,current_user_id-1]+Ymean.flatten()
+		pred_idxs_sorted = np.argsort(my_predictions)
+		pred_idxs_sorted[:] = pred_idxs_sorted[::-1]
+		pred_idxs_sorted=pred_idxs_sorted+1
+		print(pred_idxs_sorted)
+		preserved = Case(*[When(pk=pk, then=pos) for pos, pk in enumerate(pred_idxs_sorted)])
+		movie_list=list(Myrating.objects.filter(id__in = pred_idxs_sorted,).order_by(preserved)[:10])
+		data = myrating_serializer(movie_list,many=True).data
+		return Response(data)
+
 class peopleyoumayknowformentee(generics.ListAPIView):
 	serializer_class = MentorProfileSerializer
 	permission_classes = (permissions.IsAuthenticated,)

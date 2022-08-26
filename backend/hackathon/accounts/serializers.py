@@ -137,32 +137,34 @@ class MentorProfileSerializer(serializers.ModelSerializer):
     experience = WorkExperienceSerializer(source = 'user.experience', many=True, read_only=True)
     education = EducationSerializer(source = 'user.education', many=True, read_only=True)
     profile_pic = serializers.ImageField(source = 'user.profile_pic', read_only=True)
-    rating = serializers.SerializerMethodField(read_only=True)
-    coins = serializers.SerializerMethodField(read_only=True)
+    # rating = serializers.SerializerMethodField(read_only=True)
+    # coins = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = MentorProfile
-        fields = ['id','name', 'expertise', 'experience', 'education', 'latitude', 'longitude','profile_pic','coins','rating']
+        fields = ['id','name', 'expertise', 'experience', 'education', 'latitude', 'longitude','profile_pic']
     
-    def get_rating(self,obj):
-        request = self.context.get("request")
-        if request and hasattr(request, "user"):
-            current_user = request.user
-        # mentors_list = Mentorship.objects.filter(entrepreneur=current_entrepreneur).values_list('mentor')
-        mentor_profile = MentorProfile.objects.get(user=current_user)
-        myrating_objects = Myrating.objects.filter(mentor_profile = mentor_profile).values_list('rating')
-        sum = 0
-        for i in myrating_objects:
-            sum = sum + i
-        print(sum)
-        return sum
+    # def get_rating(self,obj):
+    #     request = self.context.get("request")
+    #     if request and hasattr(request, "user"):
+    #         current_user = request.user
+    #         print(current_user)
+    #     # mentors_list = Mentorship.objects.filter(entrepreneur=current_entrepreneur).values_list('mentor')
+    #     mentor_profile = MentorProfile.objects.get(user=current_user)
+    #     myrating_objects = Myrating.objects.filter(mentor_profile = mentor_profile).values_list('rating')
+    #     sum = 0
+    #     for i in myrating_objects:
+    #         sum = sum + i
+    #     print(sum)
+    #     return sum
     
-    def get_coins(self,obj):
-        request = self.context.get("request")
-        if request and hasattr(request, "user"):
-            current_user = request.user
-        coin_obj = Coins.objects.get(user = current_user)
-        return coin_obj.coins
+    # def get_coins(self,obj):
+    #     request = self.context.get("request")
+    #     if request and hasattr(request, "user"):
+    #         current_user = request.user
+    #         print(current_user)
+    #         coin_obj = Coins.objects.get(user = current_user)
+    #     return coin_obj.coins
 
 class EntrepreneurProfileSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
@@ -173,11 +175,11 @@ class EntrepreneurProfileSerializer(serializers.ModelSerializer):
     experience = WorkExperienceSerializer(source = 'user.experience', many=True, read_only=True)
     education = EducationSerializer(source = 'user.education', many=True, read_only=True)
     profile_pic = serializers.ImageField(source = 'user.profile_pic', read_only=True)
-    coins = CoinsSerializer(source = 'user.coins', read_only=True)
+    # coins = CoinsSerializer(source = 'user.coins', read_only=True)
 
     class Meta:
         model = EntrepreneurProfile
-        fields = ['name','id','startup', 'mentor', 'experience', 'education', 'profile_pic','coins']
+        fields = ['name','id','startup', 'mentor', 'experience', 'education', 'profile_pic']
     
     def get_mentor(self,obj):
         current_entrepreneur = None
@@ -190,6 +192,7 @@ class EntrepreneurProfileSerializer(serializers.ModelSerializer):
         mentor_queryset = MentorProfile.objects.filter(user__in=mentors_list)
         print(mentor_queryset)
         return MentorProfileSerializer(mentor_queryset, many=True).data
+
 class Prototypeserializer(serializers.ModelSerializer):
     class Meta:
         model = Prototype
