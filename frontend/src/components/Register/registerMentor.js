@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useRegisterMentorMutation } from "../../features/auth/authAPISlice";
+import { useRegisterMenteeMutation, useRegisterMentorMutation } from "../../features/auth/authAPISlice";
 import { setCredentails } from "../../features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import "../../static/css/login.css";
@@ -21,6 +21,7 @@ const RegisterMentor = ({ setLogin }) => {
   });
   const [pass, setPass] = useState("");
   const [registerMentor] = useRegisterMentorMutation();
+  const [registerMentee] = useRegisterMenteeMutation();
 
   const register = async () => {
     if (pass !== inputs.password) {

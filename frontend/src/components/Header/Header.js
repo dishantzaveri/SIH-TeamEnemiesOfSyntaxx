@@ -284,13 +284,13 @@ const Header = ({ event }) => {
         </div>
       ) : (
         <div className={`flex gap-4 ${token && "hidden"} items-center`}>
-          <Link className="font-semibold text-xl" to="/registermentor">
+          <Link className="font-semibold text-xl" to="/signup">
             Become a Mentor
           </Link>
           <Link className="font-semibold text-xl" to="/registermentor">
             Find a Mentor
           </Link>
-          <Link to="/registermentee">
+          <Link to="/signup">
             <button className="uppercase rounded-full border w-[8vw] py-2 hover:bg-purple-gray-600 hover:text-white transition-all duration-150">
               Sign Up
             </button>
