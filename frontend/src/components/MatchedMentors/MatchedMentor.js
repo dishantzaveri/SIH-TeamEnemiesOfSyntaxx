@@ -1,7 +1,31 @@
 import React, { useEffect } from "react";
 import Header from "../Header/Header";
+import { Rating } from "@mui/material";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import Button from '@mui/material/Button';
+import DialogTitle from "@mui/material/DialogTitle";
+import {Routes, Route, useNavigate, useLocation} from 'react-router-dom';
 import { AiFillHeart } from "react-icons/ai";
 const MatchedMentor = () => {
+  const [open, setOpen] = React.useState(false);
+
+	const handleClickOpen = () => {
+		setOpen(true);
+	};
+
+	const handleClose = () => {
+		setOpen(false);
+	};
+
+    const navigate = useNavigate();
+
+  const navigateToChat = () => {
+    // 👇️ navigate to /contacts
+    navigate('/chat');
+  };
   return (
     <div>
       <Header />
@@ -82,9 +106,33 @@ const MatchedMentor = () => {
             <div className="flex items-center mt-2">
               <p className="ml-2">Industry Type : Tech</p>
             </div>
-            <button className="bg-[#2eb6b8] text-white font-bold text-xl p-2 mt-4 rounded-lg">
-              Connect
-            </button>
+            <button
+							onClick={handleClickOpen}
+							className="bg-[#2eb6b8] text-white font-bold text-xl p-2 mt-4 rounded-lg"
+						>
+							Connect 
+						</button>
+						<Dialog
+							open={open}
+							onClose={handleClose}
+							aria-labelledby="alert-dialog-title"
+							aria-describedby="alert-dialog-description"
+						>
+							<DialogTitle id="alert-dialog-title">
+								{"Connect with the Mentor"}
+							</DialogTitle>
+							<DialogContent>
+								<DialogContentText id="alert-dialog-description">
+									In order to unlock the Chat Feature with this Mentor, 2 coins will be deducted from your existing Account
+								</DialogContentText>
+							</DialogContent>
+							<DialogActions>
+								<Button onClick={handleClose}>Disagree</Button>
+								<Button onClick={navigateToChat} autoFocus>
+									Agree
+								</Button>
+							</DialogActions>
+						</Dialog>
           </div>
         </div>
       </div>
