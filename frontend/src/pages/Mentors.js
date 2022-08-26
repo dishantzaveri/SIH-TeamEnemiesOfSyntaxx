@@ -45,17 +45,19 @@ const Mentor = ({ mentor }) => {
           </h1>
           <h1 className="mt-[5px]">Expertise : {mentor?.expertise}</h1>
         </div>
-        <button
-          style={{
-            backgroundColor: "white",
-            borderColor: "#604E9E",
-            borderWidth: 1,
-            color: "#604E9E",
-          }}
-          className="text-white self-end p-2 px-4 rounded-2xl mt-4"
-        >
-          View Profile
-        </button>
+        <Link to='/singleMentor' state={{'mentor': mentor}}>
+          <button
+            style={{
+              backgroundColor: "white",
+              borderColor: "#604E9E",
+              borderWidth: 1,
+              color: "#604E9E",
+            }}
+            className="text-white self-end p-2 px-4 rounded-2xl mt-4"
+          >
+            View Profile
+          </button>
+        </Link>
       </div>
     </div>
   );
