@@ -34,8 +34,6 @@ import Header from "../components/Header/Header.js";
 import Eligibility from "../components/Eligibility.js";
 import alanBtn from "@alan-ai/alan-sdk-web";
 
-
-
 // const Header = () => {
 //   const dispatch = useDispatch();
 //   const { token } = useSelector((state) => state.auth);
@@ -100,9 +98,9 @@ const Section1 = () => {
     { value: "ta", text: "Tamil" },
   ];
   const { t } = useTranslation();
-  
+
   const [lang, setLang] = useState("");
-  
+
   // This function put query that helps to
   // change the language
   const handleLanguage = (e) => {
@@ -125,10 +123,11 @@ const Section1 = () => {
       )} */}
       <div className="flex flex-col items-center w-[50vw]">
         <h1 className="text-6xl font-semibold text-gray-800">
-        {t("evn1")} <span className="text-purple-gray-700">{t("Mentor")}</span>
+          {t("evn1")}{" "}
+          <span className="text-purple-gray-700">{t("Mentor")}</span>
         </h1>
         <h1 className="text-center text-xl text-gray-700 mt-6">
-        {t("search")}
+          {t("search")}
         </h1>
         <div className="flex items-center border rounded-full w-full bg-white text-gray-700 mt-12 box-content">
           <BiSearch className="mr-4 ml-6 text-3xl text-greha-1" />
@@ -137,15 +136,16 @@ const Section1 = () => {
             type="text"
             placeholder="Search Mentor"
           />
-          <div className="h-full px-8 py-4 bg-purple-gray-600 rounded-r-full cursor-pointer">
-            <h1 className="text-white text-lg font-bold uppercase">Search</h1>
-          </div>
+          <Link to="/login">
+            <div className="h-full px-8 py-4 bg-purple-gray-600 rounded-r-full cursor-pointer">
+              <h1 className="text-white text-lg font-bold uppercase">Search</h1>
+            </div>
+          </Link>
         </div>
-        <h1 className="text-xs text-greha-1 mt-4">
-        {t("tip")}
-        </h1>
+        <h1 className="text-xs text-greha-1 mt-4">{t("tip")}</h1>
         <h1 className="flex items-center text-xl mt-20 text-greha-3 hover:text-purple-gray-700 transition-all duration-300 cursor-pointer">
-        {t("browse")}<BiRightArrowAlt className="text-2xl" />
+          {t("browse")}
+          <BiRightArrowAlt className="text-2xl" />
         </h1>
       </div>
     </div>
@@ -316,7 +316,7 @@ const Home = () => {
 
   useEffect(() => {
     alanBtn({
-      key: 'ecc5936429f8831a0a3f3bd73ff973822e956eca572e1d8b807a3e2338fdd0dc/stage',
+      key: "ecc5936429f8831a0a3f3bd73ff973822e956eca572e1d8b807a3e2338fdd0dc/stage",
     });
   }, []);
 
@@ -327,7 +327,10 @@ const Home = () => {
       <Eligibility />
       <div className="px-24 bg-white h-screen mt-4">
         <h1 className="text-center text-5xl font-bold pt-20">Activities</h1>
-        <h1 className="text-xl text-gray-500 text-center mt-6 mb-12">Find investors & incubators in your region that can support your startup's growth...</h1>
+        <h1 className="text-xl text-gray-500 text-center mt-6 mb-12">
+          Find investors & incubators in your region that can support your
+          startup's growth...
+        </h1>
         <div className="grid grid-cols-2 gap-16 my-6">
           <div className="h-full w-full flex flex-col justify-center">
             <h1 className="text-xl font-semibold mb-2">Top Funding Places</h1>
@@ -347,8 +350,7 @@ const Home = () => {
           </div>
           <div className="h-full w-full flex flex-col justify-center">
             <h1 className="text-xl font-semibold mb-2">Incubators Located</h1>
-            {
-              mentorLocationLoading && 
+            {mentorLocationLoading && (
               <div className="h-[350px] animate-pulse">
                 <div className="h-full w-full bg-slate-500 rounded-xl">
                   <div className="w-full h-full flex flex-col justify-center items-center">
@@ -357,7 +359,7 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-            }
+            )}
             {mentorLocation && (
               <SimpleMap location={mentorLocation} zoomLevel={3} h={"350px"} />
             )}

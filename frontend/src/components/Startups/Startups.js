@@ -50,6 +50,7 @@ export default function Startups() {
   const { token } = useSelector((state) => state.auth);
   const [mentors, setMentors] = useState([]);
   useEffect(() => {
+    console.log("Hello");
     getMentorsList();
   }, []);
   const getMentorsList = async () => {

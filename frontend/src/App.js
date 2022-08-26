@@ -39,6 +39,8 @@ import MatchedEntrepreneurs from "./components/MatchedEntrepreneurs/MatchedEntre
 import RequireAuth from "./ProtectedRoute";
 import ObjectDetection from "./pages/ObjectDetection";
 import SignDetection from "./pages/SignDetection";
+import Startups from "./components/Startups/Startups";
+import Schemes from "./components/GovernmentSchemes/GovernmentSchemes";
 
 const languages = [
   { value: "", text: "Options" },
@@ -91,6 +93,7 @@ function App() {
               path="/singleCampaign/:id"
               element={<FullSingleCampaign />}
             />
+            <Route path="/startups" element={<Startups />} />
             <Route path="/createProfile" element={<CreateProfile />} />
             <Route path="/events" element={<Events />} />
             <Route path="/mentorlist" element={<MentorList />} />
@@ -108,6 +111,7 @@ function App() {
               path="/requestedentrepreneurs"
               element={<MatchedEntrepreneurs />}
             />
+            <Route path="/schemes" element={<Schemes />} />
           </Route>
         </Routes>
       </Router>

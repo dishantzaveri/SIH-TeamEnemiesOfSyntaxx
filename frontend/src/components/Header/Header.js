@@ -61,7 +61,7 @@ const Header = ({ event }) => {
     let loc = "http://localhost:3000/";
     window.location.replace(loc + "?lng=" + e.target.value);
   };
-  const disabled = localStorage.getItem('disabled')
+  const disabled = localStorage.getItem("disabled");
   return (
     <div className="px-12 py-2 flex justify-between items-center border-b">
       {/* <h1>{t('welcome')}</h1> */}
@@ -170,7 +170,7 @@ const Header = ({ event }) => {
           <Link to="/feed">
             <h1 className="font-medium text-lg">{t("home")}</h1>
           </Link>
-          {!is_mentor ? (
+          {is_mentor ? (
             <Link to="/startups">
               <h1 className="font-medium text-lg">{t("startups")}</h1>
             </Link>
@@ -237,21 +237,21 @@ const Header = ({ event }) => {
                 <MenuItem
                   sx={{ margin: "10px", padding: "10px", width: "140px" }}
                 >
-                   {t("schemes")}
+                  {t("schemes")}
                 </MenuItem>
               </Link>
               <Link to="/object-detection">
                 <MenuItem
                   sx={{ margin: "10px", padding: "10px", width: "140px" }}
                 >
-                   Object Detection
+                  Object Detection
                 </MenuItem>
               </Link>
               <Link to="/sign-detection">
                 <MenuItem
                   sx={{ margin: "10px", padding: "10px", width: "120px" }}
                 >
-                   Sign Detection
+                  Sign Detection
                 </MenuItem>
               </Link>
             </Menu>
@@ -289,7 +289,7 @@ const Header = ({ event }) => {
                 <MenuItem
                   sx={{ margin: "10px", padding: "10px", width: "120px" }}
                 >
-                 {t("myProfile")}
+                  {t("myProfile")}
                 </MenuItem>
               </Link>
               {/* <Link to="/campaigns"> */}
@@ -313,14 +313,14 @@ const Header = ({ event }) => {
       ) : (
         <div className={`flex gap-4 ${token && "hidden"} items-center`}>
           <Link className="font-semibold text-xl" to="/signup">
-          {t("becomeMentor")}
+            {t("becomeMentor")}
           </Link>
           <Link className="font-semibold text-xl" to="/registermentor">
-          {t("findMentor")}
+            {t("findMentor")}
           </Link>
           <Link to="/signup">
             <button className="uppercase rounded-full border w-[8vw] py-2 hover:bg-purple-gray-600 hover:text-white transition-all duration-150">
-            {t("signup")}
+              {t("signup")}
             </button>
           </Link>
           <Link to="/login">

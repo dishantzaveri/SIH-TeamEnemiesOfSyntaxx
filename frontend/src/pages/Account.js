@@ -12,44 +12,52 @@ import { useGetStartupsQuery } from "../features/gst/gstAPISlice";
 import { Link } from "react-router-dom";
 import { base64 } from "ethers/lib/utils";
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   // width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
+  bgcolor: "background.paper",
+  border: "2px solid #000",
   boxShadow: 24,
   p: 4,
   // overflow:"scroll"
 };
-const Startup = ({startup}) => {
-  const [idCardBase64, setIdCardBase64] = useState('')
+const Startup = ({ startup }) => {
+  const [idCardBase64, setIdCardBase64] = useState("");
   const getBase64 = (file, cb) => {
     let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function () {
-      cb(reader.result)
+      cb(reader.result);
     };
     reader.onerror = function (error) {
-        console.log('Error: ', error);
+      console.log("Error: ", error);
     };
-  }
-  const [ppt, setPpt] = useState(startup.pitch_deck)
+  };
+  const [ppt, setPpt] = useState(startup.pitch_deck);
   return (
     <div className="flex items-center border-b-2 border-solid border-gray-200 pb-4">
       <div className="ml-4">
         <h1 className="font-extrabold text-lg cursor-pointer mt-4 self-center">
           {startup.legalNameOfBusiness}
         </h1>
-        <p>
-          GST number - {startup.gstin}
-        </p>
+        <p>GST number - {startup.gstin}</p>
         <p className="font-semibold">{startup.dateOfRegistration} - Present</p>
-        {idCardBase64 && <a className="px-2 py-1 border border-purple-gray-600 rounded-full bg-purple-gray-700 text-gray-100" href={idCardBase64} download>View Ppt</a>}
+        {idCardBase64 && (
+          <a
+            className="px-2 py-1 border border-purple-gray-600 rounded-full bg-purple-gray-700 text-gray-100"
+            href={idCardBase64}
+            download
+          >
+            View Ppt
+          </a>
+        )}
         <div className="mt-2">
-          <Link to='/pitchdeck-form'>
-            <button className="bg-purple-gray-500 text-sm font-semibold py-2 px-4 mr-4 rounded-full">Generate Pitchdeck</button>
+          <Link to="/pitchdeck-form">
+            <button className="bg-purple-gray-500 text-sm font-semibold py-2 px-4 mr-4 rounded-full">
+              Generate Pitchdeck
+            </button>
           </Link>
           <input
             id="upload-image"
@@ -63,47 +71,59 @@ const Startup = ({startup}) => {
             application/vnd.openxmlformats-officedocument.presentationml.presentation"
             hidden
             onChange={(e) => {
-              setPpt(getBase64(e.target.files[0], (result) => {
-                setIdCardBase64(result)
-              }));
+              setPpt(
+                getBase64(e.target.files[0], (result) => {
+                  setIdCardBase64(result);
+                })
+              );
               console.log(getBase64(e.target.files[0]));
             }}
           />
-          <label htmlFor="upload-image" className="bg-purple-gray-500 text-sm font-semibold py-2 px-4 rounded-full">Upload Pitchdeck</label>
+          <label
+            htmlFor="upload-image"
+            className="bg-purple-gray-500 text-sm font-semibold py-2 px-4 rounded-full"
+          >
+            Upload Pitchdeck
+          </label>
         </div>
       </div>
     </div>
-  )
-}
-const EditStartup = ({data}) => {
-  return(
-    <div> 
+  );
+};
+const EditStartup = ({ data }) => {
+  return (
+    <div>
       <h2 className="text-2xl font-semibold text-center">Edit your Startups</h2>
-      <div class="bg-purple-gray-100 px-6 mt-2 rounded shadow-md text-black w-full"
+      <div
+        class="bg-purple-gray-100 px-6 mt-2 rounded shadow-md text-black w-full"
         component="form"
         sx={{
-          '& .MuiTextField-root': { m:1, width: '25ch' }, display:""
-          ,
+          "& .MuiTextField-root": { m: 1, width: "25ch" },
+          display: "",
         }}
         noValidate
         autoComplete="off"
       >
-        {data?.map((startup) => <Startup startup={startup} />)}
+        {data?.map((startup) => (
+          <Startup startup={startup} />
+        ))}
       </div>
     </div>
-  )
-}
+  );
+};
 const Account = () => {
-  const {is_entrepreneur} = useSelector(state => state.auth);
-  const {data, isLoading, error} = useGetProfileQuery(is_entrepreneur ? 'entrepreneur' : 'mentor');
-  const {data: startups} = useGetStartupsQuery()
+  const { is_entrepreneur, email } = useSelector((state) => state.auth);
+  const { data, isLoading, error } = useGetProfileQuery(
+    is_entrepreneur ? "entrepreneur" : "mentor"
+  );
+  const { data: startups } = useGetStartupsQuery();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   useEffect(() => {
-    console.log(data, startups)
-  }, [data, startups])
-  
+    console.log(data, startups);
+  }, [data, startups]);
+
   return (
     <div>
       <Header />
@@ -112,7 +132,11 @@ const Account = () => {
           <div className="shadow bg-white shadow-gray-300 p-8 flex flex-col rounded h-fit">
             <img
               className="w-[80px] h-[80px] rounded-full object-cover self-center"
-              src="https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg.jpg"
+              src={
+                data?.profile_pic
+                  ? data?.profile_pic
+                  : "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/2048px-Circle-icons-profile.svg.png"
+              }
             />
             <h1 className="font-bold text-lg cursor-pointer mt-4 self-center">
               {data?.name}
@@ -120,7 +144,7 @@ const Account = () => {
             <div className="mt-4">
               <div className="flex items-center mt-2">
                 <MdEmail />
-                <p className="ml-2">manan@gmail.com</p>
+                <p className="ml-2">{email}</p>
               </div>
               <div className="flex items-center mt-2">
                 <FaBirthdayCake />
@@ -211,10 +235,10 @@ const Account = () => {
                       <h1 className="font-extrabold text-lg cursor-pointer mt-4 self-center">
                         {startup.legalNameOfBusiness}
                       </h1>
-                      <p>
-                        GST number - {startup.gstin}
+                      <p>GST number - {startup.gstin}</p>
+                      <p className="font-semibold">
+                        {startup.dateOfRegistration} - Present
                       </p>
-                      <p className="font-semibold">{startup.dateOfRegistration} - Present</p>
                     </div>
                   </div>
                 ))}
