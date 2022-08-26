@@ -99,7 +99,7 @@ export default function FormPropsTextFields() {
       } catch (error) {
         console.log(error);
       }
-    } else {
+    } else if(select === 'PAN') {
       var data = new FormData();
       data.append('pannumber', 'AAACT2803M');
 
@@ -107,7 +107,7 @@ export default function FormPropsTextFields() {
         method: 'post',
         url: 'https://vismayvora.pythonanywhere.com/account/panverify/',
         headers: { 
-          'Authorization': 'Token 8ee14cbf8c09c0baeae939b60041b703ed240e82', 
+          'Authorization': 'Token '+token, 
         },
         data : data
       };
@@ -133,7 +133,7 @@ export default function FormPropsTextFields() {
         <div className='pt-2'>
           <h1 className='text-purplegray-400 mb-2'>Choose</h1>
           <div className={`flex'} gap-1`}>
-            {['PAN', 'GST'].map(option => (
+            {['PAN', 'GST', 'CIN'].map(option => (
               <label class={`flex items-center gap-1'} text-sm text-purplezinc`}>
                 <input type="radio" checked={select === option} onChange={e => setSelect(e.target.value)} value={option} class="w-4 h-4 accent-purplegray-600 bg-gray-100 border-gray-300" />
                 {option}

@@ -17,7 +17,7 @@ import {useGetSchemesQuery} from "../../features/schemes/schemesApiSlice"
 // import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 const Scheme = ({ scheme }) => {
-// console.log(data);
+  console.log(scheme);
 
   return (
     <div>
@@ -71,27 +71,29 @@ const style = {
 
 const Schemes = (scheme) => {
     
-    var config = {
-        method: 'get',
-        url: 'https://vismayvora.pythonanywhere.com/news/scheme/',
-        headers: { 
-          'Authorization': 'Token 8ee14cbf8c09c0baeae939b60041b703ed240e82'
-        }
-      };
+    // var config = {
+    //     method: 'get',
+    //     url: 'https://vismayvora.pythonanywhere.com/news/scheme/',
+    //     headers: { 
+    //       'Authorization': 'Token 8ee14cbf8c09c0baeae939b60041b703ed240e82'
+    //     }
+    //   };
       
-      axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    //   axios(config)
+    //   .then(function (response) {
+    //     console.log(JSON.stringify(response.data));
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-//   const { data, isLoading, error } = useGetEventsQuery()
-const { data, isLoading, error } = useGetSchemesQuery();
-  console.log(data);
+  const { data, isLoading, error } = useGetSchemesQuery();
+  useEffect(() => {
+    console.log(data);
+  }, [data])
+  
   return (
     <div>
       <Header />
