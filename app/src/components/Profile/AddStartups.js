@@ -1,19 +1,13 @@
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from 'react-native';
-import React, { useEffect, useState } from 'react';
-import { RadioButton, Button } from 'react-native-paper';
-import { useSelector } from 'react-redux';
-import { width, height } from '../../Consts'
-import { useNavigation } from '@react-navigation/native';
+import {ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {RadioButton, Button} from 'react-native-paper';
+import {useSelector} from 'react-redux';
+import {width, height} from '../../Consts';
+import {useNavigation} from '@react-navigation/native';
 
-const GSTNumber = ({ }) => {
+const GSTNumber = ({}) => {
   const [gstNumber, setGstNumber] = useState(0);
-  const { signUpToken } = useSelector(state => state.user);
+  const {signUpToken} = useSelector(state => state.user);
 
   const navigation = useNavigation();
   useEffect(() => {
@@ -65,22 +59,26 @@ const GSTNumber = ({ }) => {
         />
       </View>
       <View style={styles.button}>
-        <Button style={styles.button1} labelStyle={styles.label1} onPress={() => {
-          gstVerification();
-        }}>Add Startup</Button>
-
+        <Button
+          style={styles.button1}
+          labelStyle={styles.label1}
+          onPress={() => {
+            gstVerification();
+          }}>
+          Add Startup
+        </Button>
       </View>
     </View>
   );
 };
 
-const CINNumber = ({ }) => {
+const CINNumber = ({}) => {
   const [name, setName] = useState('');
   const [cin, setCinNumber] = useState('');
   const [date, setDate] = useState('');
   const [location, setLocation] = useState('');
   const [type, setType] = useState('');
-  const { signUpToken } = useSelector(state => state.user);
+  const {signUpToken} = useSelector(state => state.user);
   const sendCin = () => {
     var myHeaders = new Headers();
     myHeaders.append('Authorization', `Token ${signUpToken}`);
@@ -185,8 +183,12 @@ const CINNumber = ({ }) => {
         />
       </View>
       <View style={styles.button}>
-        <Button style={styles.button1} labelStyle={styles.label1} onPress={() => sendCin()}>Add Startup</Button>
-
+        <Button
+          style={styles.button1}
+          labelStyle={styles.label1}
+          onPress={() => sendCin()}>
+          Add Startup
+        </Button>
       </View>
     </View>
   );
@@ -198,7 +200,7 @@ const PanNumber = () => {
   const [date, setDate] = useState('');
   const [location, setLocation] = useState('');
   const [type, setType] = useState('');
-  const { signUpToken } = useSelector(state => state.user);
+  const {signUpToken} = useSelector(state => state.user);
   const sendPan = () => {
     var myHeaders = new Headers();
     myHeaders.append('Authorization', `Token ${signUpToken}`);
@@ -222,7 +224,34 @@ const PanNumber = () => {
       requestOptions,
     )
       .then(response => response.text())
-      .then(result => console.log(result))
+      .then(result => {
+        console.log(result);
+        var formdata2 = new FormData();
+        formdata2.append('legalNameOfBusiness', name);
+        formdata2.append('dateOfRegistration', date);
+        formdata2.append('constitutionOfBusiness', type);
+        formdata2.append('principalPlaceOfBusinessAddress', location);
+        formdata2.append('tradeName', name);
+        var requestOptions2 = {
+          method: 'POST',
+          headers: myHeaders,
+          body: formdata2,
+          redirect: 'follow',
+        };
+        fetch(
+          'https://vismayvora.pythonanywhere.com/account/startup/',
+          requestOptions2,
+        )
+          .then(response => response.text())
+          .then(result => {
+            console.log(result);
+            setName('');
+            setPanNumber('');
+            setDate('');
+            setLocation('');
+          })
+          .catch(error => console.log('error', error));
+      })
       .catch(error => console.log('error', error));
   };
 
@@ -304,23 +333,27 @@ const PanNumber = () => {
       </View>
 
       <View style={styles.button}>
-        <Button style={styles.button1} labelStyle={styles.label1} onPress={() => {
-          sendPan();
-        }} >Add Startup</Button>
-
+        <Button
+          style={styles.button1}
+          labelStyle={styles.label1}
+          onPress={() => {
+            sendPan();
+          }}>
+          Add Startup
+        </Button>
       </View>
     </View>
   );
 };
 
-const PatentNumber = ({ }) => {
+const PatentNumber = ({}) => {
   const [name, setName] = useState('');
   const [diaryNo, setDiaryNo] = useState('');
   const [date, setDate] = useState('');
   const [location, setLocation] = useState('');
   const [type, setType] = useState('');
   const [rockNo, setRockNo] = useState('');
-  const { signUpToken } = useSelector(state => state.user);
+  const {signUpToken} = useSelector(state => state.user);
 
   const navigation = useNavigation();
   const sendPatent = async () => {
@@ -441,16 +474,43 @@ const PatentNumber = ({ }) => {
         />
       </View>
       <View style={styles.button}>
-        <Button style={styles.button1} labelStyle={styles.label1} onPress={() => sendPatent()} >Add Startup</Button>
-        <Button style={styles.button2} labelStyle={styles.label2} onPress={() => navigation.navigate('Login')} >Next </Button>
+        <Button
+          style={styles.button1}
+          labelStyle={styles.label1}
+          onPress={() => sendPatent()}>
+          Add Startup
+        </Button>
       </View>
     </View>
   );
 };
 
-const AddStartups = () => {
+const AddStartups = ({navigation}) => {
   const [checked, setChecked] = useState('gst');
+  const {signUpToken} = useSelector(state => state.user);
+  const sendData = async () => {
+    var myHeaders = new Headers();
+    myHeaders.append('Authorization', `Token ${signUpToken}`);
+    myHeaders.append(
+      'Cookie',
+      'csrftoken=XrZ21zawQLTzsfHhgMRb0aSPUt27OtRf; sessionid=tpxs6ge4xtu4f4shfqsqgnxc4niny1tz',
+    );
 
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+
+      redirect: 'follow',
+    };
+
+    fetch(
+      'https://vismayvora.pythonanywhere.com/account/entrepreneur/',
+      requestOptions,
+    )
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+  };
   return (
     <View
       style={{
@@ -551,6 +611,15 @@ const AddStartups = () => {
         {checked === 'cin' ? <CINNumber /> : null}
         {checked === 'pan' ? <PanNumber /> : null}
         {checked === 'patent' ? <PatentNumber /> : null}
+        <Button
+          style={styles.button2}
+          labelStyle={styles.label2}
+          onPress={() => {
+            sendData();
+            navigation.navigate('Login');
+          }}>
+          Next{' '}
+        </Button>
       </ScrollView>
     </View>
   );
@@ -559,9 +628,7 @@ const AddStartups = () => {
 export default AddStartups;
 
 const styles = StyleSheet.create({
-
   button: {
-
     justifyContent: 'space-between',
     alignSelf: 'center',
     flexDirection: 'row',
@@ -576,8 +643,6 @@ const styles = StyleSheet.create({
     borderColor: '#EBE9E9',
     borderWidth: 1,
     borderRadius: 10,
-
-
   },
   button2: {
     width: width * 0.2,
@@ -593,14 +658,10 @@ const styles = StyleSheet.create({
     color: '#00CFDE',
     fontWeight: '100',
     fontSize: 12,
-
-
   },
   label2: {
-
     color: 'white',
     fontWeight: '100',
     fontSize: 12,
   },
-
 });

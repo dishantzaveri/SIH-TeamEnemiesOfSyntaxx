@@ -263,74 +263,35 @@ export default function Account() {
                     No Startups Added
                   </Text>
                 ) : (
-                  <View>
-                    <View
-                      style={{
-                        marginVertical: 10,
-                        flexDirection: 'row',
-                      }}>
-                      <Image
-                        source={{
-                          uri: 'https://upload.wikimedia.org/wikipedia/commons/e/e8/Tesla_logo.png',
-                        }}
+                  data.startup.map(s => (
+                    <View>
+                      <View
                         style={{
-                          width: 70,
-                          height: 70,
-                          borderRadius: 100,
-                        }}
-                      />
-                      <View style={{width: '80%', marginLeft: 10}}>
-                        <Text
-                          style={{
-                            fontSize: 16,
-                            color: 'black',
-                            fontWeight: 'bold',
-                          }}>
-                          Tesla
-                        </Text>
-                        <Text style={{color: 'black'}}>
-                          Tesla, Inc. is an American multinational automotive
-                          and clean .......
-                        </Text>
-                        <Text style={{color: 'black', fontWeight: '600'}}>
-                          2020 June - Present
-                        </Text>
+                          marginVertical: 10,
+                          flexDirection: 'row',
+                        }}>
+                        <View style={{width: '80%', marginLeft: 10}}>
+                          <Text
+                            style={{
+                              fontSize: 16,
+                              color: 'black',
+                              fontWeight: 'bold',
+                            }}>
+                            {s.legalNameOfBusiness}
+                          </Text>
+                          <Text style={{color: 'black'}}>
+                            {s.principalPlaceOfBusinessAddress}
+                          </Text>
+                          <Text style={{color: 'black', fontWeight: '600'}}>
+                            Type : {s.constitutionOfBusiness}
+                          </Text>
+                          <Text style={{color: 'black', fontWeight: '600'}}>
+                            Date : {s.dateOfRegistration}
+                          </Text>
+                        </View>
                       </View>
                     </View>
-                    <View
-                      style={{
-                        marginVertical: 10,
-                        flexDirection: 'row',
-                      }}>
-                      <Image
-                        source={{
-                          uri: 'https://upload.wikimedia.org/wikipedia/commons/e/e8/Tesla_logo.png',
-                        }}
-                        style={{
-                          width: 70,
-                          height: 70,
-                          borderRadius: 100,
-                        }}
-                      />
-                      <View style={{width: '80%', marginLeft: 10}}>
-                        <Text
-                          style={{
-                            fontSize: 16,
-                            color: 'black',
-                            fontWeight: 'bold',
-                          }}>
-                          Tesla
-                        </Text>
-                        <Text style={{color: 'black'}}>
-                          Tesla, Inc. is an American multinational automotive
-                          and clean .......
-                        </Text>
-                        <Text style={{color: 'black', fontWeight: '600'}}>
-                          2020 June - Present
-                        </Text>
-                      </View>
-                    </View>
-                  </View>
+                  ))
                 )}
               </View>
             </>
