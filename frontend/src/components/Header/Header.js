@@ -171,11 +171,11 @@ const Header = ({ event }) => {
           </Link>
           {!is_mentor ? (
             <Link to="/startups">
-              <h1 className="font-medium text-lg">Startups</h1>
+              <h1 className="font-medium text-lg">{t("startups")}</h1>
             </Link>
           ) : (
             <Link to="/mentors">
-              <h1 className="font-medium text-lg">Mentors</h1>
+              <h1 className="font-medium text-lg">{t("mentors")}</h1>
             </Link>
           )}
 

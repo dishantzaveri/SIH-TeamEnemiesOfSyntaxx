@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { BiSearch, BiRightArrowAlt } from "react-icons/bi";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../features/auth/authSlice.js";
@@ -32,6 +33,8 @@ import {
 import Header from "../components/Header/Header.js";
 import Eligibility from "../components/Eligibility.js";
 import alanBtn from "@alan-ai/alan-sdk-web";
+
+
 
 // const Header = () => {
 //   const dispatch = useDispatch();
@@ -88,15 +91,44 @@ import alanBtn from "@alan-ai/alan-sdk-web";
 // };
 
 const Section1 = () => {
+  const languages = [
+    { value: "", text: "Options" },
+    { value: "en", text: "English" },
+    { value: "hi", text: "Hindi" },
+    { value: "gu", text: "Gujarati" },
+    { value: "mr", text: "Marathi" },
+    { value: "ta", text: "Tamil" },
+  ];
+  const { t } = useTranslation();
+  
+  const [lang, setLang] = useState("");
+  
+  // This function put query that helps to
+  // change the language
+  const handleLanguage = (e) => {
+    setLang(e.target.value);
+    let loc = "http://localhost:3000/";
+    window.location.replace(loc + "?lng=" + e.target.value);
+  };
   return (
     <div className="h-screen w-full flex justify-center items-center">
+      {/* {window.location.pathname === "/" && (
+        <select value={lang} onChange={handleLanguage}>
+          {languages.map((item) => {
+            return (
+              <option key={item.value} value={item.value}>
+                {item.text}
+              </option>
+            );
+          })}
+        </select>
+      )} */}
       <div className="flex flex-col items-center w-[50vw]">
         <h1 className="text-6xl font-semibold text-gray-800">
-          Everyone needs a <span className="text-purple-gray-700">Mentor</span>
+        {t("evn1")} <span className="text-purple-gray-700">{t("Mentor")}</span>
         </h1>
         <h1 className="text-center text-xl text-gray-700 mt-6">
-          Search amazing individuals around the globe, find a mentor, expand
-          your network, and learn from incredible people!
+        {t("search")}
         </h1>
         <div className="flex items-center border rounded-full w-full bg-white text-gray-700 mt-12 box-content">
           <BiSearch className="mr-4 ml-6 text-3xl text-greha-1" />
@@ -110,10 +142,10 @@ const Section1 = () => {
           </div>
         </div>
         <h1 className="text-xs text-greha-1 mt-4">
-          Tip: Search by skills, interest, location, name etc
+        {t("tip")}
         </h1>
         <h1 className="flex items-center text-xl mt-20 text-greha-3 hover:text-purple-gray-700 transition-all duration-300 cursor-pointer">
-          Browse all Mentors <BiRightArrowAlt className="text-2xl" />
+        {t("browse")}<BiRightArrowAlt className="text-2xl" />
         </h1>
       </div>
     </div>
