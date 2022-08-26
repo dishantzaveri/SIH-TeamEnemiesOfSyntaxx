@@ -9,23 +9,26 @@ import Location from "@material-ui/icons/LocationOnOutlined";
 import GrainOutlined from "@material-ui/icons/GrainOutlined";
 // import { logout } from "../features/auth/authSlice";
 import axios from "axios";
+
 // import { useGetEventsQuery } from "../features/events/eventsAPISlice";
 import { VscLoading } from "react-icons/vsc";
 // import CreateEvents from "../components/CreateEvents/CreateEvents";
 import Header from "../../components/Header/Header";
-import {useGetSchemesQuery} from "../../features/schemes/schemesApiSlice" 
+import {useGetSchemesQuery} from "../../features/schemes/schemesApiSlice" ;
+import { useNavigate } from 'react-router-dom';
 // import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 const Scheme = ({ scheme }) => {
   console.log(scheme);
+  const navigate = useNavigate();
 
   return (
     <div>
-      {/* <img
-        src={scheme.image}
-        className="rounded-t-2xl max-w-[280px] max-h-[150px]"
-      /> */}
-      <div className="bg-white flex justify-between self-center max-w-[280px] bottom-[-40px] p-2 rounded-b-2xl shadow-lg">
+      <img
+        src={scheme.images_post}
+        className="rounded-t-2xl max-w-[300px] max-h-[140px]"
+      />
+      <div className="bg-white  justify-between self-center max-w-[300px] p-2 rounded-b-2xl shadow-lg">
         <div className="">
           <h1
             className="text-lg font-bold mt-2"
@@ -39,15 +42,24 @@ const Scheme = ({ scheme }) => {
           >
             {scheme.title}
           </h1>
-          {/* <h1 className="mt-[5px]">Price : {scheme.price}</h1>
-          <h1 className="mt-[5px]">Organized By: {scheme.organiser}</h1>
-          <div className="flex mt-[5px]">
+          <h1 className="mt-[8px]" style={{
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              display: "-webkit-box",
+              WebkitLineClamp: 5,
+              WebkitBoxOrient: "vertical",
+            //   fontSize:"20px"
+            }}><b>Benefits</b> : {scheme.Benefits}</h1>
+          {/* <h1 className="mt-[5px]">Organized By: {scheme.organiser}</h1> */}
+          {/* <div className="flex mt-[5px]">
             <Location />
             <h1>{scheme.venue}</h1>
           </div> */}
         </div>
-        <button className="bg-purple-gray-600 text-white self-end p-2 px-4 rounded-2xl">
-          Buy
+        <button 
+        // onClick={navigate('/`$link_of_policy`')} 
+        className="bg-purple-gray-600 text-white self-end p-2 px-4 rounded-2xl m-1 ml-[25%]">
+          Know more
         </button>
       </div>
     </div>
@@ -101,20 +113,8 @@ const Schemes = (scheme) => {
         <div className="py-[80px] flex">
           <div className="content ">
           <h1 className="text-5xl">Government Schemes</h1>
-          <h1 className="text-2xl mt-4 text-slate-700">Book Your Seats Now!</h1>
+          <h1 className="text-2xl mt-4 text-slate-700">Know about the schemes offered by the Government!</h1>
           </div>
-        
-        {/* <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-        sx={{overflow:"scroll"}}
-      >
-        <Box sx={style}>
-          <CreateEvents />
-        </Box>
-      </Modal> */}
         </div>
         <div>
           <div className="flex justify-between items-center p-2 bg-white rounded-3xl shadow-lg mt-[-25px]">

@@ -58,7 +58,7 @@ const Header = ({ event }) => {
   // change the language
   const handleLanguage = (e) => {
     setLang(e.target.value);
-    let loc = "http://localhost:3000/header/";
+    let loc = "http://localhost:3000/";
     window.location.replace(loc + "?lng=" + e.target.value);
   };
   return (
@@ -167,20 +167,20 @@ const Header = ({ event }) => {
       {token ? (
         <div className="flex flex-row justify-end items-center flex-1 gap-8">
           <Link to="/feed">
-            <h1 className="font-medium text-lg">Home</h1>
+            <h1 className="font-medium text-lg">{t("home")}</h1>
           </Link>
           {!is_mentor ? (
             <Link to="/startups">
-              <h1 className="font-medium text-lg">Startups</h1>
+              <h1 className="font-medium text-lg">{t("startups")}</h1>
             </Link>
           ) : (
             <Link to="/mentors">
-              <h1 className="font-medium text-lg">Mentors</h1>
+              <h1 className="font-medium text-lg">{t("mentors")}</h1>
             </Link>
           )}
 
           <Link to="/chat">
-            <h1 className="font-medium text-lg">Chat</h1>
+            <h1 className="font-medium text-lg">{t("chat")}</h1>
           </Link>
 
           <div>
@@ -197,7 +197,7 @@ const Header = ({ event }) => {
                 lineHeight: "1.75rem",
               }}
             >
-              Activities
+              {t("activities")}
             </button>
             <Menu
               id="fade-menu"
@@ -215,21 +215,28 @@ const Header = ({ event }) => {
                 <MenuItem
                   sx={{ margin: "10px", padding: "10px", width: "120px" }}
                 >
-                  Events
+                  {t("events")}
                 </MenuItem>
               </Link>
               <Link to="/campaigns">
                 <MenuItem
                   sx={{ margin: "10px", padding: "10px", width: "120px" }}
                 >
-                  Campaigns
+                  {t("campaigns")}
                 </MenuItem>
               </Link>
               <Link to="/matchedmentors">
                 <MenuItem
                   sx={{ margin: "10px", padding: "10px", width: "120px" }}
                 >
-                  Match Mentors
+                  {t("match")}
+                </MenuItem>
+              </Link>
+              <Link to="/schemes">
+                <MenuItem
+                  sx={{ margin: "10px", padding: "10px", width: "120px" }}
+                >
+                   {t("schemes")}
                 </MenuItem>
               </Link>
             </Menu>
@@ -249,7 +256,7 @@ const Header = ({ event }) => {
                 lineHeight: "1.75rem",
               }}
             >
-              Profile
+              {t("profile")}
             </button>
             <Menu
               id="fade-menu"
@@ -267,7 +274,7 @@ const Header = ({ event }) => {
                 <MenuItem
                   sx={{ margin: "10px", padding: "10px", width: "120px" }}
                 >
-                  My Profile
+                 {t("myProfile")}
                 </MenuItem>
               </Link>
               {/* <Link to="/campaigns"> */}
@@ -275,7 +282,7 @@ const Header = ({ event }) => {
                 onClick={() => dispatch(logout())}
                 sx={{ margin: "10px", padding: "10px", width: "120px" }}
               >
-                Logout
+                {t("logout")}
               </MenuItem>
               {/* </Link> */}
             </Menu>
@@ -291,19 +298,19 @@ const Header = ({ event }) => {
       ) : (
         <div className={`flex gap-4 ${token && "hidden"} items-center`}>
           <Link className="font-semibold text-xl" to="/signup">
-            Become a Mentor
+          {t("becomeMentor")}
           </Link>
           <Link className="font-semibold text-xl" to="/registermentor">
-            Find a Mentor
+          {t("findMentor")}
           </Link>
           <Link to="/signup">
             <button className="uppercase rounded-full border w-[8vw] py-2 hover:bg-purple-gray-600 hover:text-white transition-all duration-150">
-              Sign Up
+            {t("signup")}
             </button>
           </Link>
           <Link to="/login">
             <button className="uppercase rounded-full border w-[8vw] py-2 hover:bg-inherit hover:text-inherit bg-purple-gray-600 text-white transition-all duration-150">
-              Log in
+              {t("login")}
             </button>
           </Link>
         </div>
