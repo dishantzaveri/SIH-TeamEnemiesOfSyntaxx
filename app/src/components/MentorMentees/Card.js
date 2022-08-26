@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   SafeAreaView,
   Text,
@@ -7,15 +7,18 @@ import {
   Linking,
   TouchableOpacity,
   Dimensions,
+  Image,
 } from 'react-native';
 import {Avatar} from 'react-native-elements';
 import {Github, Linkedin, Twitter} from '../SVGR-Components';
 
 const Card = ({navigation, data, listType = 'mentor'}) => {
-  const twitterUrl = data.twitter_handle;
-  const githubUrl = data.github;
-  const linkedinUrl = data.linkedin;
-
+  const twitterUrl = '';
+  const githubUrl = '';
+  const linkedinUrl = '';
+  useEffect(() => {
+    console.log(data?.profile_pic);
+  }, []);
   const getBorderTopColor = () => {
     const mentorColor = '#17aa90';
     const menteeColor = '#2f6998';
@@ -42,7 +45,7 @@ const Card = ({navigation, data, listType = 'mentor'}) => {
       <TouchableOpacity
         onPress={() =>
           navigation.navigate('MentorMenteesDetail', {
-            slug: data.slug,
+            slug: data,
           })
         }
         style={{
@@ -66,10 +69,13 @@ const Card = ({navigation, data, listType = 'mentor'}) => {
             <Linkedin width={26} height={26} />
           </TouchableOpacity>
         </View>
+
         <Avatar
           rounded
           source={{
-            uri: data.avatar,
+            uri: data?.profile_pic
+              ? `http://vismayvora.pythonanywhere.com/${data.profile_pic}`
+              : 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/2048px-Circle-icons-profile.svg.png',
           }}
           size="large"
         />
@@ -78,29 +84,22 @@ const Card = ({navigation, data, listType = 'mentor'}) => {
             numberOfLines={2}
             ellipsizeMode="tail"
             style={{...styles.nameStyle, color: getBorderTopColor()}}>
-            {data.name}
+            {data?.name}
           </Text>
         </View>
         <View style={styles.goalsView}>
           <Text numberOfLines={3} ellipsizeMode="tail" style={styles.goalsText}>
-            {data.displayInterests}
+            {data?.expertise}
           </Text>
         </View>
         {listType === 'both' && (
           <View style={styles.goalsView}>
-            <Text style={styles.goalsText}>
-              {data.mentor === 'İkisi de' ? 'Mentor & Mentee' : data.mentor}
-            </Text>
+            <Text style={styles.goalsText}>Expertise : {data?.expertise}</Text>
           </View>
         )}
-        <View
-          style={
-            data.isHireable === true
-              ? [styles.hireMe, {borderColor: getBorderTopColor()}]
-              : {display: 'none'}
-          }>
+        <View style={{...styles.hireMe, borderColor: getBorderTopColor()}}>
           <Text style={[styles.hireMeText, {color: getBorderTopColor()}]}>
-            Hire Me
+            View Profile
           </Text>
         </View>
       </TouchableOpacity>
