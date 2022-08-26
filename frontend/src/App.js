@@ -36,7 +36,8 @@ import CreateCampaigns from "./CreateCampaigns/CreateCampaigns";
 import Footer from "./components/Footer/Footer";
 import MatchedMentor from "./components/MatchedMentors/MatchedMentor";
 import MatchedEntrepreneurs from "./components/MatchedEntrepreneurs/MatchedEntrepreneurs";
-import RequireAuth from './ProtectedRoute';
+import RequireAuth from "./ProtectedRoute";
+import Startups from "./components/Startups/Startups";
 
 const languages = [
   { value: "", text: "Options" },
@@ -62,46 +63,50 @@ function App() {
 
   return (
     <>
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        {/* <Route path="/registerMentor" element={<RegisterMentor />} />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          {/* <Route path="/registerMentor" element={<RegisterMentor />} />
         <Route path="/registerMentee" element={<RegisterMentee />} /> */}
-        <Route path="/signup" element={<Signup />} />
-        <Route element={<RequireAuth />}>
-          <Route path="/gst" element={<Gst />} />
-          <Route path="/myprofile" element={<Account />} />
-          <Route path="/uploadDocs" element={<UploadDocs />} />
-          <Route path="/createPosts" element={<CreatePosts />} />
-          <Route path="/showPosts" element={<Posts />} />
-          <Route path="/feed" element={<Feed />} />
-          <Route path="/chat" element={<Chat />} />
-          <Route path="/news" element={<News />} />
-          <Route path="/pitchdeck" element={<PitchDeck />} />
-          <Route path="/pitchdeck-form" element={<PitchDeckForm />} />
-          <Route path="/videocall" element={<VideoCall />} />
-          <Route path="/campaigns" element={<AllCampaigns />} />
-          <Route path="/form" element={<MyForm />} />
-          <Route path="/singleCampaign/:id" element={<FullSingleCampaign />} />
-          <Route path="/createProfile" element={<CreateProfile />} />
-          <Route path="/events" element={<Events />} />
-          <Route path="/mentorlist" element={<MentorList />} />
-          <Route path="/mentors" element={<Mentors />} />
-          <Route path="/sidenavbar" element={<SideNavbar />} />
-          <Route path="/singleMentor" element={<SingleMentor />} />
-          <Route path="/createEvents" element={<CreateEvents />} />
-          <Route path="/header" element={<Header />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/steps" element={<Steps />} />
-          <Route path="/createCampaigns" element={<CreateCampaigns />} />
-          <Route path="/footer" element={<Footer />} />
-          <Route path="/matchedmentors" element={<MatchedMentor />} />
-          <Route
-            path="/requestedentrepreneurs"
-            element={<MatchedEntrepreneurs />}
-          />
-        </Route>
+          <Route element={<RequireAuth />}>
+            <Route path="/gst" element={<Gst />} />
+            <Route path="/myprofile" element={<Account />} />
+            <Route path="/uploadDocs" element={<UploadDocs />} />
+            <Route path="/createPosts" element={<CreatePosts />} />
+            <Route path="/showPosts" element={<Posts />} />
+            <Route path="/feed" element={<Feed />} />
+            <Route path="/chat" element={<Chat />} />
+            <Route path="/news" element={<News />} />
+            <Route path="/pitchdeck" element={<PitchDeck />} />
+            <Route path="/pitchdeck-form" element={<PitchDeckForm />} />
+            <Route path="/videocall" element={<VideoCall />} />
+            <Route path="/campaigns" element={<AllCampaigns />} />
+            <Route path="/form" element={<MyForm />} />
+            <Route
+              path="/singleCampaign/:id"
+              element={<FullSingleCampaign />}
+            />
+            <Route path="/createProfile" element={<CreateProfile />} />
+            <Route path="/events" element={<Events />} />
+            <Route path="/mentorlist" element={<MentorList />} />
+            <Route path="/mentors" element={<Mentors />} />
+            <Route path="/sidenavbar" element={<SideNavbar />} />
+            <Route path="/singleMentor" element={<SingleMentor />} />
+            <Route path="/createEvents" element={<CreateEvents />} />
+            <Route path="/header" element={<Header />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/steps" element={<Steps />} />
+            <Route path="/createCampaigns" element={<CreateCampaigns />} />
+            <Route path="/footer" element={<Footer />} />
+            <Route path="/matchedmentors" element={<MatchedMentor />} />
+            <Route path="/startups" element={<Startups />} />
+            <Route
+              path="/requestedentrepreneurs"
+              element={<MatchedEntrepreneurs />}
+            />
+          </Route>
         </Routes>
       </Router>
     </>

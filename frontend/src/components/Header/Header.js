@@ -25,6 +25,7 @@ const Header = ({ event }) => {
   ];
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorEl1, setAnchorEl1] = React.useState(null);
+  const { is_mentor } = useSelector((state) => state.auth);
   const open = Boolean(anchorEl);
   const open1 = Boolean(anchorEl1);
   const handleClick = (event) => {
@@ -168,10 +169,15 @@ const Header = ({ event }) => {
           <Link to="/feed">
             <h1 className="font-medium text-lg">Home</h1>
           </Link>
-
-          <Link to="/mentors">
-            <h1 className="font-medium text-lg">Startups</h1>
-          </Link>
+          {!is_mentor ? (
+            <Link to="/startups">
+              <h1 className="font-medium text-lg">Startups</h1>
+            </Link>
+          ) : (
+            <Link to="/mentors">
+              <h1 className="font-medium text-lg">Mentors</h1>
+            </Link>
+          )}
 
           <Link to="/chat">
             <h1 className="font-medium text-lg">Chat</h1>
