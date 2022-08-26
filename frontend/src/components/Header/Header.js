@@ -61,6 +61,7 @@ const Header = ({ event }) => {
     let loc = "http://localhost:3000/";
     window.location.replace(loc + "?lng=" + e.target.value);
   };
+  const disabled = localStorage.getItem('disabled')
   return (
     <div className="px-12 py-2 flex justify-between items-center border-b">
       {/* <h1>{t('welcome')}</h1> */}
@@ -213,30 +214,44 @@ const Header = ({ event }) => {
             >
               <Link to="/events">
                 <MenuItem
-                  sx={{ margin: "10px", padding: "10px", width: "120px" }}
+                  sx={{ margin: "10px", padding: "10px", width: "140px" }}
                 >
                   {t("events")}
                 </MenuItem>
               </Link>
               <Link to="/campaigns">
                 <MenuItem
-                  sx={{ margin: "10px", padding: "10px", width: "120px" }}
+                  sx={{ margin: "10px", padding: "10px", width: "140px" }}
                 >
                   {t("campaigns")}
                 </MenuItem>
               </Link>
               <Link to="/matchedmentors">
                 <MenuItem
-                  sx={{ margin: "10px", padding: "10px", width: "120px" }}
+                  sx={{ margin: "10px", padding: "10px", width: "140px" }}
                 >
                   {t("match")}
                 </MenuItem>
               </Link>
               <Link to="/schemes">
                 <MenuItem
-                  sx={{ margin: "10px", padding: "10px", width: "120px" }}
+                  sx={{ margin: "10px", padding: "10px", width: "140px" }}
                 >
                    {t("schemes")}
+                </MenuItem>
+              </Link>
+              <Link to="/object-detection">
+                <MenuItem
+                  sx={{ margin: "10px", padding: "10px", width: "140px" }}
+                >
+                   Object Detection
+                </MenuItem>
+              </Link>
+              <Link to="/sign-detection">
+                <MenuItem
+                  sx={{ margin: "10px", padding: "10px", width: "120px" }}
+                >
+                   Sign Detection
                 </MenuItem>
               </Link>
             </Menu>

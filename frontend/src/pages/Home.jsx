@@ -393,7 +393,7 @@ const Home = () => {
             )}
           </div>
           <div className="h-full w-full flex flex-col justify-center">
-            <h1 className="text-xl font-semibold mb-2">Top Company Funds</h1>
+            <h1 className="text-xl font-semibold mb-2">Top Funding Regions</h1>
             {regions && (
               <div className="h-[350px] w-full">
                 <ResponsiveContainer width="100%" height="100%">

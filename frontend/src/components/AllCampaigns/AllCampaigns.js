@@ -37,15 +37,8 @@ const AllCampaigns = () => {
     return (
         <div className="">
           <Header />
-            {/* {loading ? <Loader /> : null} */}
-            {/* <NavBar /> */}
-            {/* {message ? */}
-             {/* <p className="text-center"> hi </p>  */}
-             {/* : null} */}
-            {/* {campaigns ? */}
-                <div className="">
-                    {/* <Navbar /> */}
-                    <div className="px-32 bg-gradient-to-r from-[#2eb6b8] via-blue-300  to-[#DAF0F4] w-full h-64 relative">
+        <div className="">
+          <div className="px-32 bg-gradient-to-r from-[#2eb6b8] via-blue-300  to-[#DAF0F4] w-full h-64 relative">
         <div className="py-[80px] flex">
         <div className="content">
           <h1 className="text-5xl">Funding Campaigns</h1>
