@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import gstLogo from "../assets/gst.png";
 import cinLogo from "../assets/cin.png";
 import panLogo from "../assets/pan.png";
@@ -6,38 +7,70 @@ import patentLogo from "../assets/patent.png";
 import proofLogo from "../assets/proof.png";
 import eventsLogo from "../assets/events.png";
 const Eligibility = () => {
+
+  const languages = [
+    { value: "", text: "Options" },
+    { value: "en", text: "English" },
+    { value: "hi", text: "Hindi" },
+    { value: "gu", text: "Gujarati" },
+    { value: "mr", text: "Marathi" },
+    { value: "ta", text: "Tamil" },
+  ];
+  const { t } = useTranslation();
+
+  const [lang, setLang] = useState("");
+
+  // This function put query that helps to
+  // change the language
+  const handleLanguage = (e) => {
+    setLang(e.target.value);
+    let loc = "http://localhost:3000/";
+    window.location.replace(loc + "?lng=" + e.target.value);
+  };
   const constantData = [
     {
       id: 1,
       image: gstLogo,
-      title: "Gst Number of Company",
+      title: t("t1"),
       description:
-        "Enter your GST number and we will fetch your company details",
+      t("d1"),
     },
     {
       id: 2,
       image: cinLogo,
-      title: "Gst CIN of Company",
+      title: t("t2"),
       description:
-        "If your company isn't registered in GST, you can enter CIN number and we will add your company details within a moment",
+      t("d2"),
     },
     {
       id: 3,
       image: panLogo,
-      title: "Companies Registered Pan number",
+      title: t("t3"),
       description:
-        "A small business? Don't have GST or CIN number, verify your startup with your company's Pan Number",
+      t("d3"),
     },
     {
       id: 4,
       image: patentLogo,
-      title: "Enter your patent number",
+      title: t("t4"),
       description:
-        "Have a unique idea and want to start or grow your business? Don't worry we've got you!",
+      t("d4"),
     },
   ];
+
   return (
     <div className="px-24 bg-gray-100">
+      {window.location.pathname === "/" && (
+        <select value={lang} onChange={handleLanguage}>
+          {languages.map((item) => {
+            return (
+              <option key={item.value} value={item.value}>
+                {item.text}
+              </option>
+            );
+          })}
+        </select>
+      )}
       <h1 className="text-4xl font-bold pt-16 pb-8">
         Eligibility Criteria for a Startup{" "}
       </h1>

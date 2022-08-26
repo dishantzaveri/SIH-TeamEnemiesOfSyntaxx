@@ -73,19 +73,19 @@ import alanBtn from "@alan-ai/alan-sdk-web";
 //   );
 // };
 
-const Categories = () => {
-  return (
-    <div className="px-24 py-6 flex justify-center gap-8 border-b">
-      <h1 className="text-lg text-gray-700">All</h1>
-      <h1 className="text-lg text-gray-700">Entrepreneurship</h1>
-      <h1 className="text-lg text-gray-700">Education</h1>
-      <h1 className="text-lg text-gray-700">Art / Creative</h1>
-      <h1 className="text-lg text-gray-700">Media / Production</h1>
-      <h1 className="text-lg text-gray-700">Law</h1>
-      <h1 className="text-lg text-gray-700">Recreational</h1>
-    </div>
-  );
-};
+// const Categories = () => {
+//   return (
+//     <div className="px-24 py-6 flex justify-center gap-8 border-b">
+//       <h1 className="text-lg text-gray-700">All</h1>
+//       <h1 className="text-lg text-gray-700">Entrepreneurship</h1>
+//       <h1 className="text-lg text-gray-700">Education</h1>
+//       <h1 className="text-lg text-gray-700">Art / Creative</h1>
+//       <h1 className="text-lg text-gray-700">Media / Production</h1>
+//       <h1 className="text-lg text-gray-700">Law</h1>
+//       <h1 className="text-lg text-gray-700">Recreational</h1>
+//     </div>
+//   );
+// };
 
 const Section1 = () => {
   return (
@@ -291,7 +291,6 @@ const Home = () => {
   return (
     <div className="bg-gray-50">
       <Header />
-      <Categories />
       <Section1 />
       <Eligibility />
       <div className="px-24 bg-white h-screen mt-4">
