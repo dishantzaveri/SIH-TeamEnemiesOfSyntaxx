@@ -1,9 +1,8 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   StyleSheet,
   Text,
-  Button,
   TouchableOpacity,
   TextInput,
   Image,
@@ -19,15 +18,21 @@ import {
 } from 'react-native-responsive-screen';
 import signInLogo from '../assets/signin.png';
 import DropDownPicker from 'react-native-dropdown-picker';
-function SignUpMentor({navigation}) {
+import {
+  Button,
+} from 'react-native-paper';
+import { height, width} from '../Consts';
+
+function SignUpMentor({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState([
-    {label: 'Entrepreneur', value: 'entrepreneur'},
-    {label: 'Mentor', value: 'mentor'},
+    { label: 'Entrepreneur', value: 'entrepreneur' },
+    { label: 'Mentor', value: 'mentor' },
+    { label: 'Socially Disabled', value: 'disabled' },
   ]);
   return (
     <KeyboardAvoidingView style={styles.container}>
@@ -101,8 +106,16 @@ function SignUpMentor({navigation}) {
           });
           // console.log("Signed Up");
         }}>
-        <Text style={styles.textStyle}>Sign Up</Text>
+           <Text style={styles.textStyle}>Sign Up</Text>
       </TouchableOpacity>
+        <View >
+
+          <Button style={styles.button2} labelStyle={styles.label2} onPress={() =>
+            navigation.navigate('LocationTracer')
+          }>Location
+          </Button>
+        </View>
+       
     </KeyboardAvoidingView>
   );
 }
@@ -138,6 +151,42 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     width: wp('85%'),
+  },
+  button1: {
+    width: width * 0.25,
+    alignSelf: 'center',
+    backgroundColor: 'white',
+    flexDirection: 'row',
+    margin: 10,
+    alignContent: 'center',
+    borderColor: '#EBE9E9',
+    borderWidth: 1,
+    borderRadius: 10,
+
+
+  },
+  button2: {
+    width: width * 0.3,
+    alignSelf: 'center',
+    backgroundColor: '#00CFDE',
+    flexDirection: 'row',
+    margin: 10,
+    alignContent: 'center',
+    borderWidth: 1,
+    borderRadius: 10,
+  },
+  label1: {
+    color: '#00CFDE',
+    fontWeight: '100',
+    fontSize: 12,
+
+
+  },
+  label2: {
+
+    color: 'white',
+    fontWeight: '100',
+    fontSize: 12,
   },
 });
 

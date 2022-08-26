@@ -57,7 +57,7 @@ export const data = [
         id: 7,
         coords: {
             latitude: 30.7333,
-            longitude: 76.7833,
+            longitude: 77.7833,
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
         },
@@ -67,7 +67,7 @@ export const data = [
 
         coords: {
             latitude: 30.7333,
-            longitude: 76.7833,
+            longitude: 78.7833,
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
         },

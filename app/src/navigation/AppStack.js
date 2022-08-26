@@ -5,7 +5,7 @@ import CustomDrawer from '../components/CustomDrawer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import VideoCall from '../components/App/VideoCall';
 import Account from '../components/Profile/Account';
-import {ActiveMentorships, Mentees, Mentors, WelcomePage} from '../pages';
+import {Mentees, Mentors, WelcomePage} from '../pages';
 import Careertv from '../pages/Careertv';
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -41,6 +41,7 @@ import Matching from '../pages/Matching';
 import ProfileScreen from '../pages/ProfileScreen';
 import TopPicksScreen from '../pages/TopPicksScreen';
 import ChatMain from '../pages/Chat/ChatMain';
+import { StartupDetails } from '../pages/StartupDetails';
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 const HomeStack = createNativeStackNavigator();
@@ -51,6 +52,7 @@ const MatchScreensStack = createNativeStackNavigator();
 
 const AllTabsStack = createNativeStackNavigator();
 const MentorStack = createNativeStackNavigator();
+const MenteesStack = createNativeStackNavigator();
 const {AlanManager, AlanEventEmitter} = NativeModules;
 const alanEventEmitter = new NativeEventEmitter(AlanEventEmitter);
 const subscription = alanEventEmitter.addListener('command', data => {
@@ -71,7 +73,27 @@ const MentorsScreens = () => {
         screenOptions={{headerShown: false}}
       />
       <MentorStack.Screen name="ChatScreen" component={ChatMain} />
+      <MentorStack.Screen name="StartupDetails" component={StartupDetails} />
     </MentorStack.Navigator>
+  );
+};
+
+const MenteeScreen = () => {
+  return (
+    <MenteesStack.Navigator screenOptions={{headerShown: false}}>
+      <MenteesStack.Screen
+        name="Mentees"
+        component={Mentees}
+        screenOptions={{headerShown: false}}
+      />
+      <MenteesStack.Screen
+        name="MentorMenteesDetail"
+        component={MentorMenteesDetail}
+        screenOptions={{headerShown: false}}
+      />
+      <MenteesStack.Screen name="ChatScreen" component={ChatMain} />
+      <MenteesStack.Screen name="StartupDetails" component={StartupDetails} />
+    </MenteesStack.Navigator>
   );
 };
 
@@ -179,12 +201,13 @@ function Tabs() {
 
       <Tab.Screen
         name="Mentees"
-        component={Mentees}
+        component={MenteeScreen}
         options={{headerShown: false}}
       />
     </Tab.Navigator>
   );
 }
+
 
 const HomeStackScreen = () => {
   return (

@@ -14,6 +14,7 @@ import {Card} from '../components/MentorMentees';
 import {SearchBar} from '../components/SearchBar';
 import {useSelector} from 'react-redux';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { CardMentees } from '../components/MentorMentees/CardMentees';
 const Mentees = ({navigation}) => {
   const [person, setPerson] = useState(['']);
   const [loading, setLoading] = useState(true);
@@ -73,7 +74,7 @@ const Mentees = ({navigation}) => {
       });
   };
   const renderItem = ({item}) => {
-    return <Card navigation={navigation} data={item} />;
+    return <CardMentees navigation={navigation} data={item} />;
   };
   return (
     <SafeAreaView

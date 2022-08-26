@@ -1,167 +1,103 @@
-import React from "react";
+import React, {Component} from 'react';
 import {
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
   Platform,
-  PermissionsAndroid
-} from "react-native";
-import MapView, {
-  Marker,
-  AnimatedRegion,
-  Polyline,
-  PROVIDER_GOOGLE
-} from "react-native-maps";
-import Geolocation from '@react-native-community/geolocation'
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  Alert,
+  ActivityIndicator,
+} from 'react-native';
 
-// const LATITUDE = 29.95539;
-// const LONGITUDE = 78.07513;
-const LATITUDE_DELTA = 0.009;
-const LONGITUDE_DELTA = 0.009;
-const LATITUDE = 37.78825;
-const LONGITUDE = -122.4324;
+import GetLocation from 'react-native-get-location';
 
-class LocationTracer extends React.Component {
-  constructor(props) {
-    super(props);
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
+  instructions: {
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 5,
+  },
+  location: {
+    color: '#333333',
+    marginBottom: 5,
+  },
+  button: {
+    marginBottom: 8,
+  },
+});
 
-    this.state = {
-      latitude: LATITUDE,
-      longitude: LONGITUDE,
-      routeCoordinates: [],
-      distanceTravelled: 0,
-      prevLatLng: {},
-      coordinate: new AnimatedRegion({
-        latitude: LATITUDE,
-        longitude: LONGITUDE,
-        latitudeDelta: 0,
-        longitudeDelta: 0
-      })
-    };
-  }
+export default class LocationTracer extends Component {
+  state = {
+    location: null,
+    loading: false,
+  };
 
-  componentDidMount() {
-    const { coordinate } = this.state;
+  _requestLocation = (teste = '') => {
+    this.setState({loading: true, location: null});
 
-    this.watchID = Geolocation.getCurrentPosition(
-      position => {
-        const { routeCoordinates, distanceTravelled } = this.state;
-        const { latitude, longitude } = position.coords;
-
-        const newCoordinate = {
-          latitude,
-          longitude
-        };
-
-        if (Platform.OS === "android") {
-          if (this.marker) {
-            this.marker._component.animateMarkerToCoordinate(
-              newCoordinate,
-              500
-            );
-          }
-        } else {
-          coordinate.timing(newCoordinate).start();
-        }
-
+    GetLocation.getCurrentPosition({
+      enableHighAccuracy: false,
+      timeout: 150000,
+    })
+      .then(location => {
         this.setState({
-          latitude,
-          longitude,
-          routeCoordinates: routeCoordinates.concat([newCoordinate]),
-          distanceTravelled:
-            distanceTravelled + this.calcDistance(newCoordinate),
-          prevLatLng: newCoordinate
+          location,
+          loading: false,
         });
-      },
-      error => console.log(error),
-      {
-        enableHighAccuracy: true,
-        timeout: 20000,
-        maximumAge: 1000,
-        distanceFilter: 10
-      }
-    );
-  }
-
-  // componentWillUnmount() {
-  //   navigator.geolocation.clearWatch(this.watchID);
-  // }
-
-  getMapRegion = () => ({
-    latitude: this.state.latitude,
-    longitude: this.state.longitude,
-    latitudeDelta: LATITUDE_DELTA,
-    longitudeDelta: LONGITUDE_DELTA
-  });
-
-  calcDistance = newLatLng => {
-    const { prevLatLng } = this.state;
-    return (prevLatLng, newLatLng) || 0;
+      })
+      .catch(ex => {
+        const {code, message} = ex;
+        console.warn(code, message);
+        if (code === 'CANCELLED') {
+          Alert.alert('Location cancelled by user or by another request');
+        }
+        if (code === 'UNAVAILABLE') {
+          Alert.alert('Location service is disabled or unavailable');
+        }
+        if (code === 'TIMEOUT') {
+          Alert.alert('Location request timed out');
+        }
+        if (code === 'UNAUTHORIZED') {
+          Alert.alert('Authorization denied');
+        }
+        this.setState({
+          location: null,
+          loading: false,
+        });
+      });
   };
 
   render() {
+    const {location, loading} = this.state;
     return (
       <View style={styles.container}>
-        <MapView
-          style={styles.map}
-          provider={PROVIDER_GOOGLE}
-          showUserLocation
-          followUserLocation
-          loadingEnabled
-          region={this.getMapRegion()}
-        >
-          <Polyline coordinates={this.state.routeCoordinates} strokeWidth={5} />
-          <Marker.Animated
-            ref={marker => {
-              this.marker = marker;
-            }}
-            coordinate={this.state.coordinate}
+        <Text style={styles.welcome}>Welcome to MentorDots!</Text>
+        <Text style={styles.instructions}>
+          To get location, press the button:
+        </Text>
+        <View style={styles.button}>
+          <Button
+            disabled={loading}
+            title="Get Location"
+            onPress={this._requestLocation}
           />
-        </MapView>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={[styles.bubble, styles.button]}>
-            <Text style={styles.bottomBarContent}>
-              {parseFloat(this.state.distanceTravelled).toFixed(2)} km
-            </Text>
-          </TouchableOpacity>
         </View>
+        {loading ? <ActivityIndicator /> : null}
+        {location ? (
+          <Text style={styles.location}>{JSON.stringify(location, 0, 2)}</Text>
+        ) : null}
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    ...StyleSheet.absoluteFillObject,
-    justifyContent: "flex-end",
-    alignItems: "center"
-  },
-  map: {
-    ...StyleSheet.absoluteFillObject
-  },
-  bubble: {
-    flex: 1,
-    backgroundColor: "rgba(255,255,255,0.7)",
-    paddingHorizontal: 18,
-    paddingVertical: 12,
-    borderRadius: 20
-  },
-  latlng: {
-    width: 200,
-    alignItems: "stretch"
-  },
-  button: {
-    width: 80,
-    paddingHorizontal: 12,
-    alignItems: "center",
-    marginHorizontal: 10
-  },
-  buttonContainer: {
-    flexDirection: "row",
-    marginVertical: 20,
-    backgroundColor: "transparent"
-  }
-});
-
-export default LocationTracer;

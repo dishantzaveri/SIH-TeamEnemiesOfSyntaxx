@@ -14,6 +14,7 @@ import Onboarding5 from '../pages/Onboarding5';
 import Profile1 from '../components/Profile/Profile1';
 import Profile2 from '../components/Profile/Profile2';
 import AddStartups from '../components/Profile/AddStartups';
+import LocationTracer from '../pages/LocationTracer';
 
 const Stack = createNativeStackNavigator();
 const OnboardingStack = createNativeStackNavigator();
@@ -88,6 +89,10 @@ const AuthStack = () => {
       <Stack.Screen
         name="Onboarding"
         component={Onboarding}
+        options={{headerShown: false}}></Stack.Screen>
+           <Stack.Screen
+        name="LocationTracer"
+        component={LocationTracer}
         options={{headerShown: false}}></Stack.Screen>
     </Stack.Navigator>
   );
