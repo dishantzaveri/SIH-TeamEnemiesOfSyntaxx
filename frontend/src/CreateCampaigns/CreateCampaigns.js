@@ -1,262 +1,176 @@
-import  React, {useState} from 'react';
+import  {useState} from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Grid } from '@mui/material';
-import { MdAlignHorizontalCenter, MdFormatAlignJustify } from 'react-icons/md';
-import MenuItem from '@mui/material/MenuItem';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import Stack from '@mui/material/Stack';
-import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { MdAddCircleOutline, MdKeyboardArrowDown } from 'react-icons/md';
+import { useSelector } from 'react-redux';
+import { AiOutlineClose } from 'react-icons/ai';
+import ReactImageUploading from 'react-images-uploading';
+import { inputClasses } from '@mui/material/node/Input';
 
-export default function CreateCampaigns() {
-  const [value3, setValue3] = React.useState(new Date('2022-01-01T00:00:00.000Z'));
-  const [value4, setValue4] = React.useState(new Date('2022-01-01T00:00:00.000Z'));
-    const [value1, setValue1] = React.useState(new Date());
-    const [value2, setValue2] = React.useState(new Date());
-  // work 
-  const [item, setItem] = useState(['div'])
-  function addNewDiv() {
-    const current = [...item];
-    current.push('newDiv');
-    setItem(current);
-  }
-  function removeDiv() {
-    const current = [...item];
-    current.pop();
-    setItem(current);
-  }
-
-  // education 
-  const [data, setData] = useState(['div'])
-  function addNewEducation() {
-    const curr = [...data];
-    curr.push('newDiv');
-    setData(curr);
-  }
-  function removeEducation() {
-    const curr = [...data];
-    curr.pop();
-    setData(curr);
-  }
-
-  const modes = [
-    {
-      value: 'online',
-      label: 'Online',
-    },
-    {
-      value: 'offline',
-      label: 'Offline',
-    },
-  ];
-  const [mode, setMode] = React.useState('online');
-
-  const handleChange = (event) => {
-    setMode(event.target.value);
-  };
+const DropDown = ({data, inputs, setInputs}) => {
+  console.log(data)
   return (
-<div 
-// class=" bg-purple-gray-500"
-> <h2 style={{fontSize:"22px", textAlign:"center",}}>Create your Campaign</h2>
-     {/* <div class="container max-w-[50%] mx-auto flex-1 flex flex-col items-center justify-center px-1 "> <h1 style={{fontSize:30, margin:"10%", fontWeight:"bolder" , color:"#F1F2F7"}}>Event Details</h1> */}
+      <div className='flex flex-col pt-2'>
+          <div class="relative w-full">
+              <select 
+              value={inputs.startup} 
+              onChange={e => setInputs(prevState => ({...prevState, startup: e.target.value}))} 
+              class="appearance-none w-full border border-gray-200 text-gray-700 py-2 px-3 pr-8 rounded leading-tight focus:outline-none bg-blue-100 focus:border-gray-400">
+              {data.map(option => <option>{option}</option>)}
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                  <MdKeyboardArrowDown />
+              </div>
+          </div>
+      </div>
+  )
+}
 
-     <div class="bg-purple-gray-100 px-6 py-8 rounded shadow-md text-black w-full "
-    // class="bg-purple-gray-100"
-      component="form"
-      sx={{
-        '& .MuiTextField-root': { m:1, width: '25ch' }, display:""
-        ,
-      }}
-      noValidate
-      autoComplete="off"
-    >
-
-  <Box className='event'>
-<div>
-  {/* {item?.map((currentItem, index) => { */}
-   {/* return */}
-    <div >
- <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}>Company Name  </h1>
- <TextField
-     required
-     id="standard-required"
-     label=""
-     variant="standard"
-   //   placeholder='Name'
-   />
- </div>
- <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}>Title of campaign</h1>
- <TextField
-     required
-     id="standard-required"
-     label=""
-     variant="standard"
-   //   placeholder='Name'
-   />
- </div>
- <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}>Description about the campaign  </h1>
- <TextField
-     required
-     id="standard-required"
-     label=""
-     variant="standard"
-   //   placeholder='Name'
-   />
- </div>
- <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}> Description about the Event </h1>
- <TextField
-     id="standard-textarea"
-     label=""
-     multiline
-     variant="standard"
-   />
- </div>
- <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}>Target Amount for the campaign </h1>
- <TextField
-     id="standard-textarea"
-     label=""
-     multiline
-     variant="standard"
-   />
- </div>
- <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}>Amount collected till now </h1>
- <TextField
-     id="standard-textarea"
-     label=""
-     multiline
-     variant="standard"
-   />
- </div>
- {/* <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}> Mode of the Event</h1>
- <TextField
-          id="outlined-select-mode"
-          select
-          label="Select"
-          value={mode}
-          onChange={handleChange}
-          helperText="Please select your mode"
+const Photo = ({inputs, setInputs}) => {
+  const onChange = (imageList, addUpdateIndex) => {
+      setInputs(prevState => ({...prevState, images: imageList[0]}));
+  };
+  return(
+      <ReactImageUploading
+          value={inputs.images}
+          onChange={onChange}
+          dataURLKey="data_url"
         >
-          {modes.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
- </div>
- <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}> Start Date </h1>
- <LocalizationProvider dateAdapter={AdapterDateFns} >
-      <Stack spacing={3} >
-      <DatePicker
-          label="Responsive"
-          openTo="year"
-          views={['year', 'month', 'day']}
-          value={value1}
-          onChange={(newValue) => {
-            setValue1(newValue);
-          }}
-          renderInput={(params) => <TextField {...params} />}
-        />
-      </Stack>
-    </LocalizationProvider>
- </div>
- <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}>Start Time  </h1>
- <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <Stack spacing={3}>
-      <TimePicker
-          value={value3}
-          onChange={setValue3}
-          renderInput={(params) => <TextField {...params} />}
-        />
-      </Stack>
-    </LocalizationProvider>
- </div>
- <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}> End Date</h1>
- <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <Stack spacing={3} >
-      <DatePicker
-          disableFuture
-          label="End Date"
-          openTo="month"
-          views={['month', 'day']}
-          value={value2}
-          onChange={(newValue) => {
-            setValue2(newValue);
-          }}
-          renderInput={(params) => <TextField {...params} />}
-          
-        />
-      </Stack>
-    </LocalizationProvider>
- </div>
- <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}>End Time  </h1>
- <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <Stack spacing={3}>
-      <TimePicker
-          value={value4}
-          onChange={setValue4}
-          renderInput={(params) => <TextField {...params} />}
-        />
-      </Stack>
-    </LocalizationProvider>
- </div>
- <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}>Maximum number of Registrations  </h1>
- <TextField
-     required
-     id="standard-required"
-     label=""
-     variant="standard"
-   //   placeholder='Name'
-   />
- </div>
- <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}>Meet Link (if online) </h1>
- <TextField
-     required
-     id="standard-required"
-     label=""
-     variant="standard"
-   //   placeholder='Name'
-   />
- </div>
- <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}>Venue of Event (if offline)  </h1>
- <TextField
-     required
-     id="standard-required"
-     label=""
-     variant="standard"
-   //   placeholder='Name'
-   />
- </div>
- <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}>Price per ticket  </h1>
- <TextField
-     required
-     id="standard-required"
-     label=""
-     variant="standard"
-   //   placeholder='Name'
-   />
- </div>
- <div sx={{display:"inline-block"}}> <h1 style={{display:"inline-block",fontSize:20, margin:10, paddingRight:"20px"}}> Description </h1>
- <TextField
-     id="standard-textarea"
-     label=""
-     multiline
-     variant="standard"
-   />
- </div> */}
- {/* <button onClick={() => addNewDiv()}  class="w-[40%] items-center justify-center bg-purple-gray-500 hover:bg-purple-gray-600 text-white font-bold py-2 px-4 rounded m-5 "> Add Work Experience</button>
- <button onClick={() => removeDiv()}  class="w-[40%] items-center justify-center bg-purple-gray-500 hover:bg-purple-gray-600 text-white font-bold py-2 px-4 rounded m-5"> Remove Work Experience</button> */}
- </div>
-   {/* })}  */}
-</div>
-     
-  </Box>
+          {({
+            onImageUpload,
+            onImageRemove,
+          }) => (
+            <div className="upload__image-wrapper">
+              {inputs.images ? (
+                <div className="h-28 w-28 rounded-full bg-white relative">
+                  <div className="w-full h-full flex justify-center items-center" onClick={onImageUpload}>
+                    <img src={inputs.images['data_url']} alt="" 
+                      className="h-28 w-28" 
+                      onClick={() => {
+                        setInputs(prevState => ({...prevState, images: null}));
+                        onImageRemove(0)
+                      }} 
+                    />
+                  </div>
+                  <div className="absolute top-[-10px] right-[-10px] p-1 bg-purple-200 rounded-full">
+                    <AiOutlineClose
+                      className="text-red-500 text-sm"
+                      onClick={() => {
+                        setInputs(prevState => ({...prevState, images: null}));  
+                        onImageRemove(0)
+                      }}
+                    />
+                  </div>
+                </div>
+              ) : (
+                <div className="h-28 w-28 bg-white flex justify-center items-center" onClick={onImageUpload}>
+                  <MdAddCircleOutline className="w-12 h-12 text-gray-600" />
+                </div>
+              )}
 
-  <button class="w-full bg-purple-gray-500 hover:bg-purple-gray-600 text-white font-bold py-2 px-4 rounded">Submit</button>
-  </div>
-  {/* </div> */}
+            </div>
+          )}
+        </ReactImageUploading>
+  )
+}
 
+export default function CreateCampaigns({data}) {
+  console.log(data)
+  const {token} = useSelector(state => state.auth)
+  const [inputs, setInputs] = useState({
+      name: '',
+      description: '',
+      images: null,
+      targetAmount: '',
+      startup: '',
+  })
+
+  const create = async () => {
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Token " + token);
+    var formdata = new FormData();
+    formdata.append("name", inputs.name);
+    formdata.append("description", inputs.description);
+    formdata.append("images", inputs.images.file, inputs.images.file.name);
+    formdata.append("targetAmount", inputs.targetAmount);
+    const startup = data.filter(startup => startup.legalNameOfBusiness === inputs.startup)[0].id
+    console.log(startup)
+    formdata.append("startup", +startup);
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: formdata,
+      redirect: 'follow'
+    };
+    fetch("https://vismayvora.pythonanywhere.com/news/funding/", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+  }
+
+  
+  return (
+    <div> 
+      <h2 style={{fontSize:"22px", textAlign:"center",}}>Create your Campaign</h2>
+      <div class="bg-purple-gray-100 px-6 py-8 rounded shadow-md text-black w-full"
+        component="form"
+        sx={{
+          '& .MuiTextField-root': { m:1, width: '25ch' }, display:""
+          ,
+        }}
+        noValidate
+        autoComplete="off"
+      >
+
+        <Box className='event'>
+          <div>
+            <div className='flex flex-col gap-4' >
+              <div className='flex gap-6'> 
+                <h1 className='text-xl'>Campaign Name</h1>
+                <TextField
+                  required
+                  id="standard-required"
+                  label=""
+                  variant="standard"
+                  value={inputs.name}
+                  onChange={(e) => setInputs(prevState => ({...prevState, name: e.target.value}))}
+                />  
+              </div>
+              <div className='flex gap-6'> 
+                <h1 className='text-xl'>Description</h1>
+                <TextField
+                  required
+                  id="standard-required"
+                  label=""
+                  variant="standard"
+                  value={inputs.description}
+                  onChange={(e) => setInputs(prevState => ({...prevState, description: e.target.value}))}
+                />  
+              </div>
+              <div className='flex gap-6'> 
+                <h1 className='text-xl'>Target Amount</h1>
+                <TextField
+                  required
+                  id="standard-required"
+                  label=""
+                  variant="standard"
+                  value={inputs.targetAmount}
+                  onChange={(e) => setInputs(prevState => ({...prevState, targetAmount: e.target.value}))}
+                />  
+              </div>
+              <div className="flex gap-4 items-center">
+                <h1 className='text-xl'>Upload Pic</h1>
+                <Photo inputs={inputs} setInputs={setInputs} />
+              </div>
+              <div className="flex gap-4 items-center">
+                <h1 className='text-xl'>Startup</h1>
+                <DropDown data={data.map(element => element.legalNameOfBusiness)} inputs={inputs} setInputs={setInputs} />
+              </div>
+            </div>
+          </div>
+        </Box>
+      <button className="w-full bg-purple-gray-500 hover:bg-purple-gray-600 text-white font-bold py-2 px-4 rounded mt-4" onClick={() => create()} >Submit</button>
+      </div>
     </div>
   );
 }

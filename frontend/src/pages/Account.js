@@ -6,13 +6,102 @@ import { AiFillEdit } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { useGetProfileQuery } from "../features/profile/profileAPISlice";
 import Header from "../components/Header/Header";
+import { Box, Modal } from "@mui/material/node";
+import CreateCampaigns from "../CreateCampaigns/CreateCampaigns";
+import { useGetStartupsQuery } from "../features/gst/gstAPISlice";
+import { Link } from "react-router-dom";
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  // width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+  // overflow:"scroll"
+};
+const Startup = ({startup}) => {
+  const getBase64 = (file) => {
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      return reader.result
+    };
+    reader.onerror = function (error) {
+        console.log('Error: ', error);
+    };
+  }
+  const [ppt, setPpt] = useState(startup.pitch_deck)
+  return (
+    <div className="flex items-center border-b-2 border-solid border-gray-200 pb-4">
+      <div className="ml-4">
+        <h1 className="font-extrabold text-lg cursor-pointer mt-4 self-center">
+          {startup.legalNameOfBusiness}
+        </h1>
+        <p>
+          GST number - {startup.gstin}
+        </p>
+        <p className="font-semibold">{startup.dateOfRegistration} - Present</p>
+        {ppt && <a href={ppt} download>ppt</a>}
+        <div className="mt-2">
+          <Link to='/pitchdeck-form'>
+            <button className="bg-purple-gray-500 text-sm font-semibold py-2 px-4 mr-4 rounded-full">Generate Pitchdeck</button>
+          </Link>
+          <input
+            id="upload-image"
+            type="file"
+            accept=".pps,
+            .jpg,
+            .txt,
+            application/pdf,
+            application/vnd.ms-powerpoint,
+            application/vnd.openxmlformats-officedocument.presentationml.slideshow,
+            application/vnd.openxmlformats-officedocument.presentationml.presentation"
+            hidden
+            onChange={(e) => {
+              setPpt(getBase64(e.target.files[0]));
+              console.log(e.target.files[0]);
+            }}
+          />
+          <label htmlFor="upload-image" className="bg-purple-gray-500 text-sm font-semibold py-2 px-4 rounded-full">Upload Pitchdeck</label>
+        </div>
+      </div>
+    </div>
+  )
+}
+const EditStartup = ({data}) => {
+  return(
+    <div> 
+      <h2 className="text-2xl font-semibold text-center">Edit your Startups</h2>
+      <div class="bg-purple-gray-100 px-6 mt-2 rounded shadow-md text-black w-full"
+        component="form"
+        sx={{
+          '& .MuiTextField-root': { m:1, width: '25ch' }, display:""
+          ,
+        }}
+        noValidate
+        autoComplete="off"
+      >
+        {data?.map((startup) => <Startup startup={startup} />)}
+      </div>
+    </div>
+  )
+}
 const Account = () => {
   const {is_entrepreneur} = useSelector(state => state.auth);
   const {data, isLoading, error} = useGetProfileQuery(is_entrepreneur ? 'entrepreneur' : 'mentor');
-  console.log(data, error)
+  const {data: startups} = useGetStartupsQuery()
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  useEffect(() => {
+    console.log(data, startups)
+  }, [data, startups])
+  
   return (
     <div>
-      {/* <Navbar /> */}
       <Header />
       <div className="px-64 bg-gradient-to-r from-[#2eb6b8] via-blue-300  to-[#DAF0F4] w-full h-64 relative">
         <div className="flex justify-between absolute  top-[100px] ">
@@ -100,51 +189,31 @@ const Account = () => {
                 <h1 className="font-extrabold text-lg cursor-pointer self-center ">
                   Startups
                 </h1>
-                <AiFillEdit size={23} color="#2eb6b8" />
+                <AiFillEdit onClick={setOpen} size={23} color="#2eb6b8" />
+                <Modal
+                  open={open}
+                  onClose={handleClose}
+                  // sx={{overflow:"scroll"}}
+                >
+                  <Box sx={style}>
+                    <EditStartup data={startups} />
+                  </Box>
+                </Modal>
               </div>
               <div>
-                <div className="mt-2 flex items-center border-b-2 border-solid border-gray-200 pb-4">
-                  <img
-                    className="w-[60px] h-[60px] rounded-full object-cover"
-                    src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Tesla_logo.png"
-                  />
-                  <div className="ml-4">
-                    <h1 className="font-extrabold text-lg cursor-pointer mt-4 self-center">
-                      Tesla
-                    </h1>
-                    <p>
-                      <span className="font-semibold">Description: </span>{" "}
-                      Tesla, Inc. is an American multinational automotive and
-                      clean energy company headquartered in Austin, Texas. Tesla
-                      designs and manufactures electric vehicles (electric cars
-                      and trucks), battery energy storage from home to
-                      grid-scale, solar panels and solar roof tiles, and related
-                      products and services.
-                    </p>
-                    <p className="font-semibold">2020 June - Present</p>
+                {startups?.map((startup) => (
+                  <div className="mt-2 flex items-center border-b-2 border-solid border-gray-200 pb-4">
+                    <div className="ml-4">
+                      <h1 className="font-extrabold text-lg cursor-pointer mt-4 self-center">
+                        {startup.legalNameOfBusiness}
+                      </h1>
+                      <p>
+                        GST number - {startup.gstin}
+                      </p>
+                      <p className="font-semibold">{startup.dateOfRegistration} - Present</p>
+                    </div>
                   </div>
-                </div>
-                <div className="mt-2 flex items-center border-b-2 border-solid border-gray-200 pb-4">
-                  <img
-                    className="w-[60px] h-[60px] rounded-full object-cover"
-                    src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Tesla_logo.png"
-                  />
-                  <div className="ml-4">
-                    <h1 className="font-bold text-lg cursor-pointer mt-4 self-center">
-                      Tesla
-                    </h1>
-                    <p>
-                      <span className="font-semibold">Description: </span>{" "}
-                      Tesla, Inc. is an American multinational automotive and
-                      clean energy company headquartered in Austin, Texas. Tesla
-                      designs and manufactures electric vehicles (electric cars
-                      and trucks), battery energy storage from home to
-                      grid-scale, solar panels and solar roof tiles, and related
-                      products and services.
-                    </p>
-                    <p className="font-semibold">2020 June - Present</p>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>

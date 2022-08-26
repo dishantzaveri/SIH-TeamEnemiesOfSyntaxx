@@ -17,8 +17,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 const Footer = () => {
 return (
 	<Box className="create-button bg-gradient-to-r from-[#c0edf5] via-blue-300  to-[#2eb6b8]">
-	<h1 className="text-purple-gray-600" style={{ textAlign: "center",
-				marginTop: "-50px", marginBottom:"20px", fontSize:"20px"}}>
+	<h1 className="text-purple-gray-600" style={{ textAlign: "center", marginTop: "-50px", marginBottom:"20px", fontSize:"20px"}}>
 		MentorDots : Learning from someone who wants you to grow
 	</h1>
 	<Container >

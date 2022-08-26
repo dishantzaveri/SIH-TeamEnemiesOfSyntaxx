@@ -88,7 +88,6 @@ export default function Mentors() {
   };
   return (
     <>
-      {/* <Navbar /> */}
       <Header />
       <div className="px-32 bg-gradient-to-r from-[#2eb6b8] via-blue-300  to-[#DAF0F4] w-full h-64 relative ">
         <div className="py-[80px] flex">
