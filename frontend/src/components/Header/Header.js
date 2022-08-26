@@ -219,6 +219,13 @@ const Header = ({ event }) => {
                   Campaigns
                 </MenuItem>
               </Link>
+              <Link to="/matchedmentors">
+                <MenuItem
+                  sx={{ margin: "10px", padding: "10px", width: "120px" }}
+                >
+                  Match Mentors
+                </MenuItem>
+              </Link>
             </Menu>
           </div>
 
@@ -258,16 +265,16 @@ const Header = ({ event }) => {
                 </MenuItem>
               </Link>
               {/* <Link to="/campaigns"> */}
-                <MenuItem onClick={() => dispatch(logout())}
-                  sx={{ margin: "10px", padding: "10px", width: "120px" }}
-                >
-                  Logout
-                </MenuItem>
+              <MenuItem
+                onClick={() => dispatch(logout())}
+                sx={{ margin: "10px", padding: "10px", width: "120px" }}
+              >
+                Logout
+              </MenuItem>
               {/* </Link> */}
             </Menu>
           </div>
 
-          
           {/* <button
             className="uppercase rounded-full border w-[8vw] py-2 hover:bg-inherit hover:text-inherit bg-purple-gray-600 text-white transition-all duration-150"
             onClick={() => dispatch(logout())}
