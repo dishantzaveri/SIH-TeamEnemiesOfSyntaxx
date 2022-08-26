@@ -40,23 +40,23 @@ return (
 			{/* <Heading>Social Media</Heading> */}
             <div style={{marginTop:"50px"}}>
 			<FooterLink href="#">
-			<i className="fab fa-facebook-f">
+			<i className="fab fa-instagram">
 				<span style={{ marginLeft: "10px" }}>
-				<GoogleIcon />
+				<GoogleIcon sx={{width:"35px", height:"35px"}} />
 				</span>
 			</i>
 			</FooterLink>
 			<FooterLink href="#">
 			<i className="fab fa-instagram">
 				<span style={{ marginLeft: "10px" }}>
-				<GitHubIcon />
+				<GitHubIcon sx={{width:"35px", height:"35px"}} />
 				</span>
 			</i>
 			</FooterLink>
 			<FooterLink href="#">
-			<i className="fab fa-twitter">
-				<span >
-				<YouTubeIcon />
+			<i className="fab fa-instagram">
+				<span style={{ marginLeft: "10px" }}>
+				<YouTubeIcon sx={{width:"35px", height:"35px"}}/>
 				</span>
 			</i>
 			</FooterLink>

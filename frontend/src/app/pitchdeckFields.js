@@ -1,7 +1,7 @@
 export const formSections = {
     'Info': [1, 2],
     'Reasons you want the funding': [[4, 5]],
-    'Once you get the funding, solutions that you offer': [7, [8]],
+    'Solutions you offer': [7, [8]],
     'Market Validation': [[10, 11]],
     'Market Size': [[13, 14]],
     'Details about your product': [16, [17]],
@@ -103,7 +103,7 @@ export const fields = {
             fontSize: 36,
             align: "center",
             fill: { color: "D3E3F3" },
-            color: "#b4b4b4",
+            color: "#3c3c3c",
         }
     },
     7: {
@@ -297,7 +297,7 @@ export const fields = {
             align: "center",
             // fill: { color: "D3E3F3" },
             color: "black",
-            border:"blue",
+            // border:"blue",
             // shadow:"000000"
         }
     },
@@ -311,9 +311,9 @@ export const fields = {
             h: 1,
             fontSize: 20,
             align: "center",
-            // fill: { color: "D3E3F3" },
+            fill: { color: "#FFFFFF" },
             color: "000000",
-            border:"blue",
+            // border:"blue",
             // shadow:"000000"
         }
     },
@@ -328,7 +328,7 @@ export const fields = {
             fontSize: 36,
             align: "center",
             fill: { color: "#b4b4b4" },
-            color: "008899",
+            color: "black",
         }
     },
     23: {
@@ -357,7 +357,7 @@ export const fields = {
             fontSize: 15,
             align: "center",
             // fill: { color: "D3E3F3" },
-            color: "#b4b4b4",
+            color: "black",
             // shadow:"000000"
         }
     },
