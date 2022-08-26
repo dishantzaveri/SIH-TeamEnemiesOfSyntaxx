@@ -36,7 +36,7 @@ const getStyle = (field) => {
             fontSize: 18,
             align: "left",
             // fill: { color: "D3E3F3" },
-            color: "FFFFFF",
+            color: "black",
           }
         }
       ];
@@ -96,8 +96,8 @@ const getStyle = (field) => {
             h: 2,
             fontSize: 25,
             align: "center",
-            fill: { color: "008899" },
-            color: "black",
+            fill: { color: "#3c3c3c" },
+            color: "#b4b4b4",
           }
         },
         {
@@ -110,7 +110,7 @@ const getStyle = (field) => {
             h: 2,
             fontSize: 17,
             align: "center",
-            color: "black",
+            color: "#FFFFFF",
           }
         },
       ]
@@ -145,9 +145,9 @@ const getStyle = (field) => {
             h: 1,
             fontSize: 25,
             align: "center",
-            // fill: { color: "D3E3F3" },
-            color: "008899",
-            border:"blue",
+            fill: { color: "#FFFFFF" },
+            color: "black",
+            // border:"blue",
             // shadow:"000000"
           }
         },
@@ -163,7 +163,7 @@ const getStyle = (field) => {
             align: "center",
             // fill: { color: "D3E3F3" },
             color: "000000",
-            border:"blue",
+            
             // shadow:"000000"
           }
         },
@@ -181,8 +181,8 @@ const getStyle = (field) => {
             fontSize: 25,
             align: "center",
             // fill: { color: "D3E3F3" },
-            color: "008899",
-            border:"blue",
+            color: "black",
+            // border:"blue",
             // shadow:"000000"
           }
         },
@@ -198,7 +198,7 @@ const getStyle = (field) => {
             align: "center",
             // fill: { color: "D3E3F3" },
             color: "000000",
-            border:"blue",
+            // border:"blue",
             // shadow:"000000"
           }
         },
@@ -216,8 +216,8 @@ const getStyle = (field) => {
             fontSize: 25,
             align: "center",
             // fill: { color: "D3E3F3" },
-            color: "008899",
-            border:"blue",
+            color: "black",
+            // border:"blue",
             // shadow:"000000"
           }
         },
@@ -233,7 +233,7 @@ const getStyle = (field) => {
             align: "center",
             // fill: { color: "D3E3F3" },
             color: "000000",
-            border:"blue",
+            // border:"blue",
             // shadow:"000000"
           }
         },
@@ -267,7 +267,7 @@ export const PitchDeck = () => {
         // else if(Object.keys(x)[0]==="Market Validation"){
         //   slide.addImage({ path: "https://cdn0.iconfinder.com/data/icons/vector-huge-black-icons/60/3d_bar_chart-512.png",  x: 0, y: 2, w: 2, h: 2 });
         }else if(Object.keys(x)[0]==="Market Validation"){
-          slide.addImage({ path: "https://image.shutterstock.com/image-photo/tunnel-columns-black-white-photo-260nw-212145013.jpg",  x: 0, y: 0, w: 10, h: 6 });
+          slide.addImage({ path: "https://static.vecteezy.com/system/resources/previews/000/399/204/original/abstract-background-design-in-light-gray-vector.jpg",  x: 0, y: 0, w: 10, h: 6 });
         }else if(Object.keys(x)[0]==="Market Size"){
           slide.addImage({ path: "https://th.bing.com/th/id/OIP.AvCM8d6s-F07YbPxpP-9pQHaEM?pid=ImgDet&rs=1",  x: 0, y: 0, w: 10, h: 6 });
         }else if(Object.keys(x)[0]==="Product"){
