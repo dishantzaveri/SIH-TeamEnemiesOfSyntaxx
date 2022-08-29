@@ -1,0 +1,75 @@
+.single-campaign-card{
+    /* border: 1px solid rgba(216, 140, 220, 0.476); */
+    border: 0.1px solid lightgray;
+    /* padding: 20px; */
+    /* box-shadow:
+         inset 0 -2em 2em rgba(0,0,0,0.1),
+               0 0  0 2px rgb(255,255,255),
+               0.2em 0.2em 0.5em rgba(0,0,0,0.3); */
+    box-shadow: 0.2em 0.2em 0.5em rgba(0,0,0,0.3);
+    height: 400px !important;
+    box-sizing: border-box;
+    overflow: hidden;
+    margin:2em;
+    padding: 5px;
+    margin-bottom: 2% !important;
+    transition: all 0.3s;
+    display: inline-block
+}
+.single-campaign-card:hover{
+    /* border: 1px solid gray; */
+    /* border: 0.1mm solid gray; */
+    box-shadow:
+         inset 0 -2em 2em rgba(0,0,0,0.1),
+               0 0  0 2px rgb(255,255,255),
+               0.2em 0.2em 0.5em rgba(0,0,0,0.3);
+    transition: all 1s;
+
+}
+.donate{
+    font-size: 18px;
+}
+.action{
+    text-align: center;
+    margin-top: 10px;
+}
+.c-img{
+    height: 100px;
+    width: 35%;
+    justify-content: center;
+    margin-left: 30%;
+}
+.last-donay, .card-title, b, .grey, .goal--{
+    color: #555;
+    margin-bottom: 1em;
+}
+/*  */
+.last-donay, .raised--{
+    font-size: 70%;
+}
+.story-p{
+    height: 50px !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #555;
+    /* margin-bottom: 9px; */
+}
+.numbers{
+    font-size: medium;
+    margin-top: 1.2em;
+}
+.bar{
+    width: 60%;
+    height: 20px; 
+}
+.description-st{
+    font-weight: 700;
+    font-size: 20px;
+}
+.all-c_header{
+    font-weight: 800;
+    font-size: 20px;
+}
+.all-c-r{
+    padding: 5%;
+}

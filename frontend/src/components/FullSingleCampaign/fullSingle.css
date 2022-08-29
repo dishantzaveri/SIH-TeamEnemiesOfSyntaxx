@@ -1,0 +1,87 @@
+.font-weight{
+    font-weight: 700 ;
+    display: block;
+}
+.fullSingle-img{
+    height: 150px;
+    width: 30%;
+}
+.color-green{
+    background: green;
+    color: #fff !important;
+ }
+ .card---{
+    width: 90%;
+ }
+ .raised--{
+font-size: 20px;
+ }
+.card-body{
+    font-size: 30px;
+    margin-top: 1em;
+}
+.progress{
+    color: #fff !important;
+    background-color: #fff !important;
+    width: 25%;
+    height: 30px;
+    /* padding: 3px; */
+    margin-left: 3px;
+}
+ .raising{
+    font-size: 25px;
+ }
+ .fullSingleCard{
+     width: 40%;
+     /* margin: auto; */
+ }
+ .white-c{
+     color: #fff;
+     font-weight: 600;
+ }
+ .transpa{
+     background: none;
+ }
+ .donay-btn{
+     width: 100%;
+ }
+.container{
+    display: inline-block
+}
+  
+  .profileWrapper {
+    margin: 4vw 0;
+    width: 70vw;
+    margin: auto;
+  }
+  .profileWrapper > div {
+    margin: 2vw 0;
+  }
+  .profileWrapper .heading {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+  }
+  
+  .policyName .name h2 {
+    font-size: 2.5vw;
+  }
+
+  .profileWrapper .sparkline {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .profileWrapper .sparklineData {
+    width: 100%;
+    margin: auto;
+  }
+  .profileWrapper .policyDetails p {
+    padding: 0.5vw 2vw;
+    line-height: 2vw;
+    font-size: 1.1vw;
+    color: #6d6d75;
+  }
+  .profileWrapper .policyDetails p::first-letter {
+    font-size: 2vw;
+  }
+  
