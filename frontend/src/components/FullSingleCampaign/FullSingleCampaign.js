@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import "./fullSingle.css";
 import { NavLink, useLocation } from "react-router-dom";
 import Navbar from "../Navbar";
+import Header from "../Header/Header";
 // import Footer from '../Footer/Footer';
 // import Loader from '../Loader/Loader';
 // import { AllCampaignsContext } from '../../contexts/allCampaignsContext';
@@ -44,7 +45,8 @@ const FullSingleCampaign = (props) => {
 	// if (parseInt(x.id) === parseInt(id)) {
 	return (
 		<div>
-			<Navbar />
+			{/* <Navbar /> */}
+			<Header />
 			<div className="profileWrapper">
 				<div className="heading">
 					<div className="policyName">

@@ -11,34 +11,34 @@ import Styles from "./Style";
 import swal from "@sweetalert/with-react";
 import InsertLinkIcon from "@material-ui/icons/InsertLink";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
-import OndemandVideoIcon from '@material-ui/icons/OndemandVideo';
+import OndemandVideoIcon from "@material-ui/icons/OndemandVideo";
 import { imageUploadHandler } from "./Post.utils";
-import { usePostPostMutation } from "../../features/feed/postSlice";
+import { usePostPostMutation } from "../../features/feed/postAPISlice";
+import axios from "axios";
 
 const CreatePosts = () => {
   const classes = Styles();
   const theme = useTheme();
-  const [postPost, {isLoading}] = usePostPostMutation()
-
+  const [postPost, { isLoading }] = usePostPostMutation();
+  const { token } = useSelector((state) => state.auth);
   const [uploadData, setUploadData] = useState({
     description: "",
     file: null,
   });
+
   const [progress, setProgress] = useState("");
   const [openURL, setOpenURL] = useState({
     photo: false,
     youtube: false,
   });
   const [URL, setURL] = useState({
-    photo: '',
-    youtube: '',
+    photo: "",
+    youtube: "",
   });
 
-  const handleSubmitButton = async (e) => {
-    e.preventDefault();
-
+  const handleSubmitButton = async () => {
     // verify atleast one of the input fields are not empyt
-    if (uploadData.description || uploadData.file || URL) {
+    if (uploadData.description || uploadData.file || URL.photo || URL.youtube) {
       if (URL.photo !== "" || URL.youtube !== "") {
         if (URL.photo.startsWith("data") || URL.youtube.startsWith("data")) {
           swal(
@@ -47,29 +47,91 @@ const CreatePosts = () => {
             "warning"
           );
           setURL({
-            photo: '',
-            youtube: '',
+            photo: "",
+            youtube: "",
           });
-        } else if (!(URL.photo.startsWith("http") || URL.youtube.startsWith("http"))) {
+        } else if (
+          !(URL.photo.startsWith("http") || URL.youtube.startsWith("http"))
+        ) {
           swal("Invalid Image URL", "Please enter valid image url", "warning");
           setURL({
-            photo: '',
-            youtube: '',
+            photo: "",
+            youtube: "",
           });
         } else {
           try {
-            console.log({'title': '', 'body': uploadData.description, "images_post": uploadData.data ? uploadData.data : URL.photo, "youtube_link": URL.youtube})
-            const data = await postPost({'title': null, 'body': uploadData.description, "images_post": uploadData.data ? uploadData.data : URL.photo, "youtube_link": URL.youtube}).unwrap()
-            console.log(data)
+            let formData = new FormData();
+            console.log(uploadData);
+            formData.append("title", "Hello");
+            formData.append("body", uploadData?.description);
+            formData.append("youtube_link", URL.youtube);
+            var myHeaders = new Headers();
+            myHeaders.append("Authorization", `Token ${token}`);
+            myHeaders.append(
+              "Cookie",
+              "csrftoken=o4q1Ihf3JTBVbPIRuFvCtHZVT3RHp0X8; sessionid=0rx0ut9910ocx5ggaz1l6en6khbzxg1n"
+            );
+
+            var requestOptions = {
+              method: "POST",
+              headers: myHeaders,
+              body: formData,
+              redirect: "follow",
+            };
+
+            fetch(
+              "https://vismayvora.pythonanywhere.com/api/posts/",
+              requestOptions
+            )
+              .then((response) => response.text())
+              .then((result) => console.log(result))
+              .catch((error) => console.log("error", error));
+
+            setUploadData({
+              description: "",
+              file: null,
+            });
           } catch (error) {
             console.log(error);
           }
         }
       } else {
         try {
-          console.log({'title': '', 'body': uploadData.description, "images_post": uploadData.file ? uploadData.file : null, "youtube_link": null})
-          const data = await postPost({'title': '', 'body': uploadData.description, "images_post": uploadData.file ? uploadData.file : null, "youtube_link": null}).unwrap()
-          console.log(data)
+          let formData = new FormData();
+          console.log(uploadData);
+          formData.append("title", "Hello");
+          formData.append("body", uploadData?.description);
+          formData.append(
+            "images_post",
+            uploadData?.file,
+            uploadData?.file?.name
+          );
+          var myHeaders = new Headers();
+          myHeaders.append("Authorization", `Token ${token}`);
+          myHeaders.append(
+            "Cookie",
+            "csrftoken=o4q1Ihf3JTBVbPIRuFvCtHZVT3RHp0X8; sessionid=0rx0ut9910ocx5ggaz1l6en6khbzxg1n"
+          );
+
+          var requestOptions = {
+            method: "POST",
+            headers: myHeaders,
+            body: formData,
+            redirect: "follow",
+          };
+
+          fetch(
+            "https://vismayvora.pythonanywhere.com/api/posts/",
+            requestOptions
+          )
+            .then((response) => response.text())
+            .then((result) => console.log(result))
+            .catch((error) => console.log("error", error));
+
+          setUploadData({
+            description: "",
+            file: null,
+          });
         } catch (error) {
           console.log(error);
         }
@@ -90,8 +152,8 @@ const CreatePosts = () => {
       youtube: false,
     });
     setURL({
-      photo: '',
-      youtube: '',
+      photo: "",
+      youtube: "",
     });
   };
 
@@ -124,7 +186,7 @@ const CreatePosts = () => {
   return (
     <Paper className={classes.upload}>
       <div className={classes.upload__header}>
-        <form className={classes.header__form} onSubmit={handleSubmitButton}>
+        <div className={classes.header__form}>
           <CreateIcon />
           <input
             placeholder="Start a post"
@@ -159,8 +221,8 @@ const CreatePosts = () => {
               });
             }}
           />
-          <button type="submit">Post</button>
-        </form>
+          <button onClick={() => handleSubmitButton()}>Post</button>
+        </div>
       </div>
       {!openURL.photo && !openURL.youtube && !progress && uploadData.file && (
         <div className={classes.selectedFile}>
@@ -191,12 +253,16 @@ const CreatePosts = () => {
           <input
             placeholder="Paste an image URL"
             value={URL.photo}
-            onChange={(e) => setURL(prevState => ({...prevState, photo: e.target.value}))}
+            onChange={(e) =>
+              setURL((prevState) => ({ ...prevState, photo: e.target.value }))
+            }
           />
           {URL.photo !== "" && (
             <HighlightOffIcon
               style={{ color: "orange", fontSize: 16 }}
-              onClick={() => setURL(prevState => ({...prevState, photo: ''}))}
+              onClick={() =>
+                setURL((prevState) => ({ ...prevState, photo: "" }))
+              }
             />
           )}
         </div>
@@ -207,12 +273,16 @@ const CreatePosts = () => {
           <input
             placeholder="Paste an Youtube URL"
             value={URL.youtube}
-            onChange={(e) => setURL(prevState => ({...prevState, youtube: e.target.value}))}
+            onChange={(e) =>
+              setURL((prevState) => ({ ...prevState, youtube: e.target.value }))
+            }
           />
           {URL.youtube !== "" && (
             <HighlightOffIcon
               style={{ color: "orange", fontSize: 16 }}
-              onClick={() => setURL(prevState => ({...prevState, youtube: ''}))}
+              onClick={() =>
+                setURL((prevState) => ({ ...prevState, youtube: "" }))
+              }
             />
           )}
         </div>
@@ -242,11 +312,17 @@ const CreatePosts = () => {
           <OndemandVideoIcon style={{ color: "orange" }} />
           <h4>Video</h4>
         </label>
-        <div className={classes.media__options} onClick={() => toggleURL_Tab('photo')}>
+        <div
+          className={classes.media__options}
+          onClick={() => toggleURL_Tab("photo")}
+        >
           <InsertLinkIcon style={{ color: "#e88ee4", fontSize: 30 }} />
           <h4>URL</h4>
         </div>
-        <div className={classes.media__options} onClick={() => toggleURL_Tab('youtube')}>
+        <div
+          className={classes.media__options}
+          onClick={() => toggleURL_Tab("youtube")}
+        >
           <YouTubeIcon style={{ color: "#e88ee4", fontSize: 30 }} />
           <h4>Youtube</h4>
         </div>

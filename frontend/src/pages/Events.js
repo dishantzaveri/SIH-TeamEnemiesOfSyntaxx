@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from "react";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Location from "@material-ui/icons/LocationOnOutlined";
@@ -6,12 +10,24 @@ import GrainOutlined from "@material-ui/icons/GrainOutlined";
 import { logout } from "../features/auth/authSlice";
 import "./Events.css";
 import axios from "axios";
+import { useGetEventsQuery } from "../features/events/eventsAPISlice";
+import { VscLoading } from "react-icons/vsc";
+import CreateEvents from "../components/CreateEvents/CreateEvents";
+import Header from "../components/Header/Header";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 const Event = ({ event }) => {
+  useEffect(() => {
+    console.log(event.image);
+  }, []);
   return (
     <div>
       <img
-        src={event.image}
+        src={
+          event.image
+            ? event.image
+            : "https://image.shutterstock.com/image-vector/ui-image-placeholder-wireframes-apps-260nw-1037719204.jpg"
+        }
         className="rounded-t-2xl max-w-[280px] max-h-[150px]"
       />
       <div className="bg-white flex justify-between self-center max-w-[280px] bottom-[-40px] p-2 rounded-b-2xl shadow-lg">
@@ -43,39 +59,62 @@ const Event = ({ event }) => {
   );
 };
 
+const style = {
+  position: "absolute",
+  top: "80%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  // width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+  overflow: "scroll",
+};
+
 const Events = () => {
-  const [events, setEvents] = useState([]);
-  useEffect(() => {
-    getEvents();
-  }, []);
+  // const [events, setEvents] = useState([]);
+  // useEffect(() => {
+  //   getEvents();
+  // }, []);
 
-  const getEvents = async () => {
-    const res = await axios.get(
-      "https://vismayvora.pythonanywhere.com/api/session/"
-    );
+  // const getEvents = async () => {
+  //   const res = await axios.get(
+  //     "https://vismayvora.pythonanywhere.com/api/session/"
+  //   );
 
-    console.log(res.data);
-    setEvents(res.data);
-  };
+  //   console.log(res.data);
+  //   setEvents(res.data);
+  // };
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const { data, isLoading, error } = useGetEventsQuery();
+  // const Header = () => {
+  //   const dispatch = useDispatch();
+  //   const { token } = useSelector((state) => state.auth);
+  //   console.log(token);
 
-  const Header = () => {
-    const dispatch = useDispatch();
-    const { token } = useSelector((state) => state.auth);
-    console.log(token);
-
-    return (
-      <div className="px-24 py-4 flex justify-between items-center border-b">
-        <Link className="font-bold text-3xl" to="/">
-          mentoree
-        </Link>
-        {/* {token && ( */}
-        {/* <div className="header__search">
+  // return (
+  //   <div className="px-24 py-4 flex justify-between items-center border-b">
+  //     <Link className="font-bold text-3xl" to="/">
+  //       mentoree
+  //     </Link>
+  {
+    /* {token && ( */
+  }
+  {
+    /* <div className="header__search">
           <SearchIcon />
           <input type="text" placeholder="Search bar" />
-        </div> */}
-        {/* )} */}
+        </div> */
+  }
+  {
+    /* )} */
+  }
 
-        {/* <div className={`flex gap-4 ${token && "hidden"} items-center`}>
+  {
+    /* <div className={`flex gap-4 ${token && "hidden"} items-center`}>
           <Link className="font-semibold text-xl" to="/registermentor">
             Become a Mentor
           </Link>
@@ -92,45 +131,73 @@ const Events = () => {
               Log in
             </button>
           </Link>
-        </div> */}
-        {token && (
-          <div className="px-64 flex flex-row justify-between items-center  flex-1">
-            {/* // <div className="flex flex-row justify-content items-center flex-1"> */}
-            <Link to="/feed">
-              <h1 className="font-medium text-lg">Home</h1>
-            </Link>
+        </div> */
+  }
+  // {token && (
+  //   <div className="px-64 flex flex-row justify-between items-center  flex-1">
+  //     {/* // <div className="flex flex-row justify-content items-center flex-1"> */}
+  //     <Link to="/feed">
+  //       <h1 className="font-medium text-lg">Home</h1>
+  //     </Link>
 
-            <h1 className="font-medium text-lg">Mentors</h1>
+  //     <h1 className="font-medium text-lg">Mentors</h1>
 
-            <Link to="/chat">
-              <h1 className="font-medium text-lg">Chat</h1>
-            </Link>
+  //     <Link to="/chat">
+  //       <h1 className="font-medium text-lg">Chat</h1>
+  //     </Link>
 
-            <Link to="/myProfile">
-              <h1 className="font-medium text-lg">Profile</h1>
-            </Link>
+  //     <Link to="/myProfile">
+  //       <h1 className="font-medium text-lg">Profile</h1>
+  //     </Link>
 
-            {/* <HeaderOption Icon={NotificationsIcon} title="Notifications" /> */}
-            {/* <HeaderOption avatar={user.photoUrl} title="me" /> */}
-            {/* </div> */}
-          </div>
-        )}
-        <button
-          className="uppercase rounded-full border w-[8vw] py-2 hover:bg-inherit hover:text-inherit bg-purple-gray-600 text-white transition-all duration-150"
-          onClick={() => dispatch(logout())}
-        >
-          Log out
-        </button>
-      </div>
-    );
-  };
+  {
+    /* <HeaderOption Icon={NotificationsIcon} title="Notifications" /> */
+  }
+  {
+    /* <HeaderOption avatar={user.photoUrl} title="me" /> */
+  }
+  {
+    /* </div> */
+  }
+  //         </div>
+  //       )}
+  //       <button
+  //         className="uppercase rounded-full border w-[8vw] py-2 hover:bg-inherit hover:text-inherit bg-purple-gray-600 text-white transition-all duration-150"
+  //         onClick={() => dispatch(logout())}
+  //       >
+  //         Log out
+  //       </button>
+  //     </div>
+  //   );
+  // };
   return (
     <div>
       <Header />
-      <div className="px-32 bg-gradient-to-r from-[#2eb6b8] via-blue-300  to-[#DAF0F4] w-full h-64 relative">
-        <div className="py-[80px]">
-          <h1 className="text-5xl">Events by Top Entrepreneurs</h1>
-          <h1 className="text-2xl mt-4 text-slate-700">Book Your Seats Now!</h1>
+      <div className="px-32 bg-gradient-to-r from-[#2eb6b8] via-blue-300  to-[#DAF0F4] w-full h-64 relative ">
+        <div className="py-[80px] flex">
+          <div className="content ">
+            <h1 className="text-5xl">Events by Top Mentors</h1>
+            <h1 className="text-2xl mt-4 text-slate-700">
+              Book Your Seats Now!
+            </h1>
+          </div>
+          <button
+            onClick={handleOpen}
+            className="create-button bg-gradient-to-r from-[#c0edf5] via-blue-300  to-[#2eb6b8] text-white self-end p-2 px-4 rounded-2xl ml-[37%] "
+          >
+            <AddCircleIcon /> Create Event
+          </button>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+            sx={{ overflow: "scroll" }}
+          >
+            <Box sx={style}>
+              <CreateEvents />
+            </Box>
+          </Modal>
         </div>
         <div>
           <div className="flex justify-between items-center p-2 bg-white rounded-3xl shadow-lg mt-[-25px]">
@@ -174,10 +241,14 @@ const Events = () => {
             rowGap: "50px",
           }}
         >
-          {events.map((event) => (
-            <Event event={event} />
-          ))}
+          {data && data.map((event) => <Event event={event} />)}
         </div>
+        {isLoading && (
+          <div className="w-full flex flex-col justify-center items-center my-8">
+            <VscLoading className="w-8 h-8 animate-spin text-center text-gray-600" />
+            <h1 className="text-xl mt-2">Loading...</h1>
+          </div>
+        )}
       </div>
     </div>
   );

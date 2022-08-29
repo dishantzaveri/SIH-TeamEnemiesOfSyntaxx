@@ -5,6 +5,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import { removeTile, updatePitch } from '../../app/pitchdeckSlice';
 import { formSections, fields } from '../../app/pitchdeckFields';
 import { Link } from 'react-router-dom';
+import { PitchDeck } from './PitchDeck';
 
 const selectField = (field) => {
   switch (field) {
@@ -95,7 +96,6 @@ export default function PitchDeckForm() {
         noValidate
         autoComplete="off"
       >
-        <Link to='/pitchdeck'>back</Link>
         {
           Object.entries(formSections).map(([key, value]) => (
             <div className='my-4'>
@@ -120,7 +120,7 @@ export default function PitchDeckForm() {
             </div>
           ))
         }
-        <button class="w-full bg-purple-gray-500 hover:bg-purple-gray-600 text-white font-bold py-2 px-4 rounded">Submit</button>
+        <PitchDeck />
       </div>
     </div>
   </div>

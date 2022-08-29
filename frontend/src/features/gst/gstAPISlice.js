@@ -2,7 +2,10 @@ import { apiSlice } from "../../app/api/apiSlice";
 
 export const gstApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
-        getGst: builder.mutation({
+        getStartups: builder.query({
+            query: () => '/account/startup/'
+        }),
+        postGst: builder.mutation({
             query: (credentials) => ({
                 url: '/account/gstverify/',
                 method: 'POST',
@@ -13,5 +16,6 @@ export const gstApiSlice = apiSlice.injectEndpoints({
 })
 
 export const { 
-    useGetGstMutation 
+    usePostGstMutation,
+    useGetStartupsQuery,
 } = gstApiSlice;

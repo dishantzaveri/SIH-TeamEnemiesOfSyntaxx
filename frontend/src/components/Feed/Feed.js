@@ -25,6 +25,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import SearchIcon from "@material-ui/icons/Search";
 import PersonIcon from "@material-ui/icons/Person";
 import Navbar from "../Navbar";
+import Header from "../Header/Header";
 
 function HeaderOption({ avatar, Icon, title }) {
   return (
@@ -36,74 +37,74 @@ function HeaderOption({ avatar, Icon, title }) {
   );
 }
 
-const Header = () => {
-  const dispatch = useDispatch();
-  const { token } = useSelector((state) => state.auth);
-  console.log(token);
+// const Header = () => {
+//   const dispatch = useDispatch();
+//   const { token } = useSelector((state) => state.auth);
+//   console.log(token);
 
-  return (
-    <div className="header px-24 py-4 flex justify-between border-b">
-      <Link className="font-bold text-3xl" to="/">
-        mentoree
-      </Link>
-      {/* {token && ( */}
-      <div className="header__search">
-        <SearchIcon />
-        <input type="text" placeholder="Search bar" />
-      </div>
-      {/* )} */}
+//   return (
+//     <div className="header px-24 py-4 flex justify-between border-b">
+//       <Link className="font-bold text-3xl" to="/">
+//         mentoree
+//       </Link>
+//       {/* {token && ( */}
+//       <div className="header__search">
+//         <SearchIcon />
+//         <input type="text" placeholder="Search bar" />
+//       </div>
+//       {/* )} */}
 
-      <div className={`flex gap-4 ${token && "hidden"} items-center`}>
-        <Link className="font-semibold text-xl" to="/registermentor">
-          Become a Mentor
-        </Link>
-        <Link className="font-semibold text-xl" to="/registermentor">
-          Find a Mentor
-        </Link>
-        <Link to="/registermentee">
-          <button className="uppercase rounded-full border w-[8vw] py-2 hover:bg-purple-gray-600 hover:text-white transition-all duration-150">
-            Sign Up
-          </button>
-        </Link>
-        <Link to="/login">
-          <button className="uppercase rounded-full border w-[8vw] py-2 hover:bg-inherit hover:text-inherit bg-purple-gray-600 text-white transition-all duration-150">
-            Log in
-          </button>
-        </Link>
-      </div>
-      <div>
-        {token && (
-          <>
-            <div className="header__right">
-              <Link to="/feed">
-                <HeaderOption Icon={HomeIcon} title="Home" />
-              </Link>
+//       <div className={`flex gap-4 ${token && "hidden"} items-center`}>
+//         <Link className="font-semibold text-xl" to="/registermentor">
+//           Become a Mentor
+//         </Link>
+//         <Link className="font-semibold text-xl" to="/registermentor">
+//           Find a Mentor
+//         </Link>
+//         <Link to="/registermentee">
+//           <button className="uppercase rounded-full border w-[8vw] py-2 hover:bg-purple-gray-600 hover:text-white transition-all duration-150">
+//             Sign Up
+//           </button>
+//         </Link>
+//         <Link to="/login">
+//           <button className="uppercase rounded-full border w-[8vw] py-2 hover:bg-inherit hover:text-inherit bg-purple-gray-600 text-white transition-all duration-150">
+//             Log in
+//           </button>
+//         </Link>
+//       </div>
+//       <div>
+//         {token && (
+//           <>
+//             <div className="header__right">
+//               <Link to="/feed">
+//                 <HeaderOption Icon={HomeIcon} title="Home" />
+//               </Link>
 
-              <HeaderOption Icon={SupervisorAccountIcon} title="Mentors" />
+//               <HeaderOption Icon={SupervisorAccountIcon} title="Mentors" />
 
-              <Link to="/chat">
-                <HeaderOption Icon={ChatIcon} title="Chat" />
-              </Link>
+//               <Link to="/chat">
+//                 <HeaderOption Icon={ChatIcon} title="Chat" />
+//               </Link>
 
-              <Link to="/myProfile">
-                <HeaderOption Icon={PersonIcon} title="Profile" />
-              </Link>
+//               <Link to="/myProfile">
+//                 <HeaderOption Icon={PersonIcon} title="Profile" />
+//               </Link>
 
-              {/* <HeaderOption Icon={NotificationsIcon} title="Notifications" /> */}
-              {/* <HeaderOption avatar={user.photoUrl} title="me" /> */}
-              <button
-                className="uppercase rounded-full border w-[8vw] py-2 hover:bg-inherit hover:text-inherit bg-purple-gray-600 text-white transition-all duration-150"
-                onClick={() => dispatch(logout())}
-              >
-                Log out
-              </button>
-            </div>
-          </>
-        )}
-      </div>
-    </div>
-  );
-};
+//               {/* <HeaderOption Icon={NotificationsIcon} title="Notifications" /> */}
+//               {/* <HeaderOption avatar={user.photoUrl} title="me" /> */}
+//               <button
+//                 className="uppercase rounded-full border w-[8vw] py-2 hover:bg-inherit hover:text-inherit bg-purple-gray-600 text-white transition-all duration-150"
+//                 onClick={() => dispatch(logout())}
+//               >
+//                 Log out
+//               </button>
+//             </div>
+//           </>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
 
 function Feed() {
   //   const user = useSelector(selectUser);
@@ -136,9 +137,18 @@ function Feed() {
   //   };
 
   return (
-    <>
-      {/* <Header /> */}
-      <Navbar />
+    <div>
+      <Header />
+      <div className="">
+          <div className="px-32 bg-gradient-to-r from-[#2eb6b8] via-blue-300  to-[#DAF0F4] w-full h-64 relative">
+        <div className="py-[80px] flex">
+        <div className="content">
+          <h1 className="text-5xl">Feed</h1>
+          <h1 className="text-2xl mt-4 text-slate-700">Explore what others are doing</h1>
+          </div>
+        </div>
+        </div>
+      </div>
       <div className="grid grid-cols-12 p-8 gap-8">
         <div className="col-span-1"></div>
         <div className="feed col-span-6">
@@ -163,7 +173,7 @@ function Feed() {
           <News />
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
