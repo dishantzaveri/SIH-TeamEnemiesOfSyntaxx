@@ -1,5 +1,5 @@
 # SIH-TeamEnemiesOfSyntaxx
-This is our project made for Smart India Hackathon 2022 . We bagged the First place(Rewarded with cash prize of Rs.100000 + Goodies) .
+This is our project made for Smart India Hackathon 2022 . We bagged the First place(Rewarded with cash prize of Rs.1,00,000 + Goodies) .
 
 # We have Branches :
 App Code : https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/tree/app
