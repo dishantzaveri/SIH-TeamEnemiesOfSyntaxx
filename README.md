@@ -80,7 +80,6 @@ Web Preview :
   
 # App Preview
  <p float="left">
-<img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/app/screen.jpeg" width = "40%" />
 <img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/app/start.jpeg" width = "40%" />
   <img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/app/log.jpeg" width = "40%" />
   <img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/app/1.jpeg" width = "40%" />
