@@ -54,42 +54,42 @@ Now we are taking this time to introduce you guys with the web thing of our comp
 Web Preview : 
 
 <p float="left">
-<img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/1.jpeg" width = "40%" />
-<img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/2.jpeg" width = "40%" />
-<img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/3.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/4.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/5.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/6.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/7.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/8.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/9.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/10.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/11.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/12.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/13.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/14.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/feed.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/object detection.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/pitch deck.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/pitch deck ppt.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/sign detection.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/post.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/startups.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/profile page.jpeg" width = "40%" />
+<img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/1.jpeg" width = "40%" />
+<img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/2.jpeg" width = "40%" />
+<img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/3.jpeg" width = "40%" />
+  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/4.jpeg" width = "40%" />
+  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/5.jpeg" width = "40%" />
+  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/6.jpeg" width = "40%" />
+  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/7.jpeg" width = "40%" />
+  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/8.jpeg" width = "40%" />
+  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/9.jpeg" width = "40%" />
+  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/10.jpeg" width = "40%" />
+  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/11.jpeg" width = "40%" />
+  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/12.jpeg" width = "40%" />
+  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/13.jpeg" width = "40%" />
+  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/14.jpeg" width = "40%" />
+  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/feed.jpeg" width = "40%" />
+  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/object detection.jpeg" width = "40%" />
+  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/pitch deck.jpeg" width = "40%" />
+  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/pitch deck ppt.jpeg" width = "40%" />
+  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/sign detection.jpeg" width = "40%" />
+  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/post.jpeg" width = "40%" />
+  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/startups.jpeg" width = "40%" />
+  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/profile page.jpeg" width = "40%" />
   </p>
   
 # App Preview
  <p float="left">
-<img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/app/start.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/app/log.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/app/1.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/app/2.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/app/3.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/app/4.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/app/5.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/app/6.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/app/7.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/acm/blob/main/backend/chat/assests/app/8.jpeg" width = "40%" />
+<img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/app/start.jpeg" width = "40%" />
+  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/app/log.jpeg" width = "40%" />
+  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/app/1.jpeg" width = "40%" />
+  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/app/2.jpeg" width = "40%" />
+  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/app/3.jpeg" width = "40%" />
+  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/app/4.jpeg" width = "40%" />
+  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/app/5.jpeg" width = "40%" />
+  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/app/6.jpeg" width = "40%" />
+  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/app/7.jpeg" width = "40%" />
+  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/app/8.jpeg" width = "40%" />
 
 
  
