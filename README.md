@@ -14,13 +14,6 @@ App Code : https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/tree/app
 
 Hola Everyone, This is team The Enemies of Syntaxx which consists of 6 people of each and every stack. We have Dishant and Manan here for React Native, Mihir and Greha for Frontend and Yash and Vismay for AI/ML and Backend .
 
-# Contributors :
-<br />Dishant Zaveri (ReactNative) : https://github.com/dishantzaveri
-<br />Manan Shah (ReactNative + React) : https://github.com/Manan17
-<br />Mihir Shinde (React Frontend) : https://github.com/MihirShinde-29
-<br />Greha Shah (React Frontend) : https://github.com/grehashah6
-<br />Yash Joshi (Backend) : https://github.com/joshiyash05
-<br />Vismay Vora (Backend) : https://github.com/VismayVora
 
 # Case Study: Mentor Dots
 
@@ -53,45 +46,59 @@ Now we are taking this time to introduce you guys with the web thing of our comp
 # Overcoming The Challenges — Solution Overview
 Web Preview : 
 
-<p float="left">
-<img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/1.jpeg" width = "40%" />
-<img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/2.jpeg" width = "40%" />
-<img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/3.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/4.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/5.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/6.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/7.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/8.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/9.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/10.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/11.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/12.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/13.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/14.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/feed.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/object detection.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/pitch deck.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/pitch deck ppt.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/sign detection.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/post.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/startups.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/profile page.jpeg" width = "40%" />
-  </p>
-  </p>
-  
-# App Preview
- <p float="left">
-<img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/app/start.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/app/log.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/app/1.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/app/2.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/app/3.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/app/4.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/app/5.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/app/6.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/app/7.jpeg" width = "40%" />
-  <img src = "https://github.com/joshiyash05/fastapi-task/blob/main/assests/app/8.jpeg" width = "40%" />
 
+![12](https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/assets/80118978/675034dc-59b6-4ea2-b216-a33b03f15e7e)
+![11](https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/assets/80118978/b1a5720f-d0c5-4879-b9c0-df8ce3e4ba31)
+![10](https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/assets/80118978/8083ee7e-c338-4a57-8d16-04366194c5a7)
+![9](https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/assets/80118978/7fcf11b5-f8c1-4729-b98e-d9ff7a550b74)
+![8](https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/assets/80118978/36e18b88-c40d-4677-a753-65926833317d)
+![7](https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/assets/80118978/d362488f-722e-4d5d-a245-a8d791030d2e)
+![6](https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/assets/80118978/b1d456fc-55de-45f6-a153-78bd018417c3)
+![5](https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/assets/80118978/8a5904db-e216-453f-a8c1-880e373583a2)
+![4](https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/assets/80118978/1826bf20-d0d6-4707-907f-bc6971049e9f)
+![3](https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/assets/80118978/efa5273b-619f-40e3-b508-b7290fa33576)
+![2](https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/assets/80118978/094a29e6-9e87-43a4-a6aa-27903b7d13ef)
+![1](https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/assets/80118978/39cbd365-f018-4b5e-ad94-c57dadb8a02e)
+![13](https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/assets/80118978/5a7ee53b-6f84-43c2-979a-4bc18aef8016)
+![feed](https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/assets/80118978/963e11f5-6beb-4011-a913-ca71a1e14982)
+![14](https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/assets/80118978/43512d66-7230-4b5d-b564-db16cd6bb97b)
+![profile page](https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/assets/80118978/8fce9f58-9b20-4153-8d41-c65123e3e784)
+![sign detection](https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/assets/80118978/db216863-e0af-4ee5-b797-77d386fdeeb8)
+![startups](https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/assets/80118978/c059ffac-c429-4891-9e00-1dc6ed6d0aa2)
+![pitch deck](https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/assets/80118978/d4e8e1b2-42dc-48f7-9b36-6c29e6969db0)
+![object detection](https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/assets/80118978/616d5b08-66e4-45a8-a9e0-a0c6ff055813)
+![pitch deck ppt](https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/assets/80118978/c5e098b4-5bd3-45fd-a0e5-03e6cd591869)
+![post](https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/assets/80118978/492a33c5-204a-4310-8d73-afb8cd596201)
+
+# App Preview
+
+<p align="center">
+  <img src="https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/assets/80118978/a26858c1-a84b-452e-9a85-4ec5c4e62b2a.png" width="200" alt="start" />
+  <img src="https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/assets/80118978/4abdab67-a81e-4009-a05f-460e2f22c78e.png" width="200" alt="screen" />
+  <img src="https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/assets/80118978/4ed551b4-fa92-4dbd-8643-26bd01628b17.png" width="200" alt="log" />
+  <img src="https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/assets/80118978/45e09489-e66f-4b94-94ad-173b28b562fc.png" width="200" alt="8" />
+</p>
+
+ <p align="center">
+  <img src="https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/assets/80118978/2e467964-8277-49b7-a7b1-a81ffc066140.png" width="200" alt="8" />
+  <img src="https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/assets/80118978/7c5214ca-2bf2-4325-96bf-d9016c6f0178.png" width="200" alt="start" />
+  <img src="https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/assets/80118978/0273a4f3-ab15-4442-a515-3f191fc8c670.png" width="200" alt="screen" />
+  <img src="https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/assets/80118978/39bdd6d8-a2f1-4a4c-aeb3-03c6e54f5f57.png" width="200" alt="log" />
+</p>
+
+ <p align="center">
+  <img src="https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/assets/80118978/4c987e43-d16a-47a1-9123-1633622858d8.png" width="200" alt="8" />
+  <img src="https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/assets/80118978/cec7e3f9-d746-4efd-91d8-51c7970633b5.png" width="200" alt="start" />
+  <img src="https://github.com/dishantzaveri/SIH-TeamEnemiesOfSyntaxx/assets/80118978/35f2876f-c817-4504-a1d2-163a18b9df33.png" width="200" alt="screen" />
+</p>
+
+# Contributors :
+<br />Dishant Zaveri (ReactNative) : https://github.com/dishantzaveri
+<br />Manan Shah (ReactNative + React) : https://github.com/Manan17
+<br />Mihir Shinde (React Frontend) : https://github.com/MihirShinde-29
+<br />Greha Shah (React Frontend) : https://github.com/grehashah6
+<br />Yash Joshi (Backend) : https://github.com/joshiyash05
+<br />Vismay Vora (Backend) : https://github.com/VismayVora
 
  
 <h3 align="left">Languages and Tools:</h3>
